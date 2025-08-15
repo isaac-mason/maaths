@@ -1,14 +1,15 @@
 {
     "name": "maaths",
-    "version": "0.0.0-alpha-1",
+    "version": "0.0.0-placeholder-1",
     "author": "Isaac Mason <isaac@isaacmason.com>",
     "description": "",
     "keywords": [],
     "license": "MIT",
     "type": "module",
-    "main": "dist/index.mjs",
+    "main": "dist/index.js",
     "scripts": {
-        "build": "rm -rf ./dist && rollup --config rollup.config.mjs"
+        "build": "rm -rf ./dist && rollup --config rollup.config.mjs",
+        "test": "vitest"
     },
     "packageManager": "pnpm@8.15.2+sha1.798034f615aa211c6c2ae00010cc20be5fc102ee",
     "devDependencies": {
