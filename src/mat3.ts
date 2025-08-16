@@ -1,5 +1,5 @@
 import * as common from "./common";
-import type { Mat3, Mat4, Mat2d, Vec2, Quat } from "./types";
+import type { Mat2d, Mat3, Mat4, Quat, Vec2 } from "./types";
 
 /**
  * Creates a new identity mat3

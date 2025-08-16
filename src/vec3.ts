@@ -1,5 +1,5 @@
 import * as common from './common';
-import type { Vec3, Mat4, Mat3, Quat, MutableArrayLike } from './types';
+import type { Mat3, Mat4, MutableArrayLike, Quat, Vec3 } from './types';
 
 /**
  * Creates a new, empty vec3

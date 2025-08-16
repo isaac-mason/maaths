@@ -1,4 +1,4 @@
-import { EPSILON, clamp } from './common';
+import { clamp, EPSILON } from './common';
 import * as mat4 from './mat4';
 import * as quat from './quat';
 import type { Euler, EulerOrder, Mat4, Quat } from './types';

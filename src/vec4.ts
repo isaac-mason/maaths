@@ -1,5 +1,5 @@
 import * as common from './common';
-import type { Vec4, Mat4, Quat } from './types';
+import type { Mat4, Quat, Vec4 } from './types';
 
 /**
  * Creates a new, empty vec4

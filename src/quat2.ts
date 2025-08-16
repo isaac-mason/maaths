@@ -1,7 +1,7 @@
 import * as common from './common';
-import * as quat from './quat';
 import * as mat4 from './mat4';
-import type { Quat2, Quat, Vec3, Mat4 } from './types';
+import * as quat from './quat';
+import type { Mat4, Quat, Quat2, Vec3 } from './types';
 
 /**
  * Creates a new identity dual quat
