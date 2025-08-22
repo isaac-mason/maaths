@@ -21,6 +21,18 @@ export function create(): Box3 {
 }
 
 /**
+ * Clones a Box3
+ * @param box - A Box3 to clone
+ * @returns a clone of box
+ */
+export function clone(box: Box3): Box3 {
+    return [
+        [box[0][0], box[0][1], box[0][2]],
+        [box[1][0], box[1][1], box[1][2]],
+    ];
+}
+
+/**
  * Check whether two bounding boxes intersect
  */
 export function intersectsBox3(boxA: Box3, boxB: Box3): boolean {
