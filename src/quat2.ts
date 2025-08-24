@@ -545,19 +545,12 @@ export function rotateByQuatPrepend(out: Quat2, q: Quat, a: Quat2): Quat2 {
  * @param rad how far the rotation should be
  * @returns out
  */
-export function rotateAroundAxis(
-    out: Quat2,
-    a: Quat2,
-    axis: Vec3,
-    rad: number,
-): Quat2 {
+export function rotateAroundAxis(out: Quat2, a: Quat2, axis: Vec3, rad: number): Quat2 {
     //Special case for rad = 0
     if (Math.abs(rad) < common.EPSILON) {
         return copy(out, a);
     }
-    const axisLength = Math.sqrt(
-        axis[0] * axis[0] + axis[1] * axis[1] + axis[2] * axis[2],
-    );
+    const axisLength = Math.sqrt(axis[0] * axis[0] + axis[1] * axis[1] + axis[2] * axis[2]);
 
     rad = rad * 0.5;
     const s = Math.sin(rad);
@@ -637,42 +630,10 @@ export function multiply(out: Quat2, a: Quat2, b: Quat2): Quat2 {
     out[1] = ay0 * bw0 + aw0 * by0 + az0 * bx0 - ax0 * bz0;
     out[2] = az0 * bw0 + aw0 * bz0 + ax0 * by0 - ay0 * bx0;
     out[3] = aw0 * bw0 - ax0 * bx0 - ay0 * by0 - az0 * bz0;
-    out[4] =
-        ax0 * bw1 +
-        aw0 * bx1 +
-        ay0 * bz1 -
-        az0 * by1 +
-        ax1 * bw0 +
-        aw1 * bx0 +
-        ay1 * bz0 -
-        az1 * by0;
-    out[5] =
-        ay0 * bw1 +
-        aw0 * by1 +
-        az0 * bx1 -
-        ax0 * bz1 +
-        ay1 * bw0 +
-        aw1 * by0 +
-        az1 * bx0 -
-        ax1 * bz0;
-    out[6] =
-        az0 * bw1 +
-        aw0 * bz1 +
-        ax0 * by1 -
-        ay0 * bx1 +
-        az1 * bw0 +
-        aw1 * bz0 +
-        ax1 * by0 -
-        ay1 * bx0;
-    out[7] =
-        aw0 * bw1 -
-        ax0 * bx1 -
-        ay0 * by1 -
-        az0 * bz1 +
-        aw1 * bw0 -
-        ax1 * bx0 -
-        ay1 * by0 -
-        az1 * bz0;
+    out[4] = ax0 * bw1 + aw0 * bx1 + ay0 * bz1 - az0 * by1 + ax1 * bw0 + aw1 * bx0 + ay1 * bz0 - az1 * by0;
+    out[5] = ay0 * bw1 + aw0 * by1 + az0 * bx1 - ax0 * bz1 + ay1 * bw0 + aw1 * by0 + az1 * bx0 - ax1 * bz0;
+    out[6] = az0 * bw1 + aw0 * bz1 + ax0 * by1 - ay0 * bx1 + az1 * bw0 + aw1 * bz0 + ax1 * by0 - ay1 * bx0;
+    out[7] = aw0 * bw1 - ax0 * bx1 - ay0 * by1 - az0 * bz1 + aw1 * bw0 - ax1 * bx0 - ay1 * by0 - az1 * bz0;
     return out;
 }
 
@@ -902,21 +863,13 @@ export function equals(a: Quat2, b: Quat2): boolean {
     const b6 = b[6];
     const b7 = b[7];
     return (
-        Math.abs(a0 - b0) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
-        Math.abs(a1 - b1) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)) &&
-        Math.abs(a2 - b2) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2)) &&
-        Math.abs(a3 - b3) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a3), Math.abs(b3)) &&
-        Math.abs(a4 - b4) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a4), Math.abs(b4)) &&
-        Math.abs(a5 - b5) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a5), Math.abs(b5)) &&
-        Math.abs(a6 - b6) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a6), Math.abs(b6)) &&
-        Math.abs(a7 - b7) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a7), Math.abs(b7))
+        Math.abs(a0 - b0) <= common.EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
+        Math.abs(a1 - b1) <= common.EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)) &&
+        Math.abs(a2 - b2) <= common.EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2)) &&
+        Math.abs(a3 - b3) <= common.EPSILON * Math.max(1.0, Math.abs(a3), Math.abs(b3)) &&
+        Math.abs(a4 - b4) <= common.EPSILON * Math.max(1.0, Math.abs(a4), Math.abs(b4)) &&
+        Math.abs(a5 - b5) <= common.EPSILON * Math.max(1.0, Math.abs(a5), Math.abs(b5)) &&
+        Math.abs(a6 - b6) <= common.EPSILON * Math.max(1.0, Math.abs(a6), Math.abs(b6)) &&
+        Math.abs(a7 - b7) <= common.EPSILON * Math.max(1.0, Math.abs(a7), Math.abs(b7))
     );
 }

@@ -1,7 +1,7 @@
-import { beforeEach, describe, expect, it } from "vitest";
-import { type Vec2, type Vec3, vec2 } from "../dist";
+import { beforeEach, describe, expect, it } from 'vitest';
+import { type Vec2, type Vec3, vec2 } from '../dist';
 
-describe("vec2", () => {
+describe('vec2', () => {
     let a: Vec2;
     let b: Vec2;
     let out: Vec2;
@@ -12,219 +12,219 @@ describe("vec2", () => {
         out = [0, 0];
     });
 
-    describe("create", () => {
-        it("should create a zero vector", () => {
+    describe('create', () => {
+        it('should create a zero vector', () => {
             const result = vec2.create();
             expect(result).toEqual([0, 0]);
         });
     });
 
-    describe("clone", () => {
-        it("should create a copy of the vector", () => {
+    describe('clone', () => {
+        it('should create a copy of the vector', () => {
             const result = vec2.clone(a);
             expect(result).toEqual([1, 2]);
             expect(result).not.toBe(a);
         });
     });
 
-    describe("fromValues", () => {
-        it("should create a vector with given values", () => {
+    describe('fromValues', () => {
+        it('should create a vector with given values', () => {
             const result = vec2.fromValues(5, 6);
             expect(result).toEqual([5, 6]);
         });
     });
 
-    describe("copy", () => {
-        it("should copy values from source to output vector", () => {
+    describe('copy', () => {
+        it('should copy values from source to output vector', () => {
             const result = vec2.copy(out, a);
             expect(result).toEqual([1, 2]);
             expect(result).toBe(out);
         });
     });
 
-    describe("set", () => {
-        it("should set the vector components", () => {
+    describe('set', () => {
+        it('should set the vector components', () => {
             const result = vec2.set(out, 7, 8);
             expect(result).toEqual([7, 8]);
             expect(result).toBe(out);
         });
     });
 
-    describe("add", () => {
-        it("should add two vectors", () => {
+    describe('add', () => {
+        it('should add two vectors', () => {
             const result = vec2.add(out, a, b);
             expect(result).toEqual([4, 6]);
         });
     });
 
-    describe("addScalar", () => {
-        it("should add scalar to all components", () => {
+    describe('addScalar', () => {
+        it('should add scalar to all components', () => {
             const result = vec2.addScalar(out, a, 5);
             expect(result).toEqual([6, 7]);
         });
     });
 
-    describe("subtract", () => {
-        it("should subtract second vector from first", () => {
+    describe('subtract', () => {
+        it('should subtract second vector from first', () => {
             const result = vec2.subtract(out, b, a);
             expect(result).toEqual([2, 2]);
         });
     });
 
-    describe("subtractScalar", () => {
-        it("should subtract scalar from all components", () => {
+    describe('subtractScalar', () => {
+        it('should subtract scalar from all components', () => {
             const result = vec2.subtractScalar(out, a, 1);
             expect(result).toEqual([0, 1]);
         });
     });
 
-    describe("multiply", () => {
-        it("should multiply vectors component-wise", () => {
+    describe('multiply', () => {
+        it('should multiply vectors component-wise', () => {
             const result = vec2.multiply(out, a, b);
             expect(result).toEqual([3, 8]);
         });
     });
 
-    describe("divide", () => {
-        it("should divide vectors component-wise", () => {
+    describe('divide', () => {
+        it('should divide vectors component-wise', () => {
             const result = vec2.divide(out, [6, 8], [2, 4]);
             expect(result).toEqual([3, 2]);
         });
     });
 
-    describe("ceil", () => {
-        it("should ceil all components", () => {
+    describe('ceil', () => {
+        it('should ceil all components', () => {
             const result = vec2.ceil(out, [1.1, 2.7]);
             expect(result).toEqual([2, 3]);
         });
     });
 
-    describe("floor", () => {
-        it("should floor all components", () => {
+    describe('floor', () => {
+        it('should floor all components', () => {
             const result = vec2.floor(out, [1.9, 2.1]);
             expect(result).toEqual([1, 2]);
         });
     });
 
-    describe("min", () => {
-        it("should return minimum of each component", () => {
+    describe('min', () => {
+        it('should return minimum of each component', () => {
             const result = vec2.min(out, a, b);
             expect(result).toEqual([1, 2]);
         });
     });
 
-    describe("max", () => {
-        it("should return maximum of each component", () => {
+    describe('max', () => {
+        it('should return maximum of each component', () => {
             const result = vec2.max(out, a, b);
             expect(result).toEqual([3, 4]);
         });
     });
 
-    describe("round", () => {
-        it("should round all components", () => {
+    describe('round', () => {
+        it('should round all components', () => {
             const result = vec2.round(out, [1.4, 2.6]);
             expect(result).toEqual([1, 3]);
         });
     });
 
-    describe("scale", () => {
-        it("should scale vector by scalar", () => {
+    describe('scale', () => {
+        it('should scale vector by scalar', () => {
             const result = vec2.scale(out, a, 2);
             expect(result).toEqual([2, 4]);
         });
     });
 
-    describe("scaleAndAdd", () => {
-        it("should scale second vector and add to first", () => {
+    describe('scaleAndAdd', () => {
+        it('should scale second vector and add to first', () => {
             const result = vec2.scaleAndAdd(out, a, b, 2);
             expect(result).toEqual([7, 10]);
         });
     });
 
-    describe("distance", () => {
-        it("should calculate distance between vectors", () => {
+    describe('distance', () => {
+        it('should calculate distance between vectors', () => {
             const result = vec2.distance(a, b);
             expect(result).toBeCloseTo(Math.sqrt(8));
         });
 
-        it("should return 0 for same vectors", () => {
+        it('should return 0 for same vectors', () => {
             expect(vec2.distance(a, a)).toBe(0);
         });
     });
 
-    describe("squaredDistance", () => {
-        it("should calculate squared distance between vectors", () => {
+    describe('squaredDistance', () => {
+        it('should calculate squared distance between vectors', () => {
             const result = vec2.squaredDistance(a, b);
             expect(result).toBe(8);
         });
     });
 
-    describe("length", () => {
-        it("should calculate vector length", () => {
+    describe('length', () => {
+        it('should calculate vector length', () => {
             const result = vec2.length([3, 4]);
             expect(result).toBe(5);
         });
 
-        it("should return 0 for zero vector", () => {
+        it('should return 0 for zero vector', () => {
             expect(vec2.length([0, 0])).toBe(0);
         });
     });
 
-    describe("squaredLength", () => {
-        it("should calculate squared length", () => {
+    describe('squaredLength', () => {
+        it('should calculate squared length', () => {
             const result = vec2.squaredLength([3, 4]);
             expect(result).toBe(25);
         });
     });
 
-    describe("negate", () => {
-        it("should negate all components", () => {
+    describe('negate', () => {
+        it('should negate all components', () => {
             const result = vec2.negate(out, a);
             expect(result).toEqual([-1, -2]);
         });
     });
 
-    describe("inverse", () => {
-        it("should invert all components", () => {
+    describe('inverse', () => {
+        it('should invert all components', () => {
             const result = vec2.inverse(out, [2, 4]);
             expect(result).toEqual([0.5, 0.25]);
         });
     });
 
-    describe("normalize", () => {
-        it("should normalize vector to unit length", () => {
+    describe('normalize', () => {
+        it('should normalize vector to unit length', () => {
             const result = vec2.normalize(out, [3, 4]);
             expect(result[0]).toBeCloseTo(0.6);
             expect(result[1]).toBeCloseTo(0.8);
             expect(vec2.length(result)).toBeCloseTo(1);
         });
 
-        it("should handle zero vector", () => {
+        it('should handle zero vector', () => {
             const result = vec2.normalize(out, [0, 0]);
             expect(result).toEqual([0, 0]);
         });
     });
 
-    describe("dot", () => {
-        it("should calculate dot product", () => {
+    describe('dot', () => {
+        it('should calculate dot product', () => {
             const result = vec2.dot(a, b);
             expect(result).toBe(11); // 1*3 + 2*4
         });
 
-        it("should return 0 for perpendicular vectors", () => {
+        it('should return 0 for perpendicular vectors', () => {
             const result = vec2.dot([1, 0], [0, 1]);
             expect(result).toBe(0);
         });
     });
 
-    describe("cross", () => {
-        it("should calculate cross product as 3D vector", () => {
+    describe('cross', () => {
+        it('should calculate cross product as 3D vector', () => {
             const out3: Vec3 = [0, 0, 0];
             const result = vec2.cross(out3, [1, 0], [0, 1]);
             expect(result).toEqual([0, 0, 1]);
         });
 
-        it("should be anti-commutative", () => {
+        it('should be anti-commutative', () => {
             const out3a: Vec3 = [0, 0, 0];
             const out3b: Vec3 = [0, 0, 0];
             const result1 = vec2.cross(out3a, a, b);
@@ -234,32 +234,32 @@ describe("vec2", () => {
         });
     });
 
-    describe("lerp", () => {
-        it("should interpolate between vectors", () => {
+    describe('lerp', () => {
+        it('should interpolate between vectors', () => {
             const result = vec2.lerp(out, a, b, 0.5);
             expect(result).toEqual([2, 3]);
         });
 
-        it("should return first vector at t=0", () => {
+        it('should return first vector at t=0', () => {
             const result = vec2.lerp(out, a, b, 0);
             expect(result).toEqual(a);
         });
 
-        it("should return second vector at t=1", () => {
+        it('should return second vector at t=1', () => {
             const result = vec2.lerp(out, a, b, 1);
             expect(result).toEqual(b);
         });
     });
 
-    describe("transformMat2", () => {
-        it("should transform vector by 2x2 matrix", () => {
+    describe('transformMat2', () => {
+        it('should transform vector by 2x2 matrix', () => {
             // Identity matrix should return original vector
             const identity: number[] = [1, 0, 0, 1];
             const result = vec2.transformMat2(out, a, identity as any);
             expect(result).toEqual(a);
         });
 
-        it("should apply scaling transformation", () => {
+        it('should apply scaling transformation', () => {
             // Scale by 2 in x, 3 in y
             const scaleMatrix: number[] = [2, 0, 0, 3];
             const result = vec2.transformMat2(out, [1, 1], scaleMatrix as any);
@@ -267,15 +267,15 @@ describe("vec2", () => {
         });
     });
 
-    describe("transformMat2d", () => {
-        it("should transform vector by 2D transformation matrix", () => {
+    describe('transformMat2d', () => {
+        it('should transform vector by 2D transformation matrix', () => {
             // Identity matrix should return original vector
             const identity: number[] = [1, 0, 0, 1, 0, 0];
             const result = vec2.transformMat2d(out, a, identity as any);
             expect(result).toEqual(a);
         });
 
-        it("should apply translation", () => {
+        it('should apply translation', () => {
             // Translation by (5, 3)
             const translateMatrix: number[] = [1, 0, 0, 1, 5, 3];
             const result = vec2.transformMat2d(out, [1, 1], translateMatrix as any);
@@ -283,65 +283,47 @@ describe("vec2", () => {
         });
     });
 
-    describe("transformMat3", () => {
-        it("should transform vector by 3x3 matrix", () => {
+    describe('transformMat3', () => {
+        it('should transform vector by 3x3 matrix', () => {
             // Identity matrix should return original vector
-            const identity: number[] = [
-                1, 0, 0,
-                0, 1, 0,
-                0, 0, 1
-            ];
+            const identity: number[] = [1, 0, 0, 0, 1, 0, 0, 0, 1];
             const result = vec2.transformMat3(out, a, identity as any);
             expect(result).toEqual(a);
         });
 
-        it("should apply translation in homogeneous coordinates", () => {
+        it('should apply translation in homogeneous coordinates', () => {
             // Translation by (5, 3)
-            const translateMatrix: number[] = [
-                1, 0, 0,
-                0, 1, 0,
-                5, 3, 1
-            ];
+            const translateMatrix: number[] = [1, 0, 0, 0, 1, 0, 5, 3, 1];
             const result = vec2.transformMat3(out, [1, 1], translateMatrix as any);
             expect(result).toEqual([6, 4]);
         });
     });
 
-    describe("transformMat4", () => {
-        it("should transform vector by 4x4 matrix", () => {
+    describe('transformMat4', () => {
+        it('should transform vector by 4x4 matrix', () => {
             // Identity matrix should return original vector
-            const identity: number[] = [
-                1, 0, 0, 0,
-                0, 1, 0, 0,
-                0, 0, 1, 0,
-                0, 0, 0, 1
-            ];
+            const identity: number[] = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
             const result = vec2.transformMat4(out, a, identity as any);
             expect(result).toEqual(a);
         });
 
-        it("should apply translation", () => {
+        it('should apply translation', () => {
             // Translation by (5, 3, 0)
-            const translateMatrix: number[] = [
-                1, 0, 0, 0,
-                0, 1, 0, 0,
-                0, 0, 1, 0,
-                5, 3, 0, 1
-            ];
+            const translateMatrix: number[] = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 5, 3, 0, 1];
             const result = vec2.transformMat4(out, [1, 1], translateMatrix as any);
             expect(result).toEqual([6, 4]);
         });
     });
 
-    describe("rotate", () => {
-        it("should rotate vector around origin", () => {
+    describe('rotate', () => {
+        it('should rotate vector around origin', () => {
             const origin: Vec2 = [0, 0];
             const result = vec2.rotate(out, [1, 0], origin, Math.PI / 2);
             expect(result[0]).toBeCloseTo(0);
             expect(result[1]).toBeCloseTo(1);
         });
 
-        it("should rotate vector around arbitrary point", () => {
+        it('should rotate vector around arbitrary point', () => {
             const center: Vec2 = [1, 1];
             const result = vec2.rotate(out, [2, 1], center, Math.PI / 2);
             expect(result[0]).toBeCloseTo(1);
@@ -349,102 +331,102 @@ describe("vec2", () => {
         });
     });
 
-    describe("angle", () => {
-        it("should calculate angle between vectors", () => {
+    describe('angle', () => {
+        it('should calculate angle between vectors', () => {
             const result = vec2.angle([1, 0], [0, 1]);
             expect(result).toBeCloseTo(Math.PI / 2);
         });
 
-        it("should return 0 for parallel vectors", () => {
+        it('should return 0 for parallel vectors', () => {
             const result = vec2.angle([1, 2], [2, 4]);
             expect(result).toBeCloseTo(0);
         });
 
-        it("should return PI for opposite vectors", () => {
+        it('should return PI for opposite vectors', () => {
             const result = vec2.angle([1, 0], [-1, 0]);
             expect(result).toBeCloseTo(Math.PI);
         });
     });
 
-    describe("zero", () => {
-        it("should set all components to zero", () => {
+    describe('zero', () => {
+        it('should set all components to zero', () => {
             const result = vec2.zero(a);
             expect(result).toEqual([0, 0]);
             expect(result).toBe(a);
         });
     });
 
-    describe("str", () => {
-        it("should return string representation", () => {
+    describe('str', () => {
+        it('should return string representation', () => {
             const result = vec2.str(a);
-            expect(result).toBe("vec2(1, 2)");
+            expect(result).toBe('vec2(1, 2)');
         });
     });
 
-    describe("exactEquals", () => {
-        it("should return true for exactly equal vectors", () => {
+    describe('exactEquals', () => {
+        it('should return true for exactly equal vectors', () => {
             expect(vec2.exactEquals(a, [1, 2])).toBe(true);
         });
 
-        it("should return false for different vectors", () => {
+        it('should return false for different vectors', () => {
             expect(vec2.exactEquals(a, b)).toBe(false);
         });
 
-        it("should return false for approximately equal vectors", () => {
+        it('should return false for approximately equal vectors', () => {
             expect(vec2.exactEquals([1, 2], [1.0000001, 2])).toBe(false);
         });
     });
 
-    describe("equals", () => {
-        it("should return true for approximately equal vectors", () => {
+    describe('equals', () => {
+        it('should return true for approximately equal vectors', () => {
             expect(vec2.equals([1, 2], [1.0000001, 2])).toBe(true);
         });
 
-        it("should return false for significantly different vectors", () => {
+        it('should return false for significantly different vectors', () => {
             expect(vec2.equals(a, b)).toBe(false);
         });
     });
 
-    describe("finite", () => {
-        it("should return true for finite vectors", () => {
+    describe('finite', () => {
+        it('should return true for finite vectors', () => {
             expect(vec2.finite(a)).toBe(true);
         });
 
-        it("should return false for vectors with infinity", () => {
+        it('should return false for vectors with infinity', () => {
             expect(vec2.finite([1, Infinity])).toBe(false);
         });
 
-        it("should return false for vectors with NaN", () => {
+        it('should return false for vectors with NaN', () => {
             expect(vec2.finite([NaN, 2])).toBe(false);
         });
     });
 
-    describe("aliases", () => {
-        it("len should be alias for length", () => {
+    describe('aliases', () => {
+        it('len should be alias for length', () => {
             expect(vec2.len).toBe(vec2.length);
         });
 
-        it("sub should be alias for subtract", () => {
+        it('sub should be alias for subtract', () => {
             expect(vec2.sub).toBe(vec2.subtract);
         });
 
-        it("mul should be alias for multiply", () => {
+        it('mul should be alias for multiply', () => {
             expect(vec2.mul).toBe(vec2.multiply);
         });
 
-        it("div should be alias for divide", () => {
+        it('div should be alias for divide', () => {
             expect(vec2.div).toBe(vec2.divide);
         });
 
-        it("dist should be alias for distance", () => {
+        it('dist should be alias for distance', () => {
             expect(vec2.dist).toBe(vec2.distance);
         });
 
-        it("sqrDist should be alias for squaredDistance", () => {
+        it('sqrDist should be alias for squaredDistance', () => {
             expect(vec2.sqrDist).toBe(vec2.squaredDistance);
         });
 
-        it("sqrLen should be alias for squaredLength", () => {
+        it('sqrLen should be alias for squaredLength', () => {
             expect(vec2.sqrLen).toBe(vec2.squaredLength);
         });
     });

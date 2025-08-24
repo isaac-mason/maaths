@@ -18,12 +18,7 @@ export function create(): Euler {
  * @param order The order of rotation.
  * @returns A new Euler.
  */
-export function fromValues(
-    x: number,
-    y: number,
-    z: number,
-    order: EulerOrder,
-): Euler {
+export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler {
     return [x, y, z, order];
 }
 
@@ -36,13 +31,7 @@ export function fromValues(
  * @param order The order of rotation.
  * @returns The output Euler.
  */
-export function fromDegrees(
-    out: Euler,
-    x: number,
-    y: number,
-    z: number,
-    order: EulerOrder,
-): Euler {
+export function fromDegrees(out: Euler, x: number, y: number, z: number, order: EulerOrder): Euler {
     out[0] = (x * Math.PI) / 180;
     out[1] = (y * Math.PI) / 180;
     out[2] = (z * Math.PI) / 180;
@@ -58,11 +47,7 @@ export function fromDegrees(
  * @param order The order of the Euler angles.
  * @returns The output Euler.
  */
-export function fromRotationMat4(
-    out: Euler,
-    rotationMatrix: Mat4,
-    order: EulerOrder = out[3] || 'xyz',
-): Euler {
+export function fromRotationMat4(out: Euler, rotationMatrix: Mat4, order: EulerOrder = out[3] || 'xyz'): Euler {
     const m11 = rotationMatrix[0];
     const m12 = rotationMatrix[4];
     const m13 = rotationMatrix[8];
@@ -187,12 +172,9 @@ export function equals(a: Euler, b: Euler): boolean {
     const b1 = b[1];
     const b2 = b[2];
     return (
-        Math.abs(a0 - b0) <=
-            EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
-        Math.abs(a1 - b1) <=
-            EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)) &&
-        Math.abs(a2 - b2) <=
-            EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2)) &&
+        Math.abs(a0 - b0) <= EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
+        Math.abs(a1 - b1) <= EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)) &&
+        Math.abs(a2 - b2) <= EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2)) &&
         a[3] === b[3]
     );
 }

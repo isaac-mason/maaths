@@ -35,11 +35,7 @@ export function generateMulberry32Seed(): number {
  * @param randomFloat01 the random float in the range [0, 1) to use for randomness. Defaults to Math.random().
  * @returns A random integer between min and max (inclusive).
  */
-export function randomInt(
-    min: number,
-    max: number,
-    randomFloat01: number = Math.random(),
-): number {
+export function randomInt(min: number, max: number, randomFloat01: number = Math.random()): number {
     return Math.floor(randomFloat01 * (max - min + 1)) + min;
 }
 
@@ -50,11 +46,7 @@ export function randomInt(
  * @param randomFloat01 the random float in the range [0, 1) to use for randomness. Defaults to Math.random().
  * @returns A random float between min and max.
  */
-export function randomFloat(
-    min: number,
-    max: number,
-    randomFloat01: number = Math.random(),
-): number {
+export function randomFloat(min: number, max: number, randomFloat01: number = Math.random()): number {
     return randomFloat01 * (max - min) + min;
 }
 
@@ -64,10 +56,7 @@ export function randomFloat(
  * @param randomFloat01 the random float in the range [0, 1) to use for randomness. Defaults to Math.random().
  * @returns A boolean value based on the chance.
  */
-export function randomBool(
-    chance = 0.5,
-    randomFloat01: number = Math.random(),
-): boolean {
+export function randomBool(chance = 0.5, randomFloat01: number = Math.random()): boolean {
     return randomFloat01 < chance;
 }
 
@@ -90,10 +79,7 @@ export function randomSign(plusChance = 0.5, randomFloat01: number = Math.random
  * @returns A randomly chosen item from the array.
  * @throws Error if the array is empty.
  */
-export function randomChoice<T>(
-    items: T[],
-    randomFloat01: number = Math.random(),
-): T {
+export function randomChoice<T>(items: T[], randomFloat01: number = Math.random()): T {
     if (items.length === 0) {
         throw new Error('Cannot choose from an empty array');
     }

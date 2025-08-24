@@ -659,8 +659,7 @@ export const rotationTo = (() => {
 
         if (dot < -0.999999) {
             vec3.cross(tmpvec3, xUnitVec3, a);
-            if (vec3.length(tmpvec3) < 0.000001)
-                vec3.cross(tmpvec3, yUnitVec3, a);
+            if (vec3.length(tmpvec3) < 0.000001) vec3.cross(tmpvec3, yUnitVec3, a);
             vec3.normalize(tmpvec3, tmpvec3);
             setAxisAngle(out, tmpvec3, Math.PI);
             return out;

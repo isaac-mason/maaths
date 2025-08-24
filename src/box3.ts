@@ -7,16 +7,8 @@ import * as vec3 from './vec3';
  */
 export function create(): Box3 {
     return [
-        [
-            Number.POSITIVE_INFINITY,
-            Number.POSITIVE_INFINITY,
-            Number.POSITIVE_INFINITY,
-        ],
-        [
-            Number.NEGATIVE_INFINITY,
-            Number.NEGATIVE_INFINITY,
-            Number.NEGATIVE_INFINITY,
-        ],
+        [Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY],
+        [Number.NEGATIVE_INFINITY, Number.NEGATIVE_INFINITY, Number.NEGATIVE_INFINITY],
     ];
 }
 
@@ -84,10 +76,7 @@ function _satForAxes(axes: number[], axisCount: number): boolean {
         else if (p2 > maxP) maxP = p2;
 
         // Project AABB (centered at origin) radius onto axis
-        const r =
-            _extents[0] * Math.abs(ax) +
-            _extents[1] * Math.abs(ay) +
-            _extents[2] * Math.abs(az);
+        const r = _extents[0] * Math.abs(ax) + _extents[1] * Math.abs(ay) + _extents[2] * Math.abs(az);
         if (maxP < -r || minP > r) return false; // Separating axis found
     }
     return true;
@@ -185,12 +174,9 @@ export function intersectsSphere3(box: Box3, sphere: Sphere3): boolean {
     const center = sphere[0];
     const radius = sphere[1];
     // Clamp center to box to obtain closest point
-    _closestPoint[0] =
-        center[0] < min[0] ? min[0] : center[0] > max[0] ? max[0] : center[0];
-    _closestPoint[1] =
-        center[1] < min[1] ? min[1] : center[1] > max[1] ? max[1] : center[1];
-    _closestPoint[2] =
-        center[2] < min[2] ? min[2] : center[2] > max[2] ? max[2] : center[2];
+    _closestPoint[0] = center[0] < min[0] ? min[0] : center[0] > max[0] ? max[0] : center[0];
+    _closestPoint[1] = center[1] < min[1] ? min[1] : center[1] > max[1] ? max[1] : center[1];
+    _closestPoint[2] = center[2] < min[2] ? min[2] : center[2] > max[2] ? max[2] : center[2];
     const dx = _closestPoint[0] - center[0];
     const dy = _closestPoint[1] - center[1];
     const dz = _closestPoint[2] - center[2];

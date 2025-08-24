@@ -532,10 +532,8 @@ export function equals(a: Vec2, b: Vec2): boolean {
     const b0 = b[0];
     const b1 = b[1];
     return (
-        Math.abs(a0 - b0) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
-        Math.abs(a1 - b1) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1))
+        Math.abs(a0 - b0) <= common.EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
+        Math.abs(a1 - b1) <= common.EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1))
     );
 }
 
@@ -545,10 +543,7 @@ export function equals(a: Vec2, b: Vec2): boolean {
  * @returns whether or not the vector is finite
  */
 export function finite(a: Vec2): boolean {
-    return (
-        Number.isFinite(a[0]) &&
-        Number.isFinite(a[1])
-    );
+    return Number.isFinite(a[0]) && Number.isFinite(a[1]);
 }
 
 /**

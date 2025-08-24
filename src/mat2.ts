@@ -63,12 +63,7 @@ export function identity(out: Mat2): Mat2 {
  * @param m11 Component in column 1, row 1 position (index 3)
  * @returns out A new 2x2 matrix
  */
-export function fromValues(
-    m00: number,
-    m01: number,
-    m10: number,
-    m11: number,
-): Mat2 {
+export function fromValues(m00: number, m01: number, m10: number, m11: number): Mat2 {
     const out = create();
     out[0] = m00;
     out[1] = m01;
@@ -87,13 +82,7 @@ export function fromValues(
  * @param m11 Component in column 1, row 1 position (index 3)
  * @returns out
  */
-export function set(
-    out: Mat2,
-    m00: number,
-    m01: number,
-    m10: number,
-    m11: number,
-): Mat2 {
+export function set(out: Mat2, m00: number, m01: number, m10: number, m11: number): Mat2 {
     out[0] = m00;
     out[1] = m01;
     out[2] = m10;
@@ -386,14 +375,10 @@ export function equals(a: Mat2, b: Mat2): boolean {
     const b2 = b[2];
     const b3 = b[3];
     return (
-        Math.abs(a0 - b0) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
-        Math.abs(a1 - b1) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)) &&
-        Math.abs(a2 - b2) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2)) &&
-        Math.abs(a3 - b3) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a3), Math.abs(b3))
+        Math.abs(a0 - b0) <= common.EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
+        Math.abs(a1 - b1) <= common.EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)) &&
+        Math.abs(a2 - b2) <= common.EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2)) &&
+        Math.abs(a3 - b3) <= common.EPSILON * Math.max(1.0, Math.abs(a3), Math.abs(b3))
     );
 }
 
@@ -422,12 +407,7 @@ export function multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2 {
  * @param scale the amount to scale b's elements by before adding
  * @returns out
  */
-export function multiplyScalarAndAdd(
-    out: Mat2,
-    a: Mat2,
-    b: Mat2,
-    scale: number,
-): Mat2 {
+export function multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number): Mat2 {
     out[0] = a[0] + b[0] * scale;
     out[1] = a[1] + b[1] * scale;
     out[2] = a[2] + b[2] * scale;

@@ -68,13 +68,7 @@ export function copy(out: Vec4, a: Vec4): Vec4 {
  * @param w W component
  * @returns out
  */
-export function set(
-    out: Vec4,
-    x: number,
-    y: number,
-    z: number,
-    w: number,
-): Vec4 {
+export function set(out: Vec4, x: number, y: number, z: number, w: number): Vec4 {
     out[0] = x;
     out[1] = y;
     out[2] = z;
@@ -428,7 +422,6 @@ export function lerp(out: Vec4, a: Vec4, b: Vec4, t: number): Vec4 {
     return out;
 }
 
-
 /**
  * Transforms the vec4 with a mat4.
  *
@@ -532,14 +525,10 @@ export function equals(a: Vec4, b: Vec4): boolean {
     const b2 = b[2];
     const b3 = b[3];
     return (
-        Math.abs(a0 - b0) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
-        Math.abs(a1 - b1) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)) &&
-        Math.abs(a2 - b2) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2)) &&
-        Math.abs(a3 - b3) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a3), Math.abs(b3))
+        Math.abs(a0 - b0) <= common.EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
+        Math.abs(a1 - b1) <= common.EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)) &&
+        Math.abs(a2 - b2) <= common.EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2)) &&
+        Math.abs(a3 - b3) <= common.EPSILON * Math.max(1.0, Math.abs(a3), Math.abs(b3))
     );
 }
 
@@ -549,12 +538,7 @@ export function equals(a: Vec4, b: Vec4): boolean {
  * @returns whether or not the vector is finite
  */
 export function finite(a: Vec4): boolean {
-    return (
-        Number.isFinite(a[0]) &&
-        Number.isFinite(a[1]) &&
-        Number.isFinite(a[2]) &&
-        Number.isFinite(a[3])
-    );
+    return Number.isFinite(a[0]) && Number.isFinite(a[1]) && Number.isFinite(a[2]) && Number.isFinite(a[3]);
 }
 
 /**

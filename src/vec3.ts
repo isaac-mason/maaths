@@ -126,7 +126,6 @@ export function add(out: Vec3, a: Vec3, b: Vec3): Vec3 {
     return out;
 }
 
-
 /**
  * Adds a scalar value to all components of a vec3
  *
@@ -480,14 +479,7 @@ export function slerp(out: Vec3, a: Vec3, b: Vec3, t: number): Vec3 {
  * @param t interpolation amount, in the range [0-1], between the two inputs
  * @returns out
  */
-export function hermite(
-    out: Vec3,
-    a: Vec3,
-    b: Vec3,
-    c: Vec3,
-    d: Vec3,
-    t: number,
-): Vec3 {
+export function hermite(out: Vec3, a: Vec3, b: Vec3, c: Vec3, d: Vec3, t: number): Vec3 {
     const factorTimes2 = t * t;
     const factor1 = factorTimes2 * (2 * t - 3) + 1;
     const factor2 = factorTimes2 * (t - 2) + t;
@@ -512,14 +504,7 @@ export function hermite(
  * @param t interpolation amount, in the range [0-1], between the two inputs
  * @returns out
  */
-export function bezier(
-    out: Vec3,
-    a: Vec3,
-    b: Vec3,
-    c: Vec3,
-    d: Vec3,
-    t: number,
-): Vec3 {
+export function bezier(out: Vec3, a: Vec3, b: Vec3, c: Vec3, d: Vec3, t: number): Vec3 {
     const inverseFactor = 1 - t;
     const inverseFactorTimesTwo = inverseFactor * inverseFactor;
     const factorTimes2 = t * t;
@@ -717,9 +702,7 @@ export function angle(a: Vec3, b: Vec3): number {
     const bx = b[0];
     const by = b[1];
     const bz = b[2];
-    const mag = Math.sqrt(
-            (ax * ax + ay * ay + az * az) * (bx * bx + by * by + bz * bz),
-        );
+    const mag = Math.sqrt((ax * ax + ay * ay + az * az) * (bx * bx + by * by + bz * bz));
     const cosine = mag && dot(a, b) / mag;
     return Math.acos(Math.min(Math.max(cosine, -1), 1));
 }
@@ -773,12 +756,9 @@ export function equals(a: Vec3, b: Vec3): boolean {
     const b1 = b[1];
     const b2 = b[2];
     return (
-        Math.abs(a0 - b0) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
-        Math.abs(a1 - b1) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)) &&
-        Math.abs(a2 - b2) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2))
+        Math.abs(a0 - b0) <= common.EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
+        Math.abs(a1 - b1) <= common.EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)) &&
+        Math.abs(a2 - b2) <= common.EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2))
     );
 }
 
@@ -788,11 +768,7 @@ export function equals(a: Vec3, b: Vec3): boolean {
  * @returns whether or not the vector is finite
  */
 export function finite(a: Vec3): boolean {
-    return (
-        Number.isFinite(a[0]) &&
-        Number.isFinite(a[1]) &&
-        Number.isFinite(a[2])
-    );
+    return Number.isFinite(a[0]) && Number.isFinite(a[1]) && Number.isFinite(a[2]);
 }
 
 /**

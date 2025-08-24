@@ -71,14 +71,7 @@ export function identity(out: Mat2d): Mat2d {
  * @param ty Component TY (index 5)
  * @returns A new mat2d
  */
-export function fromValues(
-    a: number,
-    b: number,
-    c: number,
-    d: number,
-    tx: number,
-    ty: number,
-): Mat2d {
+export function fromValues(a: number, b: number, c: number, d: number, tx: number, ty: number): Mat2d {
     const out = create();
     out[0] = a;
     out[1] = b;
@@ -101,15 +94,7 @@ export function fromValues(
  * @param ty Component TY (index 5)
  * @returns out
  */
-export function set(
-    out: Mat2d,
-    a: number,
-    b: number,
-    c: number,
-    d: number,
-    tx: number,
-    ty: number,
-): Mat2d {
+export function set(out: Mat2d, a: number, b: number, c: number, d: number, tx: number, ty: number): Mat2d {
     out[0] = a;
     out[1] = b;
     out[2] = c;
@@ -339,9 +324,7 @@ export function fromTranslation(out: Mat2d, v: Vec2): Mat2d {
  * @returns string representation of the matrix
  */
 export function str(a: Mat2d): string {
-    return (
-        `mat2d(${a[0]}, ${a[1]}, ${a[2]}, ${a[3]}, ${a[4]}, ${a[5]})`
-    );
+    return `mat2d(${a[0]}, ${a[1]}, ${a[2]}, ${a[3]}, ${a[4]}, ${a[5]})`;
 }
 
 /**
@@ -351,15 +334,7 @@ export function str(a: Mat2d): string {
  * @returns Frobenius norm
  */
 export function frob(a: Mat2d): number {
-    return Math.sqrt(
-        a[0] * a[0] +
-            a[1] * a[1] +
-            a[2] * a[2] +
-            a[3] * a[3] +
-            a[4] * a[4] +
-            a[5] * a[5] +
-            1,
-    );
+    return Math.sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2] + a[3] * a[3] + a[4] * a[4] + a[5] * a[5] + 1);
 }
 
 /**
@@ -425,12 +400,7 @@ export function multiplyScalar(out: Mat2d, a: Mat2d, b: number): Mat2d {
  * @param scale the amount to scale b's elements by before adding
  * @returns out
  */
-export function multiplyScalarAndAdd(
-    out: Mat2d,
-    a: Mat2d,
-    b: Mat2d,
-    scale: number,
-): Mat2d {
+export function multiplyScalarAndAdd(out: Mat2d, a: Mat2d, b: Mat2d, scale: number): Mat2d {
     out[0] = a[0] + b[0] * scale;
     out[1] = a[1] + b[1] * scale;
     out[2] = a[2] + b[2] * scale;
@@ -448,14 +418,7 @@ export function multiplyScalarAndAdd(
  * @returns True if the matrices are equal, false otherwise.
  */
 export function exactEquals(a: Mat2d, b: Mat2d): boolean {
-    return (
-        a[0] === b[0] &&
-        a[1] === b[1] &&
-        a[2] === b[2] &&
-        a[3] === b[3] &&
-        a[4] === b[4] &&
-        a[5] === b[5]
-    );
+    return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3] && a[4] === b[4] && a[5] === b[5];
 }
 
 /**
@@ -479,18 +442,12 @@ export function equals(a: Mat2d, b: Mat2d): boolean {
     const b4 = b[4];
     const b5 = b[5];
     return (
-        Math.abs(a0 - b0) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
-        Math.abs(a1 - b1) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)) &&
-        Math.abs(a2 - b2) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2)) &&
-        Math.abs(a3 - b3) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a3), Math.abs(b3)) &&
-        Math.abs(a4 - b4) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a4), Math.abs(b4)) &&
-        Math.abs(a5 - b5) <=
-            common.EPSILON * Math.max(1.0, Math.abs(a5), Math.abs(b5))
+        Math.abs(a0 - b0) <= common.EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
+        Math.abs(a1 - b1) <= common.EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)) &&
+        Math.abs(a2 - b2) <= common.EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2)) &&
+        Math.abs(a3 - b3) <= common.EPSILON * Math.max(1.0, Math.abs(a3), Math.abs(b3)) &&
+        Math.abs(a4 - b4) <= common.EPSILON * Math.max(1.0, Math.abs(a4), Math.abs(b4)) &&
+        Math.abs(a5 - b5) <= common.EPSILON * Math.max(1.0, Math.abs(a5), Math.abs(b5))
     );
 }
 
