@@ -49,7 +49,7 @@ export type Plane3 = [normal: Vec3, constant: number];
  * Represents a sphere in 3D space
  * center: Vec3, radius: number
  */
-export type Sphere3 = [center: Vec3, radius: number];
+export type Sphere = [center: Vec3, radius: number];
 
 export type MutableArrayLike<T> = {
     [index: number]: T;

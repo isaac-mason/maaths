@@ -1,4 +1,4 @@
-import type { Box3, Plane3, Sphere3, Triangle3, Vec3 } from './types';
+import type { Box3, Plane3, Sphere, Triangle3, Vec3 } from './types';
 import * as vec3 from './vec3';
 
 /**
@@ -168,7 +168,7 @@ export function intersectsTriangle3(box: Box3, triangle: Triangle3): boolean {
  * Test intersection between axis-aligned bounding box and a sphere.
  * Sphere format: [centerVec3, radius]
  */
-export function intersectsSphere3(box: Box3, sphere: Sphere3): boolean {
+export function intersectsSphere(box: Box3, sphere: Sphere): boolean {
     const min = box[0];
     const max = box[1];
     const center = sphere[0];
