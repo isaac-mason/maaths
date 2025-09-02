@@ -274,7 +274,8 @@ export function intersectsPlane3(box: Box3, plane: Plane3): boolean {
 /**
  * Test intersection between axis-aligned bounding box and a ray.
  * Ray is defined by start and end points.
- * 
+ * Uses slab method for intersection testing.
+ *
  * @param box - The bounding box
  * @param start - Ray start point
  * @param end - Ray end point
