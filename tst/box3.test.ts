@@ -255,6 +255,265 @@ describe('box3', () => {
         });
     });
 
+    describe('containsPoint', () => {
+        it('should return true when point is inside box', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [2, 2, 2],
+            ];
+            const point: Vec3 = [1, 1, 1];
+
+            expect(box3.containsPoint(box, point)).toBe(true);
+        });
+
+        it('should return true when point is on box boundary', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [2, 2, 2],
+            ];
+            const point: Vec3 = [0, 1, 2]; // on faces
+
+            expect(box3.containsPoint(box, point)).toBe(true);
+        });
+
+        it('should return true when point is at box corner', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [2, 2, 2],
+            ];
+            const point: Vec3 = [2, 2, 2]; // corner
+
+            expect(box3.containsPoint(box, point)).toBe(true);
+        });
+
+        it('should return false when point is outside box on X axis', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [1, 1, 1],
+            ];
+            const point: Vec3 = [2, 0.5, 0.5];
+
+            expect(box3.containsPoint(box, point)).toBe(false);
+        });
+
+        it('should return false when point is outside box on Y axis', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [1, 1, 1],
+            ];
+            const point: Vec3 = [0.5, 2, 0.5];
+
+            expect(box3.containsPoint(box, point)).toBe(false);
+        });
+
+        it('should return false when point is outside box on Z axis', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [1, 1, 1],
+            ];
+            const point: Vec3 = [0.5, 0.5, 2];
+
+            expect(box3.containsPoint(box, point)).toBe(false);
+        });
+
+        it('should handle negative coordinates', () => {
+            const box: Box3 = [
+                [-2, -2, -2],
+                [-1, -1, -1],
+            ];
+            const point: Vec3 = [-1.5, -1.5, -1.5];
+
+            expect(box3.containsPoint(box, point)).toBe(true);
+        });
+
+        it('should handle zero-sized box (point)', () => {
+            const box: Box3 = [
+                [1, 1, 1],
+                [1, 1, 1],
+            ];
+            const point: Vec3 = [1, 1, 1];
+
+            expect(box3.containsPoint(box, point)).toBe(true);
+        });
+
+        it('should return false for zero-sized box with different point', () => {
+            const box: Box3 = [
+                [1, 1, 1],
+                [1, 1, 1],
+            ];
+            const point: Vec3 = [1.1, 1, 1];
+
+            expect(box3.containsPoint(box, point)).toBe(false);
+        });
+    });
+
+    describe('containsBox3', () => {
+        it('should return true when contained box is completely inside container', () => {
+            const container: Box3 = [
+                [0, 0, 0],
+                [4, 4, 4],
+            ];
+            const contained: Box3 = [
+                [1, 1, 1],
+                [3, 3, 3],
+            ];
+
+            expect(box3.containsBox3(container, contained)).toBe(true);
+        });
+
+        it('should return true when boxes are identical', () => {
+            const box: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+
+            expect(box3.containsBox3(box, box)).toBe(true);
+        });
+
+        it('should return true when contained box touches container boundary', () => {
+            const container: Box3 = [
+                [0, 0, 0],
+                [2, 2, 2],
+            ];
+            const contained: Box3 = [
+                [0, 0, 0],
+                [2, 2, 2],
+            ];
+
+            expect(box3.containsBox3(container, contained)).toBe(true);
+        });
+
+        it('should return false when contained box extends beyond container on X axis', () => {
+            const container: Box3 = [
+                [0, 0, 0],
+                [2, 2, 2],
+            ];
+            const contained: Box3 = [
+                [1, 1, 1],
+                [3, 2, 2], // extends beyond X max
+            ];
+
+            expect(box3.containsBox3(container, contained)).toBe(false);
+        });
+
+        it('should return false when contained box extends beyond container on Y axis', () => {
+            const container: Box3 = [
+                [0, 0, 0],
+                [2, 2, 2],
+            ];
+            const contained: Box3 = [
+                [1, 1, 1],
+                [2, 3, 2], // extends beyond Y max
+            ];
+
+            expect(box3.containsBox3(container, contained)).toBe(false);
+        });
+
+        it('should return false when contained box extends beyond container on Z axis', () => {
+            const container: Box3 = [
+                [0, 0, 0],
+                [2, 2, 2],
+            ];
+            const contained: Box3 = [
+                [1, 1, 1],
+                [2, 2, 3], // extends beyond Z max
+            ];
+
+            expect(box3.containsBox3(container, contained)).toBe(false);
+        });
+
+        it('should return false when contained box extends before container on X axis', () => {
+            const container: Box3 = [
+                [1, 1, 1],
+                [3, 3, 3],
+            ];
+            const contained: Box3 = [
+                [0, 1, 1], // starts before X min
+                [2, 2, 2],
+            ];
+
+            expect(box3.containsBox3(container, contained)).toBe(false);
+        });
+
+        it('should return false when contained box extends before container on Y axis', () => {
+            const container: Box3 = [
+                [1, 1, 1],
+                [3, 3, 3],
+            ];
+            const contained: Box3 = [
+                [1, 0, 1], // starts before Y min
+                [2, 2, 2],
+            ];
+
+            expect(box3.containsBox3(container, contained)).toBe(false);
+        });
+
+        it('should return false when contained box extends before container on Z axis', () => {
+            const container: Box3 = [
+                [1, 1, 1],
+                [3, 3, 3],
+            ];
+            const contained: Box3 = [
+                [1, 1, 0], // starts before Z min
+                [2, 2, 2],
+            ];
+
+            expect(box3.containsBox3(container, contained)).toBe(false);
+        });
+
+        it('should handle negative coordinates', () => {
+            const container: Box3 = [
+                [-5, -5, -5],
+                [-1, -1, -1],
+            ];
+            const contained: Box3 = [
+                [-4, -4, -4],
+                [-2, -2, -2],
+            ];
+
+            expect(box3.containsBox3(container, contained)).toBe(true);
+        });
+
+        it('should return true for zero-sized boxes at same position', () => {
+            const container: Box3 = [
+                [1, 1, 1],
+                [1, 1, 1],
+            ];
+            const contained: Box3 = [
+                [1, 1, 1],
+                [1, 1, 1],
+            ];
+
+            expect(box3.containsBox3(container, contained)).toBe(true);
+        });
+
+        it('should return false for zero-sized boxes at different positions', () => {
+            const container: Box3 = [
+                [1, 1, 1],
+                [1, 1, 1],
+            ];
+            const contained: Box3 = [
+                [2, 1, 1],
+                [2, 1, 1],
+            ];
+
+            expect(box3.containsBox3(container, contained)).toBe(false);
+        });
+
+        it('should handle partially overlapping boxes', () => {
+            const container: Box3 = [
+                [0, 0, 0],
+                [2, 2, 2],
+            ];
+            const contained: Box3 = [
+                [1, 1, 1],
+                [3, 3, 3], // overlaps but extends beyond
+            ];
+
+            expect(box3.containsBox3(container, contained)).toBe(false);
+        });
+    });
+
     describe('intersectsBox3', () => {
         it('should return true for overlapping boxes', () => {
             const boxA: Box3 = [

@@ -75,6 +75,37 @@ export function expandByPoint(out: Box3, box: Box3, point: Vec3): Box3 {
 }
 
 /**
+ * Test if a point is contained within the bounding box
+ * @param box - The bounding box
+ * @param point - The point to test
+ * @returns true if the point is inside or on the boundary of the box
+ */
+export function containsPoint(box: Box3, point: Vec3): boolean {
+    const min = box[0];
+    const max = box[1];
+    return point[0] >= min[0] && point[0] <= max[0] &&
+           point[1] >= min[1] && point[1] <= max[1] &&
+           point[2] >= min[2] && point[2] <= max[2];
+}
+
+/**
+ * Test if one Box3 completely contains another Box3
+ * @param container - The potentially containing Box3
+ * @param contained - The Box3 that might be contained
+ * @returns true if the container Box3 completely contains the contained Box3
+ */
+export function containsBox3(container: Box3, contained: Box3): boolean {
+    const containerMin = container[0];
+    const containerMax = container[1];
+    const containedMin = contained[0];
+    const containedMax = contained[1];
+    
+    return containedMin[0] >= containerMin[0] && containedMax[0] <= containerMax[0] &&
+           containedMin[1] >= containerMin[1] && containedMax[1] <= containerMax[1] &&
+           containedMin[2] >= containerMin[2] && containedMax[2] <= containerMax[2];
+}
+
+/**
  * Check whether two bounding boxes intersect
  */
 export function intersectsBox3(boxA: Box3, boxB: Box3): boolean {
