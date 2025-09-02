@@ -25,6 +25,56 @@ export function clone(box: Box3): Box3 {
 }
 
 /**
+ * Sets the min and max values of a Box3
+ * @param out - The output Box3
+ * @param min - The minimum corner
+ * @param max - The maximum corner
+ * @returns The updated Box3
+ */
+export function set(out: Box3, min: Vec3, max: Vec3): Box3 {
+    out[0][0] = min[0];
+    out[0][1] = min[1];
+    out[0][2] = min[2];
+    out[1][0] = max[0];
+    out[1][1] = max[1];
+    out[1][2] = max[2];
+    return out;
+}
+
+const _setFromCenterAndSize_halfSize = vec3.create();
+
+/**
+ * Sets the box from a center point and size
+ * @param out - The output Box3
+ * @param center - The center point
+ * @param size - The size of the box
+ * @returns The updated Box3
+ */
+export function setFromCenterAndSize(out: Box3, center: Vec3, size: Vec3): Box3 {
+    const halfSize = vec3.scale(_setFromCenterAndSize_halfSize, size, 0.5);
+    vec3.sub(out[0], center, halfSize);
+    vec3.add(out[1], center, halfSize);
+    return out;
+}
+
+/**
+ * Expands a Box3 to include a point
+ * @param out - The output Box3
+ * @param box - The input Box3
+ * @param point - The point to include
+ * @returns The expanded Box3
+ */
+export function expandByPoint(out: Box3, box: Box3, point: Vec3): Box3 {
+    out[0][0] = Math.min(box[0][0], point[0]);
+    out[0][1] = Math.min(box[0][1], point[1]);
+    out[0][2] = Math.min(box[0][2], point[2]);
+    out[1][0] = Math.max(box[1][0], point[0]);
+    out[1][1] = Math.max(box[1][1], point[1]);
+    out[1][2] = Math.max(box[1][2], point[2]);
+    return out;
+}
+
+/**
  * Check whether two bounding boxes intersect
  */
 export function intersectsBox3(boxA: Box3, boxB: Box3): boolean {
@@ -166,7 +216,6 @@ export function intersectsTriangle3(box: Box3, triangle: Triangle3): boolean {
 
 /**
  * Test intersection between axis-aligned bounding box and a sphere.
- * Sphere format: [centerVec3, radius]
  */
 export function intersectsSphere(box: Box3, sphere: Sphere): boolean {
     const min = box[0];
@@ -185,7 +234,6 @@ export function intersectsSphere(box: Box3, sphere: Sphere): boolean {
 
 /**
  * Test intersection between axis-aligned bounding box and plane.
- * Plane format: [normalVec3, constant]; plane equation: normal.dot(p) + constant = 0
  */
 export function intersectsPlane3(box: Box3, plane: Plane3): boolean {
     const min = box[0];
@@ -221,4 +269,79 @@ export function intersectsPlane3(box: Box3, plane: Plane3): boolean {
 
     // Plane intersection occurs if the interval [minDot + constant, maxDot + constant] straddles zero
     return minDot + constant <= 0 && maxDot + constant >= 0;
+}
+
+/**
+ * Test intersection between axis-aligned bounding box and a ray.
+ * Ray is defined by start and end points.
+ * 
+ * @param box - The bounding box
+ * @param start - Ray start point
+ * @param end - Ray end point
+ * @returns true if the ray intersects the box, false otherwise
+ */
+export function intersectsRay(box: Box3, start: Vec3, end: Vec3): boolean {
+    const min = box[0];
+    const max = box[1];
+    
+    // Ray direction and inverse direction
+    const dx = end[0] - start[0];
+    const dy = end[1] - start[1];
+    const dz = end[2] - start[2];
+    
+    // Handle degenerate ray (start == end)
+    if (dx === 0 && dy === 0 && dz === 0) {
+        // Point in box test
+        return start[0] >= min[0] && start[0] <= max[0] &&
+               start[1] >= min[1] && start[1] <= max[1] &&
+               start[2] >= min[2] && start[2] <= max[2];
+    }
+    
+    let tMin = 0;
+    let tMax = 1; // We only care about the segment from start to end
+    
+    // X axis
+    if (dx === 0) {
+        // Ray is parallel to X axis
+        if (start[0] < min[0] || start[0] > max[0]) return false;
+    } else {
+        const invDx = 1 / dx;
+        let t1 = (min[0] - start[0]) * invDx;
+        let t2 = (max[0] - start[0]) * invDx;
+        if (t1 > t2) [t1, t2] = [t2, t1]; // swap
+        tMin = Math.max(tMin, t1);
+        tMax = Math.min(tMax, t2);
+        if (tMin > tMax) return false;
+    }
+    
+    // Y axis
+    if (dy === 0) {
+        // Ray is parallel to Y axis
+        if (start[1] < min[1] || start[1] > max[1]) return false;
+    } else {
+        const invDy = 1 / dy;
+        let t1 = (min[1] - start[1]) * invDy;
+        let t2 = (max[1] - start[1]) * invDy;
+        if (t1 > t2) [t1, t2] = [t2, t1]; // swap
+        tMin = Math.max(tMin, t1);
+        tMax = Math.min(tMax, t2);
+        if (tMin > tMax) return false;
+    }
+    
+    // Z axis
+    if (dz === 0) {
+        // Ray is parallel to Z axis
+        if (start[2] < min[2] || start[2] > max[2]) return false;
+    } else {
+        const invDz = 1 / dz;
+        let t1 = (min[2] - start[2]) * invDz;
+        let t2 = (max[2] - start[2]) * invDz;
+        if (t1 > t2) [t1, t2] = [t2, t1]; // swap
+        tMin = Math.max(tMin, t1);
+        tMax = Math.min(tMax, t2);
+        if (tMin > tMax) return false;
+    }
+    
+    // Ray intersects if tMin <= tMax and the intersection is within the segment [0, 1]
+    return tMax >= 0 && tMin <= 1;
 }
