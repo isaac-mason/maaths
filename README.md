@@ -9,7 +9,7 @@ maaths is a collection of math helpers for 3D graphics and simulations.
 ## Overview
 
 This library is an amalgamation of:
-- A typescript fork of [glMatrix](https://glmatrix.net/) (that does not aim to stay in sync)
+- A typescript fork of [glMatrix](https://glmatrix.net/)
 - Noise functions
 - Easing functions
 - Randomness utilities
