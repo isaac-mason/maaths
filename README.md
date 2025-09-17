@@ -17,9 +17,9 @@ This library is an amalgamation of:
 
 Basically, this aims to become a "kitchen sink" library for math that is useful for graphics and simulations.
 
-The goals of this library / differentiators to other libraries are to:
-- Use simple json-serializable data structures - no classes or typed arrays
-- Have excellent for tree shaking. low import coupling, no classes with non-tree-shakable methods
+The goals of this library are to:
+- Use simple json-serializable objects as data structures, no classes or typed arrays
+- Have excellent tree shaking support by avoiding import coupling, avoiding classes with non-tree-shakable methods
 - Be typescript-first, and therefore offer a great dx for both javascript and typescript projects
 
 ## Table Of Contents
