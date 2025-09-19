@@ -71,7 +71,7 @@ function generateApiDocs() {
             continue;
         }
 
-        const exportedFns = [];
+        const exported = [];
         function visit(node) {
             if (
                 ts.isFunctionDeclaration(node) &&
@@ -79,7 +79,7 @@ function generateApiDocs() {
                 node.modifiers &&
                 node.modifiers.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)
             ) {
-                exportedFns.push(node.name.text);
+                exported.push(node.name.text);
             }
 
             if (
@@ -89,7 +89,7 @@ function generateApiDocs() {
             ) {
                 for (const decl of node.declarationList.declarations) {
                     if (decl.name && ts.isIdentifier(decl.name)) {
-                        exportedFns.push(decl.name.text);
+                        exported.push(decl.name.text);
                     }
                 }
             }
@@ -99,12 +99,12 @@ function generateApiDocs() {
         visit(sf);
 
         docs += `### ${entryModule.apiName}\n\n`;
-        for (const fnName of exportedFns) {
-            const typeDoc = getType(fnName);
+        for (const name of exported) {
+            const typeDoc = getType(name);
 
             if (typeDoc) {
                 const lines = typeDoc.trim();
-                docs += `#### \`${entryModule.name ? `${entryModule.name}.` : ''}${fnName}\``;
+                docs += `#### \`${entryModule.name ? `${entryModule.name}.` : ''}${name}\``;
                 docs += `\n\n\`\`\`ts\n`;
                 docs += lines;
                 docs += `\n\`\`\`\n\n`;
@@ -229,12 +229,7 @@ function getSource(typeName) {
             node.modifiers.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)
         ) {
             for (const decl of node.declarationList.declarations) {
-                if (
-                    decl.name &&
-                    ts.isIdentifier(decl.name) &&
-                    decl.name.text === typeName //&&
-                    // decl.initializer && (ts.isFunctionExpression(decl.initializer) || ts.isArrowFunction(decl.initializer))
-                ) {
+                if (decl.name && ts.isIdentifier(decl.name) && decl.name.text === typeName) {
                     found = fileText.slice(node.getFullStart(), node.getEnd());
                 }
             }
@@ -296,13 +291,13 @@ function getType(typeName) {
             }
             found = sigStr;
         }
-        // Exported const function expressions (arrow or function)
         if (
             ts.isVariableStatement(node) &&
             node.modifiers &&
             node.modifiers.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)
         ) {
             for (const decl of node.declarationList.declarations) {
+                // Exported const function expressions (arrow or function)
                 if (
                     decl.name &&
                     ts.isIdentifier(decl.name) &&
@@ -331,6 +326,23 @@ function getType(typeName) {
                     );
                     const sigStr = printer.printNode(ts.EmitHint.Unspecified, sigNode, node.getSourceFile());
                     found = (jsDoc ? jsDoc + '\n' : '') + sigStr;
+                } else if (decl.name && ts.isIdentifier(decl.name) && decl.name.text === typeName) {
+                    // Get JSDoc (if any)
+                    const jsDoc = ts
+                        .getJSDocCommentsAndTags(node)
+                        .map((doc) => fileText.slice(doc.pos, doc.end))
+                        .join('');
+                    // Print variable declaration
+                    const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
+                    const varNode = ts.factory.createVariableStatement(
+                        [ts.factory.createModifier(ts.SyntaxKind.ExportKeyword)],
+                        ts.factory.createVariableDeclarationList(
+                            [ts.factory.createVariableDeclaration(decl.name, undefined, decl.type, decl.initializer)],
+                            node.declarationList.flags,
+                        ),
+                    );
+                    const varStr = printer.printNode(ts.EmitHint.Unspecified, varNode, node.getSourceFile());
+                    found = (jsDoc ? jsDoc + '\n' : '') + varStr;
                 }
             }
         }

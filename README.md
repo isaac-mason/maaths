@@ -39,6 +39,7 @@ The goals of this library are to:
     - [`box3.intersectsPlane3`](#box3intersectsplane3)
     - [`box3.intersectsRay`](#box3intersectsray)
   - [common](#common)
+    - [`EPSILON`](#epsilon)
     - [`round`](#round)
     - [`degreesToRadians`](#degreestoradians)
     - [`radiansToDegrees`](#radianstodegrees)
@@ -104,6 +105,8 @@ The goals of this library are to:
     - [`mat2.equals`](#mat2equals)
     - [`mat2.multiplyScalar`](#mat2multiplyscalar)
     - [`mat2.multiplyScalarAndAdd`](#mat2multiplyscalarandadd)
+    - [`mat2.mul`](#mat2mul)
+    - [`mat2.sub`](#mat2sub)
   - [mat2d](#mat2d)
     - [`mat2d.create`](#mat2dcreate)
     - [`mat2d.clone`](#mat2dclone)
@@ -128,6 +131,8 @@ The goals of this library are to:
     - [`mat2d.multiplyScalarAndAdd`](#mat2dmultiplyscalarandadd)
     - [`mat2d.exactEquals`](#mat2dexactequals)
     - [`mat2d.equals`](#mat2dequals)
+    - [`mat2d.mul`](#mat2dmul)
+    - [`mat2d.sub`](#mat2dsub)
   - [mat3](#mat3)
     - [`mat3.create`](#mat3create)
     - [`mat3.fromMat4`](#mat3frommat4)
@@ -159,6 +164,8 @@ The goals of this library are to:
     - [`mat3.multiplyScalarAndAdd`](#mat3multiplyscalarandadd)
     - [`mat3.exactEquals`](#mat3exactequals)
     - [`mat3.equals`](#mat3equals)
+    - [`mat3.mul`](#mat3mul)
+    - [`mat3.sub`](#mat3sub)
   - [mat4](#mat4)
     - [`mat4.create`](#mat4create)
     - [`mat4.clone`](#mat4clone)
@@ -194,9 +201,11 @@ The goals of this library are to:
     - [`mat4.fromQuat`](#mat4fromquat)
     - [`mat4.frustum`](#mat4frustum)
     - [`mat4.perspectiveNO`](#mat4perspectiveno)
+    - [`mat4.perspective`](#mat4perspective)
     - [`mat4.perspectiveZO`](#mat4perspectivezo)
     - [`mat4.perspectiveFromFieldOfView`](#mat4perspectivefromfieldofview)
     - [`mat4.orthoNO`](#mat4orthono)
+    - [`mat4.ortho`](#mat4ortho)
     - [`mat4.orthoZO`](#mat4orthozo)
     - [`mat4.lookAt`](#mat4lookat)
     - [`mat4.targetTo`](#mat4targetto)
@@ -208,6 +217,8 @@ The goals of this library are to:
     - [`mat4.multiplyScalarAndAdd`](#mat4multiplyscalarandadd)
     - [`mat4.exactEquals`](#mat4exactequals)
     - [`mat4.equals`](#mat4equals)
+    - [`mat4.mul`](#mat4mul)
+    - [`mat4.sub`](#mat4sub)
   - [noise](#noise)
     - [`createSimplex2D`](#createsimplex2d)
     - [`createSimplex3D`](#createsimplex3d)
@@ -242,10 +253,16 @@ The goals of this library are to:
     - [`quat.dot`](#quatdot)
     - [`quat.lerp`](#quatlerp)
     - [`quat.length`](#quatlength)
+    - [`quat.len`](#quatlen)
     - [`quat.squaredLength`](#quatsquaredlength)
+    - [`quat.sqrLen`](#quatsqrlen)
+    - [`quat.mul`](#quatmul)
     - [`quat.normalize`](#quatnormalize)
     - [`quat.exactEquals`](#quatexactequals)
     - [`quat.equals`](#quatequals)
+    - [`quat.rotationTo`](#quatrotationto)
+    - [`quat.sqlerp`](#quatsqlerp)
+    - [`quat.setAxes`](#quatsetaxes)
   - [quat2](#quat2)
     - [`quat2.create`](#quat2create)
     - [`quat2.clone`](#quat2clone)
@@ -258,7 +275,9 @@ The goals of this library are to:
     - [`quat2.copy`](#quat2copy)
     - [`quat2.identity`](#quat2identity)
     - [`quat2.set`](#quat2set)
+    - [`quat2.getReal`](#quat2getreal)
     - [`quat2.getDual`](#quat2getdual)
+    - [`quat2.setReal`](#quat2setreal)
     - [`quat2.setDual`](#quat2setdual)
     - [`quat2.getTranslation`](#quat2gettranslation)
     - [`quat2.translate`](#quat2translate)
@@ -270,13 +289,16 @@ The goals of this library are to:
     - [`quat2.rotateAroundAxis`](#quat2rotatearoundaxis)
     - [`quat2.add`](#quat2add)
     - [`quat2.multiply`](#quat2multiply)
+    - [`quat2.mul`](#quat2mul)
     - [`quat2.scale`](#quat2scale)
     - [`quat2.dot`](#quat2dot)
     - [`quat2.lerp`](#quat2lerp)
     - [`quat2.invert`](#quat2invert)
     - [`quat2.conjugate`](#quat2conjugate)
     - [`quat2.length`](#quat2length)
+    - [`quat2.len`](#quat2len)
     - [`quat2.squaredLength`](#quat2squaredlength)
+    - [`quat2.sqrLen`](#quat2sqrlen)
     - [`quat2.normalize`](#quat2normalize)
     - [`quat2.str`](#quat2str)
     - [`quat2.exactEquals`](#quat2exactequals)
@@ -338,6 +360,13 @@ The goals of this library are to:
     - [`vec2.exactEquals`](#vec2exactequals)
     - [`vec2.equals`](#vec2equals)
     - [`vec2.finite`](#vec2finite)
+    - [`vec2.len`](#vec2len)
+    - [`vec2.sub`](#vec2sub)
+    - [`vec2.mul`](#vec2mul)
+    - [`vec2.div`](#vec2div)
+    - [`vec2.dist`](#vec2dist)
+    - [`vec2.sqrDist`](#vec2sqrdist)
+    - [`vec2.sqrLen`](#vec2sqrlen)
   - [vec3](#vec3)
     - [`vec3.create`](#vec3create)
     - [`vec3.clone`](#vec3clone)
@@ -384,6 +413,13 @@ The goals of this library are to:
     - [`vec3.exactEquals`](#vec3exactequals)
     - [`vec3.equals`](#vec3equals)
     - [`vec3.finite`](#vec3finite)
+    - [`vec3.sub`](#vec3sub)
+    - [`vec3.mul`](#vec3mul)
+    - [`vec3.div`](#vec3div)
+    - [`vec3.dist`](#vec3dist)
+    - [`vec3.sqrDist`](#vec3sqrdist)
+    - [`vec3.len`](#vec3len)
+    - [`vec3.sqrLen`](#vec3sqrlen)
   - [vec4](#vec4)
     - [`vec4.create`](#vec4create)
     - [`vec4.clone`](#vec4clone)
@@ -418,6 +454,13 @@ The goals of this library are to:
     - [`vec4.exactEquals`](#vec4exactequals)
     - [`vec4.equals`](#vec4equals)
     - [`vec4.finite`](#vec4finite)
+    - [`vec4.sub`](#vec4sub)
+    - [`vec4.mul`](#vec4mul)
+    - [`vec4.div`](#vec4div)
+    - [`vec4.dist`](#vec4dist)
+    - [`vec4.sqrDist`](#vec4sqrdist)
+    - [`vec4.len`](#vec4len)
+    - [`vec4.sqrLen`](#vec4sqrlen)
 - [Acknowledgements](#acknowledgements)
 
 ## API Documentation
@@ -558,6 +601,12 @@ export function intersectsRay(box: Box3, start: Vec3, end: Vec3): boolean;
 ```
 
 ### common
+
+#### `EPSILON`
+
+```ts
+export const EPSILON = 0.000001;
+```
 
 #### `round`
 
@@ -1228,6 +1277,24 @@ export function multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2;
 export function multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number): Mat2;
 ```
 
+#### `mat2.mul`
+
+```ts
+/**
+ * Alias for {@link mat2.multiply}
+ */
+export const mul = multiply;
+```
+
+#### `mat2.sub`
+
+```ts
+/**
+ * Alias for {@link mat2.subtract}
+ */
+export const sub = subtract;
+```
+
 ### mat2d
 
 #### `mat2d.create`
@@ -1542,6 +1609,24 @@ export function exactEquals(a: Euler, b: Euler): boolean;
  * @returns True if the numbers are approximately equal, false otherwise.
  */
 export function equals(a: number, b: number, epsilon = EPSILON): boolean;
+```
+
+#### `mat2d.mul`
+
+```ts
+/**
+ * Alias for {@link mat2.multiply}
+ */
+export const mul = multiply;
+```
+
+#### `mat2d.sub`
+
+```ts
+/**
+ * Alias for {@link mat2.subtract}
+ */
+export const sub = subtract;
 ```
 
 ### mat3
@@ -1951,6 +2036,24 @@ export function exactEquals(a: Euler, b: Euler): boolean;
  * @returns True if the numbers are approximately equal, false otherwise.
  */
 export function equals(a: number, b: number, epsilon = EPSILON): boolean;
+```
+
+#### `mat3.mul`
+
+```ts
+/**
+ * Alias for {@link mat2.multiply}
+ */
+export const mul = multiply;
+```
+
+#### `mat3.sub`
+
+```ts
+/**
+ * Alias for {@link mat2.subtract}
+ */
+export const sub = subtract;
 ```
 
 ### mat4
@@ -2473,6 +2576,16 @@ export function frustum(out: Mat4, left: number, right: number, bottom: number, 
 export function perspectiveNO(out: Mat4, fovy: number, aspect: number, near: number, far: number): Mat4;
 ```
 
+#### `mat4.perspective`
+
+```ts
+/**
+ * Alias for {@link mat4.perspectiveNO}
+ * @function
+ */
+export const perspective = perspectiveNO;
+```
+
 #### `mat4.perspectiveZO`
 
 ```ts
@@ -2532,6 +2645,16 @@ export function perspectiveFromFieldOfView(out: Mat4, fov: {
  * @returns out
  */
 export function orthoNO(out: Mat4, left: number, right: number, bottom: number, top: number, near: number, far: number): Mat4;
+```
+
+#### `mat4.ortho`
+
+```ts
+/**
+ * Alias for {@link mat4.orthoNO}
+ * @function
+ */
+export const ortho = orthoNO;
 ```
 
 #### `mat4.orthoZO`
@@ -2692,6 +2815,24 @@ export function exactEquals(a: Euler, b: Euler): boolean;
  * @returns True if the numbers are approximately equal, false otherwise.
  */
 export function equals(a: number, b: number, epsilon = EPSILON): boolean;
+```
+
+#### `mat4.mul`
+
+```ts
+/**
+ * Alias for {@link mat2.multiply}
+ */
+export const mul = multiply;
+```
+
+#### `mat4.sub`
+
+```ts
+/**
+ * Alias for {@link mat2.subtract}
+ */
+export const sub = subtract;
 ```
 
 ### noise
@@ -3084,13 +3225,13 @@ export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 
 ```ts
 /**
- * Calculates the dot product of two vec2's
+ * Calculates the dot product of two quat's
  *
  * @param a the first operand
  * @param b the second operand
  * @returns dot product of a and b
  */
-export function dot(a: Vec2, b: Vec2): number;
+export const dot = vec4.dot;
 ```
 
 #### `quat.lerp`
@@ -3112,38 +3253,64 @@ export function lerp(v0: number, v1: number, t: number);
 
 ```ts
 /**
- * Calculates the length of a vec2
+ * Calculates the length of a quat
  *
- * @param a vector to calculate length of
+ * @param a quaternion to calculate length of
  * @returns length of a
  */
-export function length(a: Vec2): number;
+export const length = vec4.length;
+```
+
+#### `quat.len`
+
+```ts
+/**
+ * Alias for {@link length}
+ */
+export const len = length;
 ```
 
 #### `quat.squaredLength`
 
 ```ts
 /**
- * Calculates the squared length of a vec2
+ * Calculates the squared length of a quat
  *
- * @param a vector to calculate squared length of
+ * @param a quaternion to calculate squared length of
  * @returns squared length of a
  */
-export function squaredLength(a: Vec2): number;
+export const squaredLength = vec4.squaredLength;
+```
+
+#### `quat.sqrLen`
+
+```ts
+/**
+ * Alias for {@link squaredLength}
+ */
+export const sqrLen = squaredLength;
+```
+
+#### `quat.mul`
+
+```ts
+/**
+ * Alias for {@link mat2.multiply}
+ */
+export const mul = multiply;
 ```
 
 #### `quat.normalize`
 
 ```ts
 /**
- * Normalize a dual quat
+ * Normalize a quat
  *
- * @param out the receiving dual quaternion
- * @param a dual quaternion to normalize
+ * @param out the receiving quaternion
+ * @param a quaternion to normalize
  * @returns out
- * @function
  */
-export function normalize(out: Quat2, a: Quat2): Quat2;
+export const normalize = vec4.normalize;
 ```
 
 #### `quat.exactEquals`
@@ -3172,6 +3339,107 @@ export function exactEquals(a: Euler, b: Euler): boolean;
  * @returns True if the numbers are approximately equal, false otherwise.
  */
 export function equals(a: number, b: number, epsilon = EPSILON): boolean;
+```
+
+#### `quat.rotationTo`
+
+```ts
+/**
+ * Sets a quaternion to represent the shortest rotation from one
+ * vector to another.
+ *
+ * Both vectors are assumed to be unit length.
+ *
+ * @param out the receiving quaternion.
+ * @param a the initial vector
+ * @param b the destination vector
+ * @returns out
+ */
+export const rotationTo = (() => {
+    const tmpvec3 = vec3.create();
+    const xUnitVec3 = vec3.fromValues(1, 0, 0);
+    const yUnitVec3 = vec3.fromValues(0, 1, 0);
+    return (out: Quat, a: Vec3, b: Vec3): Quat => {
+        const dot = vec3.dot(a, b);
+        if (dot < -0.999999) {
+            vec3.cross(tmpvec3, xUnitVec3, a);
+            if (vec3.length(tmpvec3) < 0.000001)
+                vec3.cross(tmpvec3, yUnitVec3, a);
+            vec3.normalize(tmpvec3, tmpvec3);
+            setAxisAngle(out, tmpvec3, Math.PI);
+            return out;
+        }
+        if (dot > 0.999999) {
+            out[0] = 0;
+            out[1] = 0;
+            out[2] = 0;
+            out[3] = 1;
+            return out;
+        }
+        vec3.cross(tmpvec3, a, b);
+        out[0] = tmpvec3[0];
+        out[1] = tmpvec3[1];
+        out[2] = tmpvec3[2];
+        out[3] = 1 + dot;
+        return normalize(out, out);
+    };
+})();
+```
+
+#### `quat.sqlerp`
+
+```ts
+/**
+ * Performs a spherical linear interpolation with two control points
+ *
+ * @param out the receiving quaternion
+ * @param a the first operand
+ * @param b the second operand
+ * @param c the third operand
+ * @param d the fourth operand
+ * @param t interpolation amount, in the range [0-1], between the two inputs
+ * @returns out
+ */
+export const sqlerp = (() => {
+    const temp1 = create();
+    const temp2 = create();
+    return (out: Quat, a: Quat, b: Quat, c: Quat, d: Quat, t: number): Quat => {
+        slerp(temp1, a, d, t);
+        slerp(temp2, b, c, t);
+        slerp(out, temp1, temp2, 2 * t * (1 - t));
+        return out;
+    };
+})();
+```
+
+#### `quat.setAxes`
+
+```ts
+/**
+ * Sets the specified quaternion with values corresponding to the given
+ * axes. Each axis is a vec3 and is expected to be unit length and
+ * perpendicular to all other specified axes.
+ *
+ * @param view  the vector representing the viewing direction
+ * @param right the vector representing the local "right" direction
+ * @param up    the vector representing the local "up" direction
+ * @returns out
+ */
+export const setAxes = (() => {
+    const matr = mat3.create();
+    return (out: Quat, view: Vec3, right: Vec3, up: Vec3): Quat => {
+        matr[0] = right[0];
+        matr[3] = right[1];
+        matr[6] = right[2];
+        matr[1] = up[0];
+        matr[4] = up[1];
+        matr[7] = up[2];
+        matr[2] = -view[0];
+        matr[5] = -view[1];
+        matr[8] = -view[2];
+        return normalize(out, fromMat3(out, matr));
+    };
+})();
 ```
 
 ### quat2
@@ -3336,6 +3604,18 @@ export function identity(out: Mat2): Mat2;
 export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 ```
 
+#### `quat2.getReal`
+
+```ts
+/**
+ * Gets the real part of a dual quat
+ * @param  out real part
+ * @param  a Dual Quaternion
+ * @return real part
+ */
+export const getReal = quat.copy;
+```
+
 #### `quat2.getDual`
 
 ```ts
@@ -3346,6 +3626,20 @@ export function set(out: Box3, min: Vec3, max: Vec3): Box3;
  * @return dual part
  */
 export function getDual(out: Quat, a: Quat2): Quat;
+```
+
+#### `quat2.setReal`
+
+```ts
+/**
+ * Set the real component of a dual quat to the given quaternion
+ *
+ * @param out the receiving quaternion
+ * @param q a quaternion representing the real part
+ * @returns out
+ * @function
+ */
+export const setReal = quat.copy;
 ```
 
 #### `quat2.setDual`
@@ -3504,6 +3798,15 @@ export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
+#### `quat2.mul`
+
+```ts
+/**
+ * Alias for {@link mat2.multiply}
+ */
+export const mul = multiply;
+```
+
 #### `quat2.scale`
 
 ```ts
@@ -3522,13 +3825,13 @@ export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 
 ```ts
 /**
- * Calculates the dot product of two vec2's
+ * Calculates the dot product of two quat's
  *
  * @param a the first operand
  * @param b the second operand
  * @returns dot product of a and b
  */
-export function dot(a: Vec2, b: Vec2): number;
+export const dot = vec4.dot;
 ```
 
 #### `quat2.lerp`
@@ -3577,38 +3880,55 @@ export function conjugate(out: Quat, a: Quat): Quat;
 
 ```ts
 /**
- * Calculates the length of a vec2
+ * Calculates the length of a quat
  *
- * @param a vector to calculate length of
+ * @param a quaternion to calculate length of
  * @returns length of a
  */
-export function length(a: Vec2): number;
+export const length = vec4.length;
+```
+
+#### `quat2.len`
+
+```ts
+/**
+ * Alias for {@link length}
+ */
+export const len = length;
 ```
 
 #### `quat2.squaredLength`
 
 ```ts
 /**
- * Calculates the squared length of a vec2
+ * Calculates the squared length of a quat
  *
- * @param a vector to calculate squared length of
+ * @param a quaternion to calculate squared length of
  * @returns squared length of a
  */
-export function squaredLength(a: Vec2): number;
+export const squaredLength = vec4.squaredLength;
+```
+
+#### `quat2.sqrLen`
+
+```ts
+/**
+ * Alias for {@link squaredLength}
+ */
+export const sqrLen = squaredLength;
 ```
 
 #### `quat2.normalize`
 
 ```ts
 /**
- * Normalize a dual quat
+ * Normalize a quat
  *
- * @param out the receiving dual quaternion
- * @param a dual quaternion to normalize
+ * @param out the receiving quaternion
+ * @param a quaternion to normalize
  * @returns out
- * @function
  */
-export function normalize(out: Quat2, a: Quat2): Quat2;
+export const normalize = vec4.normalize;
 ```
 
 #### `quat2.str`
@@ -4089,24 +4409,24 @@ export function squaredDistance(a: Vec2, b: Vec2): number;
 
 ```ts
 /**
- * Calculates the length of a vec2
+ * Calculates the length of a quat
  *
- * @param a vector to calculate length of
+ * @param a quaternion to calculate length of
  * @returns length of a
  */
-export function length(a: Vec2): number;
+export const length = vec4.length;
 ```
 
 #### `vec2.squaredLength`
 
 ```ts
 /**
- * Calculates the squared length of a vec2
+ * Calculates the squared length of a quat
  *
- * @param a vector to calculate squared length of
+ * @param a quaternion to calculate squared length of
  * @returns squared length of a
  */
-export function squaredLength(a: Vec2): number;
+export const squaredLength = vec4.squaredLength;
 ```
 
 #### `vec2.negate`
@@ -4139,27 +4459,26 @@ export function inverse(out: Vec2, a: Vec2): Vec2;
 
 ```ts
 /**
- * Normalize a dual quat
+ * Normalize a quat
  *
- * @param out the receiving dual quaternion
- * @param a dual quaternion to normalize
+ * @param out the receiving quaternion
+ * @param a quaternion to normalize
  * @returns out
- * @function
  */
-export function normalize(out: Quat2, a: Quat2): Quat2;
+export const normalize = vec4.normalize;
 ```
 
 #### `vec2.dot`
 
 ```ts
 /**
- * Calculates the dot product of two vec2's
+ * Calculates the dot product of two quat's
  *
  * @param a the first operand
  * @param b the second operand
  * @returns dot product of a and b
  */
-export function dot(a: Vec2, b: Vec2): number;
+export const dot = vec4.dot;
 ```
 
 #### `vec2.cross`
@@ -4340,6 +4659,69 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 export function finite(a: Vec2): boolean;
 ```
 
+#### `vec2.len`
+
+```ts
+/**
+ * Alias for {@link length}
+ */
+export const len = length;
+```
+
+#### `vec2.sub`
+
+```ts
+/**
+ * Alias for {@link mat2.subtract}
+ */
+export const sub = subtract;
+```
+
+#### `vec2.mul`
+
+```ts
+/**
+ * Alias for {@link mat2.multiply}
+ */
+export const mul = multiply;
+```
+
+#### `vec2.div`
+
+```ts
+/**
+ * Alias for {@link divide}
+ */
+export const div = divide;
+```
+
+#### `vec2.dist`
+
+```ts
+/**
+ * Alias for {@link distance}
+ */
+export const dist = distance;
+```
+
+#### `vec2.sqrDist`
+
+```ts
+/**
+ * Alias for {@link squaredDistance}
+ */
+export const sqrDist = squaredDistance;
+```
+
+#### `vec2.sqrLen`
+
+```ts
+/**
+ * Alias for {@link squaredLength}
+ */
+export const sqrLen = squaredLength;
+```
+
 ### vec3
 
 #### `vec3.create`
@@ -4367,12 +4749,12 @@ export function clone(box: Box3): Box3;
 
 ```ts
 /**
- * Calculates the length of a vec2
+ * Calculates the length of a quat
  *
- * @param a vector to calculate length of
+ * @param a quaternion to calculate length of
  * @returns length of a
  */
-export function length(a: Vec2): number;
+export const length = vec4.length;
 ```
 
 #### `vec3.fromValues`
@@ -4650,12 +5032,12 @@ export function squaredDistance(a: Vec2, b: Vec2): number;
 
 ```ts
 /**
- * Calculates the squared length of a vec2
+ * Calculates the squared length of a quat
  *
- * @param a vector to calculate squared length of
+ * @param a quaternion to calculate squared length of
  * @returns squared length of a
  */
-export function squaredLength(a: Vec2): number;
+export const squaredLength = vec4.squaredLength;
 ```
 
 #### `vec3.negate`
@@ -4688,27 +5070,26 @@ export function inverse(out: Vec2, a: Vec2): Vec2;
 
 ```ts
 /**
- * Normalize a dual quat
+ * Normalize a quat
  *
- * @param out the receiving dual quaternion
- * @param a dual quaternion to normalize
+ * @param out the receiving quaternion
+ * @param a quaternion to normalize
  * @returns out
- * @function
  */
-export function normalize(out: Quat2, a: Quat2): Quat2;
+export const normalize = vec4.normalize;
 ```
 
 #### `vec3.dot`
 
 ```ts
 /**
- * Calculates the dot product of two vec2's
+ * Calculates the dot product of two quat's
  *
  * @param a the first operand
  * @param b the second operand
  * @returns dot product of a and b
  */
-export function dot(a: Vec2, b: Vec2): number;
+export const dot = vec4.dot;
 ```
 
 #### `vec3.cross`
@@ -4951,6 +5332,69 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
  * @returns whether or not the vector is finite
  */
 export function finite(a: Vec2): boolean;
+```
+
+#### `vec3.sub`
+
+```ts
+/**
+ * Alias for {@link mat2.subtract}
+ */
+export const sub = subtract;
+```
+
+#### `vec3.mul`
+
+```ts
+/**
+ * Alias for {@link mat2.multiply}
+ */
+export const mul = multiply;
+```
+
+#### `vec3.div`
+
+```ts
+/**
+ * Alias for {@link divide}
+ */
+export const div = divide;
+```
+
+#### `vec3.dist`
+
+```ts
+/**
+ * Alias for {@link distance}
+ */
+export const dist = distance;
+```
+
+#### `vec3.sqrDist`
+
+```ts
+/**
+ * Alias for {@link squaredDistance}
+ */
+export const sqrDist = squaredDistance;
+```
+
+#### `vec3.len`
+
+```ts
+/**
+ * Alias for {@link length}
+ */
+export const len = length;
+```
+
+#### `vec3.sqrLen`
+
+```ts
+/**
+ * Alias for {@link squaredLength}
+ */
+export const sqrLen = squaredLength;
 ```
 
 ### vec4
@@ -5197,24 +5641,24 @@ export function squaredDistance(a: Vec2, b: Vec2): number;
 
 ```ts
 /**
- * Calculates the length of a vec2
+ * Calculates the length of a quat
  *
- * @param a vector to calculate length of
+ * @param a quaternion to calculate length of
  * @returns length of a
  */
-export function length(a: Vec2): number;
+export const length = vec4.length;
 ```
 
 #### `vec4.squaredLength`
 
 ```ts
 /**
- * Calculates the squared length of a vec2
+ * Calculates the squared length of a quat
  *
- * @param a vector to calculate squared length of
+ * @param a quaternion to calculate squared length of
  * @returns squared length of a
  */
-export function squaredLength(a: Vec2): number;
+export const squaredLength = vec4.squaredLength;
 ```
 
 #### `vec4.negate`
@@ -5247,27 +5691,26 @@ export function inverse(out: Vec2, a: Vec2): Vec2;
 
 ```ts
 /**
- * Normalize a dual quat
+ * Normalize a quat
  *
- * @param out the receiving dual quaternion
- * @param a dual quaternion to normalize
+ * @param out the receiving quaternion
+ * @param a quaternion to normalize
  * @returns out
- * @function
  */
-export function normalize(out: Quat2, a: Quat2): Quat2;
+export const normalize = vec4.normalize;
 ```
 
 #### `vec4.dot`
 
 ```ts
 /**
- * Calculates the dot product of two vec2's
+ * Calculates the dot product of two quat's
  *
  * @param a the first operand
  * @param b the second operand
  * @returns dot product of a and b
  */
-export function dot(a: Vec2, b: Vec2): number;
+export const dot = vec4.dot;
 ```
 
 #### `vec4.cross`
@@ -5392,6 +5835,69 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
  * @returns whether or not the vector is finite
  */
 export function finite(a: Vec2): boolean;
+```
+
+#### `vec4.sub`
+
+```ts
+/**
+ * Alias for {@link mat2.subtract}
+ */
+export const sub = subtract;
+```
+
+#### `vec4.mul`
+
+```ts
+/**
+ * Alias for {@link mat2.multiply}
+ */
+export const mul = multiply;
+```
+
+#### `vec4.div`
+
+```ts
+/**
+ * Alias for {@link divide}
+ */
+export const div = divide;
+```
+
+#### `vec4.dist`
+
+```ts
+/**
+ * Alias for {@link distance}
+ */
+export const dist = distance;
+```
+
+#### `vec4.sqrDist`
+
+```ts
+/**
+ * Alias for {@link squaredDistance}
+ */
+export const sqrDist = squaredDistance;
+```
+
+#### `vec4.len`
+
+```ts
+/**
+ * Alias for {@link length}
+ */
+export const len = length;
+```
+
+#### `vec4.sqrLen`
+
+```ts
+/**
+ * Alias for {@link squaredLength}
+ */
+export const sqrLen = squaredLength;
 ```
 
 
