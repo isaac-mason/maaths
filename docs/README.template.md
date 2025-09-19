@@ -26,7 +26,7 @@ The goals of this library are to:
 
 <TOC />
 
-## APIs
+## API Documentation
 
 <RenderAPI />
 

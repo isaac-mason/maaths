@@ -81,22 +81,19 @@ function generateApiDocs() {
             ) {
                 exportedFns.push(node.name.text);
             }
+
             if (
                 ts.isVariableStatement(node) &&
                 node.modifiers &&
                 node.modifiers.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)
             ) {
                 for (const decl of node.declarationList.declarations) {
-                    if (
-                        decl.name &&
-                        ts.isIdentifier(decl.name) &&
-                        decl.initializer &&
-                        (ts.isFunctionExpression(decl.initializer) || ts.isArrowFunction(decl.initializer))
-                    ) {
+                    if (decl.name && ts.isIdentifier(decl.name)) {
                         exportedFns.push(decl.name.text);
                     }
                 }
             }
+
             ts.forEachChild(node, visit);
         }
         visit(sf);
@@ -107,10 +104,10 @@ function generateApiDocs() {
 
             if (typeDoc) {
                 const lines = typeDoc.trim();
-                docs += `#### ${entryModule.name ? `${entryModule.name}.` : ''}${fnName}`
-                docs += `\n\n\`\`\`ts\n`
+                docs += `#### \`${entryModule.name ? `${entryModule.name}.` : ''}${fnName}\``;
+                docs += `\n\n\`\`\`ts\n`;
                 docs += lines;
-                docs += `\n\`\`\`\n\n`
+                docs += `\n\`\`\`\n\n`;
             }
         }
     }
@@ -179,9 +176,14 @@ readmeText = readmeText.replace(snippetRegex, (fullMatch, sourcePath, groupName)
 
 /* <TOC /> */
 const tocRegex = /<TOC\s*\/>/g;
+const tocLine = readmeText.split('\n').findIndex((line) => tocRegex.test(line));
+const linesAfterToc = readmeText
+    .split('\n')
+    .slice(tocLine + 1)
+    .join('\n');
 const tocLines = [];
 const headingRegex = /^(#{2,6})\s+(.*)$/gm;
-for (const match of readmeText.matchAll(headingRegex)) {
+for (const match of linesAfterToc.matchAll(headingRegex)) {
     const level = match[1].length - 1; // level 2-6 becomes 1-5
     const title = match[2].trim();
     const anchor = title

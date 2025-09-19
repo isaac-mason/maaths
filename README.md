@@ -24,394 +24,407 @@ The goals of this library are to:
 
 ## Table Of Contents
 
-- [Overview](#overview)
-- [Table Of Contents](#table-of-contents)
-- [APIs](#apis)
+- [API Documentation](#api-documentation)
   - [box3](#box3)
-    - [box3.create](#box3create)
-    - [box3.clone](#box3clone)
-    - [box3.set](#box3set)
-    - [box3.setFromCenterAndSize](#box3setfromcenterandsize)
-    - [box3.expandByPoint](#box3expandbypoint)
-    - [box3.containsPoint](#box3containspoint)
-    - [box3.containsBox3](#box3containsbox3)
-    - [box3.intersectsBox3](#box3intersectsbox3)
-    - [box3.intersectsTriangle3](#box3intersectstriangle3)
-    - [box3.intersectsSphere](#box3intersectssphere)
-    - [box3.intersectsPlane3](#box3intersectsplane3)
-    - [box3.intersectsRay](#box3intersectsray)
+    - [`box3.create`](#box3create)
+    - [`box3.clone`](#box3clone)
+    - [`box3.set`](#box3set)
+    - [`box3.setFromCenterAndSize`](#box3setfromcenterandsize)
+    - [`box3.expandByPoint`](#box3expandbypoint)
+    - [`box3.containsPoint`](#box3containspoint)
+    - [`box3.containsBox3`](#box3containsbox3)
+    - [`box3.intersectsBox3`](#box3intersectsbox3)
+    - [`box3.intersectsTriangle3`](#box3intersectstriangle3)
+    - [`box3.intersectsSphere`](#box3intersectssphere)
+    - [`box3.intersectsPlane3`](#box3intersectsplane3)
+    - [`box3.intersectsRay`](#box3intersectsray)
   - [common](#common)
-    - [round](#round)
-    - [degreesToRadians](#degreestoradians)
-    - [radiansToDegrees](#radianstodegrees)
-    - [equals](#equals)
-    - [fade](#fade)
-    - [lerp](#lerp)
-    - [clamp](#clamp)
-    - [remap](#remap)
-    - [remapClamp](#remapclamp)
+    - [`round`](#round)
+    - [`degreesToRadians`](#degreestoradians)
+    - [`radiansToDegrees`](#radianstodegrees)
+    - [`equals`](#equals)
+    - [`fade`](#fade)
+    - [`lerp`](#lerp)
+    - [`clamp`](#clamp)
+    - [`remap`](#remap)
+    - [`remapClamp`](#remapclamp)
   - [easing](#easing)
-    - [easing.exp](#easingexp)
-    - [easing.linear](#easinglinear)
-    - [easing.sineIn](#easingsinein)
-    - [easing.sineOut](#easingsineout)
-    - [easing.sineInOut](#easingsineinout)
-    - [easing.cubicIn](#easingcubicin)
-    - [easing.cubicOut](#easingcubicout)
-    - [easing.cubicInOut](#easingcubicinout)
-    - [easing.quintIn](#easingquintin)
-    - [easing.quintOut](#easingquintout)
-    - [easing.quintInOut](#easingquintinout)
-    - [easing.circIn](#easingcircin)
-    - [easing.circOut](#easingcircout)
-    - [easing.circInOut](#easingcircinout)
-    - [easing.quartIn](#easingquartin)
-    - [easing.quartOut](#easingquartout)
-    - [easing.quartInOut](#easingquartinout)
-    - [easing.expoIn](#easingexpoin)
-    - [easing.expoOut](#easingexpoout)
-    - [easing.expoInOut](#easingexpoinout)
-    - [easing.rsqw](#easingrsqw)
+    - [`easing.exp`](#easingexp)
+    - [`easing.linear`](#easinglinear)
+    - [`easing.sineIn`](#easingsinein)
+    - [`easing.sineOut`](#easingsineout)
+    - [`easing.sineInOut`](#easingsineinout)
+    - [`easing.cubicIn`](#easingcubicin)
+    - [`easing.cubicOut`](#easingcubicout)
+    - [`easing.cubicInOut`](#easingcubicinout)
+    - [`easing.quintIn`](#easingquintin)
+    - [`easing.quintOut`](#easingquintout)
+    - [`easing.quintInOut`](#easingquintinout)
+    - [`easing.circIn`](#easingcircin)
+    - [`easing.circOut`](#easingcircout)
+    - [`easing.circInOut`](#easingcircinout)
+    - [`easing.quartIn`](#easingquartin)
+    - [`easing.quartOut`](#easingquartout)
+    - [`easing.quartInOut`](#easingquartinout)
+    - [`easing.expoIn`](#easingexpoin)
+    - [`easing.expoOut`](#easingexpoout)
+    - [`easing.expoInOut`](#easingexpoinout)
+    - [`easing.rsqw`](#easingrsqw)
   - [euler](#euler)
-    - [euler.create](#eulercreate)
-    - [euler.fromValues](#eulerfromvalues)
-    - [euler.fromDegrees](#eulerfromdegrees)
-    - [euler.fromRotationMat4](#eulerfromrotationmat4)
-    - [euler.exactEquals](#eulerexactequals)
-    - [euler.equals](#eulerequals)
-    - [euler.fromQuat](#eulerfromquat)
-    - [euler.reorder](#eulerreorder)
+    - [`euler.create`](#eulercreate)
+    - [`euler.fromValues`](#eulerfromvalues)
+    - [`euler.fromDegrees`](#eulerfromdegrees)
+    - [`euler.fromRotationMat4`](#eulerfromrotationmat4)
+    - [`euler.exactEquals`](#eulerexactequals)
+    - [`euler.equals`](#eulerequals)
+    - [`euler.fromQuat`](#eulerfromquat)
+    - [`euler.reorder`](#eulerreorder)
   - [mat2](#mat2)
-    - [mat2.create](#mat2create)
-    - [mat2.clone](#mat2clone)
-    - [mat2.copy](#mat2copy)
-    - [mat2.identity](#mat2identity)
-    - [mat2.fromValues](#mat2fromvalues)
-    - [mat2.set](#mat2set)
-    - [mat2.transpose](#mat2transpose)
-    - [mat2.invert](#mat2invert)
-    - [mat2.adjoint](#mat2adjoint)
-    - [mat2.determinant](#mat2determinant)
-    - [mat2.multiply](#mat2multiply)
-    - [mat2.rotate](#mat2rotate)
-    - [mat2.scale](#mat2scale)
-    - [mat2.fromRotation](#mat2fromrotation)
-    - [mat2.fromScaling](#mat2fromscaling)
-    - [mat2.str](#mat2str)
-    - [mat2.frob](#mat2frob)
-    - [mat2.LDU](#mat2ldu)
-    - [mat2.add](#mat2add)
-    - [mat2.subtract](#mat2subtract)
-    - [mat2.exactEquals](#mat2exactequals)
-    - [mat2.equals](#mat2equals)
-    - [mat2.multiplyScalar](#mat2multiplyscalar)
-    - [mat2.multiplyScalarAndAdd](#mat2multiplyscalarandadd)
+    - [`mat2.create`](#mat2create)
+    - [`mat2.clone`](#mat2clone)
+    - [`mat2.copy`](#mat2copy)
+    - [`mat2.identity`](#mat2identity)
+    - [`mat2.fromValues`](#mat2fromvalues)
+    - [`mat2.set`](#mat2set)
+    - [`mat2.transpose`](#mat2transpose)
+    - [`mat2.invert`](#mat2invert)
+    - [`mat2.adjoint`](#mat2adjoint)
+    - [`mat2.determinant`](#mat2determinant)
+    - [`mat2.multiply`](#mat2multiply)
+    - [`mat2.rotate`](#mat2rotate)
+    - [`mat2.scale`](#mat2scale)
+    - [`mat2.fromRotation`](#mat2fromrotation)
+    - [`mat2.fromScaling`](#mat2fromscaling)
+    - [`mat2.str`](#mat2str)
+    - [`mat2.frob`](#mat2frob)
+    - [`mat2.LDU`](#mat2ldu)
+    - [`mat2.add`](#mat2add)
+    - [`mat2.subtract`](#mat2subtract)
+    - [`mat2.exactEquals`](#mat2exactequals)
+    - [`mat2.equals`](#mat2equals)
+    - [`mat2.multiplyScalar`](#mat2multiplyscalar)
+    - [`mat2.multiplyScalarAndAdd`](#mat2multiplyscalarandadd)
   - [mat2d](#mat2d)
-    - [mat2d.create](#mat2dcreate)
-    - [mat2d.clone](#mat2dclone)
-    - [mat2d.copy](#mat2dcopy)
-    - [mat2d.identity](#mat2didentity)
-    - [mat2d.fromValues](#mat2dfromvalues)
-    - [mat2d.set](#mat2dset)
-    - [mat2d.invert](#mat2dinvert)
-    - [mat2d.determinant](#mat2ddeterminant)
-    - [mat2d.multiply](#mat2dmultiply)
-    - [mat2d.rotate](#mat2drotate)
-    - [mat2d.scale](#mat2dscale)
-    - [mat2d.translate](#mat2dtranslate)
-    - [mat2d.fromRotation](#mat2dfromrotation)
-    - [mat2d.fromScaling](#mat2dfromscaling)
-    - [mat2d.fromTranslation](#mat2dfromtranslation)
-    - [mat2d.str](#mat2dstr)
-    - [mat2d.frob](#mat2dfrob)
-    - [mat2d.add](#mat2dadd)
-    - [mat2d.subtract](#mat2dsubtract)
-    - [mat2d.multiplyScalar](#mat2dmultiplyscalar)
-    - [mat2d.multiplyScalarAndAdd](#mat2dmultiplyscalarandadd)
-    - [mat2d.exactEquals](#mat2dexactequals)
-    - [mat2d.equals](#mat2dequals)
+    - [`mat2d.create`](#mat2dcreate)
+    - [`mat2d.clone`](#mat2dclone)
+    - [`mat2d.copy`](#mat2dcopy)
+    - [`mat2d.identity`](#mat2didentity)
+    - [`mat2d.fromValues`](#mat2dfromvalues)
+    - [`mat2d.set`](#mat2dset)
+    - [`mat2d.invert`](#mat2dinvert)
+    - [`mat2d.determinant`](#mat2ddeterminant)
+    - [`mat2d.multiply`](#mat2dmultiply)
+    - [`mat2d.rotate`](#mat2drotate)
+    - [`mat2d.scale`](#mat2dscale)
+    - [`mat2d.translate`](#mat2dtranslate)
+    - [`mat2d.fromRotation`](#mat2dfromrotation)
+    - [`mat2d.fromScaling`](#mat2dfromscaling)
+    - [`mat2d.fromTranslation`](#mat2dfromtranslation)
+    - [`mat2d.str`](#mat2dstr)
+    - [`mat2d.frob`](#mat2dfrob)
+    - [`mat2d.add`](#mat2dadd)
+    - [`mat2d.subtract`](#mat2dsubtract)
+    - [`mat2d.multiplyScalar`](#mat2dmultiplyscalar)
+    - [`mat2d.multiplyScalarAndAdd`](#mat2dmultiplyscalarandadd)
+    - [`mat2d.exactEquals`](#mat2dexactequals)
+    - [`mat2d.equals`](#mat2dequals)
   - [mat3](#mat3)
-    - [mat3.create](#mat3create)
-    - [mat3.fromMat4](#mat3frommat4)
-    - [mat3.clone](#mat3clone)
-    - [mat3.copy](#mat3copy)
-    - [mat3.fromValues](#mat3fromvalues)
-    - [mat3.set](#mat3set)
-    - [mat3.identity](#mat3identity)
-    - [mat3.transpose](#mat3transpose)
-    - [mat3.invert](#mat3invert)
-    - [mat3.adjoint](#mat3adjoint)
-    - [mat3.determinant](#mat3determinant)
-    - [mat3.multiply](#mat3multiply)
-    - [mat3.translate](#mat3translate)
-    - [mat3.rotate](#mat3rotate)
-    - [mat3.scale](#mat3scale)
-    - [mat3.fromTranslation](#mat3fromtranslation)
-    - [mat3.fromRotation](#mat3fromrotation)
-    - [mat3.fromScaling](#mat3fromscaling)
-    - [mat3.fromMat2d](#mat3frommat2d)
-    - [mat3.fromQuat](#mat3fromquat)
-    - [mat3.normalFromMat4](#mat3normalfrommat4)
-    - [mat3.projection](#mat3projection)
-    - [mat3.str](#mat3str)
-    - [mat3.frob](#mat3frob)
-    - [mat3.add](#mat3add)
-    - [mat3.subtract](#mat3subtract)
-    - [mat3.multiplyScalar](#mat3multiplyscalar)
-    - [mat3.multiplyScalarAndAdd](#mat3multiplyscalarandadd)
-    - [mat3.exactEquals](#mat3exactequals)
-    - [mat3.equals](#mat3equals)
+    - [`mat3.create`](#mat3create)
+    - [`mat3.fromMat4`](#mat3frommat4)
+    - [`mat3.clone`](#mat3clone)
+    - [`mat3.copy`](#mat3copy)
+    - [`mat3.fromValues`](#mat3fromvalues)
+    - [`mat3.set`](#mat3set)
+    - [`mat3.identity`](#mat3identity)
+    - [`mat3.transpose`](#mat3transpose)
+    - [`mat3.invert`](#mat3invert)
+    - [`mat3.adjoint`](#mat3adjoint)
+    - [`mat3.determinant`](#mat3determinant)
+    - [`mat3.multiply`](#mat3multiply)
+    - [`mat3.translate`](#mat3translate)
+    - [`mat3.rotate`](#mat3rotate)
+    - [`mat3.scale`](#mat3scale)
+    - [`mat3.fromTranslation`](#mat3fromtranslation)
+    - [`mat3.fromRotation`](#mat3fromrotation)
+    - [`mat3.fromScaling`](#mat3fromscaling)
+    - [`mat3.fromMat2d`](#mat3frommat2d)
+    - [`mat3.fromQuat`](#mat3fromquat)
+    - [`mat3.normalFromMat4`](#mat3normalfrommat4)
+    - [`mat3.projection`](#mat3projection)
+    - [`mat3.str`](#mat3str)
+    - [`mat3.frob`](#mat3frob)
+    - [`mat3.add`](#mat3add)
+    - [`mat3.subtract`](#mat3subtract)
+    - [`mat3.multiplyScalar`](#mat3multiplyscalar)
+    - [`mat3.multiplyScalarAndAdd`](#mat3multiplyscalarandadd)
+    - [`mat3.exactEquals`](#mat3exactequals)
+    - [`mat3.equals`](#mat3equals)
   - [mat4](#mat4)
-    - [mat4.create](#mat4create)
-    - [mat4.clone](#mat4clone)
-    - [mat4.copy](#mat4copy)
-    - [mat4.fromValues](#mat4fromvalues)
-    - [mat4.set](#mat4set)
-    - [mat4.identity](#mat4identity)
-    - [mat4.transpose](#mat4transpose)
-    - [mat4.invert](#mat4invert)
-    - [mat4.adjoint](#mat4adjoint)
-    - [mat4.determinant](#mat4determinant)
-    - [mat4.multiply](#mat4multiply)
-    - [mat4.translate](#mat4translate)
-    - [mat4.scale](#mat4scale)
-    - [mat4.rotate](#mat4rotate)
-    - [mat4.rotateX](#mat4rotatex)
-    - [mat4.rotateY](#mat4rotatey)
-    - [mat4.rotateZ](#mat4rotatez)
-    - [mat4.fromTranslation](#mat4fromtranslation)
-    - [mat4.fromScaling](#mat4fromscaling)
-    - [mat4.fromRotation](#mat4fromrotation)
-    - [mat4.fromXRotation](#mat4fromxrotation)
-    - [mat4.fromYRotation](#mat4fromyrotation)
-    - [mat4.fromZRotation](#mat4fromzrotation)
-    - [mat4.fromRotationTranslation](#mat4fromrotationtranslation)
-    - [mat4.fromQuat2](#mat4fromquat2)
-    - [mat4.getTranslation](#mat4gettranslation)
-    - [mat4.getScaling](#mat4getscaling)
-    - [mat4.getRotation](#mat4getrotation)
-    - [mat4.decompose](#mat4decompose)
-    - [mat4.fromRotationTranslationScale](#mat4fromrotationtranslationscale)
-    - [mat4.fromRotationTranslationScaleOrigin](#mat4fromrotationtranslationscaleorigin)
-    - [mat4.fromQuat](#mat4fromquat)
-    - [mat4.frustum](#mat4frustum)
-    - [mat4.perspectiveNO](#mat4perspectiveno)
-    - [mat4.perspectiveZO](#mat4perspectivezo)
-    - [mat4.perspectiveFromFieldOfView](#mat4perspectivefromfieldofview)
-    - [mat4.orthoNO](#mat4orthono)
-    - [mat4.orthoZO](#mat4orthozo)
-    - [mat4.lookAt](#mat4lookat)
-    - [mat4.targetTo](#mat4targetto)
-    - [mat4.str](#mat4str)
-    - [mat4.frob](#mat4frob)
-    - [mat4.add](#mat4add)
-    - [mat4.subtract](#mat4subtract)
-    - [mat4.multiplyScalar](#mat4multiplyscalar)
-    - [mat4.multiplyScalarAndAdd](#mat4multiplyscalarandadd)
-    - [mat4.exactEquals](#mat4exactequals)
-    - [mat4.equals](#mat4equals)
+    - [`mat4.create`](#mat4create)
+    - [`mat4.clone`](#mat4clone)
+    - [`mat4.copy`](#mat4copy)
+    - [`mat4.fromValues`](#mat4fromvalues)
+    - [`mat4.set`](#mat4set)
+    - [`mat4.identity`](#mat4identity)
+    - [`mat4.transpose`](#mat4transpose)
+    - [`mat4.invert`](#mat4invert)
+    - [`mat4.adjoint`](#mat4adjoint)
+    - [`mat4.determinant`](#mat4determinant)
+    - [`mat4.multiply`](#mat4multiply)
+    - [`mat4.translate`](#mat4translate)
+    - [`mat4.scale`](#mat4scale)
+    - [`mat4.rotate`](#mat4rotate)
+    - [`mat4.rotateX`](#mat4rotatex)
+    - [`mat4.rotateY`](#mat4rotatey)
+    - [`mat4.rotateZ`](#mat4rotatez)
+    - [`mat4.fromTranslation`](#mat4fromtranslation)
+    - [`mat4.fromScaling`](#mat4fromscaling)
+    - [`mat4.fromRotation`](#mat4fromrotation)
+    - [`mat4.fromXRotation`](#mat4fromxrotation)
+    - [`mat4.fromYRotation`](#mat4fromyrotation)
+    - [`mat4.fromZRotation`](#mat4fromzrotation)
+    - [`mat4.fromRotationTranslation`](#mat4fromrotationtranslation)
+    - [`mat4.fromQuat2`](#mat4fromquat2)
+    - [`mat4.getTranslation`](#mat4gettranslation)
+    - [`mat4.getScaling`](#mat4getscaling)
+    - [`mat4.getRotation`](#mat4getrotation)
+    - [`mat4.decompose`](#mat4decompose)
+    - [`mat4.fromRotationTranslationScale`](#mat4fromrotationtranslationscale)
+    - [`mat4.fromRotationTranslationScaleOrigin`](#mat4fromrotationtranslationscaleorigin)
+    - [`mat4.fromQuat`](#mat4fromquat)
+    - [`mat4.frustum`](#mat4frustum)
+    - [`mat4.perspectiveNO`](#mat4perspectiveno)
+    - [`mat4.perspectiveZO`](#mat4perspectivezo)
+    - [`mat4.perspectiveFromFieldOfView`](#mat4perspectivefromfieldofview)
+    - [`mat4.orthoNO`](#mat4orthono)
+    - [`mat4.orthoZO`](#mat4orthozo)
+    - [`mat4.lookAt`](#mat4lookat)
+    - [`mat4.targetTo`](#mat4targetto)
+    - [`mat4.str`](#mat4str)
+    - [`mat4.frob`](#mat4frob)
+    - [`mat4.add`](#mat4add)
+    - [`mat4.subtract`](#mat4subtract)
+    - [`mat4.multiplyScalar`](#mat4multiplyscalar)
+    - [`mat4.multiplyScalarAndAdd`](#mat4multiplyscalarandadd)
+    - [`mat4.exactEquals`](#mat4exactequals)
+    - [`mat4.equals`](#mat4equals)
   - [noise](#noise)
-    - [createSimplex2D](#createsimplex2d)
-    - [createSimplex3D](#createsimplex3d)
-    - [createPerlin2D](#createperlin2d)
-    - [createPerlin3D](#createperlin3d)
+    - [`createSimplex2D`](#createsimplex2d)
+    - [`createSimplex3D`](#createsimplex3d)
+    - [`createPerlin2D`](#createperlin2d)
+    - [`createPerlin3D`](#createperlin3d)
   - [quat](#quat)
-    - [quat.create](#quatcreate)
-    - [quat.identity](#quatidentity)
-    - [quat.setAxisAngle](#quatsetaxisangle)
-    - [quat.getAxisAngle](#quatgetaxisangle)
-    - [quat.getAngle](#quatgetangle)
-    - [quat.multiply](#quatmultiply)
-    - [quat.rotateX](#quatrotatex)
-    - [quat.rotateY](#quatrotatey)
-    - [quat.rotateZ](#quatrotatez)
-    - [quat.calculateW](#quatcalculatew)
-    - [quat.exp](#quatexp)
-    - [quat.ln](#quatln)
-    - [quat.pow](#quatpow)
-    - [quat.slerp](#quatslerp)
-    - [quat.invert](#quatinvert)
-    - [quat.conjugate](#quatconjugate)
-    - [quat.fromMat3](#quatfrommat3)
-    - [quat.fromEuler](#quatfromeuler)
-    - [quat.str](#quatstr)
-    - [quat.equals](#quatequals)
+    - [`quat.create`](#quatcreate)
+    - [`quat.identity`](#quatidentity)
+    - [`quat.setAxisAngle`](#quatsetaxisangle)
+    - [`quat.getAxisAngle`](#quatgetaxisangle)
+    - [`quat.getAngle`](#quatgetangle)
+    - [`quat.multiply`](#quatmultiply)
+    - [`quat.rotateX`](#quatrotatex)
+    - [`quat.rotateY`](#quatrotatey)
+    - [`quat.rotateZ`](#quatrotatez)
+    - [`quat.calculateW`](#quatcalculatew)
+    - [`quat.exp`](#quatexp)
+    - [`quat.ln`](#quatln)
+    - [`quat.pow`](#quatpow)
+    - [`quat.slerp`](#quatslerp)
+    - [`quat.invert`](#quatinvert)
+    - [`quat.conjugate`](#quatconjugate)
+    - [`quat.fromMat3`](#quatfrommat3)
+    - [`quat.fromEuler`](#quatfromeuler)
+    - [`quat.str`](#quatstr)
+    - [`quat.clone`](#quatclone)
+    - [`quat.fromValues`](#quatfromvalues)
+    - [`quat.copy`](#quatcopy)
+    - [`quat.set`](#quatset)
+    - [`quat.add`](#quatadd)
+    - [`quat.scale`](#quatscale)
+    - [`quat.dot`](#quatdot)
+    - [`quat.lerp`](#quatlerp)
+    - [`quat.length`](#quatlength)
+    - [`quat.squaredLength`](#quatsquaredlength)
+    - [`quat.normalize`](#quatnormalize)
+    - [`quat.exactEquals`](#quatexactequals)
+    - [`quat.equals`](#quatequals)
   - [quat2](#quat2)
-    - [quat2.create](#quat2create)
-    - [quat2.clone](#quat2clone)
-    - [quat2.fromValues](#quat2fromvalues)
-    - [quat2.fromRotationTranslationValues](#quat2fromrotationtranslationvalues)
-    - [quat2.fromRotationTranslation](#quat2fromrotationtranslation)
-    - [quat2.fromTranslation](#quat2fromtranslation)
-    - [quat2.fromRotation](#quat2fromrotation)
-    - [quat2.fromMat4](#quat2frommat4)
-    - [quat2.copy](#quat2copy)
-    - [quat2.identity](#quat2identity)
-    - [quat2.set](#quat2set)
-    - [quat2.getDual](#quat2getdual)
-    - [quat2.setDual](#quat2setdual)
-    - [quat2.getTranslation](#quat2gettranslation)
-    - [quat2.translate](#quat2translate)
-    - [quat2.rotateX](#quat2rotatex)
-    - [quat2.rotateY](#quat2rotatey)
-    - [quat2.rotateZ](#quat2rotatez)
-    - [quat2.rotateByQuatAppend](#quat2rotatebyquatappend)
-    - [quat2.rotateByQuatPrepend](#quat2rotatebyquatprepend)
-    - [quat2.rotateAroundAxis](#quat2rotatearoundaxis)
-    - [quat2.add](#quat2add)
-    - [quat2.multiply](#quat2multiply)
-    - [quat2.scale](#quat2scale)
-    - [quat2.lerp](#quat2lerp)
-    - [quat2.invert](#quat2invert)
-    - [quat2.conjugate](#quat2conjugate)
-    - [quat2.normalize](#quat2normalize)
-    - [quat2.str](#quat2str)
-    - [quat2.exactEquals](#quat2exactequals)
-    - [quat2.equals](#quat2equals)
+    - [`quat2.create`](#quat2create)
+    - [`quat2.clone`](#quat2clone)
+    - [`quat2.fromValues`](#quat2fromvalues)
+    - [`quat2.fromRotationTranslationValues`](#quat2fromrotationtranslationvalues)
+    - [`quat2.fromRotationTranslation`](#quat2fromrotationtranslation)
+    - [`quat2.fromTranslation`](#quat2fromtranslation)
+    - [`quat2.fromRotation`](#quat2fromrotation)
+    - [`quat2.fromMat4`](#quat2frommat4)
+    - [`quat2.copy`](#quat2copy)
+    - [`quat2.identity`](#quat2identity)
+    - [`quat2.set`](#quat2set)
+    - [`quat2.getDual`](#quat2getdual)
+    - [`quat2.setDual`](#quat2setdual)
+    - [`quat2.getTranslation`](#quat2gettranslation)
+    - [`quat2.translate`](#quat2translate)
+    - [`quat2.rotateX`](#quat2rotatex)
+    - [`quat2.rotateY`](#quat2rotatey)
+    - [`quat2.rotateZ`](#quat2rotatez)
+    - [`quat2.rotateByQuatAppend`](#quat2rotatebyquatappend)
+    - [`quat2.rotateByQuatPrepend`](#quat2rotatebyquatprepend)
+    - [`quat2.rotateAroundAxis`](#quat2rotatearoundaxis)
+    - [`quat2.add`](#quat2add)
+    - [`quat2.multiply`](#quat2multiply)
+    - [`quat2.scale`](#quat2scale)
+    - [`quat2.dot`](#quat2dot)
+    - [`quat2.lerp`](#quat2lerp)
+    - [`quat2.invert`](#quat2invert)
+    - [`quat2.conjugate`](#quat2conjugate)
+    - [`quat2.length`](#quat2length)
+    - [`quat2.squaredLength`](#quat2squaredlength)
+    - [`quat2.normalize`](#quat2normalize)
+    - [`quat2.str`](#quat2str)
+    - [`quat2.exactEquals`](#quat2exactequals)
+    - [`quat2.equals`](#quat2equals)
   - [random](#random)
-    - [createMulberry32Generator](#createmulberry32generator)
-    - [generateMulberry32Seed](#generatemulberry32seed)
-    - [randomInt](#randomint)
-    - [randomFloat](#randomfloat)
-    - [randomBool](#randombool)
-    - [randomSign](#randomsign)
-    - [randomChoice](#randomchoice)
-    - [randomVec2](#randomvec2)
-    - [randomVec3](#randomvec3)
-    - [randomVec4](#randomvec4)
-    - [randomQuat](#randomquat)
+    - [`createMulberry32Generator`](#createmulberry32generator)
+    - [`generateMulberry32Seed`](#generatemulberry32seed)
+    - [`randomInt`](#randomint)
+    - [`randomFloat`](#randomfloat)
+    - [`randomBool`](#randombool)
+    - [`randomSign`](#randomsign)
+    - [`randomChoice`](#randomchoice)
+    - [`randomVec2`](#randomvec2)
+    - [`randomVec3`](#randomvec3)
+    - [`randomVec4`](#randomvec4)
+    - [`randomQuat`](#randomquat)
   - [sphere](#sphere)
-    - [sphere.create](#spherecreate)
+    - [`sphere.create`](#spherecreate)
   - [triangle3](#triangle3)
-    - [triangle3.create](#triangle3create)
+    - [`triangle3.create`](#triangle3create)
   - [types](#types)
   - [vec2](#vec2)
-    - [vec2.create](#vec2create)
-    - [vec2.clone](#vec2clone)
-    - [vec2.fromValues](#vec2fromvalues)
-    - [vec2.copy](#vec2copy)
-    - [vec2.set](#vec2set)
-    - [vec2.add](#vec2add)
-    - [vec2.addScalar](#vec2addscalar)
-    - [vec2.subtract](#vec2subtract)
-    - [vec2.subtractScalar](#vec2subtractscalar)
-    - [vec2.multiply](#vec2multiply)
-    - [vec2.divide](#vec2divide)
-    - [vec2.ceil](#vec2ceil)
-    - [vec2.floor](#vec2floor)
-    - [vec2.min](#vec2min)
-    - [vec2.max](#vec2max)
-    - [vec2.round](#vec2round)
-    - [vec2.scale](#vec2scale)
-    - [vec2.scaleAndAdd](#vec2scaleandadd)
-    - [vec2.distance](#vec2distance)
-    - [vec2.squaredDistance](#vec2squareddistance)
-    - [vec2.length](#vec2length)
-    - [vec2.squaredLength](#vec2squaredlength)
-    - [vec2.negate](#vec2negate)
-    - [vec2.inverse](#vec2inverse)
-    - [vec2.normalize](#vec2normalize)
-    - [vec2.dot](#vec2dot)
-    - [vec2.cross](#vec2cross)
-    - [vec2.lerp](#vec2lerp)
-    - [vec2.transformMat2](#vec2transformmat2)
-    - [vec2.transformMat2d](#vec2transformmat2d)
-    - [vec2.transformMat3](#vec2transformmat3)
-    - [vec2.transformMat4](#vec2transformmat4)
-    - [vec2.rotate](#vec2rotate)
-    - [vec2.angle](#vec2angle)
-    - [vec2.zero](#vec2zero)
-    - [vec2.str](#vec2str)
-    - [vec2.exactEquals](#vec2exactequals)
-    - [vec2.equals](#vec2equals)
-    - [vec2.finite](#vec2finite)
+    - [`vec2.create`](#vec2create)
+    - [`vec2.clone`](#vec2clone)
+    - [`vec2.fromValues`](#vec2fromvalues)
+    - [`vec2.copy`](#vec2copy)
+    - [`vec2.set`](#vec2set)
+    - [`vec2.add`](#vec2add)
+    - [`vec2.addScalar`](#vec2addscalar)
+    - [`vec2.subtract`](#vec2subtract)
+    - [`vec2.subtractScalar`](#vec2subtractscalar)
+    - [`vec2.multiply`](#vec2multiply)
+    - [`vec2.divide`](#vec2divide)
+    - [`vec2.ceil`](#vec2ceil)
+    - [`vec2.floor`](#vec2floor)
+    - [`vec2.min`](#vec2min)
+    - [`vec2.max`](#vec2max)
+    - [`vec2.round`](#vec2round)
+    - [`vec2.scale`](#vec2scale)
+    - [`vec2.scaleAndAdd`](#vec2scaleandadd)
+    - [`vec2.distance`](#vec2distance)
+    - [`vec2.squaredDistance`](#vec2squareddistance)
+    - [`vec2.length`](#vec2length)
+    - [`vec2.squaredLength`](#vec2squaredlength)
+    - [`vec2.negate`](#vec2negate)
+    - [`vec2.inverse`](#vec2inverse)
+    - [`vec2.normalize`](#vec2normalize)
+    - [`vec2.dot`](#vec2dot)
+    - [`vec2.cross`](#vec2cross)
+    - [`vec2.lerp`](#vec2lerp)
+    - [`vec2.transformMat2`](#vec2transformmat2)
+    - [`vec2.transformMat2d`](#vec2transformmat2d)
+    - [`vec2.transformMat3`](#vec2transformmat3)
+    - [`vec2.transformMat4`](#vec2transformmat4)
+    - [`vec2.rotate`](#vec2rotate)
+    - [`vec2.angle`](#vec2angle)
+    - [`vec2.zero`](#vec2zero)
+    - [`vec2.str`](#vec2str)
+    - [`vec2.exactEquals`](#vec2exactequals)
+    - [`vec2.equals`](#vec2equals)
+    - [`vec2.finite`](#vec2finite)
   - [vec3](#vec3)
-    - [vec3.create](#vec3create)
-    - [vec3.clone](#vec3clone)
-    - [vec3.length](#vec3length)
-    - [vec3.fromValues](#vec3fromvalues)
-    - [vec3.copy](#vec3copy)
-    - [vec3.set](#vec3set)
-    - [vec3.fromBuffer](#vec3frombuffer)
-    - [vec3.toBuffer](#vec3tobuffer)
-    - [vec3.add](#vec3add)
-    - [vec3.addScalar](#vec3addscalar)
-    - [vec3.subtract](#vec3subtract)
-    - [vec3.subtractScalar](#vec3subtractscalar)
-    - [vec3.multiply](#vec3multiply)
-    - [vec3.divide](#vec3divide)
-    - [vec3.ceil](#vec3ceil)
-    - [vec3.floor](#vec3floor)
-    - [vec3.min](#vec3min)
-    - [vec3.max](#vec3max)
-    - [vec3.round](#vec3round)
-    - [vec3.scale](#vec3scale)
-    - [vec3.scaleAndAdd](#vec3scaleandadd)
-    - [vec3.distance](#vec3distance)
-    - [vec3.squaredDistance](#vec3squareddistance)
-    - [vec3.squaredLength](#vec3squaredlength)
-    - [vec3.negate](#vec3negate)
-    - [vec3.inverse](#vec3inverse)
-    - [vec3.normalize](#vec3normalize)
-    - [vec3.dot](#vec3dot)
-    - [vec3.cross](#vec3cross)
-    - [vec3.lerp](#vec3lerp)
-    - [vec3.slerp](#vec3slerp)
-    - [vec3.hermite](#vec3hermite)
-    - [vec3.bezier](#vec3bezier)
-    - [vec3.transformMat4](#vec3transformmat4)
-    - [vec3.transformMat3](#vec3transformmat3)
-    - [vec3.transformQuat](#vec3transformquat)
-    - [vec3.rotateX](#vec3rotatex)
-    - [vec3.rotateY](#vec3rotatey)
-    - [vec3.rotateZ](#vec3rotatez)
-    - [vec3.angle](#vec3angle)
-    - [vec3.zero](#vec3zero)
-    - [vec3.str](#vec3str)
-    - [vec3.exactEquals](#vec3exactequals)
-    - [vec3.equals](#vec3equals)
-    - [vec3.finite](#vec3finite)
+    - [`vec3.create`](#vec3create)
+    - [`vec3.clone`](#vec3clone)
+    - [`vec3.length`](#vec3length)
+    - [`vec3.fromValues`](#vec3fromvalues)
+    - [`vec3.copy`](#vec3copy)
+    - [`vec3.set`](#vec3set)
+    - [`vec3.fromBuffer`](#vec3frombuffer)
+    - [`vec3.toBuffer`](#vec3tobuffer)
+    - [`vec3.add`](#vec3add)
+    - [`vec3.addScalar`](#vec3addscalar)
+    - [`vec3.subtract`](#vec3subtract)
+    - [`vec3.subtractScalar`](#vec3subtractscalar)
+    - [`vec3.multiply`](#vec3multiply)
+    - [`vec3.divide`](#vec3divide)
+    - [`vec3.ceil`](#vec3ceil)
+    - [`vec3.floor`](#vec3floor)
+    - [`vec3.min`](#vec3min)
+    - [`vec3.max`](#vec3max)
+    - [`vec3.round`](#vec3round)
+    - [`vec3.scale`](#vec3scale)
+    - [`vec3.scaleAndAdd`](#vec3scaleandadd)
+    - [`vec3.distance`](#vec3distance)
+    - [`vec3.squaredDistance`](#vec3squareddistance)
+    - [`vec3.squaredLength`](#vec3squaredlength)
+    - [`vec3.negate`](#vec3negate)
+    - [`vec3.inverse`](#vec3inverse)
+    - [`vec3.normalize`](#vec3normalize)
+    - [`vec3.dot`](#vec3dot)
+    - [`vec3.cross`](#vec3cross)
+    - [`vec3.lerp`](#vec3lerp)
+    - [`vec3.slerp`](#vec3slerp)
+    - [`vec3.hermite`](#vec3hermite)
+    - [`vec3.bezier`](#vec3bezier)
+    - [`vec3.transformMat4`](#vec3transformmat4)
+    - [`vec3.transformMat3`](#vec3transformmat3)
+    - [`vec3.transformQuat`](#vec3transformquat)
+    - [`vec3.rotateX`](#vec3rotatex)
+    - [`vec3.rotateY`](#vec3rotatey)
+    - [`vec3.rotateZ`](#vec3rotatez)
+    - [`vec3.angle`](#vec3angle)
+    - [`vec3.zero`](#vec3zero)
+    - [`vec3.str`](#vec3str)
+    - [`vec3.exactEquals`](#vec3exactequals)
+    - [`vec3.equals`](#vec3equals)
+    - [`vec3.finite`](#vec3finite)
   - [vec4](#vec4)
-    - [vec4.create](#vec4create)
-    - [vec4.clone](#vec4clone)
-    - [vec4.fromValues](#vec4fromvalues)
-    - [vec4.copy](#vec4copy)
-    - [vec4.set](#vec4set)
-    - [vec4.add](#vec4add)
-    - [vec4.subtract](#vec4subtract)
-    - [vec4.multiply](#vec4multiply)
-    - [vec4.divide](#vec4divide)
-    - [vec4.ceil](#vec4ceil)
-    - [vec4.floor](#vec4floor)
-    - [vec4.min](#vec4min)
-    - [vec4.max](#vec4max)
-    - [vec4.round](#vec4round)
-    - [vec4.scale](#vec4scale)
-    - [vec4.scaleAndAdd](#vec4scaleandadd)
-    - [vec4.distance](#vec4distance)
-    - [vec4.squaredDistance](#vec4squareddistance)
-    - [vec4.length](#vec4length)
-    - [vec4.squaredLength](#vec4squaredlength)
-    - [vec4.negate](#vec4negate)
-    - [vec4.inverse](#vec4inverse)
-    - [vec4.normalize](#vec4normalize)
-    - [vec4.dot](#vec4dot)
-    - [vec4.cross](#vec4cross)
-    - [vec4.lerp](#vec4lerp)
-    - [vec4.transformMat4](#vec4transformmat4)
-    - [vec4.transformQuat](#vec4transformquat)
-    - [vec4.zero](#vec4zero)
-    - [vec4.str](#vec4str)
-    - [vec4.exactEquals](#vec4exactequals)
-    - [vec4.equals](#vec4equals)
-    - [vec4.finite](#vec4finite)
+    - [`vec4.create`](#vec4create)
+    - [`vec4.clone`](#vec4clone)
+    - [`vec4.fromValues`](#vec4fromvalues)
+    - [`vec4.copy`](#vec4copy)
+    - [`vec4.set`](#vec4set)
+    - [`vec4.add`](#vec4add)
+    - [`vec4.subtract`](#vec4subtract)
+    - [`vec4.multiply`](#vec4multiply)
+    - [`vec4.divide`](#vec4divide)
+    - [`vec4.ceil`](#vec4ceil)
+    - [`vec4.floor`](#vec4floor)
+    - [`vec4.min`](#vec4min)
+    - [`vec4.max`](#vec4max)
+    - [`vec4.round`](#vec4round)
+    - [`vec4.scale`](#vec4scale)
+    - [`vec4.scaleAndAdd`](#vec4scaleandadd)
+    - [`vec4.distance`](#vec4distance)
+    - [`vec4.squaredDistance`](#vec4squareddistance)
+    - [`vec4.length`](#vec4length)
+    - [`vec4.squaredLength`](#vec4squaredlength)
+    - [`vec4.negate`](#vec4negate)
+    - [`vec4.inverse`](#vec4inverse)
+    - [`vec4.normalize`](#vec4normalize)
+    - [`vec4.dot`](#vec4dot)
+    - [`vec4.cross`](#vec4cross)
+    - [`vec4.lerp`](#vec4lerp)
+    - [`vec4.transformMat4`](#vec4transformmat4)
+    - [`vec4.transformQuat`](#vec4transformquat)
+    - [`vec4.zero`](#vec4zero)
+    - [`vec4.str`](#vec4str)
+    - [`vec4.exactEquals`](#vec4exactequals)
+    - [`vec4.equals`](#vec4equals)
+    - [`vec4.finite`](#vec4finite)
 - [Acknowledgements](#acknowledgements)
 
-## APIs
+## API Documentation
 
 ### box3
 
-#### box3.create
+#### `box3.create`
 
 ```ts
 /**
@@ -421,7 +434,7 @@ The goals of this library are to:
 export function create(): Box3;
 ```
 
-#### box3.clone
+#### `box3.clone`
 
 ```ts
 /**
@@ -432,7 +445,7 @@ export function create(): Box3;
 export function clone(box: Box3): Box3;
 ```
 
-#### box3.set
+#### `box3.set`
 
 ```ts
 /**
@@ -445,7 +458,7 @@ export function clone(box: Box3): Box3;
 export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 ```
 
-#### box3.setFromCenterAndSize
+#### `box3.setFromCenterAndSize`
 
 ```ts
 /**
@@ -458,7 +471,7 @@ export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 export function setFromCenterAndSize(out: Box3, center: Vec3, size: Vec3): Box3;
 ```
 
-#### box3.expandByPoint
+#### `box3.expandByPoint`
 
 ```ts
 /**
@@ -471,7 +484,7 @@ export function setFromCenterAndSize(out: Box3, center: Vec3, size: Vec3): Box3;
 export function expandByPoint(out: Box3, box: Box3, point: Vec3): Box3;
 ```
 
-#### box3.containsPoint
+#### `box3.containsPoint`
 
 ```ts
 /**
@@ -483,7 +496,7 @@ export function expandByPoint(out: Box3, box: Box3, point: Vec3): Box3;
 export function containsPoint(box: Box3, point: Vec3): boolean;
 ```
 
-#### box3.containsBox3
+#### `box3.containsBox3`
 
 ```ts
 /**
@@ -495,7 +508,7 @@ export function containsPoint(box: Box3, point: Vec3): boolean;
 export function containsBox3(container: Box3, contained: Box3): boolean;
 ```
 
-#### box3.intersectsBox3
+#### `box3.intersectsBox3`
 
 ```ts
 /**
@@ -504,13 +517,13 @@ export function containsBox3(container: Box3, contained: Box3): boolean;
 export function intersectsBox3(boxA: Box3, boxB: Box3): boolean;
 ```
 
-#### box3.intersectsTriangle3
+#### `box3.intersectsTriangle3`
 
 ```ts
 export function intersectsTriangle3(box: Box3, triangle: Triangle3): boolean;
 ```
 
-#### box3.intersectsSphere
+#### `box3.intersectsSphere`
 
 ```ts
 /**
@@ -519,7 +532,7 @@ export function intersectsTriangle3(box: Box3, triangle: Triangle3): boolean;
 export function intersectsSphere(box: Box3, sphere: Sphere): boolean;
 ```
 
-#### box3.intersectsPlane3
+#### `box3.intersectsPlane3`
 
 ```ts
 /**
@@ -528,7 +541,7 @@ export function intersectsSphere(box: Box3, sphere: Sphere): boolean;
 export function intersectsPlane3(box: Box3, plane: Plane3): boolean;
 ```
 
-#### box3.intersectsRay
+#### `box3.intersectsRay`
 
 ```ts
 /**
@@ -546,7 +559,7 @@ export function intersectsRay(box: Box3, start: Vec3, end: Vec3): boolean;
 
 ### common
 
-#### round
+#### `round`
 
 ```ts
 /**
@@ -558,7 +571,7 @@ export function intersectsRay(box: Box3, start: Vec3, end: Vec3): boolean;
 export function round(a: number): number;
 ```
 
-#### degreesToRadians
+#### `degreesToRadians`
 
 ```ts
 /**
@@ -569,7 +582,7 @@ export function round(a: number): number;
 export function degreesToRadians(degrees: number): number;
 ```
 
-#### radiansToDegrees
+#### `radiansToDegrees`
 
 ```ts
 /**
@@ -580,7 +593,7 @@ export function degreesToRadians(degrees: number): number;
 export function radiansToDegrees(radians: number): number;
 ```
 
-#### equals
+#### `equals`
 
 ```ts
 /**
@@ -595,7 +608,7 @@ export function radiansToDegrees(radians: number): number;
 export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 ```
 
-#### fade
+#### `fade`
 
 ```ts
 /**
@@ -609,7 +622,7 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 export function fade(t: number);
 ```
 
-#### lerp
+#### `lerp`
 
 ```ts
 /**
@@ -624,7 +637,7 @@ export function fade(t: number);
 export function lerp(v0: number, v1: number, t: number);
 ```
 
-#### clamp
+#### `clamp`
 
 ```ts
 /**
@@ -633,7 +646,7 @@ export function lerp(v0: number, v1: number, t: number);
 export function clamp(value: number, min: number, max: number): number;
 ```
 
-#### remap
+#### `remap`
 
 ```ts
 /**
@@ -642,7 +655,7 @@ export function clamp(value: number, min: number, max: number): number;
 export function remap(number: number, inLow: number, inHigh: number, outLow: number, outHigh: number): number;
 ```
 
-#### remapClamp
+#### `remapClamp`
 
 ```ts
 /**
@@ -653,127 +666,127 @@ export function remapClamp(value: number, inLow: number, inHigh: number, outLow:
 
 ### easing
 
-#### easing.exp
+#### `easing.exp`
 
 ```ts
 export function exp(t: number);
 ```
 
-#### easing.linear
+#### `easing.linear`
 
 ```ts
 export function linear(t: number);
 ```
 
-#### easing.sineIn
+#### `easing.sineIn`
 
 ```ts
 export function sineIn(x: number);
 ```
 
-#### easing.sineOut
+#### `easing.sineOut`
 
 ```ts
 export function sineOut(x: number);
 ```
 
-#### easing.sineInOut
+#### `easing.sineInOut`
 
 ```ts
 export function sineInOut(x: number);
 ```
 
-#### easing.cubicIn
+#### `easing.cubicIn`
 
 ```ts
 export function cubicIn(x: number);
 ```
 
-#### easing.cubicOut
+#### `easing.cubicOut`
 
 ```ts
 export function cubicOut(x: number);
 ```
 
-#### easing.cubicInOut
+#### `easing.cubicInOut`
 
 ```ts
 export function cubicInOut(x: number);
 ```
 
-#### easing.quintIn
+#### `easing.quintIn`
 
 ```ts
 export function quintIn(x: number);
 ```
 
-#### easing.quintOut
+#### `easing.quintOut`
 
 ```ts
 export function quintOut(x: number);
 ```
 
-#### easing.quintInOut
+#### `easing.quintInOut`
 
 ```ts
 export function quintInOut(x: number);
 ```
 
-#### easing.circIn
+#### `easing.circIn`
 
 ```ts
 export function circIn(x: number);
 ```
 
-#### easing.circOut
+#### `easing.circOut`
 
 ```ts
 export function circOut(x: number);
 ```
 
-#### easing.circInOut
+#### `easing.circInOut`
 
 ```ts
 export function circInOut(x: number);
 ```
 
-#### easing.quartIn
+#### `easing.quartIn`
 
 ```ts
 export function quartIn(t: number);
 ```
 
-#### easing.quartOut
+#### `easing.quartOut`
 
 ```ts
 export function quartOut(t: number);
 ```
 
-#### easing.quartInOut
+#### `easing.quartInOut`
 
 ```ts
 export function quartInOut(t: number);
 ```
 
-#### easing.expoIn
+#### `easing.expoIn`
 
 ```ts
 export function expoIn(x: number);
 ```
 
-#### easing.expoOut
+#### `easing.expoOut`
 
 ```ts
 export function expoOut(x: number);
 ```
 
-#### easing.expoInOut
+#### `easing.expoInOut`
 
 ```ts
 export function expoInOut(x: number);
 ```
 
-#### easing.rsqw
+#### `easing.rsqw`
 
 ```ts
 export function rsqw(t: number, delta = 0.01, a = 1, f = 1 / (2 * Math.PI));
@@ -781,7 +794,7 @@ export function rsqw(t: number, delta = 0.01, a = 1, f = 1 / (2 * Math.PI));
 
 ### euler
 
-#### euler.create
+#### `euler.create`
 
 ```ts
 /**
@@ -791,7 +804,7 @@ export function rsqw(t: number, delta = 0.01, a = 1, f = 1 / (2 * Math.PI));
 export function create(): Box3;
 ```
 
-#### euler.fromValues
+#### `euler.fromValues`
 
 ```ts
 /**
@@ -805,7 +818,7 @@ export function create(): Box3;
 export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
 ```
 
-#### euler.fromDegrees
+#### `euler.fromDegrees`
 
 ```ts
 /**
@@ -820,7 +833,7 @@ export function fromValues(x: number, y: number, z: number, order: EulerOrder): 
 export function fromDegrees(out: Euler, x: number, y: number, z: number, order: EulerOrder): Euler;
 ```
 
-#### euler.fromRotationMat4
+#### `euler.fromRotationMat4`
 
 ```ts
 /**
@@ -833,7 +846,7 @@ export function fromDegrees(out: Euler, x: number, y: number, z: number, order: 
 export function fromRotationMat4(out: Euler, rotationMatrix: Mat4, order: EulerOrder = out[3] || 'xyz'): Euler;
 ```
 
-#### euler.exactEquals
+#### `euler.exactEquals`
 
 ```ts
 /**
@@ -846,7 +859,7 @@ export function fromRotationMat4(out: Euler, rotationMatrix: Mat4, order: EulerO
 export function exactEquals(a: Euler, b: Euler): boolean;
 ```
 
-#### euler.equals
+#### `euler.equals`
 
 ```ts
 /**
@@ -861,7 +874,7 @@ export function exactEquals(a: Euler, b: Euler): boolean;
 export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 ```
 
-#### euler.fromQuat
+#### `euler.fromQuat`
 
 ```ts
 /**
@@ -874,7 +887,7 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 export function fromQuat(out: Euler, q: Quat, order: EulerOrder): Euler;
 ```
 
-#### euler.reorder
+#### `euler.reorder`
 
 ```ts
 /**
@@ -889,7 +902,7 @@ export function reorder(out: Euler, a: Euler, order: EulerOrder): Euler;
 
 ### mat2
 
-#### mat2.create
+#### `mat2.create`
 
 ```ts
 /**
@@ -899,7 +912,7 @@ export function reorder(out: Euler, a: Euler, order: EulerOrder): Euler;
 export function create(): Box3;
 ```
 
-#### mat2.clone
+#### `mat2.clone`
 
 ```ts
 /**
@@ -910,7 +923,7 @@ export function create(): Box3;
 export function clone(box: Box3): Box3;
 ```
 
-#### mat2.copy
+#### `mat2.copy`
 
 ```ts
 /**
@@ -923,7 +936,7 @@ export function clone(box: Box3): Box3;
 export function copy(out: Mat2, a: Mat2): Mat2;
 ```
 
-#### mat2.identity
+#### `mat2.identity`
 
 ```ts
 /**
@@ -935,7 +948,7 @@ export function copy(out: Mat2, a: Mat2): Mat2;
 export function identity(out: Mat2): Mat2;
 ```
 
-#### mat2.fromValues
+#### `mat2.fromValues`
 
 ```ts
 /**
@@ -949,7 +962,7 @@ export function identity(out: Mat2): Mat2;
 export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
 ```
 
-#### mat2.set
+#### `mat2.set`
 
 ```ts
 /**
@@ -962,7 +975,7 @@ export function fromValues(x: number, y: number, z: number, order: EulerOrder): 
 export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 ```
 
-#### mat2.transpose
+#### `mat2.transpose`
 
 ```ts
 /**
@@ -975,7 +988,7 @@ export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 export function transpose(out: Mat2, a: Mat2): Mat2;
 ```
 
-#### mat2.invert
+#### `mat2.invert`
 
 ```ts
 /**
@@ -988,7 +1001,7 @@ export function transpose(out: Mat2, a: Mat2): Mat2;
 export function invert(out: Mat2, a: Mat2): Mat2 | null;
 ```
 
-#### mat2.adjoint
+#### `mat2.adjoint`
 
 ```ts
 /**
@@ -1001,7 +1014,7 @@ export function invert(out: Mat2, a: Mat2): Mat2 | null;
 export function adjoint(out: Mat2, a: Mat2): Mat2;
 ```
 
-#### mat2.determinant
+#### `mat2.determinant`
 
 ```ts
 /**
@@ -1013,7 +1026,7 @@ export function adjoint(out: Mat2, a: Mat2): Mat2;
 export function determinant(a: Mat2): number;
 ```
 
-#### mat2.multiply
+#### `mat2.multiply`
 
 ```ts
 /**
@@ -1027,7 +1040,7 @@ export function determinant(a: Mat2): number;
 export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### mat2.rotate
+#### `mat2.rotate`
 
 ```ts
 /**
@@ -1041,7 +1054,7 @@ export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function rotate(out: Mat2, a: Mat2, rad: number): Mat2;
 ```
 
-#### mat2.scale
+#### `mat2.scale`
 
 ```ts
 /**
@@ -1055,7 +1068,7 @@ export function rotate(out: Mat2, a: Mat2, rad: number): Mat2;
 export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 ```
 
-#### mat2.fromRotation
+#### `mat2.fromRotation`
 
 ```ts
 /**
@@ -1072,7 +1085,7 @@ export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 export function fromRotation(out: Mat2, rad: number): Mat2;
 ```
 
-#### mat2.fromScaling
+#### `mat2.fromScaling`
 
 ```ts
 /**
@@ -1089,7 +1102,7 @@ export function fromRotation(out: Mat2, rad: number): Mat2;
 export function fromScaling(out: Mat2, v: Vec2): Mat2;
 ```
 
-#### mat2.str
+#### `mat2.str`
 
 ```ts
 /**
@@ -1101,7 +1114,7 @@ export function fromScaling(out: Mat2, v: Vec2): Mat2;
 export function str(a: Mat2): string;
 ```
 
-#### mat2.frob
+#### `mat2.frob`
 
 ```ts
 /**
@@ -1113,7 +1126,7 @@ export function str(a: Mat2): string;
 export function frob(a: Mat2): number;
 ```
 
-#### mat2.LDU
+#### `mat2.LDU`
 
 ```ts
 /**
@@ -1130,7 +1143,7 @@ export function LDU(L: Mat2, D: Mat2, U: Mat2, a: Mat2): [
 ];
 ```
 
-#### mat2.add
+#### `mat2.add`
 
 ```ts
 /**
@@ -1144,7 +1157,7 @@ export function LDU(L: Mat2, D: Mat2, U: Mat2, a: Mat2): [
 export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### mat2.subtract
+#### `mat2.subtract`
 
 ```ts
 /**
@@ -1158,7 +1171,7 @@ export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### mat2.exactEquals
+#### `mat2.exactEquals`
 
 ```ts
 /**
@@ -1171,7 +1184,7 @@ export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function exactEquals(a: Euler, b: Euler): boolean;
 ```
 
-#### mat2.equals
+#### `mat2.equals`
 
 ```ts
 /**
@@ -1186,7 +1199,7 @@ export function exactEquals(a: Euler, b: Euler): boolean;
 export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 ```
 
-#### mat2.multiplyScalar
+#### `mat2.multiplyScalar`
 
 ```ts
 /**
@@ -1200,7 +1213,7 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 export function multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2;
 ```
 
-#### mat2.multiplyScalarAndAdd
+#### `mat2.multiplyScalarAndAdd`
 
 ```ts
 /**
@@ -1217,7 +1230,7 @@ export function multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number)
 
 ### mat2d
 
-#### mat2d.create
+#### `mat2d.create`
 
 ```ts
 /**
@@ -1227,7 +1240,7 @@ export function multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number)
 export function create(): Box3;
 ```
 
-#### mat2d.clone
+#### `mat2d.clone`
 
 ```ts
 /**
@@ -1238,7 +1251,7 @@ export function create(): Box3;
 export function clone(box: Box3): Box3;
 ```
 
-#### mat2d.copy
+#### `mat2d.copy`
 
 ```ts
 /**
@@ -1251,7 +1264,7 @@ export function clone(box: Box3): Box3;
 export function copy(out: Mat2, a: Mat2): Mat2;
 ```
 
-#### mat2d.identity
+#### `mat2d.identity`
 
 ```ts
 /**
@@ -1263,7 +1276,7 @@ export function copy(out: Mat2, a: Mat2): Mat2;
 export function identity(out: Mat2): Mat2;
 ```
 
-#### mat2d.fromValues
+#### `mat2d.fromValues`
 
 ```ts
 /**
@@ -1277,7 +1290,7 @@ export function identity(out: Mat2): Mat2;
 export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
 ```
 
-#### mat2d.set
+#### `mat2d.set`
 
 ```ts
 /**
@@ -1290,7 +1303,7 @@ export function fromValues(x: number, y: number, z: number, order: EulerOrder): 
 export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 ```
 
-#### mat2d.invert
+#### `mat2d.invert`
 
 ```ts
 /**
@@ -1303,7 +1316,7 @@ export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 export function invert(out: Mat2, a: Mat2): Mat2 | null;
 ```
 
-#### mat2d.determinant
+#### `mat2d.determinant`
 
 ```ts
 /**
@@ -1315,7 +1328,7 @@ export function invert(out: Mat2, a: Mat2): Mat2 | null;
 export function determinant(a: Mat2): number;
 ```
 
-#### mat2d.multiply
+#### `mat2d.multiply`
 
 ```ts
 /**
@@ -1329,7 +1342,7 @@ export function determinant(a: Mat2): number;
 export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### mat2d.rotate
+#### `mat2d.rotate`
 
 ```ts
 /**
@@ -1343,7 +1356,7 @@ export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function rotate(out: Mat2, a: Mat2, rad: number): Mat2;
 ```
 
-#### mat2d.scale
+#### `mat2d.scale`
 
 ```ts
 /**
@@ -1357,7 +1370,7 @@ export function rotate(out: Mat2, a: Mat2, rad: number): Mat2;
 export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 ```
 
-#### mat2d.translate
+#### `mat2d.translate`
 
 ```ts
 /**
@@ -1371,7 +1384,7 @@ export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 export function translate(out: Mat2d, a: Mat2d, v: Vec2): Mat2d;
 ```
 
-#### mat2d.fromRotation
+#### `mat2d.fromRotation`
 
 ```ts
 /**
@@ -1388,7 +1401,7 @@ export function translate(out: Mat2d, a: Mat2d, v: Vec2): Mat2d;
 export function fromRotation(out: Mat2, rad: number): Mat2;
 ```
 
-#### mat2d.fromScaling
+#### `mat2d.fromScaling`
 
 ```ts
 /**
@@ -1405,7 +1418,7 @@ export function fromRotation(out: Mat2, rad: number): Mat2;
 export function fromScaling(out: Mat2, v: Vec2): Mat2;
 ```
 
-#### mat2d.fromTranslation
+#### `mat2d.fromTranslation`
 
 ```ts
 /**
@@ -1422,7 +1435,7 @@ export function fromScaling(out: Mat2, v: Vec2): Mat2;
 export function fromTranslation(out: Mat2d, v: Vec2): Mat2d;
 ```
 
-#### mat2d.str
+#### `mat2d.str`
 
 ```ts
 /**
@@ -1434,7 +1447,7 @@ export function fromTranslation(out: Mat2d, v: Vec2): Mat2d;
 export function str(a: Mat2): string;
 ```
 
-#### mat2d.frob
+#### `mat2d.frob`
 
 ```ts
 /**
@@ -1446,7 +1459,7 @@ export function str(a: Mat2): string;
 export function frob(a: Mat2): number;
 ```
 
-#### mat2d.add
+#### `mat2d.add`
 
 ```ts
 /**
@@ -1460,7 +1473,7 @@ export function frob(a: Mat2): number;
 export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### mat2d.subtract
+#### `mat2d.subtract`
 
 ```ts
 /**
@@ -1474,7 +1487,7 @@ export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### mat2d.multiplyScalar
+#### `mat2d.multiplyScalar`
 
 ```ts
 /**
@@ -1488,7 +1501,7 @@ export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2;
 ```
 
-#### mat2d.multiplyScalarAndAdd
+#### `mat2d.multiplyScalarAndAdd`
 
 ```ts
 /**
@@ -1503,7 +1516,7 @@ export function multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2;
 export function multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number): Mat2;
 ```
 
-#### mat2d.exactEquals
+#### `mat2d.exactEquals`
 
 ```ts
 /**
@@ -1516,7 +1529,7 @@ export function multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number)
 export function exactEquals(a: Euler, b: Euler): boolean;
 ```
 
-#### mat2d.equals
+#### `mat2d.equals`
 
 ```ts
 /**
@@ -1533,7 +1546,7 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 
 ### mat3
 
-#### mat3.create
+#### `mat3.create`
 
 ```ts
 /**
@@ -1543,7 +1556,7 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 export function create(): Box3;
 ```
 
-#### mat3.fromMat4
+#### `mat3.fromMat4`
 
 ```ts
 /**
@@ -1556,7 +1569,7 @@ export function create(): Box3;
 export function fromMat4(out: Mat3, a: Mat4): Mat3;
 ```
 
-#### mat3.clone
+#### `mat3.clone`
 
 ```ts
 /**
@@ -1567,7 +1580,7 @@ export function fromMat4(out: Mat3, a: Mat4): Mat3;
 export function clone(box: Box3): Box3;
 ```
 
-#### mat3.copy
+#### `mat3.copy`
 
 ```ts
 /**
@@ -1580,7 +1593,7 @@ export function clone(box: Box3): Box3;
 export function copy(out: Mat2, a: Mat2): Mat2;
 ```
 
-#### mat3.fromValues
+#### `mat3.fromValues`
 
 ```ts
 /**
@@ -1594,7 +1607,7 @@ export function copy(out: Mat2, a: Mat2): Mat2;
 export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
 ```
 
-#### mat3.set
+#### `mat3.set`
 
 ```ts
 /**
@@ -1607,7 +1620,7 @@ export function fromValues(x: number, y: number, z: number, order: EulerOrder): 
 export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 ```
 
-#### mat3.identity
+#### `mat3.identity`
 
 ```ts
 /**
@@ -1619,7 +1632,7 @@ export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 export function identity(out: Mat2): Mat2;
 ```
 
-#### mat3.transpose
+#### `mat3.transpose`
 
 ```ts
 /**
@@ -1632,7 +1645,7 @@ export function identity(out: Mat2): Mat2;
 export function transpose(out: Mat2, a: Mat2): Mat2;
 ```
 
-#### mat3.invert
+#### `mat3.invert`
 
 ```ts
 /**
@@ -1645,7 +1658,7 @@ export function transpose(out: Mat2, a: Mat2): Mat2;
 export function invert(out: Mat2, a: Mat2): Mat2 | null;
 ```
 
-#### mat3.adjoint
+#### `mat3.adjoint`
 
 ```ts
 /**
@@ -1658,7 +1671,7 @@ export function invert(out: Mat2, a: Mat2): Mat2 | null;
 export function adjoint(out: Mat2, a: Mat2): Mat2;
 ```
 
-#### mat3.determinant
+#### `mat3.determinant`
 
 ```ts
 /**
@@ -1670,7 +1683,7 @@ export function adjoint(out: Mat2, a: Mat2): Mat2;
 export function determinant(a: Mat2): number;
 ```
 
-#### mat3.multiply
+#### `mat3.multiply`
 
 ```ts
 /**
@@ -1684,7 +1697,7 @@ export function determinant(a: Mat2): number;
 export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### mat3.translate
+#### `mat3.translate`
 
 ```ts
 /**
@@ -1698,7 +1711,7 @@ export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function translate(out: Mat2d, a: Mat2d, v: Vec2): Mat2d;
 ```
 
-#### mat3.rotate
+#### `mat3.rotate`
 
 ```ts
 /**
@@ -1712,7 +1725,7 @@ export function translate(out: Mat2d, a: Mat2d, v: Vec2): Mat2d;
 export function rotate(out: Mat2, a: Mat2, rad: number): Mat2;
 ```
 
-#### mat3.scale
+#### `mat3.scale`
 
 ```ts
 /**
@@ -1726,7 +1739,7 @@ export function rotate(out: Mat2, a: Mat2, rad: number): Mat2;
 export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 ```
 
-#### mat3.fromTranslation
+#### `mat3.fromTranslation`
 
 ```ts
 /**
@@ -1743,7 +1756,7 @@ export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 export function fromTranslation(out: Mat2d, v: Vec2): Mat2d;
 ```
 
-#### mat3.fromRotation
+#### `mat3.fromRotation`
 
 ```ts
 /**
@@ -1760,7 +1773,7 @@ export function fromTranslation(out: Mat2d, v: Vec2): Mat2d;
 export function fromRotation(out: Mat2, rad: number): Mat2;
 ```
 
-#### mat3.fromScaling
+#### `mat3.fromScaling`
 
 ```ts
 /**
@@ -1777,7 +1790,7 @@ export function fromRotation(out: Mat2, rad: number): Mat2;
 export function fromScaling(out: Mat2, v: Vec2): Mat2;
 ```
 
-#### mat3.fromMat2d
+#### `mat3.fromMat2d`
 
 ```ts
 /**
@@ -1790,7 +1803,7 @@ export function fromScaling(out: Mat2, v: Vec2): Mat2;
 export function fromMat2d(out: Mat3, a: Mat2d): Mat3;
 ```
 
-#### mat3.fromQuat
+#### `mat3.fromQuat`
 
 ```ts
 /**
@@ -1803,7 +1816,7 @@ export function fromMat2d(out: Mat3, a: Mat2d): Mat3;
 export function fromQuat(out: Euler, q: Quat, order: EulerOrder): Euler;
 ```
 
-#### mat3.normalFromMat4
+#### `mat3.normalFromMat4`
 
 ```ts
 /**
@@ -1817,7 +1830,7 @@ export function fromQuat(out: Euler, q: Quat, order: EulerOrder): Euler;
 export function normalFromMat4(out: Mat3, a: Mat4): Mat3 | null;
 ```
 
-#### mat3.projection
+#### `mat3.projection`
 
 ```ts
 /**
@@ -1831,7 +1844,7 @@ export function normalFromMat4(out: Mat3, a: Mat4): Mat3 | null;
 export function projection(out: Mat3, width: number, height: number): Mat3;
 ```
 
-#### mat3.str
+#### `mat3.str`
 
 ```ts
 /**
@@ -1843,7 +1856,7 @@ export function projection(out: Mat3, width: number, height: number): Mat3;
 export function str(a: Mat2): string;
 ```
 
-#### mat3.frob
+#### `mat3.frob`
 
 ```ts
 /**
@@ -1855,7 +1868,7 @@ export function str(a: Mat2): string;
 export function frob(a: Mat2): number;
 ```
 
-#### mat3.add
+#### `mat3.add`
 
 ```ts
 /**
@@ -1869,7 +1882,7 @@ export function frob(a: Mat2): number;
 export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### mat3.subtract
+#### `mat3.subtract`
 
 ```ts
 /**
@@ -1883,7 +1896,7 @@ export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### mat3.multiplyScalar
+#### `mat3.multiplyScalar`
 
 ```ts
 /**
@@ -1897,7 +1910,7 @@ export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2;
 ```
 
-#### mat3.multiplyScalarAndAdd
+#### `mat3.multiplyScalarAndAdd`
 
 ```ts
 /**
@@ -1912,7 +1925,7 @@ export function multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2;
 export function multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number): Mat2;
 ```
 
-#### mat3.exactEquals
+#### `mat3.exactEquals`
 
 ```ts
 /**
@@ -1925,7 +1938,7 @@ export function multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number)
 export function exactEquals(a: Euler, b: Euler): boolean;
 ```
 
-#### mat3.equals
+#### `mat3.equals`
 
 ```ts
 /**
@@ -1942,7 +1955,7 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 
 ### mat4
 
-#### mat4.create
+#### `mat4.create`
 
 ```ts
 /**
@@ -1952,7 +1965,7 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 export function create(): Box3;
 ```
 
-#### mat4.clone
+#### `mat4.clone`
 
 ```ts
 /**
@@ -1963,7 +1976,7 @@ export function create(): Box3;
 export function clone(box: Box3): Box3;
 ```
 
-#### mat4.copy
+#### `mat4.copy`
 
 ```ts
 /**
@@ -1976,7 +1989,7 @@ export function clone(box: Box3): Box3;
 export function copy(out: Mat2, a: Mat2): Mat2;
 ```
 
-#### mat4.fromValues
+#### `mat4.fromValues`
 
 ```ts
 /**
@@ -1990,7 +2003,7 @@ export function copy(out: Mat2, a: Mat2): Mat2;
 export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
 ```
 
-#### mat4.set
+#### `mat4.set`
 
 ```ts
 /**
@@ -2003,7 +2016,7 @@ export function fromValues(x: number, y: number, z: number, order: EulerOrder): 
 export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 ```
 
-#### mat4.identity
+#### `mat4.identity`
 
 ```ts
 /**
@@ -2015,7 +2028,7 @@ export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 export function identity(out: Mat2): Mat2;
 ```
 
-#### mat4.transpose
+#### `mat4.transpose`
 
 ```ts
 /**
@@ -2028,7 +2041,7 @@ export function identity(out: Mat2): Mat2;
 export function transpose(out: Mat2, a: Mat2): Mat2;
 ```
 
-#### mat4.invert
+#### `mat4.invert`
 
 ```ts
 /**
@@ -2041,7 +2054,7 @@ export function transpose(out: Mat2, a: Mat2): Mat2;
 export function invert(out: Mat2, a: Mat2): Mat2 | null;
 ```
 
-#### mat4.adjoint
+#### `mat4.adjoint`
 
 ```ts
 /**
@@ -2054,7 +2067,7 @@ export function invert(out: Mat2, a: Mat2): Mat2 | null;
 export function adjoint(out: Mat2, a: Mat2): Mat2;
 ```
 
-#### mat4.determinant
+#### `mat4.determinant`
 
 ```ts
 /**
@@ -2066,7 +2079,7 @@ export function adjoint(out: Mat2, a: Mat2): Mat2;
 export function determinant(a: Mat2): number;
 ```
 
-#### mat4.multiply
+#### `mat4.multiply`
 
 ```ts
 /**
@@ -2080,7 +2093,7 @@ export function determinant(a: Mat2): number;
 export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### mat4.translate
+#### `mat4.translate`
 
 ```ts
 /**
@@ -2094,7 +2107,7 @@ export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function translate(out: Mat2d, a: Mat2d, v: Vec2): Mat2d;
 ```
 
-#### mat4.scale
+#### `mat4.scale`
 
 ```ts
 /**
@@ -2108,7 +2121,7 @@ export function translate(out: Mat2d, a: Mat2d, v: Vec2): Mat2d;
 export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 ```
 
-#### mat4.rotate
+#### `mat4.rotate`
 
 ```ts
 /**
@@ -2122,7 +2135,7 @@ export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 export function rotate(out: Mat2, a: Mat2, rad: number): Mat2;
 ```
 
-#### mat4.rotateX
+#### `mat4.rotateX`
 
 ```ts
 /**
@@ -2136,7 +2149,7 @@ export function rotate(out: Mat2, a: Mat2, rad: number): Mat2;
 export function rotateX(out: Mat4, a: Mat4, rad: number): Mat4;
 ```
 
-#### mat4.rotateY
+#### `mat4.rotateY`
 
 ```ts
 /**
@@ -2150,7 +2163,7 @@ export function rotateX(out: Mat4, a: Mat4, rad: number): Mat4;
 export function rotateY(out: Mat4, a: Mat4, rad: number): Mat4;
 ```
 
-#### mat4.rotateZ
+#### `mat4.rotateZ`
 
 ```ts
 /**
@@ -2164,7 +2177,7 @@ export function rotateY(out: Mat4, a: Mat4, rad: number): Mat4;
 export function rotateZ(out: Mat4, a: Mat4, rad: number): Mat4;
 ```
 
-#### mat4.fromTranslation
+#### `mat4.fromTranslation`
 
 ```ts
 /**
@@ -2181,7 +2194,7 @@ export function rotateZ(out: Mat4, a: Mat4, rad: number): Mat4;
 export function fromTranslation(out: Mat2d, v: Vec2): Mat2d;
 ```
 
-#### mat4.fromScaling
+#### `mat4.fromScaling`
 
 ```ts
 /**
@@ -2198,7 +2211,7 @@ export function fromTranslation(out: Mat2d, v: Vec2): Mat2d;
 export function fromScaling(out: Mat2, v: Vec2): Mat2;
 ```
 
-#### mat4.fromRotation
+#### `mat4.fromRotation`
 
 ```ts
 /**
@@ -2215,7 +2228,7 @@ export function fromScaling(out: Mat2, v: Vec2): Mat2;
 export function fromRotation(out: Mat2, rad: number): Mat2;
 ```
 
-#### mat4.fromXRotation
+#### `mat4.fromXRotation`
 
 ```ts
 /**
@@ -2232,7 +2245,7 @@ export function fromRotation(out: Mat2, rad: number): Mat2;
 export function fromXRotation(out: Mat4, rad: number): Mat4;
 ```
 
-#### mat4.fromYRotation
+#### `mat4.fromYRotation`
 
 ```ts
 /**
@@ -2249,7 +2262,7 @@ export function fromXRotation(out: Mat4, rad: number): Mat4;
 export function fromYRotation(out: Mat4, rad: number): Mat4;
 ```
 
-#### mat4.fromZRotation
+#### `mat4.fromZRotation`
 
 ```ts
 /**
@@ -2266,7 +2279,7 @@ export function fromYRotation(out: Mat4, rad: number): Mat4;
 export function fromZRotation(out: Mat4, rad: number): Mat4;
 ```
 
-#### mat4.fromRotationTranslation
+#### `mat4.fromRotationTranslation`
 
 ```ts
 /**
@@ -2287,7 +2300,7 @@ export function fromZRotation(out: Mat4, rad: number): Mat4;
 export function fromRotationTranslation(out: Mat4, q: Quat | Quat2, v: Vec3): Mat4;
 ```
 
-#### mat4.fromQuat2
+#### `mat4.fromQuat2`
 
 ```ts
 /**
@@ -2300,7 +2313,7 @@ export function fromRotationTranslation(out: Mat4, q: Quat | Quat2, v: Vec3): Ma
 export function fromQuat2(out: Mat4, a: Quat2): Mat4;
 ```
 
-#### mat4.getTranslation
+#### `mat4.getTranslation`
 
 ```ts
 /**
@@ -2315,7 +2328,7 @@ export function fromQuat2(out: Mat4, a: Quat2): Mat4;
 export function getTranslation(out: Vec3, mat: Mat4): Vec3;
 ```
 
-#### mat4.getScaling
+#### `mat4.getScaling`
 
 ```ts
 /**
@@ -2331,7 +2344,7 @@ export function getTranslation(out: Vec3, mat: Mat4): Vec3;
 export function getScaling(out: Vec3, mat: Mat4): Vec3;
 ```
 
-#### mat4.getRotation
+#### `mat4.getRotation`
 
 ```ts
 /**
@@ -2346,7 +2359,7 @@ export function getScaling(out: Vec3, mat: Mat4): Vec3;
 export function getRotation(out: Quat, mat: Mat4): Quat;
 ```
 
-#### mat4.decompose
+#### `mat4.decompose`
 
 ```ts
 /**
@@ -2361,7 +2374,7 @@ export function getRotation(out: Quat, mat: Mat4): Quat;
 export function decompose(out_r: Quat, out_t: Vec3, out_s: Vec3, mat: Mat4): Quat;
 ```
 
-#### mat4.fromRotationTranslationScale
+#### `mat4.fromRotationTranslationScale`
 
 ```ts
 /**
@@ -2384,7 +2397,7 @@ export function decompose(out_r: Quat, out_t: Vec3, out_s: Vec3, mat: Mat4): Qua
 export function fromRotationTranslationScale(out: Mat4, q: Quat, v: Vec3, s: Vec3): Mat4;
 ```
 
-#### mat4.fromRotationTranslationScaleOrigin
+#### `mat4.fromRotationTranslationScaleOrigin`
 
 ```ts
 /**
@@ -2410,7 +2423,7 @@ export function fromRotationTranslationScale(out: Mat4, q: Quat, v: Vec3, s: Vec
 export function fromRotationTranslationScaleOrigin(out: Mat4, q: Quat, v: Vec3, s: Vec3, o: Vec3): Mat4;
 ```
 
-#### mat4.fromQuat
+#### `mat4.fromQuat`
 
 ```ts
 /**
@@ -2423,7 +2436,7 @@ export function fromRotationTranslationScaleOrigin(out: Mat4, q: Quat, v: Vec3, 
 export function fromQuat(out: Euler, q: Quat, order: EulerOrder): Euler;
 ```
 
-#### mat4.frustum
+#### `mat4.frustum`
 
 ```ts
 /**
@@ -2441,7 +2454,7 @@ export function fromQuat(out: Euler, q: Quat, order: EulerOrder): Euler;
 export function frustum(out: Mat4, left: number, right: number, bottom: number, top: number, near: number, far: number): Mat4;
 ```
 
-#### mat4.perspectiveNO
+#### `mat4.perspectiveNO`
 
 ```ts
 /**
@@ -2460,7 +2473,7 @@ export function frustum(out: Mat4, left: number, right: number, bottom: number, 
 export function perspectiveNO(out: Mat4, fovy: number, aspect: number, near: number, far: number): Mat4;
 ```
 
-#### mat4.perspectiveZO
+#### `mat4.perspectiveZO`
 
 ```ts
 /**
@@ -2479,7 +2492,7 @@ export function perspectiveNO(out: Mat4, fovy: number, aspect: number, near: num
 export function perspectiveZO(out: Mat4, fovy: number, aspect: number, near: number, far: number): Mat4;
 ```
 
-#### mat4.perspectiveFromFieldOfView
+#### `mat4.perspectiveFromFieldOfView`
 
 ```ts
 /**
@@ -2501,7 +2514,7 @@ export function perspectiveFromFieldOfView(out: Mat4, fov: {
 }, near: number, far: number): Mat4;
 ```
 
-#### mat4.orthoNO
+#### `mat4.orthoNO`
 
 ```ts
 /**
@@ -2521,7 +2534,7 @@ export function perspectiveFromFieldOfView(out: Mat4, fov: {
 export function orthoNO(out: Mat4, left: number, right: number, bottom: number, top: number, near: number, far: number): Mat4;
 ```
 
-#### mat4.orthoZO
+#### `mat4.orthoZO`
 
 ```ts
 /**
@@ -2541,7 +2554,7 @@ export function orthoNO(out: Mat4, left: number, right: number, bottom: number, 
 export function orthoZO(out: Mat4, left: number, right: number, bottom: number, top: number, near: number, far: number): Mat4;
 ```
 
-#### mat4.lookAt
+#### `mat4.lookAt`
 
 ```ts
 /**
@@ -2557,7 +2570,7 @@ export function orthoZO(out: Mat4, left: number, right: number, bottom: number, 
 export function lookAt(out: Mat4, eye: Vec3, center: Vec3, up: Vec3): Mat4;
 ```
 
-#### mat4.targetTo
+#### `mat4.targetTo`
 
 ```ts
 /**
@@ -2572,7 +2585,7 @@ export function lookAt(out: Mat4, eye: Vec3, center: Vec3, up: Vec3): Mat4;
 export function targetTo(out: Mat4, eye: Vec3, target: Vec3, up: Vec3): Mat4;
 ```
 
-#### mat4.str
+#### `mat4.str`
 
 ```ts
 /**
@@ -2584,7 +2597,7 @@ export function targetTo(out: Mat4, eye: Vec3, target: Vec3, up: Vec3): Mat4;
 export function str(a: Mat2): string;
 ```
 
-#### mat4.frob
+#### `mat4.frob`
 
 ```ts
 /**
@@ -2596,7 +2609,7 @@ export function str(a: Mat2): string;
 export function frob(a: Mat2): number;
 ```
 
-#### mat4.add
+#### `mat4.add`
 
 ```ts
 /**
@@ -2610,7 +2623,7 @@ export function frob(a: Mat2): number;
 export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### mat4.subtract
+#### `mat4.subtract`
 
 ```ts
 /**
@@ -2624,7 +2637,7 @@ export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### mat4.multiplyScalar
+#### `mat4.multiplyScalar`
 
 ```ts
 /**
@@ -2638,7 +2651,7 @@ export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2;
 ```
 
-#### mat4.multiplyScalarAndAdd
+#### `mat4.multiplyScalarAndAdd`
 
 ```ts
 /**
@@ -2653,7 +2666,7 @@ export function multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2;
 export function multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number): Mat2;
 ```
 
-#### mat4.exactEquals
+#### `mat4.exactEquals`
 
 ```ts
 /**
@@ -2666,7 +2679,7 @@ export function multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number)
 export function exactEquals(a: Euler, b: Euler): boolean;
 ```
 
-#### mat4.equals
+#### `mat4.equals`
 
 ```ts
 /**
@@ -2683,7 +2696,7 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 
 ### noise
 
-#### createSimplex2D
+#### `createSimplex2D`
 
 ```ts
 /**
@@ -2695,7 +2708,7 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 export function createSimplex2D(seed: number): NoiseGenerator2D;
 ```
 
-#### createSimplex3D
+#### `createSimplex3D`
 
 ```ts
 /**
@@ -2707,7 +2720,7 @@ export function createSimplex2D(seed: number): NoiseGenerator2D;
 export function createSimplex3D(seed: number): NoiseGenerator3D;
 ```
 
-#### createPerlin2D
+#### `createPerlin2D`
 
 ```ts
 /**
@@ -2719,7 +2732,7 @@ export function createSimplex3D(seed: number): NoiseGenerator3D;
 export function createPerlin2D(seed: number): NoiseGenerator2D;
 ```
 
-#### createPerlin3D
+#### `createPerlin3D`
 
 ```ts
 /**
@@ -2733,7 +2746,7 @@ export function createPerlin3D(seed: number): NoiseGenerator3D;
 
 ### quat
 
-#### quat.create
+#### `quat.create`
 
 ```ts
 /**
@@ -2743,7 +2756,7 @@ export function createPerlin3D(seed: number): NoiseGenerator3D;
 export function create(): Box3;
 ```
 
-#### quat.identity
+#### `quat.identity`
 
 ```ts
 /**
@@ -2755,7 +2768,7 @@ export function create(): Box3;
 export function identity(out: Mat2): Mat2;
 ```
 
-#### quat.setAxisAngle
+#### `quat.setAxisAngle`
 
 ```ts
 /**
@@ -2770,7 +2783,7 @@ export function identity(out: Mat2): Mat2;
 export function setAxisAngle(out: Quat, axis: Vec3, rad: number): Quat;
 ```
 
-#### quat.getAxisAngle
+#### `quat.getAxisAngle`
 
 ```ts
 /**
@@ -2789,7 +2802,7 @@ export function setAxisAngle(out: Quat, axis: Vec3, rad: number): Quat;
 export function getAxisAngle(out_axis: Vec3, q: Quat): number;
 ```
 
-#### quat.getAngle
+#### `quat.getAngle`
 
 ```ts
 /**
@@ -2802,7 +2815,7 @@ export function getAxisAngle(out_axis: Vec3, q: Quat): number;
 export function getAngle(a: Quat, b: Quat): number;
 ```
 
-#### quat.multiply
+#### `quat.multiply`
 
 ```ts
 /**
@@ -2816,7 +2829,7 @@ export function getAngle(a: Quat, b: Quat): number;
 export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### quat.rotateX
+#### `quat.rotateX`
 
 ```ts
 /**
@@ -2830,7 +2843,7 @@ export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function rotateX(out: Mat4, a: Mat4, rad: number): Mat4;
 ```
 
-#### quat.rotateY
+#### `quat.rotateY`
 
 ```ts
 /**
@@ -2844,7 +2857,7 @@ export function rotateX(out: Mat4, a: Mat4, rad: number): Mat4;
 export function rotateY(out: Mat4, a: Mat4, rad: number): Mat4;
 ```
 
-#### quat.rotateZ
+#### `quat.rotateZ`
 
 ```ts
 /**
@@ -2858,7 +2871,7 @@ export function rotateY(out: Mat4, a: Mat4, rad: number): Mat4;
 export function rotateZ(out: Mat4, a: Mat4, rad: number): Mat4;
 ```
 
-#### quat.calculateW
+#### `quat.calculateW`
 
 ```ts
 /**
@@ -2873,13 +2886,13 @@ export function rotateZ(out: Mat4, a: Mat4, rad: number): Mat4;
 export function calculateW(out: Quat, a: Quat): Quat;
 ```
 
-#### quat.exp
+#### `quat.exp`
 
 ```ts
 export function exp(t: number);
 ```
 
-#### quat.ln
+#### `quat.ln`
 
 ```ts
 /**
@@ -2892,7 +2905,7 @@ export function exp(t: number);
 export function ln(out: Quat, a: Quat): Quat;
 ```
 
-#### quat.pow
+#### `quat.pow`
 
 ```ts
 /**
@@ -2906,7 +2919,7 @@ export function ln(out: Quat, a: Quat): Quat;
 export function pow(out: Quat, a: Quat, b: number): Quat;
 ```
 
-#### quat.slerp
+#### `quat.slerp`
 
 ```ts
 /**
@@ -2921,7 +2934,7 @@ export function pow(out: Quat, a: Quat, b: number): Quat;
 export function slerp(out: Quat, a: Quat, b: Quat, t: number): Quat;
 ```
 
-#### quat.invert
+#### `quat.invert`
 
 ```ts
 /**
@@ -2934,7 +2947,7 @@ export function slerp(out: Quat, a: Quat, b: Quat, t: number): Quat;
 export function invert(out: Mat2, a: Mat2): Mat2 | null;
 ```
 
-#### quat.conjugate
+#### `quat.conjugate`
 
 ```ts
 /**
@@ -2948,7 +2961,7 @@ export function invert(out: Mat2, a: Mat2): Mat2 | null;
 export function conjugate(out: Quat, a: Quat): Quat;
 ```
 
-#### quat.fromMat3
+#### `quat.fromMat3`
 
 ```ts
 /**
@@ -2964,7 +2977,7 @@ export function conjugate(out: Quat, a: Quat): Quat;
 export function fromMat3(out: Quat, m: Mat3): Quat;
 ```
 
-#### quat.fromEuler
+#### `quat.fromEuler`
 
 ```ts
 /**
@@ -2976,7 +2989,7 @@ export function fromMat3(out: Quat, m: Mat3): Quat;
 export function fromEuler(out: Quat, euler: Euler): Quat;
 ```
 
-#### quat.str
+#### `quat.str`
 
 ```ts
 /**
@@ -2988,7 +3001,165 @@ export function fromEuler(out: Quat, euler: Euler): Quat;
 export function str(a: Mat2): string;
 ```
 
-#### quat.equals
+#### `quat.clone`
+
+```ts
+/**
+ * Clones a Box3
+ * @param box - A Box3 to clone
+ * @returns a clone of box
+ */
+export function clone(box: Box3): Box3;
+```
+
+#### `quat.fromValues`
+
+```ts
+/**
+ * Creates a new Euler from the given values.
+ * @param x The x rotation in radians.
+ * @param y The y rotation in radians.
+ * @param z The z rotation in radians.
+ * @param order The order of rotation.
+ * @returns A new Euler.
+ */
+export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
+```
+
+#### `quat.copy`
+
+```ts
+/**
+ * Copy the values from one mat2 to another
+ *
+ * @param out the receiving matrix
+ * @param a the source matrix
+ * @returns out
+ */
+export function copy(out: Mat2, a: Mat2): Mat2;
+```
+
+#### `quat.set`
+
+```ts
+/**
+ * Sets the min and max values of a Box3
+ * @param out - The output Box3
+ * @param min - The minimum corner
+ * @param max - The maximum corner
+ * @returns The updated Box3
+ */
+export function set(out: Box3, min: Vec3, max: Vec3): Box3;
+```
+
+#### `quat.add`
+
+```ts
+/**
+ * Adds two mat2's
+ *
+ * @param out the receiving matrix
+ * @param a the first operand
+ * @param b the second operand
+ * @returns out
+ */
+export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
+```
+
+#### `quat.scale`
+
+```ts
+/**
+ * Scales the mat2 by the dimensions in the given vec2
+ *
+ * @param out the receiving matrix
+ * @param a the matrix to rotate
+ * @param v the vec2 to scale the matrix by
+ * @returns out
+ **/
+export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
+```
+
+#### `quat.dot`
+
+```ts
+/**
+ * Calculates the dot product of two vec2's
+ *
+ * @param a the first operand
+ * @param b the second operand
+ * @returns dot product of a and b
+ */
+export function dot(a: Vec2, b: Vec2): number;
+```
+
+#### `quat.lerp`
+
+```ts
+/**
+ *
+ * Returns the result of linearly interpolating between input A and input B by input T.
+ *
+ * @param v0
+ * @param v1
+ * @param t
+ * @returns
+ */
+export function lerp(v0: number, v1: number, t: number);
+```
+
+#### `quat.length`
+
+```ts
+/**
+ * Calculates the length of a vec2
+ *
+ * @param a vector to calculate length of
+ * @returns length of a
+ */
+export function length(a: Vec2): number;
+```
+
+#### `quat.squaredLength`
+
+```ts
+/**
+ * Calculates the squared length of a vec2
+ *
+ * @param a vector to calculate squared length of
+ * @returns squared length of a
+ */
+export function squaredLength(a: Vec2): number;
+```
+
+#### `quat.normalize`
+
+```ts
+/**
+ * Normalize a dual quat
+ *
+ * @param out the receiving dual quaternion
+ * @param a dual quaternion to normalize
+ * @returns out
+ * @function
+ */
+export function normalize(out: Quat2, a: Quat2): Quat2;
+```
+
+#### `quat.exactEquals`
+
+```ts
+/**
+ * Returns whether or not the euler angles have exactly the same elements in the same position (when compared with ===)
+ *
+ * @param a The first euler.
+ * @param b The second euler.
+ * @returns True if the euler angles are equal, false otherwise.
+ */
+export function exactEquals(a: Euler, b: Euler): boolean;
+```
+
+#### `quat.equals`
 
 ```ts
 /**
@@ -3005,7 +3176,7 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 
 ### quat2
 
-#### quat2.create
+#### `quat2.create`
 
 ```ts
 /**
@@ -3015,7 +3186,7 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 export function create(): Box3;
 ```
 
-#### quat2.clone
+#### `quat2.clone`
 
 ```ts
 /**
@@ -3026,7 +3197,7 @@ export function create(): Box3;
 export function clone(box: Box3): Box3;
 ```
 
-#### quat2.fromValues
+#### `quat2.fromValues`
 
 ```ts
 /**
@@ -3040,7 +3211,7 @@ export function clone(box: Box3): Box3;
 export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
 ```
 
-#### quat2.fromRotationTranslationValues
+#### `quat2.fromRotationTranslationValues`
 
 ```ts
 /**
@@ -3059,7 +3230,7 @@ export function fromValues(x: number, y: number, z: number, order: EulerOrder): 
 export function fromRotationTranslationValues(x1: number, y1: number, z1: number, w1: number, x2: number, y2: number, z2: number): Quat2;
 ```
 
-#### quat2.fromRotationTranslation
+#### `quat2.fromRotationTranslation`
 
 ```ts
 /**
@@ -3080,7 +3251,7 @@ export function fromRotationTranslationValues(x1: number, y1: number, z1: number
 export function fromRotationTranslation(out: Mat4, q: Quat | Quat2, v: Vec3): Mat4;
 ```
 
-#### quat2.fromTranslation
+#### `quat2.fromTranslation`
 
 ```ts
 /**
@@ -3097,7 +3268,7 @@ export function fromRotationTranslation(out: Mat4, q: Quat | Quat2, v: Vec3): Ma
 export function fromTranslation(out: Mat2d, v: Vec2): Mat2d;
 ```
 
-#### quat2.fromRotation
+#### `quat2.fromRotation`
 
 ```ts
 /**
@@ -3114,7 +3285,7 @@ export function fromTranslation(out: Mat2d, v: Vec2): Mat2d;
 export function fromRotation(out: Mat2, rad: number): Mat2;
 ```
 
-#### quat2.fromMat4
+#### `quat2.fromMat4`
 
 ```ts
 /**
@@ -3127,7 +3298,7 @@ export function fromRotation(out: Mat2, rad: number): Mat2;
 export function fromMat4(out: Mat3, a: Mat4): Mat3;
 ```
 
-#### quat2.copy
+#### `quat2.copy`
 
 ```ts
 /**
@@ -3140,7 +3311,7 @@ export function fromMat4(out: Mat3, a: Mat4): Mat3;
 export function copy(out: Mat2, a: Mat2): Mat2;
 ```
 
-#### quat2.identity
+#### `quat2.identity`
 
 ```ts
 /**
@@ -3152,7 +3323,7 @@ export function copy(out: Mat2, a: Mat2): Mat2;
 export function identity(out: Mat2): Mat2;
 ```
 
-#### quat2.set
+#### `quat2.set`
 
 ```ts
 /**
@@ -3165,7 +3336,7 @@ export function identity(out: Mat2): Mat2;
 export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 ```
 
-#### quat2.getDual
+#### `quat2.getDual`
 
 ```ts
 /**
@@ -3177,7 +3348,7 @@ export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 export function getDual(out: Quat, a: Quat2): Quat;
 ```
 
-#### quat2.setDual
+#### `quat2.setDual`
 
 ```ts
 /**
@@ -3191,7 +3362,7 @@ export function getDual(out: Quat, a: Quat2): Quat;
 export function setDual(out: Quat2, q: Quat): Quat2;
 ```
 
-#### quat2.getTranslation
+#### `quat2.getTranslation`
 
 ```ts
 /**
@@ -3206,7 +3377,7 @@ export function setDual(out: Quat2, q: Quat): Quat2;
 export function getTranslation(out: Vec3, mat: Mat4): Vec3;
 ```
 
-#### quat2.translate
+#### `quat2.translate`
 
 ```ts
 /**
@@ -3220,7 +3391,7 @@ export function getTranslation(out: Vec3, mat: Mat4): Vec3;
 export function translate(out: Mat2d, a: Mat2d, v: Vec2): Mat2d;
 ```
 
-#### quat2.rotateX
+#### `quat2.rotateX`
 
 ```ts
 /**
@@ -3234,7 +3405,7 @@ export function translate(out: Mat2d, a: Mat2d, v: Vec2): Mat2d;
 export function rotateX(out: Mat4, a: Mat4, rad: number): Mat4;
 ```
 
-#### quat2.rotateY
+#### `quat2.rotateY`
 
 ```ts
 /**
@@ -3248,7 +3419,7 @@ export function rotateX(out: Mat4, a: Mat4, rad: number): Mat4;
 export function rotateY(out: Mat4, a: Mat4, rad: number): Mat4;
 ```
 
-#### quat2.rotateZ
+#### `quat2.rotateZ`
 
 ```ts
 /**
@@ -3262,7 +3433,7 @@ export function rotateY(out: Mat4, a: Mat4, rad: number): Mat4;
 export function rotateZ(out: Mat4, a: Mat4, rad: number): Mat4;
 ```
 
-#### quat2.rotateByQuatAppend
+#### `quat2.rotateByQuatAppend`
 
 ```ts
 /**
@@ -3276,7 +3447,7 @@ export function rotateZ(out: Mat4, a: Mat4, rad: number): Mat4;
 export function rotateByQuatAppend(out: Quat2, a: Quat2, q: Quat): Quat2;
 ```
 
-#### quat2.rotateByQuatPrepend
+#### `quat2.rotateByQuatPrepend`
 
 ```ts
 /**
@@ -3290,7 +3461,7 @@ export function rotateByQuatAppend(out: Quat2, a: Quat2, q: Quat): Quat2;
 export function rotateByQuatPrepend(out: Quat2, q: Quat, a: Quat2): Quat2;
 ```
 
-#### quat2.rotateAroundAxis
+#### `quat2.rotateAroundAxis`
 
 ```ts
 /**
@@ -3305,7 +3476,7 @@ export function rotateByQuatPrepend(out: Quat2, q: Quat, a: Quat2): Quat2;
 export function rotateAroundAxis(out: Quat2, a: Quat2, axis: Vec3, rad: number): Quat2;
 ```
 
-#### quat2.add
+#### `quat2.add`
 
 ```ts
 /**
@@ -3319,7 +3490,7 @@ export function rotateAroundAxis(out: Quat2, a: Quat2, axis: Vec3, rad: number):
 export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### quat2.multiply
+#### `quat2.multiply`
 
 ```ts
 /**
@@ -3333,7 +3504,7 @@ export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### quat2.scale
+#### `quat2.scale`
 
 ```ts
 /**
@@ -3347,7 +3518,20 @@ export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 ```
 
-#### quat2.lerp
+#### `quat2.dot`
+
+```ts
+/**
+ * Calculates the dot product of two vec2's
+ *
+ * @param a the first operand
+ * @param b the second operand
+ * @returns dot product of a and b
+ */
+export function dot(a: Vec2, b: Vec2): number;
+```
+
+#### `quat2.lerp`
 
 ```ts
 /**
@@ -3362,7 +3546,7 @@ export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 export function lerp(v0: number, v1: number, t: number);
 ```
 
-#### quat2.invert
+#### `quat2.invert`
 
 ```ts
 /**
@@ -3375,7 +3559,7 @@ export function lerp(v0: number, v1: number, t: number);
 export function invert(out: Mat2, a: Mat2): Mat2 | null;
 ```
 
-#### quat2.conjugate
+#### `quat2.conjugate`
 
 ```ts
 /**
@@ -3389,7 +3573,31 @@ export function invert(out: Mat2, a: Mat2): Mat2 | null;
 export function conjugate(out: Quat, a: Quat): Quat;
 ```
 
-#### quat2.normalize
+#### `quat2.length`
+
+```ts
+/**
+ * Calculates the length of a vec2
+ *
+ * @param a vector to calculate length of
+ * @returns length of a
+ */
+export function length(a: Vec2): number;
+```
+
+#### `quat2.squaredLength`
+
+```ts
+/**
+ * Calculates the squared length of a vec2
+ *
+ * @param a vector to calculate squared length of
+ * @returns squared length of a
+ */
+export function squaredLength(a: Vec2): number;
+```
+
+#### `quat2.normalize`
 
 ```ts
 /**
@@ -3403,7 +3611,7 @@ export function conjugate(out: Quat, a: Quat): Quat;
 export function normalize(out: Quat2, a: Quat2): Quat2;
 ```
 
-#### quat2.str
+#### `quat2.str`
 
 ```ts
 /**
@@ -3415,7 +3623,7 @@ export function normalize(out: Quat2, a: Quat2): Quat2;
 export function str(a: Mat2): string;
 ```
 
-#### quat2.exactEquals
+#### `quat2.exactEquals`
 
 ```ts
 /**
@@ -3428,7 +3636,7 @@ export function str(a: Mat2): string;
 export function exactEquals(a: Euler, b: Euler): boolean;
 ```
 
-#### quat2.equals
+#### `quat2.equals`
 
 ```ts
 /**
@@ -3445,7 +3653,7 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 
 ### random
 
-#### createMulberry32Generator
+#### `createMulberry32Generator`
 
 ```ts
 /**
@@ -3459,7 +3667,7 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 export function createMulberry32Generator(seed: number): () => number;
 ```
 
-#### generateMulberry32Seed
+#### `generateMulberry32Seed`
 
 ```ts
 /**
@@ -3469,7 +3677,7 @@ export function createMulberry32Generator(seed: number): () => number;
 export function generateMulberry32Seed(): number;
 ```
 
-#### randomInt
+#### `randomInt`
 
 ```ts
 /**
@@ -3482,7 +3690,7 @@ export function generateMulberry32Seed(): number;
 export function randomInt(min: number, max: number, randomFloat01: number = Math.random()): number;
 ```
 
-#### randomFloat
+#### `randomFloat`
 
 ```ts
 /**
@@ -3495,7 +3703,7 @@ export function randomInt(min: number, max: number, randomFloat01: number = Math
 export function randomFloat(min: number, max: number, randomFloat01: number = Math.random()): number;
 ```
 
-#### randomBool
+#### `randomBool`
 
 ```ts
 /**
@@ -3507,7 +3715,7 @@ export function randomFloat(min: number, max: number, randomFloat01: number = Ma
 export function randomBool(chance = 0.5, randomFloat01: number = Math.random()): boolean;
 ```
 
-#### randomSign
+#### `randomSign`
 
 ```ts
 /**
@@ -3519,7 +3727,7 @@ export function randomBool(chance = 0.5, randomFloat01: number = Math.random()):
 export function randomSign(plusChance = 0.5, randomFloat01: number = Math.random());
 ```
 
-#### randomChoice
+#### `randomChoice`
 
 ```ts
 /**
@@ -3532,7 +3740,7 @@ export function randomSign(plusChance = 0.5, randomFloat01: number = Math.random
 export function randomChoice<T>(items: T[], randomFloat01: number = Math.random()): T;
 ```
 
-#### randomVec2
+#### `randomVec2`
 
 ```ts
 /**
@@ -3545,7 +3753,7 @@ export function randomChoice<T>(items: T[], randomFloat01: number = Math.random(
 export function randomVec2(out: Vec2 = [0, 0], randomFn: () => number = Math.random): Vec2;
 ```
 
-#### randomVec3
+#### `randomVec3`
 
 ```ts
 /**
@@ -3558,7 +3766,7 @@ export function randomVec2(out: Vec2 = [0, 0], randomFn: () => number = Math.ran
 export function randomVec3(out: Vec3 = [0, 0, 0], randomFn: () => number = Math.random): Vec3;
 ```
 
-#### randomVec4
+#### `randomVec4`
 
 ```ts
 /**
@@ -3571,7 +3779,7 @@ export function randomVec3(out: Vec3 = [0, 0, 0], randomFn: () => number = Math.
 export function randomVec4(out: Vec4 = [0, 0, 0, 0], randomFn: () => number = Math.random): Vec4;
 ```
 
-#### randomQuat
+#### `randomQuat`
 
 ```ts
 /**
@@ -3585,7 +3793,7 @@ export function randomQuat(out: Quat = [0, 0, 0, 0], randomFn: () => number = Ma
 
 ### sphere
 
-#### sphere.create
+#### `sphere.create`
 
 ```ts
 /**
@@ -3597,7 +3805,7 @@ export function create(): Box3;
 
 ### triangle3
 
-#### triangle3.create
+#### `triangle3.create`
 
 ```ts
 /**
@@ -3611,7 +3819,7 @@ export function create(): Box3;
 
 ### vec2
 
-#### vec2.create
+#### `vec2.create`
 
 ```ts
 /**
@@ -3621,7 +3829,7 @@ export function create(): Box3;
 export function create(): Box3;
 ```
 
-#### vec2.clone
+#### `vec2.clone`
 
 ```ts
 /**
@@ -3632,7 +3840,7 @@ export function create(): Box3;
 export function clone(box: Box3): Box3;
 ```
 
-#### vec2.fromValues
+#### `vec2.fromValues`
 
 ```ts
 /**
@@ -3646,7 +3854,7 @@ export function clone(box: Box3): Box3;
 export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
 ```
 
-#### vec2.copy
+#### `vec2.copy`
 
 ```ts
 /**
@@ -3659,7 +3867,7 @@ export function fromValues(x: number, y: number, z: number, order: EulerOrder): 
 export function copy(out: Mat2, a: Mat2): Mat2;
 ```
 
-#### vec2.set
+#### `vec2.set`
 
 ```ts
 /**
@@ -3672,7 +3880,7 @@ export function copy(out: Mat2, a: Mat2): Mat2;
 export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 ```
 
-#### vec2.add
+#### `vec2.add`
 
 ```ts
 /**
@@ -3686,7 +3894,7 @@ export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### vec2.addScalar
+#### `vec2.addScalar`
 
 ```ts
 /**
@@ -3700,7 +3908,7 @@ export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function addScalar(out: Vec2, a: Vec2, b: number): Vec2;
 ```
 
-#### vec2.subtract
+#### `vec2.subtract`
 
 ```ts
 /**
@@ -3714,7 +3922,7 @@ export function addScalar(out: Vec2, a: Vec2, b: number): Vec2;
 export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### vec2.subtractScalar
+#### `vec2.subtractScalar`
 
 ```ts
 /**
@@ -3728,7 +3936,7 @@ export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function subtractScalar(out: Vec2, a: Vec2, b: number): Vec2;
 ```
 
-#### vec2.multiply
+#### `vec2.multiply`
 
 ```ts
 /**
@@ -3742,7 +3950,7 @@ export function subtractScalar(out: Vec2, a: Vec2, b: number): Vec2;
 export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### vec2.divide
+#### `vec2.divide`
 
 ```ts
 /**
@@ -3756,7 +3964,7 @@ export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function divide(out: Vec2, a: Vec2, b: Vec2): Vec2;
 ```
 
-#### vec2.ceil
+#### `vec2.ceil`
 
 ```ts
 /**
@@ -3769,7 +3977,7 @@ export function divide(out: Vec2, a: Vec2, b: Vec2): Vec2;
 export function ceil(out: Vec2, a: Vec2): Vec2;
 ```
 
-#### vec2.floor
+#### `vec2.floor`
 
 ```ts
 /**
@@ -3782,7 +3990,7 @@ export function ceil(out: Vec2, a: Vec2): Vec2;
 export function floor(out: Vec2, a: Vec2): Vec2;
 ```
 
-#### vec2.min
+#### `vec2.min`
 
 ```ts
 /**
@@ -3796,7 +4004,7 @@ export function floor(out: Vec2, a: Vec2): Vec2;
 export function min(out: Vec2, a: Vec2, b: Vec2): Vec2;
 ```
 
-#### vec2.max
+#### `vec2.max`
 
 ```ts
 /**
@@ -3810,7 +4018,7 @@ export function min(out: Vec2, a: Vec2, b: Vec2): Vec2;
 export function max(out: Vec2, a: Vec2, b: Vec2): Vec2;
 ```
 
-#### vec2.round
+#### `vec2.round`
 
 ```ts
 /**
@@ -3822,7 +4030,7 @@ export function max(out: Vec2, a: Vec2, b: Vec2): Vec2;
 export function round(a: number): number;
 ```
 
-#### vec2.scale
+#### `vec2.scale`
 
 ```ts
 /**
@@ -3836,7 +4044,7 @@ export function round(a: number): number;
 export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 ```
 
-#### vec2.scaleAndAdd
+#### `vec2.scaleAndAdd`
 
 ```ts
 /**
@@ -3851,7 +4059,7 @@ export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 export function scaleAndAdd(out: Vec2, a: Vec2, b: Vec2, scale: number): Vec2;
 ```
 
-#### vec2.distance
+#### `vec2.distance`
 
 ```ts
 /**
@@ -3864,7 +4072,7 @@ export function scaleAndAdd(out: Vec2, a: Vec2, b: Vec2, scale: number): Vec2;
 export function distance(a: Vec2, b: Vec2): number;
 ```
 
-#### vec2.squaredDistance
+#### `vec2.squaredDistance`
 
 ```ts
 /**
@@ -3877,7 +4085,7 @@ export function distance(a: Vec2, b: Vec2): number;
 export function squaredDistance(a: Vec2, b: Vec2): number;
 ```
 
-#### vec2.length
+#### `vec2.length`
 
 ```ts
 /**
@@ -3889,7 +4097,7 @@ export function squaredDistance(a: Vec2, b: Vec2): number;
 export function length(a: Vec2): number;
 ```
 
-#### vec2.squaredLength
+#### `vec2.squaredLength`
 
 ```ts
 /**
@@ -3901,7 +4109,7 @@ export function length(a: Vec2): number;
 export function squaredLength(a: Vec2): number;
 ```
 
-#### vec2.negate
+#### `vec2.negate`
 
 ```ts
 /**
@@ -3914,7 +4122,7 @@ export function squaredLength(a: Vec2): number;
 export function negate(out: Vec2, a: Vec2): Vec2;
 ```
 
-#### vec2.inverse
+#### `vec2.inverse`
 
 ```ts
 /**
@@ -3927,7 +4135,7 @@ export function negate(out: Vec2, a: Vec2): Vec2;
 export function inverse(out: Vec2, a: Vec2): Vec2;
 ```
 
-#### vec2.normalize
+#### `vec2.normalize`
 
 ```ts
 /**
@@ -3941,7 +4149,7 @@ export function inverse(out: Vec2, a: Vec2): Vec2;
 export function normalize(out: Quat2, a: Quat2): Quat2;
 ```
 
-#### vec2.dot
+#### `vec2.dot`
 
 ```ts
 /**
@@ -3954,7 +4162,7 @@ export function normalize(out: Quat2, a: Quat2): Quat2;
 export function dot(a: Vec2, b: Vec2): number;
 ```
 
-#### vec2.cross
+#### `vec2.cross`
 
 ```ts
 /**
@@ -3969,7 +4177,7 @@ export function dot(a: Vec2, b: Vec2): number;
 export function cross(out: Vec3, a: Vec2, b: Vec2): Vec3;
 ```
 
-#### vec2.lerp
+#### `vec2.lerp`
 
 ```ts
 /**
@@ -3984,7 +4192,7 @@ export function cross(out: Vec3, a: Vec2, b: Vec2): Vec3;
 export function lerp(v0: number, v1: number, t: number);
 ```
 
-#### vec2.transformMat2
+#### `vec2.transformMat2`
 
 ```ts
 /**
@@ -3998,7 +4206,7 @@ export function lerp(v0: number, v1: number, t: number);
 export function transformMat2(out: Vec2, a: Vec2, m: Mat2): Vec2;
 ```
 
-#### vec2.transformMat2d
+#### `vec2.transformMat2d`
 
 ```ts
 /**
@@ -4012,7 +4220,7 @@ export function transformMat2(out: Vec2, a: Vec2, m: Mat2): Vec2;
 export function transformMat2d(out: Vec2, a: Vec2, m: Mat2d): Vec2;
 ```
 
-#### vec2.transformMat3
+#### `vec2.transformMat3`
 
 ```ts
 /**
@@ -4027,7 +4235,7 @@ export function transformMat2d(out: Vec2, a: Vec2, m: Mat2d): Vec2;
 export function transformMat3(out: Vec2, a: Vec2, m: Mat3): Vec2;
 ```
 
-#### vec2.transformMat4
+#### `vec2.transformMat4`
 
 ```ts
 /**
@@ -4043,7 +4251,7 @@ export function transformMat3(out: Vec2, a: Vec2, m: Mat3): Vec2;
 export function transformMat4(out: Vec2, a: Vec2, m: Mat4): Vec2;
 ```
 
-#### vec2.rotate
+#### `vec2.rotate`
 
 ```ts
 /**
@@ -4057,7 +4265,7 @@ export function transformMat4(out: Vec2, a: Vec2, m: Mat4): Vec2;
 export function rotate(out: Mat2, a: Mat2, rad: number): Mat2;
 ```
 
-#### vec2.angle
+#### `vec2.angle`
 
 ```ts
 /**
@@ -4069,7 +4277,7 @@ export function rotate(out: Mat2, a: Mat2, rad: number): Mat2;
 export function angle(a: Vec2, b: Vec2): number;
 ```
 
-#### vec2.zero
+#### `vec2.zero`
 
 ```ts
 /**
@@ -4081,7 +4289,7 @@ export function angle(a: Vec2, b: Vec2): number;
 export function zero(out: Vec2): Vec2;
 ```
 
-#### vec2.str
+#### `vec2.str`
 
 ```ts
 /**
@@ -4093,7 +4301,7 @@ export function zero(out: Vec2): Vec2;
 export function str(a: Mat2): string;
 ```
 
-#### vec2.exactEquals
+#### `vec2.exactEquals`
 
 ```ts
 /**
@@ -4106,7 +4314,7 @@ export function str(a: Mat2): string;
 export function exactEquals(a: Euler, b: Euler): boolean;
 ```
 
-#### vec2.equals
+#### `vec2.equals`
 
 ```ts
 /**
@@ -4121,7 +4329,7 @@ export function exactEquals(a: Euler, b: Euler): boolean;
 export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 ```
 
-#### vec2.finite
+#### `vec2.finite`
 
 ```ts
 /**
@@ -4134,7 +4342,7 @@ export function finite(a: Vec2): boolean;
 
 ### vec3
 
-#### vec3.create
+#### `vec3.create`
 
 ```ts
 /**
@@ -4144,7 +4352,7 @@ export function finite(a: Vec2): boolean;
 export function create(): Box3;
 ```
 
-#### vec3.clone
+#### `vec3.clone`
 
 ```ts
 /**
@@ -4155,7 +4363,7 @@ export function create(): Box3;
 export function clone(box: Box3): Box3;
 ```
 
-#### vec3.length
+#### `vec3.length`
 
 ```ts
 /**
@@ -4167,7 +4375,7 @@ export function clone(box: Box3): Box3;
 export function length(a: Vec2): number;
 ```
 
-#### vec3.fromValues
+#### `vec3.fromValues`
 
 ```ts
 /**
@@ -4181,7 +4389,7 @@ export function length(a: Vec2): number;
 export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
 ```
 
-#### vec3.copy
+#### `vec3.copy`
 
 ```ts
 /**
@@ -4194,7 +4402,7 @@ export function fromValues(x: number, y: number, z: number, order: EulerOrder): 
 export function copy(out: Mat2, a: Mat2): Mat2;
 ```
 
-#### vec3.set
+#### `vec3.set`
 
 ```ts
 /**
@@ -4207,7 +4415,7 @@ export function copy(out: Mat2, a: Mat2): Mat2;
 export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 ```
 
-#### vec3.fromBuffer
+#### `vec3.fromBuffer`
 
 ```ts
 /**
@@ -4220,7 +4428,7 @@ export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 export function fromBuffer(out: Vec3, buffer: ArrayLike<number>, startIndex = 0): Vec3;
 ```
 
-#### vec3.toBuffer
+#### `vec3.toBuffer`
 
 ```ts
 /**
@@ -4233,7 +4441,7 @@ export function fromBuffer(out: Vec3, buffer: ArrayLike<number>, startIndex = 0)
 export function toBuffer(outBuffer: MutableArrayLike<number>, vec: Vec3, startIndex = 0): ArrayLike<number>;
 ```
 
-#### vec3.add
+#### `vec3.add`
 
 ```ts
 /**
@@ -4247,7 +4455,7 @@ export function toBuffer(outBuffer: MutableArrayLike<number>, vec: Vec3, startIn
 export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### vec3.addScalar
+#### `vec3.addScalar`
 
 ```ts
 /**
@@ -4261,7 +4469,7 @@ export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function addScalar(out: Vec2, a: Vec2, b: number): Vec2;
 ```
 
-#### vec3.subtract
+#### `vec3.subtract`
 
 ```ts
 /**
@@ -4275,7 +4483,7 @@ export function addScalar(out: Vec2, a: Vec2, b: number): Vec2;
 export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### vec3.subtractScalar
+#### `vec3.subtractScalar`
 
 ```ts
 /**
@@ -4289,7 +4497,7 @@ export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function subtractScalar(out: Vec2, a: Vec2, b: number): Vec2;
 ```
 
-#### vec3.multiply
+#### `vec3.multiply`
 
 ```ts
 /**
@@ -4303,7 +4511,7 @@ export function subtractScalar(out: Vec2, a: Vec2, b: number): Vec2;
 export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### vec3.divide
+#### `vec3.divide`
 
 ```ts
 /**
@@ -4317,7 +4525,7 @@ export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function divide(out: Vec2, a: Vec2, b: Vec2): Vec2;
 ```
 
-#### vec3.ceil
+#### `vec3.ceil`
 
 ```ts
 /**
@@ -4330,7 +4538,7 @@ export function divide(out: Vec2, a: Vec2, b: Vec2): Vec2;
 export function ceil(out: Vec2, a: Vec2): Vec2;
 ```
 
-#### vec3.floor
+#### `vec3.floor`
 
 ```ts
 /**
@@ -4343,7 +4551,7 @@ export function ceil(out: Vec2, a: Vec2): Vec2;
 export function floor(out: Vec2, a: Vec2): Vec2;
 ```
 
-#### vec3.min
+#### `vec3.min`
 
 ```ts
 /**
@@ -4357,7 +4565,7 @@ export function floor(out: Vec2, a: Vec2): Vec2;
 export function min(out: Vec2, a: Vec2, b: Vec2): Vec2;
 ```
 
-#### vec3.max
+#### `vec3.max`
 
 ```ts
 /**
@@ -4371,7 +4579,7 @@ export function min(out: Vec2, a: Vec2, b: Vec2): Vec2;
 export function max(out: Vec2, a: Vec2, b: Vec2): Vec2;
 ```
 
-#### vec3.round
+#### `vec3.round`
 
 ```ts
 /**
@@ -4383,7 +4591,7 @@ export function max(out: Vec2, a: Vec2, b: Vec2): Vec2;
 export function round(a: number): number;
 ```
 
-#### vec3.scale
+#### `vec3.scale`
 
 ```ts
 /**
@@ -4397,7 +4605,7 @@ export function round(a: number): number;
 export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 ```
 
-#### vec3.scaleAndAdd
+#### `vec3.scaleAndAdd`
 
 ```ts
 /**
@@ -4412,7 +4620,7 @@ export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 export function scaleAndAdd(out: Vec2, a: Vec2, b: Vec2, scale: number): Vec2;
 ```
 
-#### vec3.distance
+#### `vec3.distance`
 
 ```ts
 /**
@@ -4425,7 +4633,7 @@ export function scaleAndAdd(out: Vec2, a: Vec2, b: Vec2, scale: number): Vec2;
 export function distance(a: Vec2, b: Vec2): number;
 ```
 
-#### vec3.squaredDistance
+#### `vec3.squaredDistance`
 
 ```ts
 /**
@@ -4438,7 +4646,7 @@ export function distance(a: Vec2, b: Vec2): number;
 export function squaredDistance(a: Vec2, b: Vec2): number;
 ```
 
-#### vec3.squaredLength
+#### `vec3.squaredLength`
 
 ```ts
 /**
@@ -4450,7 +4658,7 @@ export function squaredDistance(a: Vec2, b: Vec2): number;
 export function squaredLength(a: Vec2): number;
 ```
 
-#### vec3.negate
+#### `vec3.negate`
 
 ```ts
 /**
@@ -4463,7 +4671,7 @@ export function squaredLength(a: Vec2): number;
 export function negate(out: Vec2, a: Vec2): Vec2;
 ```
 
-#### vec3.inverse
+#### `vec3.inverse`
 
 ```ts
 /**
@@ -4476,7 +4684,7 @@ export function negate(out: Vec2, a: Vec2): Vec2;
 export function inverse(out: Vec2, a: Vec2): Vec2;
 ```
 
-#### vec3.normalize
+#### `vec3.normalize`
 
 ```ts
 /**
@@ -4490,7 +4698,7 @@ export function inverse(out: Vec2, a: Vec2): Vec2;
 export function normalize(out: Quat2, a: Quat2): Quat2;
 ```
 
-#### vec3.dot
+#### `vec3.dot`
 
 ```ts
 /**
@@ -4503,7 +4711,7 @@ export function normalize(out: Quat2, a: Quat2): Quat2;
 export function dot(a: Vec2, b: Vec2): number;
 ```
 
-#### vec3.cross
+#### `vec3.cross`
 
 ```ts
 /**
@@ -4518,7 +4726,7 @@ export function dot(a: Vec2, b: Vec2): number;
 export function cross(out: Vec3, a: Vec2, b: Vec2): Vec3;
 ```
 
-#### vec3.lerp
+#### `vec3.lerp`
 
 ```ts
 /**
@@ -4533,7 +4741,7 @@ export function cross(out: Vec3, a: Vec2, b: Vec2): Vec3;
 export function lerp(v0: number, v1: number, t: number);
 ```
 
-#### vec3.slerp
+#### `vec3.slerp`
 
 ```ts
 /**
@@ -4548,7 +4756,7 @@ export function lerp(v0: number, v1: number, t: number);
 export function slerp(out: Quat, a: Quat, b: Quat, t: number): Quat;
 ```
 
-#### vec3.hermite
+#### `vec3.hermite`
 
 ```ts
 /**
@@ -4565,7 +4773,7 @@ export function slerp(out: Quat, a: Quat, b: Quat, t: number): Quat;
 export function hermite(out: Vec3, a: Vec3, b: Vec3, c: Vec3, d: Vec3, t: number): Vec3;
 ```
 
-#### vec3.bezier
+#### `vec3.bezier`
 
 ```ts
 /**
@@ -4582,7 +4790,7 @@ export function hermite(out: Vec3, a: Vec3, b: Vec3, c: Vec3, d: Vec3, t: number
 export function bezier(out: Vec3, a: Vec3, b: Vec3, c: Vec3, d: Vec3, t: number): Vec3;
 ```
 
-#### vec3.transformMat4
+#### `vec3.transformMat4`
 
 ```ts
 /**
@@ -4598,7 +4806,7 @@ export function bezier(out: Vec3, a: Vec3, b: Vec3, c: Vec3, d: Vec3, t: number)
 export function transformMat4(out: Vec2, a: Vec2, m: Mat4): Vec2;
 ```
 
-#### vec3.transformMat3
+#### `vec3.transformMat3`
 
 ```ts
 /**
@@ -4613,7 +4821,7 @@ export function transformMat4(out: Vec2, a: Vec2, m: Mat4): Vec2;
 export function transformMat3(out: Vec2, a: Vec2, m: Mat3): Vec2;
 ```
 
-#### vec3.transformQuat
+#### `vec3.transformQuat`
 
 ```ts
 /**
@@ -4628,7 +4836,7 @@ export function transformMat3(out: Vec2, a: Vec2, m: Mat3): Vec2;
 export function transformQuat(out: Vec3, a: Vec3, q: Quat): Vec3;
 ```
 
-#### vec3.rotateX
+#### `vec3.rotateX`
 
 ```ts
 /**
@@ -4642,7 +4850,7 @@ export function transformQuat(out: Vec3, a: Vec3, q: Quat): Vec3;
 export function rotateX(out: Mat4, a: Mat4, rad: number): Mat4;
 ```
 
-#### vec3.rotateY
+#### `vec3.rotateY`
 
 ```ts
 /**
@@ -4656,7 +4864,7 @@ export function rotateX(out: Mat4, a: Mat4, rad: number): Mat4;
 export function rotateY(out: Mat4, a: Mat4, rad: number): Mat4;
 ```
 
-#### vec3.rotateZ
+#### `vec3.rotateZ`
 
 ```ts
 /**
@@ -4670,7 +4878,7 @@ export function rotateY(out: Mat4, a: Mat4, rad: number): Mat4;
 export function rotateZ(out: Mat4, a: Mat4, rad: number): Mat4;
 ```
 
-#### vec3.angle
+#### `vec3.angle`
 
 ```ts
 /**
@@ -4682,7 +4890,7 @@ export function rotateZ(out: Mat4, a: Mat4, rad: number): Mat4;
 export function angle(a: Vec2, b: Vec2): number;
 ```
 
-#### vec3.zero
+#### `vec3.zero`
 
 ```ts
 /**
@@ -4694,7 +4902,7 @@ export function angle(a: Vec2, b: Vec2): number;
 export function zero(out: Vec2): Vec2;
 ```
 
-#### vec3.str
+#### `vec3.str`
 
 ```ts
 /**
@@ -4706,7 +4914,7 @@ export function zero(out: Vec2): Vec2;
 export function str(a: Mat2): string;
 ```
 
-#### vec3.exactEquals
+#### `vec3.exactEquals`
 
 ```ts
 /**
@@ -4719,7 +4927,7 @@ export function str(a: Mat2): string;
 export function exactEquals(a: Euler, b: Euler): boolean;
 ```
 
-#### vec3.equals
+#### `vec3.equals`
 
 ```ts
 /**
@@ -4734,7 +4942,7 @@ export function exactEquals(a: Euler, b: Euler): boolean;
 export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 ```
 
-#### vec3.finite
+#### `vec3.finite`
 
 ```ts
 /**
@@ -4747,7 +4955,7 @@ export function finite(a: Vec2): boolean;
 
 ### vec4
 
-#### vec4.create
+#### `vec4.create`
 
 ```ts
 /**
@@ -4757,7 +4965,7 @@ export function finite(a: Vec2): boolean;
 export function create(): Box3;
 ```
 
-#### vec4.clone
+#### `vec4.clone`
 
 ```ts
 /**
@@ -4768,7 +4976,7 @@ export function create(): Box3;
 export function clone(box: Box3): Box3;
 ```
 
-#### vec4.fromValues
+#### `vec4.fromValues`
 
 ```ts
 /**
@@ -4782,7 +4990,7 @@ export function clone(box: Box3): Box3;
 export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
 ```
 
-#### vec4.copy
+#### `vec4.copy`
 
 ```ts
 /**
@@ -4795,7 +5003,7 @@ export function fromValues(x: number, y: number, z: number, order: EulerOrder): 
 export function copy(out: Mat2, a: Mat2): Mat2;
 ```
 
-#### vec4.set
+#### `vec4.set`
 
 ```ts
 /**
@@ -4808,7 +5016,7 @@ export function copy(out: Mat2, a: Mat2): Mat2;
 export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 ```
 
-#### vec4.add
+#### `vec4.add`
 
 ```ts
 /**
@@ -4822,7 +5030,7 @@ export function set(out: Box3, min: Vec3, max: Vec3): Box3;
 export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### vec4.subtract
+#### `vec4.subtract`
 
 ```ts
 /**
@@ -4836,7 +5044,7 @@ export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### vec4.multiply
+#### `vec4.multiply`
 
 ```ts
 /**
@@ -4850,7 +5058,7 @@ export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 ```
 
-#### vec4.divide
+#### `vec4.divide`
 
 ```ts
 /**
@@ -4864,7 +5072,7 @@ export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
 export function divide(out: Vec2, a: Vec2, b: Vec2): Vec2;
 ```
 
-#### vec4.ceil
+#### `vec4.ceil`
 
 ```ts
 /**
@@ -4877,7 +5085,7 @@ export function divide(out: Vec2, a: Vec2, b: Vec2): Vec2;
 export function ceil(out: Vec2, a: Vec2): Vec2;
 ```
 
-#### vec4.floor
+#### `vec4.floor`
 
 ```ts
 /**
@@ -4890,7 +5098,7 @@ export function ceil(out: Vec2, a: Vec2): Vec2;
 export function floor(out: Vec2, a: Vec2): Vec2;
 ```
 
-#### vec4.min
+#### `vec4.min`
 
 ```ts
 /**
@@ -4904,7 +5112,7 @@ export function floor(out: Vec2, a: Vec2): Vec2;
 export function min(out: Vec2, a: Vec2, b: Vec2): Vec2;
 ```
 
-#### vec4.max
+#### `vec4.max`
 
 ```ts
 /**
@@ -4918,7 +5126,7 @@ export function min(out: Vec2, a: Vec2, b: Vec2): Vec2;
 export function max(out: Vec2, a: Vec2, b: Vec2): Vec2;
 ```
 
-#### vec4.round
+#### `vec4.round`
 
 ```ts
 /**
@@ -4930,7 +5138,7 @@ export function max(out: Vec2, a: Vec2, b: Vec2): Vec2;
 export function round(a: number): number;
 ```
 
-#### vec4.scale
+#### `vec4.scale`
 
 ```ts
 /**
@@ -4944,7 +5152,7 @@ export function round(a: number): number;
 export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 ```
 
-#### vec4.scaleAndAdd
+#### `vec4.scaleAndAdd`
 
 ```ts
 /**
@@ -4959,7 +5167,7 @@ export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
 export function scaleAndAdd(out: Vec2, a: Vec2, b: Vec2, scale: number): Vec2;
 ```
 
-#### vec4.distance
+#### `vec4.distance`
 
 ```ts
 /**
@@ -4972,7 +5180,7 @@ export function scaleAndAdd(out: Vec2, a: Vec2, b: Vec2, scale: number): Vec2;
 export function distance(a: Vec2, b: Vec2): number;
 ```
 
-#### vec4.squaredDistance
+#### `vec4.squaredDistance`
 
 ```ts
 /**
@@ -4985,7 +5193,7 @@ export function distance(a: Vec2, b: Vec2): number;
 export function squaredDistance(a: Vec2, b: Vec2): number;
 ```
 
-#### vec4.length
+#### `vec4.length`
 
 ```ts
 /**
@@ -4997,7 +5205,7 @@ export function squaredDistance(a: Vec2, b: Vec2): number;
 export function length(a: Vec2): number;
 ```
 
-#### vec4.squaredLength
+#### `vec4.squaredLength`
 
 ```ts
 /**
@@ -5009,7 +5217,7 @@ export function length(a: Vec2): number;
 export function squaredLength(a: Vec2): number;
 ```
 
-#### vec4.negate
+#### `vec4.negate`
 
 ```ts
 /**
@@ -5022,7 +5230,7 @@ export function squaredLength(a: Vec2): number;
 export function negate(out: Vec2, a: Vec2): Vec2;
 ```
 
-#### vec4.inverse
+#### `vec4.inverse`
 
 ```ts
 /**
@@ -5035,7 +5243,7 @@ export function negate(out: Vec2, a: Vec2): Vec2;
 export function inverse(out: Vec2, a: Vec2): Vec2;
 ```
 
-#### vec4.normalize
+#### `vec4.normalize`
 
 ```ts
 /**
@@ -5049,7 +5257,7 @@ export function inverse(out: Vec2, a: Vec2): Vec2;
 export function normalize(out: Quat2, a: Quat2): Quat2;
 ```
 
-#### vec4.dot
+#### `vec4.dot`
 
 ```ts
 /**
@@ -5062,7 +5270,7 @@ export function normalize(out: Quat2, a: Quat2): Quat2;
 export function dot(a: Vec2, b: Vec2): number;
 ```
 
-#### vec4.cross
+#### `vec4.cross`
 
 ```ts
 /**
@@ -5077,7 +5285,7 @@ export function dot(a: Vec2, b: Vec2): number;
 export function cross(out: Vec3, a: Vec2, b: Vec2): Vec3;
 ```
 
-#### vec4.lerp
+#### `vec4.lerp`
 
 ```ts
 /**
@@ -5092,7 +5300,7 @@ export function cross(out: Vec3, a: Vec2, b: Vec2): Vec3;
 export function lerp(v0: number, v1: number, t: number);
 ```
 
-#### vec4.transformMat4
+#### `vec4.transformMat4`
 
 ```ts
 /**
@@ -5108,7 +5316,7 @@ export function lerp(v0: number, v1: number, t: number);
 export function transformMat4(out: Vec2, a: Vec2, m: Mat4): Vec2;
 ```
 
-#### vec4.transformQuat
+#### `vec4.transformQuat`
 
 ```ts
 /**
@@ -5123,7 +5331,7 @@ export function transformMat4(out: Vec2, a: Vec2, m: Mat4): Vec2;
 export function transformQuat(out: Vec3, a: Vec3, q: Quat): Vec3;
 ```
 
-#### vec4.zero
+#### `vec4.zero`
 
 ```ts
 /**
@@ -5135,7 +5343,7 @@ export function transformQuat(out: Vec3, a: Vec3, q: Quat): Vec3;
 export function zero(out: Vec2): Vec2;
 ```
 
-#### vec4.str
+#### `vec4.str`
 
 ```ts
 /**
@@ -5147,7 +5355,7 @@ export function zero(out: Vec2): Vec2;
 export function str(a: Mat2): string;
 ```
 
-#### vec4.exactEquals
+#### `vec4.exactEquals`
 
 ```ts
 /**
@@ -5160,7 +5368,7 @@ export function str(a: Mat2): string;
 export function exactEquals(a: Euler, b: Euler): boolean;
 ```
 
-#### vec4.equals
+#### `vec4.equals`
 
 ```ts
 /**
@@ -5175,7 +5383,7 @@ export function exactEquals(a: Euler, b: Euler): boolean;
 export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 ```
 
-#### vec4.finite
+#### `vec4.finite`
 
 ```ts
 /**
