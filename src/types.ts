@@ -40,16 +40,20 @@ export type Triangle2 = [a: Vec2, b: Vec2, c: Vec2];
 
 /**
  * Represents a plane in 3D space
- * @param {Vector3} [normal=(1,0,0)] - A unit length vector defining the normal of the plane.
- * @param {number} [constant=0] - The signed distance from the origin to the plane.
+ * normal - a unit length vector defining the normal of the plane.
+ * constant - the signed distance from the origin to the plane.
  */
-export type Plane3 = [normal: Vec3, constant: number];
+export type Plane3 = { normal: Vec3; constant: number };
 
 /**
  * Represents a sphere in 3D space
- * center: Vec3, radius: number
  */
-export type Sphere = [center: Vec3, radius: number];
+export type Sphere = { center: Vec3; radius: number };
+
+/**
+ * Represents a circle in 2D space
+ */
+export type Circle = { center: Vec2; radius: number };
 
 export type MutableArrayLike<T> = {
     [index: number]: T;

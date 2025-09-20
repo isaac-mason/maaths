@@ -251,8 +251,7 @@ export function intersectsTriangle3(box: Box3, triangle: Triangle3): boolean {
 export function intersectsSphere(box: Box3, sphere: Sphere): boolean {
     const min = box[0];
     const max = box[1];
-    const center = sphere[0];
-    const radius = sphere[1];
+    const { center, radius } = sphere;
     // Clamp center to box to obtain closest point
     _closestPoint[0] = center[0] < min[0] ? min[0] : center[0] > max[0] ? max[0] : center[0];
     _closestPoint[1] = center[1] < min[1] ? min[1] : center[1] > max[1] ? max[1] : center[1];
@@ -269,8 +268,7 @@ export function intersectsSphere(box: Box3, sphere: Sphere): boolean {
 export function intersectsPlane3(box: Box3, plane: Plane3): boolean {
     const min = box[0];
     const max = box[1];
-    const normal = plane[0];
-    const constant = plane[1];
+    const { normal, constant } = plane;
 
     // Select extreme points along plane normal
     let minDot = 0;

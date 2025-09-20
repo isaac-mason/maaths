@@ -5,5 +5,5 @@ import type { Sphere } from "./types";
  * @returns A new sphere.
  */
 export function create(): Sphere {
-  return [[0, 0, 0], 1];
+  return { center: [0, 0, 0], radius: 1 };
 }

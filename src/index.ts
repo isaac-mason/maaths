@@ -11,6 +11,8 @@ export * as quat from './quat';
 export * as quat2 from './quat2';
 export * from './random';
 export * as sphere from './sphere';
+export * as circle from './circle';
+export * as triangle2 from './triangle2';
 export * as triangle3 from './triangle3';
 export * from './types';
 export * as vec2 from './vec2';
