@@ -714,10 +714,10 @@ describe('box3', () => {
                 [0, 0, 0],
                 [2, 2, 2],
             ];
-            const sphere: Sphere = [
-                [1, 1, 1], // center
-                0.5, // radius
-            ];
+            const sphere: Sphere = {
+                center: [1, 1, 1], // center
+                radius: 0.5, // radius
+            };
 
             expect(box3.intersectsSphere(box, sphere)).toBe(true);
         });
@@ -727,10 +727,10 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const sphere: Sphere = [
-                [2, 2, 2], // center outside
-                2, // large enough radius to reach corner
-            ];
+            const sphere: Sphere = {
+                center: [2, 2, 2], // center outside
+                radius: 2, // large enough radius to reach corner
+            };
 
             expect(box3.intersectsSphere(box, sphere)).toBe(true);
         });
@@ -740,10 +740,10 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const sphere: Sphere = [
-                [2, 0.5, 0.5], // center outside on X face
-                1.5, // radius reaches the face
-            ];
+            const sphere: Sphere = {
+                center: [2, 0.5, 0.5], // center outside on X face
+                radius: 1.5, // radius reaches the face
+            };
 
             expect(box3.intersectsSphere(box, sphere)).toBe(true);
         });
@@ -753,10 +753,10 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const sphere: Sphere = [
-                [2, 2, 0.5], // center outside on edge
-                1.5, // radius reaches the edge
-            ];
+            const sphere: Sphere = {
+                center: [2, 2, 0.5], // center outside on edge
+                radius: 1.5, // radius reaches the edge
+            };
 
             expect(box3.intersectsSphere(box, sphere)).toBe(true);
         });
@@ -766,10 +766,10 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const sphere: Sphere = [
-                [3, 3, 3], // center far away
-                0.5, // small radius
-            ];
+            const sphere: Sphere = {
+                center: [3, 3, 3], // center far away
+                radius: 0.5, // small radius
+            };
 
             expect(box3.intersectsSphere(box, sphere)).toBe(false);
         });
@@ -779,10 +779,10 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const sphere: Sphere = [
-                [2, 2, 2], // center at (2,2,2)
-                Math.sqrt(3) + 0.001, // radius slightly larger to account for floating point precision
-            ];
+            const sphere: Sphere = {
+                center: [2, 2, 2], // center at (2,2,2)
+                radius: Math.sqrt(3) + 0.001, // radius slightly larger to account for floating point precision
+            };
 
             expect(box3.intersectsSphere(box, sphere)).toBe(true);
         });
@@ -792,10 +792,10 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const sphere: Sphere = [
-                [2, 2, 2], // center at (2,2,2)
-                Math.sqrt(3) - 0.01, // radius slightly less than distance to corner
-            ];
+            const sphere: Sphere = {
+                center: [2, 2, 2], // center at (2,2,2)
+                radius: Math.sqrt(3) - 0.01, // radius slightly less than distance to corner
+            };
 
             expect(box3.intersectsSphere(box, sphere)).toBe(false);
         });
@@ -805,10 +805,10 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const sphere: Sphere = [
-                [0.5, 0.5, 0.5], // center inside
-                0, // zero radius (point)
-            ];
+            const sphere: Sphere = {
+                center: [0.5, 0.5, 0.5], // center inside
+                radius: 0, // zero radius (point)
+            };
 
             expect(box3.intersectsSphere(box, sphere)).toBe(true);
         });
@@ -820,11 +820,11 @@ describe('box3', () => {
                 [0, 0, 0],
                 [2, 2, 2],
             ];
-            const plane: Plane3 = [
-                [1, 0, 0], // normal pointing along X axis
-                -1, // plane at x = 1 (normal.dot(point) + constant = 0)
-            ];
-            
+            const plane: Plane3 = {
+                normal: [1, 0, 0], // normal pointing along X axis
+                constant: -1, // plane at x = 1 (normal.dot(point) + constant = 0)
+            };
+
             expect(box3.intersectsPlane3(box, plane)).toBe(true);
         });
         
@@ -833,11 +833,11 @@ describe('box3', () => {
                 [1, 1, 1],
                 [2, 2, 2],
             ];
-            const plane: Plane3 = [
-                [1, 0, 0], // normal pointing along X axis
-                0.5, // plane at x = -0.5 (all box points have x >= 1)
-            ];
-            
+            const plane: Plane3 = {
+                normal: [1, 0, 0], // normal pointing along X axis
+                constant: 0.5, // plane at x = -0.5 (all box points have x >= 1)
+            };
+
             expect(box3.intersectsPlane3(box, plane)).toBe(false);
         });
         
@@ -846,11 +846,11 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const plane: Plane3 = [
-                [1, 0, 0], // normal pointing along X axis
-                -2, // plane at x = 2 (all box points have x <= 1)
-            ];
-            
+            const plane: Plane3 = {
+                normal: [1, 0, 0], // normal pointing along X axis
+                constant: -2, // plane at x = 2 (all box points have x <= 1)
+            };
+
             expect(box3.intersectsPlane3(box, plane)).toBe(false);
         });
         
@@ -859,11 +859,11 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const plane: Plane3 = [
-                [1, 1, 1], // diagonal normal
-                -Math.sqrt(3), // plane touching corner (1,1,1)
-            ];
-            
+            const plane: Plane3 = {
+                normal: [1, 1, 1], // diagonal normal
+                constant: -Math.sqrt(3), // plane touching corner (1,1,1)
+            };
+
             expect(box3.intersectsPlane3(box, plane)).toBe(true);
         });
         
@@ -872,11 +872,11 @@ describe('box3', () => {
                 [0, 0, 0],
                 [2, 2, 2],
             ];
-            const plane: Plane3 = [
-                [-1, -1, 0], // negative normal components
-                1, // plane equation: -x - y + 1 = 0 => y = -x + 1
-            ];
-            
+            const plane: Plane3 = {
+                normal: [-1, -1, 0], // negative normal components
+                constant: 1, // plane equation: -x - y + 1 = 0 => y = -x + 1
+            };
+
             expect(box3.intersectsPlane3(box, plane)).toBe(true);
         });
         
@@ -885,11 +885,11 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const plane: Plane3 = [
-                [0, 1, 0], // normal along Y axis
-                -0.5, // plane at y = 0.5 (middle of box)
-            ];
-            
+            const plane: Plane3 = {
+                normal: [0, 1, 0], // normal along Y axis
+                constant: -0.5, // plane at y = 0.5 (middle of box)
+            };
+
             expect(box3.intersectsPlane3(box, plane)).toBe(true);
         });
         
@@ -898,11 +898,11 @@ describe('box3', () => {
                 [-1, -1, -1],
                 [1, 1, 1],
             ];
-            const plane: Plane3 = [
-                [1, 2, 3], // arbitrary normal
-                0, // plane passes through origin
-            ];
-            
+            const plane: Plane3 = {
+                normal: [1, 2, 3], // arbitrary normal
+                constant: 0, // plane passes through origin
+            };
+
             expect(box3.intersectsPlane3(box, plane)).toBe(true);
         });
         
@@ -911,11 +911,11 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const plane: Plane3 = [
-                [1, 0, 0], // normal along X axis
-                -1.1, // plane at x = 1.1 (just beyond box)
-            ];
-            
+            const plane: Plane3 = {
+                normal: [1, 0, 0], // normal along X axis
+                constant: -1.1, // plane at x = 1.1 (just beyond box)
+            };
+
             expect(box3.intersectsPlane3(box, plane)).toBe(false);
         });
     });
