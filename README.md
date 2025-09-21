@@ -317,6 +317,11 @@ The goals of this library are to:
     - [`randomQuat`](#randomquat)
   - [sphere](#sphere)
     - [`sphere.create`](#spherecreate)
+  - [circle](#circle)
+    - [`circle.create`](#circlecreate)
+  - [triangle2](#triangle2)
+    - [`triangle2.create`](#triangle2create)
+    - [`triangle2.circumcircle`](#triangle2circumcircle)
   - [triangle3](#triangle3)
     - [`triangle3.create`](#triangle3create)
   - [types](#types)
@@ -4121,6 +4126,44 @@ export function randomQuat(out: Quat = [0, 0, 0, 0], randomFn: () => number = Ma
  * @returns A new Box3
  */
 export function create(): Box3;
+```
+
+### circle
+
+#### `circle.create`
+
+```ts
+/**
+ * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
+ * @returns A new Box3
+ */
+export function create(): Box3;
+```
+
+### triangle2
+
+#### `triangle2.create`
+
+```ts
+/**
+ * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
+ * @returns A new Box3
+ */
+export function create(): Box3;
+```
+
+#### `triangle2.circumcircle`
+
+```ts
+/**
+ * Calculates the circumcircle of three points and stores the center in the output parameter.
+ * @param p1 First point
+ * @param p2 Second point
+ * @param p3 Third point
+ * @param c Output parameter for the circumcircle center
+ * @returns The radius of the circumcircle, or 0 if the points are collinear
+ */
+export function circumcircle(outCircle: Circle, triangle: Triangle2): Circle;
 ```
 
 ### triangle3
