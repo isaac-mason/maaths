@@ -22,7 +22,7 @@ const _circumcircleV3 = vec2.create();
  * @param c Output parameter for the circumcircle center
  * @returns The radius of the circumcircle, or 0 if the points are collinear
  */
-export const circumcircle = (outCircle: Circle, triangle: Triangle2): Circle => {
+export function circumcircle(outCircle: Circle, triangle: Triangle2): Circle {
     const [p1, p2, p3] = triangle;
 
     // calculate the circle relative to p1, to avoid some precision issues.
