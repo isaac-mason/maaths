@@ -94,6 +94,15 @@ function generateApiDocs() {
                 }
             }
 
+            if (
+                (ts.isTypeAliasDeclaration(node) || ts.isInterfaceDeclaration(node) || ts.isClassDeclaration(node)) &&
+                node.name &&
+                node.modifiers &&
+                node.modifiers.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)
+            ) {
+                exported.push(node.name.text);
+            }
+
             ts.forEachChild(node, visit);
         }
         visit(sf);

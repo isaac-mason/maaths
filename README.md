@@ -26,6 +26,30 @@ The goals of this library are to:
 
 - [API Documentation](#api-documentation)
   - [types](#types)
+    - [`Vec2`](#vec2)
+    - [`Vec3`](#vec3)
+    - [`Vec4`](#vec4)
+    - [`Quat`](#quat)
+    - [`Quat2`](#quat2)
+    - [`Mat2`](#mat2)
+    - [`Mat3`](#mat3)
+    - [`Mat4`](#mat4)
+    - [`Mat2d`](#mat2d)
+    - [`Box3`](#box3)
+    - [`EulerOrder`](#eulerorder)
+    - [`Euler`](#euler)
+    - [`Triangle3`](#triangle3)
+    - [`Poly3`](#poly3)
+    - [`Segment3`](#segment3)
+    - [`Ray3`](#ray3)
+    - [`Triangle2`](#triangle2)
+    - [`Poly2`](#poly2)
+    - [`Segment2`](#segment2)
+    - [`Ray2`](#ray2)
+    - [`Plane3`](#plane3)
+    - [`Sphere`](#sphere)
+    - [`Circle`](#circle)
+    - [`MutableArrayLike`](#mutablearraylike)
   - [vec2](#vec2)
     - [`vec2.create`](#vec2create)
     - [`vec2.clone`](#vec2clone)
@@ -442,6 +466,8 @@ The goals of this library are to:
     - [`easing.expoInOut`](#easingexpoinout)
     - [`easing.rsqw`](#easingrsqw)
   - [noise](#noise)
+    - [`NoiseGenerator2D`](#noisegenerator2d)
+    - [`NoiseGenerator3D`](#noisegenerator3d)
     - [`createSimplex2D`](#createsimplex2d)
     - [`createSimplex3D`](#createsimplex3d)
     - [`createPerlin2D`](#createperlin2d)
@@ -474,6 +500,282 @@ The goals of this library are to:
 ## API Documentation
 
 ### types
+
+#### `Vec2`
+
+```ts
+/** A 2D vector */
+export type Vec2 = [
+    x: number,
+    y: number
+];
+```
+
+#### `Vec3`
+
+```ts
+/** A 3D vector */
+export type Vec3 = [
+    x: number,
+    y: number,
+    z: number
+];
+```
+
+#### `Vec4`
+
+```ts
+/** A 4D vector */
+export type Vec4 = [
+    x: number,
+    y: number,
+    z: number,
+    w: number
+];
+```
+
+#### `Quat`
+
+```ts
+/** A quaternion that represents rotation */
+export type Quat = [
+    x: number,
+    y: number,
+    z: number,
+    w: number
+];
+```
+
+#### `Quat2`
+
+```ts
+/** A dual quaternion that represents both rotation and translation */
+export type Quat2 = [
+    x: number,
+    y: number,
+    z: number,
+    w: number,
+    x2: number,
+    y2: number,
+    z2: number,
+    w2: number
+];
+```
+
+#### `Mat2`
+
+```ts
+/** A 2x2 matrix */
+export type Mat2 = [
+    e1: number,
+    e2: number,
+    e3: number,
+    e4: number
+];
+```
+
+#### `Mat3`
+
+```ts
+/** A 3x3 matrix */
+export type Mat3 = [
+    e1: number,
+    e2: number,
+    e3: number,
+    e4: number,
+    e5: number,
+    e6: number,
+    e7: number,
+    e8: number,
+    e9: number
+];
+```
+
+#### `Mat4`
+
+```ts
+/** A 4x4 matrix */
+export type Mat4 = [
+    e1: number,
+    e2: number,
+    e3: number,
+    e4: number,
+    e5: number,
+    e6: number,
+    e7: number,
+    e8: number,
+    e9: number,
+    e10: number,
+    e11: number,
+    e12: number,
+    e13: number,
+    e14: number,
+    e15: number,
+    e16: number
+];
+```
+
+#### `Mat2d`
+
+```ts
+/** A 2D affine transform matrix */
+export type Mat2d = [
+    e1: number,
+    e2: number,
+    e3: number,
+    e4: number,
+    e5: number,
+    e6: number
+];
+```
+
+#### `Box3`
+
+```ts
+/** A box in 3D space */
+export type Box3 = [
+    min: Vec3,
+    max: Vec3
+];
+```
+
+#### `EulerOrder`
+
+```ts
+/** Euler orders */
+export type EulerOrder = 'xyz' | 'xzy' | 'yxz' | 'yzx' | 'zxy' | 'zyx';
+```
+
+#### `Euler`
+
+```ts
+/** A Euler in 3D space, with an optional order (default is 'xyz') */
+export type Euler = [
+    x: number,
+    y: number,
+    z: number,
+    order?: EulerOrder
+];
+```
+
+#### `Triangle3`
+
+```ts
+/** A triangle in 3D space */
+export type Triangle3 = [
+    a: Vec3,
+    b: Vec3,
+    c: Vec3
+];
+```
+
+#### `Poly3`
+
+```ts
+/** A polygon in 3D space */
+export type Poly3 = Vec3[];
+```
+
+#### `Segment3`
+
+```ts
+/** A line segment in 3D space */
+export type Segment3 = [
+    start: Vec3,
+    end: Vec3
+];
+```
+
+#### `Ray3`
+
+```ts
+/** A ray in 3D space */
+export type Ray3 = {
+    origin: Vec3;
+    direction: Vec3;
+};
+```
+
+#### `Triangle2`
+
+```ts
+/** A triangle in 2D space */
+export type Triangle2 = [
+    a: Vec2,
+    b: Vec2,
+    c: Vec2
+];
+```
+
+#### `Poly2`
+
+```ts
+/** A polygon in 2D space */
+export type Poly2 = Vec2[];
+```
+
+#### `Segment2`
+
+```ts
+/** A line segment in 2D space */
+export type Segment2 = [
+    start: Vec2,
+    end: Vec2
+];
+```
+
+#### `Ray2`
+
+```ts
+/** A ray in 2D space */
+export type Ray2 = {
+    origin: Vec2;
+    direction: Vec2;
+};
+```
+
+#### `Plane3`
+
+```ts
+/**
+ * A plane in 3D space
+ * normal - a unit length vector defining the normal of the plane.
+ * constant - the signed distance from the origin to the plane.
+ */
+export type Plane3 = {
+    normal: Vec3;
+    constant: number;
+};
+```
+
+#### `Sphere`
+
+```ts
+/** A sphere in 3D space */
+export type Sphere = {
+    center: Vec3;
+    radius: number;
+};
+```
+
+#### `Circle`
+
+```ts
+/** A circle in 2D space */
+export type Circle = {
+    center: Vec2;
+    radius: number;
+};
+```
+
+#### `MutableArrayLike`
+
+```ts
+export type MutableArrayLike<T> = {
+    [index: number]: T;
+    length: number;
+};
+```
 
 ### vec2
 
@@ -5669,6 +5971,44 @@ export function rsqw(t: number, delta = 0.01, a = 1, f = 1 / (2 * Math.PI));
 ```
 
 ### noise
+
+#### `NoiseGenerator2D`
+
+```ts
+/**
+ * adapted from maath:
+ *
+ * https://github.com/pmndrs/maath/blob/main/packages/maath/src/random/noise.ts
+ *
+ * credits from maath:
+ *
+ * ```
+ * Adapated from https://github.com/josephg/noisejs
+ * ```
+ *
+ * ```
+ * A speed-improved perlin and simplex noise algorithms for 2D.
+ *
+ * Based on example code by Stefan Gustavson (stegu@itn.liu.se).
+ * Optimisations by Peter Eastman (peastman@drizzle.stanford.edu).
+ * Better rank ordering method by Stefan Gustavson in 2012.
+ * Converted to Javascript by Joseph Gentle.
+ *
+ * Version 2012-03-09
+ *
+ * This code was placed in the public domain by its original author,
+ * Stefan Gustavson. You may use it as you see fit, but
+ * attribution is appreciated.
+ * ```
+ */
+export type NoiseGenerator2D = (x: number, y: number) => number;
+```
+
+#### `NoiseGenerator3D`
+
+```ts
+export type NoiseGenerator3D = (x: number, y: number, z: number) => number;
+```
 
 #### `createSimplex2D`
 
