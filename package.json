@@ -7,6 +7,15 @@
     "license": "MIT",
     "type": "module",
     "main": "dist/index.js",
+    "files": [
+        "dist",
+        "LICENSE",
+        "README.md"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/isaac-mason/maaths.git"
+    },
     "scripts": {
         "build": "rm -rf ./dist && rollup --config rollup.config.mjs",
         "format": "biome format --write src/. tst/.",
