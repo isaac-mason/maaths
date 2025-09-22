@@ -17,7 +17,9 @@ export function create(): Segment2 {
  * @param p First endpoint of the segment
  * @param q Second endpoint of the segment
  */
-export function closestPoint(out: Vec2, point: Vec2, p: Vec2, q: Vec2): Vec2 {
+export function closestPoint(out: Vec2, point: Vec2, segment: Segment2): Vec2 {
+    const [p, q] = segment;
+
     const pqx = q[0] - p[0];
     const pqz = q[1] - p[1];
     const dx = point[0] - p[0];

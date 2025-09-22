@@ -5352,7 +5352,7 @@ export function create(): Box3;
  * @param p First endpoint of the segment
  * @param q Second endpoint of the segment
  */
-export function closestPoint(out: Vec2, point: Vec2, p: Vec2, q: Vec2): Vec2;
+export function closestPoint(out: Vec2, point: Vec2, segment: Segment2): Vec2;
 ```
 
 ### triangle2
