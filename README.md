@@ -39,13 +39,9 @@ The goals of this library are to:
     - [`EulerOrder`](#eulerorder)
     - [`Euler`](#euler)
     - [`Triangle3`](#triangle3)
-    - [`Poly3`](#poly3)
     - [`Segment3`](#segment3)
-    - [`Ray3`](#ray3)
     - [`Triangle2`](#triangle2)
-    - [`Poly2`](#poly2)
     - [`Segment2`](#segment2)
-    - [`Ray2`](#ray2)
     - [`Plane3`](#plane3)
     - [`Sphere`](#sphere)
     - [`Circle`](#circle)
@@ -669,13 +665,6 @@ export type Triangle3 = [
 ];
 ```
 
-#### `Poly3`
-
-```ts
-/** A polygon in 3D space */
-export type Poly3 = Vec3[];
-```
-
 #### `Segment3`
 
 ```ts
@@ -684,16 +673,6 @@ export type Segment3 = [
     start: Vec3,
     end: Vec3
 ];
-```
-
-#### `Ray3`
-
-```ts
-/** A ray in 3D space */
-export type Ray3 = {
-    origin: Vec3;
-    direction: Vec3;
-};
 ```
 
 #### `Triangle2`
@@ -707,13 +686,6 @@ export type Triangle2 = [
 ];
 ```
 
-#### `Poly2`
-
-```ts
-/** A polygon in 2D space */
-export type Poly2 = Vec2[];
-```
-
 #### `Segment2`
 
 ```ts
@@ -722,16 +694,6 @@ export type Segment2 = [
     start: Vec2,
     end: Vec2
 ];
-```
-
-#### `Ray2`
-
-```ts
-/** A ray in 2D space */
-export type Ray2 = {
-    origin: Vec2;
-    direction: Vec2;
-};
 ```
 
 #### `Plane3`
