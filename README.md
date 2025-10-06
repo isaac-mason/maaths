@@ -1,26 +1,22 @@
-# maaths
+![cover](./docs/cover.png)
 
 ```sh
 > npm install maaths
 ```
 
+# maaths
+
 maaths is a collection of math helpers for 3D graphics and simulations.
 
-## Overview
+**Features:**
 
-This library is an amalgamation of:
-- A typescript fork of [glMatrix](https://glmatrix.net/)
-- Noise functions
+- Vector, Quaternion, Euler, and Matrix math
 - Easing functions
 - Randomness utilities
-- ... other math-related helpers to come :)
-
-Basically, this aims to become a "kitchen sink" library for math that is useful for graphics and simulations.
-
-The goals of this library are to:
-- Use simple json-serializable objects as data structures, no classes or typed arrays
-- Have excellent tree shaking support by avoiding import coupling, avoiding classes with non-tree-shakable methods
-- Be typescript-first, and therefore offer a great dx for both javascript and typescript projects
+- Noise utilities
+- Simple JSON-serializable data structures (no classes or typed arrays)
+- TypeScript-first, great DX for both JavaScript and TypeScript projects
+- Excellent tree-shaking support
 
 ## Table Of Contents
 
