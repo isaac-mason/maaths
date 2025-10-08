@@ -32,6 +32,7 @@ maaths is a collection of math helpers for 3D graphics and simulations.
     - [`Mat4`](#mat4)
     - [`Mat2d`](#mat2d)
     - [`Box3`](#box3)
+    - [`OBB3`](#obb3)
     - [`EulerOrder`](#eulerorder)
     - [`Euler`](#euler)
     - [`Triangle3`](#triangle3)
@@ -431,10 +432,23 @@ maaths is a collection of math helpers for 3D graphics and simulations.
     - [`box3.intersectsSphere`](#box3intersectssphere)
     - [`box3.intersectsPlane3`](#box3intersectsplane3)
     - [`box3.intersectsRay`](#box3intersectsray)
+  - [obb3](#obb3)
+    - [`obb3.create`](#obb3create)
+    - [`obb3.clone`](#obb3clone)
+    - [`obb3.copy`](#obb3copy)
+    - [`obb3.set`](#obb3set)
+    - [`obb3.setFromBox3`](#obb3setfrombox3)
+    - [`obb3.containsPoint`](#obb3containspoint)
+    - [`obb3.clampPoint`](#obb3clamppoint)
+    - [`obb3.intersectsOBB3`](#obb3intersectsobb3)
+    - [`obb3.intersectsBox3`](#obb3intersectsbox3)
+    - [`obb3.applyMatrix4`](#obb3applymatrix4)
   - [sphere](#sphere)
     - [`sphere.create`](#spherecreate)
   - [triangle3](#triangle3)
     - [`triangle3.create`](#triangle3create)
+  - [quickhull3](#quickhull3)
+    - [`quickhull3.fromPoints`](#quickhull3frompoints)
   - [easing](#easing)
     - [`easing.exp`](#easingexp)
     - [`easing.linear`](#easinglinear)
@@ -629,6 +643,17 @@ export type Box3 = [
     min: Vec3,
     max: Vec3
 ];
+```
+
+#### `OBB3`
+
+```ts
+/** A oriented bounding box in 3D space */
+export type OBB3 = {
+    center: Vec3;
+    halfExtents: Vec3;
+    quaternion: Quat;
+};
 ```
 
 #### `EulerOrder`
@@ -5776,6 +5801,139 @@ export function intersectsPlane3(box: Box3, plane: Plane3): boolean;
 export function intersectsRay(box: Box3, start: Vec3, end: Vec3): boolean;
 ```
 
+### obb3
+
+#### `obb3.create`
+
+```ts
+/**
+ * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
+ * @returns A new Box3
+ */
+export function create(): Box3;
+```
+
+#### `obb3.clone`
+
+```ts
+/**
+ * Clones a Box3
+ * @param box - A Box3 to clone
+ * @returns a clone of box
+ */
+export function clone(box: Box3): Box3;
+```
+
+#### `obb3.copy`
+
+```ts
+/**
+ * Copy the values from one mat2 to another
+ *
+ * @param out the receiving matrix
+ * @param a the source matrix
+ * @returns out
+ */
+export function copy(out: Mat2, a: Mat2): Mat2;
+```
+
+#### `obb3.set`
+
+```ts
+/**
+ * Sets the min and max values of a Box3
+ * @param out - The output Box3
+ * @param min - The minimum corner
+ * @param max - The maximum corner
+ * @returns The updated Box3
+ */
+export function set(out: Box3, min: Vec3, max: Vec3): Box3;
+```
+
+#### `obb3.setFromBox3`
+
+```ts
+/**
+ * Creates an OBB from an axis-aligned bounding box (AABB).
+ * The resulting OBB will have the same center and extents as the AABB,
+ * with no rotation (identity orientation).
+ *
+ * @param out - The OBB to store the result
+ * @param aabb - The AABB (min and max corners)
+ * @returns out
+ */
+export function setFromBox3(out: OBB3, aabb: Box3): OBB3;
+```
+
+#### `obb3.containsPoint`
+
+```ts
+/**
+ * Test if a point is contained within the bounding box
+ * @param box - The bounding box
+ * @param point - The point to test
+ * @returns true if the point is inside or on the boundary of the box
+ */
+export function containsPoint(box: Box3, point: Vec3): boolean;
+```
+
+#### `obb3.clampPoint`
+
+```ts
+/**
+ * Clamps a point to the surface or interior of an OBB.
+ * Reference: Closest Point on OBB to Point in Real-Time Collision Detection
+ * by Christer Ericson (chapter 5.1.4)
+ *
+ * @param out - The clamped point result
+ * @param obb - The OBB
+ * @param point - The point to clamp
+ * @returns out
+ */
+export function clampPoint(out: Vec3, obb: OBB3, point: Vec3): Vec3;
+```
+
+#### `obb3.intersectsOBB3`
+
+```ts
+/**
+ * Tests whether an OBB intersects with another OBB using the Separating Axis Theorem.
+ * Reference: OBB-OBB Intersection in Real-Time Collision Detection
+ * by Christer Ericson (chapter 4.4.1)
+ *
+ * @param a - The first OBB
+ * @param b - The second OBB
+ * @param epsilon - Small value to prevent arithmetic errors when edges are parallel
+ * @returns true if the OBBs intersect
+ */
+export function intersectsOBB3(a: OBB3, b: OBB3, epsilon = Number.EPSILON): boolean;
+```
+
+#### `obb3.intersectsBox3`
+
+```ts
+/**
+ * Check whether two bounding boxes intersect
+ */
+export function intersectsBox3(boxA: Box3, boxB: Box3): boolean;
+```
+
+#### `obb3.applyMatrix4`
+
+```ts
+/**
+ * Applies a 4x4 transformation matrix to an OBB.
+ * This can be used to transform the bounding volume with the world matrix
+ * of a 3D object to keep both entities in sync.
+ *
+ * @param out - The transformed OBB
+ * @param obb - The OBB to transform
+ * @param matrix - The 4x4 transformation matrix
+ * @returns out
+ */
+export function applyMatrix4(out: OBB3, obb: OBB3, matrix: Mat4): OBB3;
+```
+
 ### sphere
 
 #### `sphere.create`
@@ -5798,6 +5956,19 @@ export function create(): Box3;
  * @returns A new Box3
  */
 export function create(): Box3;
+```
+
+### quickhull3
+
+#### `quickhull3.fromPoints`
+
+```ts
+/**
+ * Computes the convex hull of a set of 3D points using the QuickHull algorithm.
+ * @param points An array of numbers representing the 3D points (x1, y1, z1, x2, y2, z2, ...)
+ * @returns An array of indices representing the triangles of the convex hull (i1, j1, k1, i2, j2, k2, ...).
+ */
+export function fromPoints(points: number[]): number[];
 ```
 
 ### easing
