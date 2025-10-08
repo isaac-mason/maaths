@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { hull3 } from '../dist';
+import { quickhull3 } from '../dist';
 
 const EPS = 1e-6;
 
@@ -72,10 +72,10 @@ function isConvexHull(points: number[], faces: number[]): boolean {
 describe('hull3', () => {
     describe('fromPoints', () => {
         it('should return empty array for less than 4 points', () => {
-            expect(hull3.fromPoints([])).toEqual([]);
-            expect(hull3.fromPoints([0, 0, 0])).toEqual([]);
-            expect(hull3.fromPoints([0, 0, 0, 1, 0, 0])).toEqual([]);
-            expect(hull3.fromPoints([0, 0, 0, 1, 0, 0, 0, 1, 0])).toEqual([]);
+            expect(quickhull3.fromPoints([])).toEqual([]);
+            expect(quickhull3.fromPoints([0, 0, 0])).toEqual([]);
+            expect(quickhull3.fromPoints([0, 0, 0, 1, 0, 0])).toEqual([]);
+            expect(quickhull3.fromPoints([0, 0, 0, 1, 0, 0, 0, 1, 0])).toEqual([]);
         });
 
         it('case: tetrahedron', () => {
@@ -86,7 +86,7 @@ describe('hull3', () => {
                 [0, -1, -1],
             ]);
 
-            const result = hull3.fromPoints(points);
+            const result = quickhull3.fromPoints(points);
 
             expect(result.length).toBe(12);
             expect(isConvexHull(points, result)).toBe(true);
@@ -110,7 +110,7 @@ describe('hull3', () => {
                 [1, 1, 1],
             ]);
 
-            const result = hull3.fromPoints(points);
+            const result = quickhull3.fromPoints(points);
 
             expect(result.length).toBe(36); // 12 triangles
             expect(isConvexHull(points, result)).toBe(true);
@@ -136,7 +136,7 @@ describe('hull3', () => {
                 points.push(x, y, z);
             }
 
-            const result = hull3.fromPoints(points);
+            const result = quickhull3.fromPoints(points);
 
             // Should still be 12 triangles (interior points don't affect hull)
             expect(result.length).toBe(36);
@@ -159,7 +159,7 @@ describe('hull3', () => {
                 [0, 0, -1],
             ]);
 
-            const result = hull3.fromPoints(points);
+            const result = quickhull3.fromPoints(points);
 
             expect(result.length).toBe(24); // 8 triangles
             expect(isConvexHull(points, result)).toBe(true);
@@ -176,7 +176,7 @@ describe('hull3', () => {
                 [90, 187, 43],
             ]);
 
-            const result = hull3.fromPoints(points);
+            const result = quickhull3.fromPoints(points);
 
             expect(result.length).toBeGreaterThan(0);
             expect(isConvexHull(points, result)).toBe(true);
@@ -196,7 +196,7 @@ describe('hull3', () => {
                 [64.9183395318687, 52.24619274958968, -61.14645302295685],
             ]);
 
-            const result = hull3.fromPoints(points);
+            const result = quickhull3.fromPoints(points);
 
             expect(result.length).toBeGreaterThan(0);
             expect(isConvexHull(points, result)).toBe(true);
@@ -210,7 +210,7 @@ describe('hull3', () => {
                 [0, 0.5, 0],
             ]);
 
-            const result = hull3.fromPoints(points);
+            const result = quickhull3.fromPoints(points);
 
             expect(result.length).toBe(12); // 4 faces
             expect(isConvexHull(points, result)).toBe(true);
@@ -227,7 +227,7 @@ describe('hull3', () => {
                 [0, -3, 0],
             ]);
 
-            const result = hull3.fromPoints(points);
+            const result = quickhull3.fromPoints(points);
 
             expect(result.length).toBeGreaterThan(0);
             expect(result.length % 3).toBe(0);
@@ -244,7 +244,7 @@ describe('hull3', () => {
                 [1, 0, 0], // duplicate
             ]);
 
-            const result = hull3.fromPoints(points);
+            const result = quickhull3.fromPoints(points);
 
             expect(result.length).toBe(12); // 4 faces (tetrahedron)
             expect(isConvexHull(points, result)).toBe(true);
@@ -259,7 +259,7 @@ describe('hull3', () => {
                 [10, 10, 0],
             ]);
 
-            const result = hull3.fromPoints(points);
+            const result = quickhull3.fromPoints(points);
 
             // All points in same plane - no 3D hull
             expect(result).toEqual([]);
@@ -273,7 +273,7 @@ describe('hull3', () => {
                 [3, 0, 0],
             ]);
 
-            const result = hull3.fromPoints(points);
+            const result = quickhull3.fromPoints(points);
 
             expect(result).toEqual([]);
         });
@@ -287,7 +287,7 @@ describe('hull3', () => {
                 [0.001, 0.001, 0.001], // very close to origin
             ]);
 
-            const result = hull3.fromPoints(points);
+            const result = quickhull3.fromPoints(points);
 
             expect(result.length).toBeGreaterThan(0);
             expect(result.length % 3).toBe(0);
