@@ -21,8 +21,11 @@ export * as segment2 from './segment2';
 export * as triangle2 from './triangle2';
 
 export * as box3 from './box3';
+export * as obb3 from './obb3';
 export * as sphere from './sphere';
 export * as triangle3 from './triangle3';
+
+export * as hull3 from './hull3';
 
 export * as easing from './easing';
 
