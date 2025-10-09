@@ -69,7 +69,7 @@ function isConvexHull(points: number[], faces: number[]): boolean {
     return nError === 0;
 }
 
-describe('hull3', () => {
+describe('quickhull3', () => {
     describe('fromPoints', () => {
         it('should return empty array for less than 4 points', () => {
             expect(quickhull3.fromPoints([])).toEqual([]);
