@@ -18,6 +18,11 @@ maaths is a collection of math helpers for 3D graphics and simulations.
 - TypeScript-first, great DX for both JavaScript and TypeScript projects
 - Excellent tree-shaking support
 
+**Acknowledgements:**
+
+- The vec*, quat*, mat* code started as a typescript port of glMatrix (https://glmatrix.net/). This library doesn't aim to stay in sync with glMatrix however.
+- Simplex noise functions are adapted from https://github.com/pmndrs/maath, which were adapted from https://github.com/josephg/noisejs :)
+
 ## Table Of Contents
 
 - [API Documentation](#api-documentation)
@@ -448,7 +453,9 @@ maaths is a collection of math helpers for 3D graphics and simulations.
   - [triangle3](#triangle3)
     - [`triangle3.create`](#triangle3create)
   - [quickhull3](#quickhull3)
-    - [`quickhull3.fromPoints`](#quickhull3frompoints)
+    - [`quickhull3`](#quickhull3)
+  - [quickhull2](#quickhull2)
+    - [`quickhull2`](#quickhull2)
   - [easing](#easing)
     - [`easing.exp`](#easingexp)
     - [`easing.linear`](#easinglinear)
@@ -501,7 +508,6 @@ maaths is a collection of math helpers for 3D graphics and simulations.
     - [`clamp`](#clamp)
     - [`remap`](#remap)
     - [`remapClamp`](#remapclamp)
-- [Acknowledgements](#acknowledgements)
 
 ## API Documentation
 
@@ -5960,15 +5966,31 @@ export function create(): Box3;
 
 ### quickhull3
 
-#### `quickhull3.fromPoints`
+#### `quickhull3`
 
 ```ts
 /**
- * Computes the convex hull of a set of 3D points using the QuickHull algorithm.
+ * Computes the convex hull of a set of 3D points using an incremental QuickHull algorithm.
+ *
  * @param points An array of numbers representing the 3D points (x1, y1, z1, x2, y2, z2, ...)
  * @returns An array of indices representing the triangles of the convex hull (i1, j1, k1, i2, j2, k2, ...).
  */
-export function fromPoints(points: number[]): number[];
+export function quickhull3(points: number[]): number[];
+```
+
+### quickhull2
+
+#### `quickhull2`
+
+```ts
+/**
+ * Computes the convex hull of a set of 2D points using the QuickHull algorithm.
+ * The hull is returned as an array of indices in counter-clockwise order.
+ *
+ * @param points Flat array of 2D points: [x0, y0, x1, y1, ...]
+ * @returns Indices of hull vertices in CCW order
+ */
+export function quickhull2(points: number[]): number[];
 ```
 
 ### easing
@@ -6439,10 +6461,3 @@ export function remap(number: number, inLow: number, inHigh: number, outLow: num
  */
 export function remapClamp(value: number, inLow: number, inHigh: number, outLow: number, outHigh: number): number;
 ```
-
-
-
-## Acknowledgements
-
-- The vec*, quat*, mat* code is a typescript port of glMatrix (https://glmatrix.net/). This library doesn't aim to stay in sync with glMatrix however.
-- Simplex noise functions are adapted from https://github.com/pmndrs/maath, which were adapted from https://github.com/josephg/noisejs :)
