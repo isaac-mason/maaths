@@ -108,6 +108,17 @@ function generateApiDocs() {
         visit(sf);
 
         docs += `### ${entryModule.apiName}\n\n`;
+        
+        // Add mini-TOC for this module
+        if (exported.length > 0) {
+            for (const name of exported) {
+                const prefix = entryModule.name ? `${entryModule.name}.` : '';
+                const anchor = `${prefix}${name}`.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+                docs += `- [\`${prefix}${name}\`](#${anchor})\n`;
+            }
+            docs += '\n';
+        }
+
         for (const name of exported) {
             const typeDoc = getType(name);
 
@@ -191,7 +202,7 @@ const linesAfterToc = readmeText
     .slice(tocLine + 1)
     .join('\n');
 const tocLines = [];
-const headingRegex = /^(#{2,6})\s+(.*)$/gm;
+const headingRegex = /^(#{2,3})\s+(.*)$/gm;
 for (const match of linesAfterToc.matchAll(headingRegex)) {
     const level = match[1].length - 1; // level 2-6 becomes 1-5
     const title = match[2].trim();

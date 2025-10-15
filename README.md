@@ -26,747 +26,81 @@ maaths is a collection of math helpers for 3D graphics and simulations.
 ## Table Of Contents
 
 - [API Documentation](#api-documentation)
-  - [types](#types)
-    - [`Vec2`](#vec2)
-    - [`Vec3`](#vec3)
-    - [`Vec4`](#vec4)
-    - [`Quat`](#quat)
-    - [`Quat2`](#quat2)
-    - [`Mat2`](#mat2)
-    - [`Mat3`](#mat3)
-    - [`Mat4`](#mat4)
-    - [`Mat2d`](#mat2d)
-    - [`Box3`](#box3)
-    - [`OBB3`](#obb3)
-    - [`EulerOrder`](#eulerorder)
-    - [`Euler`](#euler)
-    - [`Triangle3`](#triangle3)
-    - [`Segment3`](#segment3)
-    - [`Triangle2`](#triangle2)
-    - [`Segment2`](#segment2)
-    - [`Plane3`](#plane3)
-    - [`Sphere`](#sphere)
-    - [`Circle`](#circle)
-    - [`MutableArrayLike`](#mutablearraylike)
   - [vec2](#vec2)
-    - [`vec2.create`](#vec2create)
-    - [`vec2.clone`](#vec2clone)
-    - [`vec2.fromValues`](#vec2fromvalues)
-    - [`vec2.copy`](#vec2copy)
-    - [`vec2.set`](#vec2set)
-    - [`vec2.add`](#vec2add)
-    - [`vec2.addScalar`](#vec2addscalar)
-    - [`vec2.subtract`](#vec2subtract)
-    - [`vec2.subtractScalar`](#vec2subtractscalar)
-    - [`vec2.multiply`](#vec2multiply)
-    - [`vec2.divide`](#vec2divide)
-    - [`vec2.ceil`](#vec2ceil)
-    - [`vec2.floor`](#vec2floor)
-    - [`vec2.min`](#vec2min)
-    - [`vec2.max`](#vec2max)
-    - [`vec2.round`](#vec2round)
-    - [`vec2.scale`](#vec2scale)
-    - [`vec2.scaleAndAdd`](#vec2scaleandadd)
-    - [`vec2.distance`](#vec2distance)
-    - [`vec2.squaredDistance`](#vec2squareddistance)
-    - [`vec2.length`](#vec2length)
-    - [`vec2.squaredLength`](#vec2squaredlength)
-    - [`vec2.negate`](#vec2negate)
-    - [`vec2.inverse`](#vec2inverse)
-    - [`vec2.normalize`](#vec2normalize)
-    - [`vec2.dot`](#vec2dot)
-    - [`vec2.cross`](#vec2cross)
-    - [`vec2.lerp`](#vec2lerp)
-    - [`vec2.transformMat2`](#vec2transformmat2)
-    - [`vec2.transformMat2d`](#vec2transformmat2d)
-    - [`vec2.transformMat3`](#vec2transformmat3)
-    - [`vec2.transformMat4`](#vec2transformmat4)
-    - [`vec2.rotate`](#vec2rotate)
-    - [`vec2.angle`](#vec2angle)
-    - [`vec2.zero`](#vec2zero)
-    - [`vec2.str`](#vec2str)
-    - [`vec2.exactEquals`](#vec2exactequals)
-    - [`vec2.equals`](#vec2equals)
-    - [`vec2.finite`](#vec2finite)
-    - [`vec2.len`](#vec2len)
-    - [`vec2.sub`](#vec2sub)
-    - [`vec2.mul`](#vec2mul)
-    - [`vec2.div`](#vec2div)
-    - [`vec2.dist`](#vec2dist)
-    - [`vec2.sqrDist`](#vec2sqrdist)
-    - [`vec2.sqrLen`](#vec2sqrlen)
   - [vec3](#vec3)
-    - [`vec3.create`](#vec3create)
-    - [`vec3.clone`](#vec3clone)
-    - [`vec3.length`](#vec3length)
-    - [`vec3.fromValues`](#vec3fromvalues)
-    - [`vec3.copy`](#vec3copy)
-    - [`vec3.set`](#vec3set)
-    - [`vec3.fromBuffer`](#vec3frombuffer)
-    - [`vec3.toBuffer`](#vec3tobuffer)
-    - [`vec3.add`](#vec3add)
-    - [`vec3.addScalar`](#vec3addscalar)
-    - [`vec3.subtract`](#vec3subtract)
-    - [`vec3.subtractScalar`](#vec3subtractscalar)
-    - [`vec3.multiply`](#vec3multiply)
-    - [`vec3.divide`](#vec3divide)
-    - [`vec3.ceil`](#vec3ceil)
-    - [`vec3.floor`](#vec3floor)
-    - [`vec3.min`](#vec3min)
-    - [`vec3.max`](#vec3max)
-    - [`vec3.round`](#vec3round)
-    - [`vec3.scale`](#vec3scale)
-    - [`vec3.scaleAndAdd`](#vec3scaleandadd)
-    - [`vec3.distance`](#vec3distance)
-    - [`vec3.squaredDistance`](#vec3squareddistance)
-    - [`vec3.squaredLength`](#vec3squaredlength)
-    - [`vec3.negate`](#vec3negate)
-    - [`vec3.inverse`](#vec3inverse)
-    - [`vec3.normalize`](#vec3normalize)
-    - [`vec3.dot`](#vec3dot)
-    - [`vec3.cross`](#vec3cross)
-    - [`vec3.lerp`](#vec3lerp)
-    - [`vec3.slerp`](#vec3slerp)
-    - [`vec3.hermite`](#vec3hermite)
-    - [`vec3.bezier`](#vec3bezier)
-    - [`vec3.transformMat4`](#vec3transformmat4)
-    - [`vec3.transformMat3`](#vec3transformmat3)
-    - [`vec3.transformQuat`](#vec3transformquat)
-    - [`vec3.rotateX`](#vec3rotatex)
-    - [`vec3.rotateY`](#vec3rotatey)
-    - [`vec3.rotateZ`](#vec3rotatez)
-    - [`vec3.angle`](#vec3angle)
-    - [`vec3.zero`](#vec3zero)
-    - [`vec3.str`](#vec3str)
-    - [`vec3.exactEquals`](#vec3exactequals)
-    - [`vec3.equals`](#vec3equals)
-    - [`vec3.finite`](#vec3finite)
-    - [`vec3.sub`](#vec3sub)
-    - [`vec3.mul`](#vec3mul)
-    - [`vec3.div`](#vec3div)
-    - [`vec3.dist`](#vec3dist)
-    - [`vec3.sqrDist`](#vec3sqrdist)
-    - [`vec3.len`](#vec3len)
-    - [`vec3.sqrLen`](#vec3sqrlen)
   - [vec4](#vec4)
-    - [`vec4.create`](#vec4create)
-    - [`vec4.clone`](#vec4clone)
-    - [`vec4.fromValues`](#vec4fromvalues)
-    - [`vec4.copy`](#vec4copy)
-    - [`vec4.set`](#vec4set)
-    - [`vec4.add`](#vec4add)
-    - [`vec4.subtract`](#vec4subtract)
-    - [`vec4.multiply`](#vec4multiply)
-    - [`vec4.divide`](#vec4divide)
-    - [`vec4.ceil`](#vec4ceil)
-    - [`vec4.floor`](#vec4floor)
-    - [`vec4.min`](#vec4min)
-    - [`vec4.max`](#vec4max)
-    - [`vec4.round`](#vec4round)
-    - [`vec4.scale`](#vec4scale)
-    - [`vec4.scaleAndAdd`](#vec4scaleandadd)
-    - [`vec4.distance`](#vec4distance)
-    - [`vec4.squaredDistance`](#vec4squareddistance)
-    - [`vec4.length`](#vec4length)
-    - [`vec4.squaredLength`](#vec4squaredlength)
-    - [`vec4.negate`](#vec4negate)
-    - [`vec4.inverse`](#vec4inverse)
-    - [`vec4.normalize`](#vec4normalize)
-    - [`vec4.dot`](#vec4dot)
-    - [`vec4.cross`](#vec4cross)
-    - [`vec4.lerp`](#vec4lerp)
-    - [`vec4.transformMat4`](#vec4transformmat4)
-    - [`vec4.transformQuat`](#vec4transformquat)
-    - [`vec4.zero`](#vec4zero)
-    - [`vec4.str`](#vec4str)
-    - [`vec4.exactEquals`](#vec4exactequals)
-    - [`vec4.equals`](#vec4equals)
-    - [`vec4.finite`](#vec4finite)
-    - [`vec4.sub`](#vec4sub)
-    - [`vec4.mul`](#vec4mul)
-    - [`vec4.div`](#vec4div)
-    - [`vec4.dist`](#vec4dist)
-    - [`vec4.sqrDist`](#vec4sqrdist)
-    - [`vec4.len`](#vec4len)
-    - [`vec4.sqrLen`](#vec4sqrlen)
   - [euler](#euler)
-    - [`euler.create`](#eulercreate)
-    - [`euler.fromValues`](#eulerfromvalues)
-    - [`euler.fromDegrees`](#eulerfromdegrees)
-    - [`euler.fromRotationMat4`](#eulerfromrotationmat4)
-    - [`euler.exactEquals`](#eulerexactequals)
-    - [`euler.equals`](#eulerequals)
-    - [`euler.fromQuat`](#eulerfromquat)
-    - [`euler.reorder`](#eulerreorder)
   - [quat](#quat)
-    - [`quat.create`](#quatcreate)
-    - [`quat.identity`](#quatidentity)
-    - [`quat.setAxisAngle`](#quatsetaxisangle)
-    - [`quat.getAxisAngle`](#quatgetaxisangle)
-    - [`quat.getAngle`](#quatgetangle)
-    - [`quat.multiply`](#quatmultiply)
-    - [`quat.rotateX`](#quatrotatex)
-    - [`quat.rotateY`](#quatrotatey)
-    - [`quat.rotateZ`](#quatrotatez)
-    - [`quat.calculateW`](#quatcalculatew)
-    - [`quat.exp`](#quatexp)
-    - [`quat.ln`](#quatln)
-    - [`quat.pow`](#quatpow)
-    - [`quat.slerp`](#quatslerp)
-    - [`quat.invert`](#quatinvert)
-    - [`quat.conjugate`](#quatconjugate)
-    - [`quat.fromMat3`](#quatfrommat3)
-    - [`quat.fromEuler`](#quatfromeuler)
-    - [`quat.str`](#quatstr)
-    - [`quat.clone`](#quatclone)
-    - [`quat.fromValues`](#quatfromvalues)
-    - [`quat.copy`](#quatcopy)
-    - [`quat.set`](#quatset)
-    - [`quat.add`](#quatadd)
-    - [`quat.scale`](#quatscale)
-    - [`quat.dot`](#quatdot)
-    - [`quat.lerp`](#quatlerp)
-    - [`quat.length`](#quatlength)
-    - [`quat.len`](#quatlen)
-    - [`quat.squaredLength`](#quatsquaredlength)
-    - [`quat.sqrLen`](#quatsqrlen)
-    - [`quat.mul`](#quatmul)
-    - [`quat.normalize`](#quatnormalize)
-    - [`quat.exactEquals`](#quatexactequals)
-    - [`quat.equals`](#quatequals)
-    - [`quat.rotationTo`](#quatrotationto)
-    - [`quat.sqlerp`](#quatsqlerp)
-    - [`quat.setAxes`](#quatsetaxes)
   - [quat2](#quat2)
-    - [`quat2.create`](#quat2create)
-    - [`quat2.clone`](#quat2clone)
-    - [`quat2.fromValues`](#quat2fromvalues)
-    - [`quat2.fromRotationTranslationValues`](#quat2fromrotationtranslationvalues)
-    - [`quat2.fromRotationTranslation`](#quat2fromrotationtranslation)
-    - [`quat2.fromTranslation`](#quat2fromtranslation)
-    - [`quat2.fromRotation`](#quat2fromrotation)
-    - [`quat2.fromMat4`](#quat2frommat4)
-    - [`quat2.copy`](#quat2copy)
-    - [`quat2.identity`](#quat2identity)
-    - [`quat2.set`](#quat2set)
-    - [`quat2.getReal`](#quat2getreal)
-    - [`quat2.getDual`](#quat2getdual)
-    - [`quat2.setReal`](#quat2setreal)
-    - [`quat2.setDual`](#quat2setdual)
-    - [`quat2.getTranslation`](#quat2gettranslation)
-    - [`quat2.translate`](#quat2translate)
-    - [`quat2.rotateX`](#quat2rotatex)
-    - [`quat2.rotateY`](#quat2rotatey)
-    - [`quat2.rotateZ`](#quat2rotatez)
-    - [`quat2.rotateByQuatAppend`](#quat2rotatebyquatappend)
-    - [`quat2.rotateByQuatPrepend`](#quat2rotatebyquatprepend)
-    - [`quat2.rotateAroundAxis`](#quat2rotatearoundaxis)
-    - [`quat2.add`](#quat2add)
-    - [`quat2.multiply`](#quat2multiply)
-    - [`quat2.mul`](#quat2mul)
-    - [`quat2.scale`](#quat2scale)
-    - [`quat2.dot`](#quat2dot)
-    - [`quat2.lerp`](#quat2lerp)
-    - [`quat2.invert`](#quat2invert)
-    - [`quat2.conjugate`](#quat2conjugate)
-    - [`quat2.length`](#quat2length)
-    - [`quat2.len`](#quat2len)
-    - [`quat2.squaredLength`](#quat2squaredlength)
-    - [`quat2.sqrLen`](#quat2sqrlen)
-    - [`quat2.normalize`](#quat2normalize)
-    - [`quat2.str`](#quat2str)
-    - [`quat2.exactEquals`](#quat2exactequals)
-    - [`quat2.equals`](#quat2equals)
   - [mat2](#mat2)
-    - [`mat2.create`](#mat2create)
-    - [`mat2.clone`](#mat2clone)
-    - [`mat2.copy`](#mat2copy)
-    - [`mat2.identity`](#mat2identity)
-    - [`mat2.fromValues`](#mat2fromvalues)
-    - [`mat2.set`](#mat2set)
-    - [`mat2.transpose`](#mat2transpose)
-    - [`mat2.invert`](#mat2invert)
-    - [`mat2.adjoint`](#mat2adjoint)
-    - [`mat2.determinant`](#mat2determinant)
-    - [`mat2.multiply`](#mat2multiply)
-    - [`mat2.rotate`](#mat2rotate)
-    - [`mat2.scale`](#mat2scale)
-    - [`mat2.fromRotation`](#mat2fromrotation)
-    - [`mat2.fromScaling`](#mat2fromscaling)
-    - [`mat2.str`](#mat2str)
-    - [`mat2.frob`](#mat2frob)
-    - [`mat2.LDU`](#mat2ldu)
-    - [`mat2.add`](#mat2add)
-    - [`mat2.subtract`](#mat2subtract)
-    - [`mat2.exactEquals`](#mat2exactequals)
-    - [`mat2.equals`](#mat2equals)
-    - [`mat2.multiplyScalar`](#mat2multiplyscalar)
-    - [`mat2.multiplyScalarAndAdd`](#mat2multiplyscalarandadd)
-    - [`mat2.mul`](#mat2mul)
-    - [`mat2.sub`](#mat2sub)
   - [mat2d](#mat2d)
-    - [`mat2d.create`](#mat2dcreate)
-    - [`mat2d.clone`](#mat2dclone)
-    - [`mat2d.copy`](#mat2dcopy)
-    - [`mat2d.identity`](#mat2didentity)
-    - [`mat2d.fromValues`](#mat2dfromvalues)
-    - [`mat2d.set`](#mat2dset)
-    - [`mat2d.invert`](#mat2dinvert)
-    - [`mat2d.determinant`](#mat2ddeterminant)
-    - [`mat2d.multiply`](#mat2dmultiply)
-    - [`mat2d.rotate`](#mat2drotate)
-    - [`mat2d.scale`](#mat2dscale)
-    - [`mat2d.translate`](#mat2dtranslate)
-    - [`mat2d.fromRotation`](#mat2dfromrotation)
-    - [`mat2d.fromScaling`](#mat2dfromscaling)
-    - [`mat2d.fromTranslation`](#mat2dfromtranslation)
-    - [`mat2d.str`](#mat2dstr)
-    - [`mat2d.frob`](#mat2dfrob)
-    - [`mat2d.add`](#mat2dadd)
-    - [`mat2d.subtract`](#mat2dsubtract)
-    - [`mat2d.multiplyScalar`](#mat2dmultiplyscalar)
-    - [`mat2d.multiplyScalarAndAdd`](#mat2dmultiplyscalarandadd)
-    - [`mat2d.exactEquals`](#mat2dexactequals)
-    - [`mat2d.equals`](#mat2dequals)
-    - [`mat2d.mul`](#mat2dmul)
-    - [`mat2d.sub`](#mat2dsub)
   - [mat3](#mat3)
-    - [`mat3.create`](#mat3create)
-    - [`mat3.fromMat4`](#mat3frommat4)
-    - [`mat3.clone`](#mat3clone)
-    - [`mat3.copy`](#mat3copy)
-    - [`mat3.fromValues`](#mat3fromvalues)
-    - [`mat3.set`](#mat3set)
-    - [`mat3.identity`](#mat3identity)
-    - [`mat3.transpose`](#mat3transpose)
-    - [`mat3.invert`](#mat3invert)
-    - [`mat3.adjoint`](#mat3adjoint)
-    - [`mat3.determinant`](#mat3determinant)
-    - [`mat3.multiply`](#mat3multiply)
-    - [`mat3.translate`](#mat3translate)
-    - [`mat3.rotate`](#mat3rotate)
-    - [`mat3.scale`](#mat3scale)
-    - [`mat3.fromTranslation`](#mat3fromtranslation)
-    - [`mat3.fromRotation`](#mat3fromrotation)
-    - [`mat3.fromScaling`](#mat3fromscaling)
-    - [`mat3.fromMat2d`](#mat3frommat2d)
-    - [`mat3.fromQuat`](#mat3fromquat)
-    - [`mat3.normalFromMat4`](#mat3normalfrommat4)
-    - [`mat3.projection`](#mat3projection)
-    - [`mat3.str`](#mat3str)
-    - [`mat3.frob`](#mat3frob)
-    - [`mat3.add`](#mat3add)
-    - [`mat3.subtract`](#mat3subtract)
-    - [`mat3.multiplyScalar`](#mat3multiplyscalar)
-    - [`mat3.multiplyScalarAndAdd`](#mat3multiplyscalarandadd)
-    - [`mat3.exactEquals`](#mat3exactequals)
-    - [`mat3.equals`](#mat3equals)
-    - [`mat3.mul`](#mat3mul)
-    - [`mat3.sub`](#mat3sub)
   - [mat4](#mat4)
-    - [`mat4.create`](#mat4create)
-    - [`mat4.clone`](#mat4clone)
-    - [`mat4.copy`](#mat4copy)
-    - [`mat4.fromValues`](#mat4fromvalues)
-    - [`mat4.set`](#mat4set)
-    - [`mat4.identity`](#mat4identity)
-    - [`mat4.transpose`](#mat4transpose)
-    - [`mat4.invert`](#mat4invert)
-    - [`mat4.adjoint`](#mat4adjoint)
-    - [`mat4.determinant`](#mat4determinant)
-    - [`mat4.multiply`](#mat4multiply)
-    - [`mat4.translate`](#mat4translate)
-    - [`mat4.scale`](#mat4scale)
-    - [`mat4.rotate`](#mat4rotate)
-    - [`mat4.rotateX`](#mat4rotatex)
-    - [`mat4.rotateY`](#mat4rotatey)
-    - [`mat4.rotateZ`](#mat4rotatez)
-    - [`mat4.fromTranslation`](#mat4fromtranslation)
-    - [`mat4.fromScaling`](#mat4fromscaling)
-    - [`mat4.fromRotation`](#mat4fromrotation)
-    - [`mat4.fromXRotation`](#mat4fromxrotation)
-    - [`mat4.fromYRotation`](#mat4fromyrotation)
-    - [`mat4.fromZRotation`](#mat4fromzrotation)
-    - [`mat4.fromRotationTranslation`](#mat4fromrotationtranslation)
-    - [`mat4.fromQuat2`](#mat4fromquat2)
-    - [`mat4.getTranslation`](#mat4gettranslation)
-    - [`mat4.getScaling`](#mat4getscaling)
-    - [`mat4.getRotation`](#mat4getrotation)
-    - [`mat4.decompose`](#mat4decompose)
-    - [`mat4.fromRotationTranslationScale`](#mat4fromrotationtranslationscale)
-    - [`mat4.fromRotationTranslationScaleOrigin`](#mat4fromrotationtranslationscaleorigin)
-    - [`mat4.fromQuat`](#mat4fromquat)
-    - [`mat4.frustum`](#mat4frustum)
-    - [`mat4.perspectiveNO`](#mat4perspectiveno)
-    - [`mat4.perspective`](#mat4perspective)
-    - [`mat4.perspectiveZO`](#mat4perspectivezo)
-    - [`mat4.perspectiveFromFieldOfView`](#mat4perspectivefromfieldofview)
-    - [`mat4.orthoNO`](#mat4orthono)
-    - [`mat4.ortho`](#mat4ortho)
-    - [`mat4.orthoZO`](#mat4orthozo)
-    - [`mat4.lookAt`](#mat4lookat)
-    - [`mat4.targetTo`](#mat4targetto)
-    - [`mat4.str`](#mat4str)
-    - [`mat4.frob`](#mat4frob)
-    - [`mat4.add`](#mat4add)
-    - [`mat4.subtract`](#mat4subtract)
-    - [`mat4.multiplyScalar`](#mat4multiplyscalar)
-    - [`mat4.multiplyScalarAndAdd`](#mat4multiplyscalarandadd)
-    - [`mat4.exactEquals`](#mat4exactequals)
-    - [`mat4.equals`](#mat4equals)
-    - [`mat4.mul`](#mat4mul)
-    - [`mat4.sub`](#mat4sub)
   - [circle](#circle)
-    - [`circle.create`](#circlecreate)
   - [segment2](#segment2)
-    - [`segment2.create`](#segment2create)
-    - [`segment2.closestPoint`](#segment2closestpoint)
   - [triangle2](#triangle2)
-    - [`triangle2.create`](#triangle2create)
-    - [`triangle2.circumcircle`](#triangle2circumcircle)
   - [box3](#box3)
-    - [`box3.create`](#box3create)
-    - [`box3.clone`](#box3clone)
-    - [`box3.set`](#box3set)
-    - [`box3.setFromCenterAndSize`](#box3setfromcenterandsize)
-    - [`box3.expandByPoint`](#box3expandbypoint)
-    - [`box3.containsPoint`](#box3containspoint)
-    - [`box3.containsBox3`](#box3containsbox3)
-    - [`box3.intersectsBox3`](#box3intersectsbox3)
-    - [`box3.intersectsTriangle3`](#box3intersectstriangle3)
-    - [`box3.intersectsSphere`](#box3intersectssphere)
-    - [`box3.intersectsPlane3`](#box3intersectsplane3)
-    - [`box3.intersectsRay`](#box3intersectsray)
   - [obb3](#obb3)
-    - [`obb3.create`](#obb3create)
-    - [`obb3.clone`](#obb3clone)
-    - [`obb3.copy`](#obb3copy)
-    - [`obb3.set`](#obb3set)
-    - [`obb3.setFromBox3`](#obb3setfrombox3)
-    - [`obb3.containsPoint`](#obb3containspoint)
-    - [`obb3.clampPoint`](#obb3clamppoint)
-    - [`obb3.intersectsOBB3`](#obb3intersectsobb3)
-    - [`obb3.intersectsBox3`](#obb3intersectsbox3)
-    - [`obb3.applyMatrix4`](#obb3applymatrix4)
   - [sphere](#sphere)
-    - [`sphere.create`](#spherecreate)
   - [triangle3](#triangle3)
-    - [`triangle3.create`](#triangle3create)
   - [quickhull3](#quickhull3)
-    - [`quickhull3`](#quickhull3)
   - [quickhull2](#quickhull2)
-    - [`quickhull2`](#quickhull2)
   - [easing](#easing)
-    - [`easing.exp`](#easingexp)
-    - [`easing.linear`](#easinglinear)
-    - [`easing.sineIn`](#easingsinein)
-    - [`easing.sineOut`](#easingsineout)
-    - [`easing.sineInOut`](#easingsineinout)
-    - [`easing.cubicIn`](#easingcubicin)
-    - [`easing.cubicOut`](#easingcubicout)
-    - [`easing.cubicInOut`](#easingcubicinout)
-    - [`easing.quintIn`](#easingquintin)
-    - [`easing.quintOut`](#easingquintout)
-    - [`easing.quintInOut`](#easingquintinout)
-    - [`easing.circIn`](#easingcircin)
-    - [`easing.circOut`](#easingcircout)
-    - [`easing.circInOut`](#easingcircinout)
-    - [`easing.quartIn`](#easingquartin)
-    - [`easing.quartOut`](#easingquartout)
-    - [`easing.quartInOut`](#easingquartinout)
-    - [`easing.expoIn`](#easingexpoin)
-    - [`easing.expoOut`](#easingexpoout)
-    - [`easing.expoInOut`](#easingexpoinout)
-    - [`easing.rsqw`](#easingrsqw)
   - [noise](#noise)
-    - [`NoiseGenerator2D`](#noisegenerator2d)
-    - [`NoiseGenerator3D`](#noisegenerator3d)
-    - [`createSimplex2D`](#createsimplex2d)
-    - [`createSimplex3D`](#createsimplex3d)
-    - [`createPerlin2D`](#createperlin2d)
-    - [`createPerlin3D`](#createperlin3d)
   - [random](#random)
-    - [`createMulberry32Generator`](#createmulberry32generator)
-    - [`generateMulberry32Seed`](#generatemulberry32seed)
-    - [`randomInt`](#randomint)
-    - [`randomFloat`](#randomfloat)
-    - [`randomBool`](#randombool)
-    - [`randomSign`](#randomsign)
-    - [`randomChoice`](#randomchoice)
-    - [`randomVec2`](#randomvec2)
-    - [`randomVec3`](#randomvec3)
-    - [`randomVec4`](#randomvec4)
-    - [`randomQuat`](#randomquat)
   - [common](#common)
-    - [`EPSILON`](#epsilon)
-    - [`round`](#round)
-    - [`degreesToRadians`](#degreestoradians)
-    - [`radiansToDegrees`](#radianstodegrees)
-    - [`equals`](#equals)
-    - [`fade`](#fade)
-    - [`lerp`](#lerp)
-    - [`clamp`](#clamp)
-    - [`remap`](#remap)
-    - [`remapClamp`](#remapclamp)
+  - [types](#types)
 
 ## API Documentation
 
-### types
-
-#### `Vec2`
-
-```ts
-/** A 2D vector */
-export type Vec2 = [
-    x: number,
-    y: number
-];
-```
-
-#### `Vec3`
-
-```ts
-/** A 3D vector */
-export type Vec3 = [
-    x: number,
-    y: number,
-    z: number
-];
-```
-
-#### `Vec4`
-
-```ts
-/** A 4D vector */
-export type Vec4 = [
-    x: number,
-    y: number,
-    z: number,
-    w: number
-];
-```
-
-#### `Quat`
-
-```ts
-/** A quaternion that represents rotation */
-export type Quat = [
-    x: number,
-    y: number,
-    z: number,
-    w: number
-];
-```
-
-#### `Quat2`
-
-```ts
-/** A dual quaternion that represents both rotation and translation */
-export type Quat2 = [
-    x: number,
-    y: number,
-    z: number,
-    w: number,
-    x2: number,
-    y2: number,
-    z2: number,
-    w2: number
-];
-```
-
-#### `Mat2`
-
-```ts
-/** A 2x2 matrix */
-export type Mat2 = [
-    e1: number,
-    e2: number,
-    e3: number,
-    e4: number
-];
-```
-
-#### `Mat3`
-
-```ts
-/** A 3x3 matrix */
-export type Mat3 = [
-    e1: number,
-    e2: number,
-    e3: number,
-    e4: number,
-    e5: number,
-    e6: number,
-    e7: number,
-    e8: number,
-    e9: number
-];
-```
-
-#### `Mat4`
-
-```ts
-/** A 4x4 matrix */
-export type Mat4 = [
-    e1: number,
-    e2: number,
-    e3: number,
-    e4: number,
-    e5: number,
-    e6: number,
-    e7: number,
-    e8: number,
-    e9: number,
-    e10: number,
-    e11: number,
-    e12: number,
-    e13: number,
-    e14: number,
-    e15: number,
-    e16: number
-];
-```
-
-#### `Mat2d`
-
-```ts
-/** A 2D affine transform matrix */
-export type Mat2d = [
-    e1: number,
-    e2: number,
-    e3: number,
-    e4: number,
-    e5: number,
-    e6: number
-];
-```
-
-#### `Box3`
-
-```ts
-/** A box in 3D space */
-export type Box3 = [
-    min: Vec3,
-    max: Vec3
-];
-```
-
-#### `OBB3`
-
-```ts
-/** A oriented bounding box in 3D space */
-export type OBB3 = {
-    center: Vec3;
-    halfExtents: Vec3;
-    quaternion: Quat;
-};
-```
-
-#### `EulerOrder`
-
-```ts
-/** Euler orders */
-export type EulerOrder = 'xyz' | 'xzy' | 'yxz' | 'yzx' | 'zxy' | 'zyx';
-```
-
-#### `Euler`
-
-```ts
-/** A Euler in 3D space, with an optional order (default is 'xyz') */
-export type Euler = [
-    x: number,
-    y: number,
-    z: number,
-    order?: EulerOrder
-];
-```
-
-#### `Triangle3`
-
-```ts
-/** A triangle in 3D space */
-export type Triangle3 = [
-    a: Vec3,
-    b: Vec3,
-    c: Vec3
-];
-```
-
-#### `Segment3`
-
-```ts
-/** A line segment in 3D space */
-export type Segment3 = [
-    start: Vec3,
-    end: Vec3
-];
-```
-
-#### `Triangle2`
-
-```ts
-/** A triangle in 2D space */
-export type Triangle2 = [
-    a: Vec2,
-    b: Vec2,
-    c: Vec2
-];
-```
-
-#### `Segment2`
-
-```ts
-/** A line segment in 2D space */
-export type Segment2 = [
-    start: Vec2,
-    end: Vec2
-];
-```
-
-#### `Plane3`
-
-```ts
-/**
- * A plane in 3D space
- * normal - a unit length vector defining the normal of the plane.
- * constant - the signed distance from the origin to the plane.
- */
-export type Plane3 = {
-    normal: Vec3;
-    constant: number;
-};
-```
-
-#### `Sphere`
-
-```ts
-/** A sphere in 3D space */
-export type Sphere = {
-    center: Vec3;
-    radius: number;
-};
-```
-
-#### `Circle`
-
-```ts
-/** A circle in 2D space */
-export type Circle = {
-    center: Vec2;
-    radius: number;
-};
-```
-
-#### `MutableArrayLike`
-
-```ts
-export type MutableArrayLike<T> = {
-    [index: number]: T;
-    length: number;
-};
-```
-
 ### vec2
+
+- [`vec2.create`](#vec2create)
+- [`vec2.clone`](#vec2clone)
+- [`vec2.fromValues`](#vec2fromvalues)
+- [`vec2.copy`](#vec2copy)
+- [`vec2.set`](#vec2set)
+- [`vec2.add`](#vec2add)
+- [`vec2.addScalar`](#vec2addscalar)
+- [`vec2.subtract`](#vec2subtract)
+- [`vec2.subtractScalar`](#vec2subtractscalar)
+- [`vec2.multiply`](#vec2multiply)
+- [`vec2.divide`](#vec2divide)
+- [`vec2.ceil`](#vec2ceil)
+- [`vec2.floor`](#vec2floor)
+- [`vec2.min`](#vec2min)
+- [`vec2.max`](#vec2max)
+- [`vec2.round`](#vec2round)
+- [`vec2.scale`](#vec2scale)
+- [`vec2.scaleAndAdd`](#vec2scaleandadd)
+- [`vec2.distance`](#vec2distance)
+- [`vec2.squaredDistance`](#vec2squareddistance)
+- [`vec2.length`](#vec2length)
+- [`vec2.squaredLength`](#vec2squaredlength)
+- [`vec2.negate`](#vec2negate)
+- [`vec2.inverse`](#vec2inverse)
+- [`vec2.normalize`](#vec2normalize)
+- [`vec2.dot`](#vec2dot)
+- [`vec2.cross`](#vec2cross)
+- [`vec2.lerp`](#vec2lerp)
+- [`vec2.transformMat2`](#vec2transformmat2)
+- [`vec2.transformMat2d`](#vec2transformmat2d)
+- [`vec2.transformMat3`](#vec2transformmat3)
+- [`vec2.transformMat4`](#vec2transformmat4)
+- [`vec2.rotate`](#vec2rotate)
+- [`vec2.angle`](#vec2angle)
+- [`vec2.zero`](#vec2zero)
+- [`vec2.str`](#vec2str)
+- [`vec2.exactEquals`](#vec2exactequals)
+- [`vec2.equals`](#vec2equals)
+- [`vec2.finite`](#vec2finite)
+- [`vec2.len`](#vec2len)
+- [`vec2.sub`](#vec2sub)
+- [`vec2.mul`](#vec2mul)
+- [`vec2.div`](#vec2div)
+- [`vec2.dist`](#vec2dist)
+- [`vec2.sqrDist`](#vec2sqrdist)
+- [`vec2.sqrLen`](#vec2sqrlen)
 
 #### `vec2.create`
 
@@ -1352,6 +686,59 @@ export const sqrLen = squaredLength;
 ```
 
 ### vec3
+
+- [`vec3.create`](#vec3create)
+- [`vec3.clone`](#vec3clone)
+- [`vec3.length`](#vec3length)
+- [`vec3.fromValues`](#vec3fromvalues)
+- [`vec3.copy`](#vec3copy)
+- [`vec3.set`](#vec3set)
+- [`vec3.fromBuffer`](#vec3frombuffer)
+- [`vec3.toBuffer`](#vec3tobuffer)
+- [`vec3.add`](#vec3add)
+- [`vec3.addScalar`](#vec3addscalar)
+- [`vec3.subtract`](#vec3subtract)
+- [`vec3.subtractScalar`](#vec3subtractscalar)
+- [`vec3.multiply`](#vec3multiply)
+- [`vec3.divide`](#vec3divide)
+- [`vec3.ceil`](#vec3ceil)
+- [`vec3.floor`](#vec3floor)
+- [`vec3.min`](#vec3min)
+- [`vec3.max`](#vec3max)
+- [`vec3.round`](#vec3round)
+- [`vec3.scale`](#vec3scale)
+- [`vec3.scaleAndAdd`](#vec3scaleandadd)
+- [`vec3.distance`](#vec3distance)
+- [`vec3.squaredDistance`](#vec3squareddistance)
+- [`vec3.squaredLength`](#vec3squaredlength)
+- [`vec3.negate`](#vec3negate)
+- [`vec3.inverse`](#vec3inverse)
+- [`vec3.normalize`](#vec3normalize)
+- [`vec3.dot`](#vec3dot)
+- [`vec3.cross`](#vec3cross)
+- [`vec3.lerp`](#vec3lerp)
+- [`vec3.slerp`](#vec3slerp)
+- [`vec3.hermite`](#vec3hermite)
+- [`vec3.bezier`](#vec3bezier)
+- [`vec3.transformMat4`](#vec3transformmat4)
+- [`vec3.transformMat3`](#vec3transformmat3)
+- [`vec3.transformQuat`](#vec3transformquat)
+- [`vec3.rotateX`](#vec3rotatex)
+- [`vec3.rotateY`](#vec3rotatey)
+- [`vec3.rotateZ`](#vec3rotatez)
+- [`vec3.angle`](#vec3angle)
+- [`vec3.zero`](#vec3zero)
+- [`vec3.str`](#vec3str)
+- [`vec3.exactEquals`](#vec3exactequals)
+- [`vec3.equals`](#vec3equals)
+- [`vec3.finite`](#vec3finite)
+- [`vec3.sub`](#vec3sub)
+- [`vec3.mul`](#vec3mul)
+- [`vec3.div`](#vec3div)
+- [`vec3.dist`](#vec3dist)
+- [`vec3.sqrDist`](#vec3sqrdist)
+- [`vec3.len`](#vec3len)
+- [`vec3.sqrLen`](#vec3sqrlen)
 
 #### `vec3.create`
 
@@ -2028,6 +1415,47 @@ export const sqrLen = squaredLength;
 
 ### vec4
 
+- [`vec4.create`](#vec4create)
+- [`vec4.clone`](#vec4clone)
+- [`vec4.fromValues`](#vec4fromvalues)
+- [`vec4.copy`](#vec4copy)
+- [`vec4.set`](#vec4set)
+- [`vec4.add`](#vec4add)
+- [`vec4.subtract`](#vec4subtract)
+- [`vec4.multiply`](#vec4multiply)
+- [`vec4.divide`](#vec4divide)
+- [`vec4.ceil`](#vec4ceil)
+- [`vec4.floor`](#vec4floor)
+- [`vec4.min`](#vec4min)
+- [`vec4.max`](#vec4max)
+- [`vec4.round`](#vec4round)
+- [`vec4.scale`](#vec4scale)
+- [`vec4.scaleAndAdd`](#vec4scaleandadd)
+- [`vec4.distance`](#vec4distance)
+- [`vec4.squaredDistance`](#vec4squareddistance)
+- [`vec4.length`](#vec4length)
+- [`vec4.squaredLength`](#vec4squaredlength)
+- [`vec4.negate`](#vec4negate)
+- [`vec4.inverse`](#vec4inverse)
+- [`vec4.normalize`](#vec4normalize)
+- [`vec4.dot`](#vec4dot)
+- [`vec4.cross`](#vec4cross)
+- [`vec4.lerp`](#vec4lerp)
+- [`vec4.transformMat4`](#vec4transformmat4)
+- [`vec4.transformQuat`](#vec4transformquat)
+- [`vec4.zero`](#vec4zero)
+- [`vec4.str`](#vec4str)
+- [`vec4.exactEquals`](#vec4exactequals)
+- [`vec4.equals`](#vec4equals)
+- [`vec4.finite`](#vec4finite)
+- [`vec4.sub`](#vec4sub)
+- [`vec4.mul`](#vec4mul)
+- [`vec4.div`](#vec4div)
+- [`vec4.dist`](#vec4dist)
+- [`vec4.sqrDist`](#vec4sqrdist)
+- [`vec4.len`](#vec4len)
+- [`vec4.sqrLen`](#vec4sqrlen)
+
 #### `vec4.create`
 
 ```ts
@@ -2531,6 +1959,15 @@ export const sqrLen = squaredLength;
 
 ### euler
 
+- [`euler.create`](#eulercreate)
+- [`euler.fromValues`](#eulerfromvalues)
+- [`euler.fromDegrees`](#eulerfromdegrees)
+- [`euler.fromRotationMat4`](#eulerfromrotationmat4)
+- [`euler.exactEquals`](#eulerexactequals)
+- [`euler.equals`](#eulerequals)
+- [`euler.fromQuat`](#eulerfromquat)
+- [`euler.reorder`](#eulerreorder)
+
 #### `euler.create`
 
 ```ts
@@ -2638,6 +2075,45 @@ export function reorder(out: Euler, a: Euler, order: EulerOrder): Euler;
 ```
 
 ### quat
+
+- [`quat.create`](#quatcreate)
+- [`quat.identity`](#quatidentity)
+- [`quat.setAxisAngle`](#quatsetaxisangle)
+- [`quat.getAxisAngle`](#quatgetaxisangle)
+- [`quat.getAngle`](#quatgetangle)
+- [`quat.multiply`](#quatmultiply)
+- [`quat.rotateX`](#quatrotatex)
+- [`quat.rotateY`](#quatrotatey)
+- [`quat.rotateZ`](#quatrotatez)
+- [`quat.calculateW`](#quatcalculatew)
+- [`quat.exp`](#quatexp)
+- [`quat.ln`](#quatln)
+- [`quat.pow`](#quatpow)
+- [`quat.slerp`](#quatslerp)
+- [`quat.invert`](#quatinvert)
+- [`quat.conjugate`](#quatconjugate)
+- [`quat.fromMat3`](#quatfrommat3)
+- [`quat.fromEuler`](#quatfromeuler)
+- [`quat.str`](#quatstr)
+- [`quat.clone`](#quatclone)
+- [`quat.fromValues`](#quatfromvalues)
+- [`quat.copy`](#quatcopy)
+- [`quat.set`](#quatset)
+- [`quat.add`](#quatadd)
+- [`quat.scale`](#quatscale)
+- [`quat.dot`](#quatdot)
+- [`quat.lerp`](#quatlerp)
+- [`quat.length`](#quatlength)
+- [`quat.len`](#quatlen)
+- [`quat.squaredLength`](#quatsquaredlength)
+- [`quat.sqrLen`](#quatsqrlen)
+- [`quat.mul`](#quatmul)
+- [`quat.normalize`](#quatnormalize)
+- [`quat.exactEquals`](#quatexactequals)
+- [`quat.equals`](#quatequals)
+- [`quat.rotationTo`](#quatrotationto)
+- [`quat.sqlerp`](#quatsqlerp)
+- [`quat.setAxes`](#quatsetaxes)
 
 #### `quat.create`
 
@@ -3196,6 +2672,46 @@ export const setAxes = (() => {
 
 ### quat2
 
+- [`quat2.create`](#quat2create)
+- [`quat2.clone`](#quat2clone)
+- [`quat2.fromValues`](#quat2fromvalues)
+- [`quat2.fromRotationTranslationValues`](#quat2fromrotationtranslationvalues)
+- [`quat2.fromRotationTranslation`](#quat2fromrotationtranslation)
+- [`quat2.fromTranslation`](#quat2fromtranslation)
+- [`quat2.fromRotation`](#quat2fromrotation)
+- [`quat2.fromMat4`](#quat2frommat4)
+- [`quat2.copy`](#quat2copy)
+- [`quat2.identity`](#quat2identity)
+- [`quat2.set`](#quat2set)
+- [`quat2.getReal`](#quat2getreal)
+- [`quat2.getDual`](#quat2getdual)
+- [`quat2.setReal`](#quat2setreal)
+- [`quat2.setDual`](#quat2setdual)
+- [`quat2.getTranslation`](#quat2gettranslation)
+- [`quat2.translate`](#quat2translate)
+- [`quat2.rotateX`](#quat2rotatex)
+- [`quat2.rotateY`](#quat2rotatey)
+- [`quat2.rotateZ`](#quat2rotatez)
+- [`quat2.rotateByQuatAppend`](#quat2rotatebyquatappend)
+- [`quat2.rotateByQuatPrepend`](#quat2rotatebyquatprepend)
+- [`quat2.rotateAroundAxis`](#quat2rotatearoundaxis)
+- [`quat2.add`](#quat2add)
+- [`quat2.multiply`](#quat2multiply)
+- [`quat2.mul`](#quat2mul)
+- [`quat2.scale`](#quat2scale)
+- [`quat2.dot`](#quat2dot)
+- [`quat2.lerp`](#quat2lerp)
+- [`quat2.invert`](#quat2invert)
+- [`quat2.conjugate`](#quat2conjugate)
+- [`quat2.length`](#quat2length)
+- [`quat2.len`](#quat2len)
+- [`quat2.squaredLength`](#quat2squaredlength)
+- [`quat2.sqrLen`](#quat2sqrlen)
+- [`quat2.normalize`](#quat2normalize)
+- [`quat2.str`](#quat2str)
+- [`quat2.exactEquals`](#quat2exactequals)
+- [`quat2.equals`](#quat2equals)
+
 #### `quat2.create`
 
 ```ts
@@ -3725,6 +3241,33 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 
 ### mat2
 
+- [`mat2.create`](#mat2create)
+- [`mat2.clone`](#mat2clone)
+- [`mat2.copy`](#mat2copy)
+- [`mat2.identity`](#mat2identity)
+- [`mat2.fromValues`](#mat2fromvalues)
+- [`mat2.set`](#mat2set)
+- [`mat2.transpose`](#mat2transpose)
+- [`mat2.invert`](#mat2invert)
+- [`mat2.adjoint`](#mat2adjoint)
+- [`mat2.determinant`](#mat2determinant)
+- [`mat2.multiply`](#mat2multiply)
+- [`mat2.rotate`](#mat2rotate)
+- [`mat2.scale`](#mat2scale)
+- [`mat2.fromRotation`](#mat2fromrotation)
+- [`mat2.fromScaling`](#mat2fromscaling)
+- [`mat2.str`](#mat2str)
+- [`mat2.frob`](#mat2frob)
+- [`mat2.LDU`](#mat2ldu)
+- [`mat2.add`](#mat2add)
+- [`mat2.subtract`](#mat2subtract)
+- [`mat2.exactEquals`](#mat2exactequals)
+- [`mat2.equals`](#mat2equals)
+- [`mat2.multiplyScalar`](#mat2multiplyscalar)
+- [`mat2.multiplyScalarAndAdd`](#mat2multiplyscalarandadd)
+- [`mat2.mul`](#mat2mul)
+- [`mat2.sub`](#mat2sub)
+
 #### `mat2.create`
 
 ```ts
@@ -4071,6 +3614,32 @@ export const sub = subtract;
 
 ### mat2d
 
+- [`mat2d.create`](#mat2dcreate)
+- [`mat2d.clone`](#mat2dclone)
+- [`mat2d.copy`](#mat2dcopy)
+- [`mat2d.identity`](#mat2didentity)
+- [`mat2d.fromValues`](#mat2dfromvalues)
+- [`mat2d.set`](#mat2dset)
+- [`mat2d.invert`](#mat2dinvert)
+- [`mat2d.determinant`](#mat2ddeterminant)
+- [`mat2d.multiply`](#mat2dmultiply)
+- [`mat2d.rotate`](#mat2drotate)
+- [`mat2d.scale`](#mat2dscale)
+- [`mat2d.translate`](#mat2dtranslate)
+- [`mat2d.fromRotation`](#mat2dfromrotation)
+- [`mat2d.fromScaling`](#mat2dfromscaling)
+- [`mat2d.fromTranslation`](#mat2dfromtranslation)
+- [`mat2d.str`](#mat2dstr)
+- [`mat2d.frob`](#mat2dfrob)
+- [`mat2d.add`](#mat2dadd)
+- [`mat2d.subtract`](#mat2dsubtract)
+- [`mat2d.multiplyScalar`](#mat2dmultiplyscalar)
+- [`mat2d.multiplyScalarAndAdd`](#mat2dmultiplyscalarandadd)
+- [`mat2d.exactEquals`](#mat2dexactequals)
+- [`mat2d.equals`](#mat2dequals)
+- [`mat2d.mul`](#mat2dmul)
+- [`mat2d.sub`](#mat2dsub)
+
 #### `mat2d.create`
 
 ```ts
@@ -4404,6 +3973,39 @@ export const sub = subtract;
 ```
 
 ### mat3
+
+- [`mat3.create`](#mat3create)
+- [`mat3.fromMat4`](#mat3frommat4)
+- [`mat3.clone`](#mat3clone)
+- [`mat3.copy`](#mat3copy)
+- [`mat3.fromValues`](#mat3fromvalues)
+- [`mat3.set`](#mat3set)
+- [`mat3.identity`](#mat3identity)
+- [`mat3.transpose`](#mat3transpose)
+- [`mat3.invert`](#mat3invert)
+- [`mat3.adjoint`](#mat3adjoint)
+- [`mat3.determinant`](#mat3determinant)
+- [`mat3.multiply`](#mat3multiply)
+- [`mat3.translate`](#mat3translate)
+- [`mat3.rotate`](#mat3rotate)
+- [`mat3.scale`](#mat3scale)
+- [`mat3.fromTranslation`](#mat3fromtranslation)
+- [`mat3.fromRotation`](#mat3fromrotation)
+- [`mat3.fromScaling`](#mat3fromscaling)
+- [`mat3.fromMat2d`](#mat3frommat2d)
+- [`mat3.fromQuat`](#mat3fromquat)
+- [`mat3.normalFromMat4`](#mat3normalfrommat4)
+- [`mat3.projection`](#mat3projection)
+- [`mat3.str`](#mat3str)
+- [`mat3.frob`](#mat3frob)
+- [`mat3.add`](#mat3add)
+- [`mat3.subtract`](#mat3subtract)
+- [`mat3.multiplyScalar`](#mat3multiplyscalar)
+- [`mat3.multiplyScalarAndAdd`](#mat3multiplyscalarandadd)
+- [`mat3.exactEquals`](#mat3exactequals)
+- [`mat3.equals`](#mat3equals)
+- [`mat3.mul`](#mat3mul)
+- [`mat3.sub`](#mat3sub)
 
 #### `mat3.create`
 
@@ -4831,6 +4433,59 @@ export const sub = subtract;
 ```
 
 ### mat4
+
+- [`mat4.create`](#mat4create)
+- [`mat4.clone`](#mat4clone)
+- [`mat4.copy`](#mat4copy)
+- [`mat4.fromValues`](#mat4fromvalues)
+- [`mat4.set`](#mat4set)
+- [`mat4.identity`](#mat4identity)
+- [`mat4.transpose`](#mat4transpose)
+- [`mat4.invert`](#mat4invert)
+- [`mat4.adjoint`](#mat4adjoint)
+- [`mat4.determinant`](#mat4determinant)
+- [`mat4.multiply`](#mat4multiply)
+- [`mat4.translate`](#mat4translate)
+- [`mat4.scale`](#mat4scale)
+- [`mat4.rotate`](#mat4rotate)
+- [`mat4.rotateX`](#mat4rotatex)
+- [`mat4.rotateY`](#mat4rotatey)
+- [`mat4.rotateZ`](#mat4rotatez)
+- [`mat4.fromTranslation`](#mat4fromtranslation)
+- [`mat4.fromScaling`](#mat4fromscaling)
+- [`mat4.fromRotation`](#mat4fromrotation)
+- [`mat4.fromXRotation`](#mat4fromxrotation)
+- [`mat4.fromYRotation`](#mat4fromyrotation)
+- [`mat4.fromZRotation`](#mat4fromzrotation)
+- [`mat4.fromRotationTranslation`](#mat4fromrotationtranslation)
+- [`mat4.fromQuat2`](#mat4fromquat2)
+- [`mat4.getTranslation`](#mat4gettranslation)
+- [`mat4.getScaling`](#mat4getscaling)
+- [`mat4.getRotation`](#mat4getrotation)
+- [`mat4.decompose`](#mat4decompose)
+- [`mat4.fromRotationTranslationScale`](#mat4fromrotationtranslationscale)
+- [`mat4.fromRotationTranslationScaleOrigin`](#mat4fromrotationtranslationscaleorigin)
+- [`mat4.fromQuat`](#mat4fromquat)
+- [`mat4.frustum`](#mat4frustum)
+- [`mat4.perspectiveNO`](#mat4perspectiveno)
+- [`mat4.perspective`](#mat4perspective)
+- [`mat4.perspectiveZO`](#mat4perspectivezo)
+- [`mat4.perspectiveFromFieldOfView`](#mat4perspectivefromfieldofview)
+- [`mat4.orthoNO`](#mat4orthono)
+- [`mat4.ortho`](#mat4ortho)
+- [`mat4.orthoZO`](#mat4orthozo)
+- [`mat4.lookAt`](#mat4lookat)
+- [`mat4.targetTo`](#mat4targetto)
+- [`mat4.str`](#mat4str)
+- [`mat4.frob`](#mat4frob)
+- [`mat4.add`](#mat4add)
+- [`mat4.subtract`](#mat4subtract)
+- [`mat4.multiplyScalar`](#mat4multiplyscalar)
+- [`mat4.multiplyScalarAndAdd`](#mat4multiplyscalarandadd)
+- [`mat4.exactEquals`](#mat4exactequals)
+- [`mat4.equals`](#mat4equals)
+- [`mat4.mul`](#mat4mul)
+- [`mat4.sub`](#mat4sub)
 
 #### `mat4.create`
 
@@ -5611,6 +5266,8 @@ export const sub = subtract;
 
 ### circle
 
+- [`circle.create`](#circlecreate)
+
 #### `circle.create`
 
 ```ts
@@ -5622,6 +5279,9 @@ export function create(): Box3;
 ```
 
 ### segment2
+
+- [`segment2.create`](#segment2create)
+- [`segment2.closestPoint`](#segment2closestpoint)
 
 #### `segment2.create`
 
@@ -5648,6 +5308,9 @@ export function closestPoint(out: Vec2, point: Vec2, segment: Segment2): Vec2;
 
 ### triangle2
 
+- [`triangle2.create`](#triangle2create)
+- [`triangle2.circumcircle`](#triangle2circumcircle)
+
 #### `triangle2.create`
 
 ```ts
@@ -5673,6 +5336,19 @@ export function circumcircle(outCircle: Circle, triangle: Triangle2): Circle;
 ```
 
 ### box3
+
+- [`box3.create`](#box3create)
+- [`box3.clone`](#box3clone)
+- [`box3.set`](#box3set)
+- [`box3.setFromCenterAndSize`](#box3setfromcenterandsize)
+- [`box3.expandByPoint`](#box3expandbypoint)
+- [`box3.containsPoint`](#box3containspoint)
+- [`box3.containsBox3`](#box3containsbox3)
+- [`box3.intersectsBox3`](#box3intersectsbox3)
+- [`box3.intersectsTriangle3`](#box3intersectstriangle3)
+- [`box3.intersectsSphere`](#box3intersectssphere)
+- [`box3.intersectsPlane3`](#box3intersectsplane3)
+- [`box3.intersectsRay`](#box3intersectsray)
 
 #### `box3.create`
 
@@ -5809,6 +5485,17 @@ export function intersectsRay(box: Box3, start: Vec3, end: Vec3): boolean;
 
 ### obb3
 
+- [`obb3.create`](#obb3create)
+- [`obb3.clone`](#obb3clone)
+- [`obb3.copy`](#obb3copy)
+- [`obb3.set`](#obb3set)
+- [`obb3.setFromBox3`](#obb3setfrombox3)
+- [`obb3.containsPoint`](#obb3containspoint)
+- [`obb3.clampPoint`](#obb3clamppoint)
+- [`obb3.intersectsOBB3`](#obb3intersectsobb3)
+- [`obb3.intersectsBox3`](#obb3intersectsbox3)
+- [`obb3.applyMatrix4`](#obb3applymatrix4)
+
 #### `obb3.create`
 
 ```ts
@@ -5942,6 +5629,8 @@ export function applyMatrix4(out: OBB3, obb: OBB3, matrix: Mat4): OBB3;
 
 ### sphere
 
+- [`sphere.create`](#spherecreate)
+
 #### `sphere.create`
 
 ```ts
@@ -5954,6 +5643,8 @@ export function create(): Box3;
 
 ### triangle3
 
+- [`triangle3.create`](#triangle3create)
+
 #### `triangle3.create`
 
 ```ts
@@ -5965,6 +5656,8 @@ export function create(): Box3;
 ```
 
 ### quickhull3
+
+- [`quickhull3`](#quickhull3)
 
 #### `quickhull3`
 
@@ -5980,6 +5673,8 @@ export function quickhull3(points: number[]): number[];
 
 ### quickhull2
 
+- [`quickhull2`](#quickhull2)
+
 #### `quickhull2`
 
 ```ts
@@ -5994,6 +5689,28 @@ export function quickhull2(points: number[]): number[];
 ```
 
 ### easing
+
+- [`easing.exp`](#easingexp)
+- [`easing.linear`](#easinglinear)
+- [`easing.sineIn`](#easingsinein)
+- [`easing.sineOut`](#easingsineout)
+- [`easing.sineInOut`](#easingsineinout)
+- [`easing.cubicIn`](#easingcubicin)
+- [`easing.cubicOut`](#easingcubicout)
+- [`easing.cubicInOut`](#easingcubicinout)
+- [`easing.quintIn`](#easingquintin)
+- [`easing.quintOut`](#easingquintout)
+- [`easing.quintInOut`](#easingquintinout)
+- [`easing.circIn`](#easingcircin)
+- [`easing.circOut`](#easingcircout)
+- [`easing.circInOut`](#easingcircinout)
+- [`easing.quartIn`](#easingquartin)
+- [`easing.quartOut`](#easingquartout)
+- [`easing.quartInOut`](#easingquartinout)
+- [`easing.expoIn`](#easingexpoin)
+- [`easing.expoOut`](#easingexpoout)
+- [`easing.expoInOut`](#easingexpoinout)
+- [`easing.rsqw`](#easingrsqw)
 
 #### `easing.exp`
 
@@ -6123,6 +5840,13 @@ export function rsqw(t: number, delta = 0.01, a = 1, f = 1 / (2 * Math.PI));
 
 ### noise
 
+- [`NoiseGenerator2D`](#noisegenerator2d)
+- [`NoiseGenerator3D`](#noisegenerator3d)
+- [`createSimplex2D`](#createsimplex2d)
+- [`createSimplex3D`](#createsimplex3d)
+- [`createPerlin2D`](#createperlin2d)
+- [`createPerlin3D`](#createperlin3d)
+
 #### `NoiseGenerator2D`
 
 ```ts
@@ -6210,6 +5934,18 @@ export function createPerlin3D(seed: number): NoiseGenerator3D;
 ```
 
 ### random
+
+- [`createMulberry32Generator`](#createmulberry32generator)
+- [`generateMulberry32Seed`](#generatemulberry32seed)
+- [`randomInt`](#randomint)
+- [`randomFloat`](#randomfloat)
+- [`randomBool`](#randombool)
+- [`randomSign`](#randomsign)
+- [`randomChoice`](#randomchoice)
+- [`randomVec2`](#randomvec2)
+- [`randomVec3`](#randomvec3)
+- [`randomVec4`](#randomvec4)
+- [`randomQuat`](#randomquat)
 
 #### `createMulberry32Generator`
 
@@ -6351,6 +6087,17 @@ export function randomQuat(out: Quat = [0, 0, 0, 0], randomFn: () => number = Ma
 
 ### common
 
+- [`EPSILON`](#epsilon)
+- [`round`](#round)
+- [`degreesToRadians`](#degreestoradians)
+- [`radiansToDegrees`](#radianstodegrees)
+- [`equals`](#equals)
+- [`fade`](#fade)
+- [`lerp`](#lerp)
+- [`clamp`](#clamp)
+- [`remap`](#remap)
+- [`remapClamp`](#remapclamp)
+
 #### `EPSILON`
 
 ```ts
@@ -6461,3 +6208,282 @@ export function remap(number: number, inLow: number, inHigh: number, outLow: num
  */
 export function remapClamp(value: number, inLow: number, inHigh: number, outLow: number, outHigh: number): number;
 ```
+
+### types
+
+- [`Vec2`](#vec2)
+- [`Vec3`](#vec3)
+- [`Vec4`](#vec4)
+- [`Quat`](#quat)
+- [`Quat2`](#quat2)
+- [`Mat2`](#mat2)
+- [`Mat3`](#mat3)
+- [`Mat4`](#mat4)
+- [`Mat2d`](#mat2d)
+- [`Box3`](#box3)
+- [`OBB3`](#obb3)
+- [`EulerOrder`](#eulerorder)
+- [`Euler`](#euler)
+- [`Triangle3`](#triangle3)
+- [`Segment3`](#segment3)
+- [`Triangle2`](#triangle2)
+- [`Segment2`](#segment2)
+- [`Plane3`](#plane3)
+- [`Sphere`](#sphere)
+- [`Circle`](#circle)
+- [`MutableArrayLike`](#mutablearraylike)
+
+#### `Vec2`
+
+```ts
+/** A 2D vector */
+export type Vec2 = [
+    x: number,
+    y: number
+];
+```
+
+#### `Vec3`
+
+```ts
+/** A 3D vector */
+export type Vec3 = [
+    x: number,
+    y: number,
+    z: number
+];
+```
+
+#### `Vec4`
+
+```ts
+/** A 4D vector */
+export type Vec4 = [
+    x: number,
+    y: number,
+    z: number,
+    w: number
+];
+```
+
+#### `Quat`
+
+```ts
+/** A quaternion that represents rotation */
+export type Quat = [
+    x: number,
+    y: number,
+    z: number,
+    w: number
+];
+```
+
+#### `Quat2`
+
+```ts
+/** A dual quaternion that represents both rotation and translation */
+export type Quat2 = [
+    x: number,
+    y: number,
+    z: number,
+    w: number,
+    x2: number,
+    y2: number,
+    z2: number,
+    w2: number
+];
+```
+
+#### `Mat2`
+
+```ts
+/** A 2x2 matrix */
+export type Mat2 = [
+    e1: number,
+    e2: number,
+    e3: number,
+    e4: number
+];
+```
+
+#### `Mat3`
+
+```ts
+/** A 3x3 matrix */
+export type Mat3 = [
+    e1: number,
+    e2: number,
+    e3: number,
+    e4: number,
+    e5: number,
+    e6: number,
+    e7: number,
+    e8: number,
+    e9: number
+];
+```
+
+#### `Mat4`
+
+```ts
+/** A 4x4 matrix */
+export type Mat4 = [
+    e1: number,
+    e2: number,
+    e3: number,
+    e4: number,
+    e5: number,
+    e6: number,
+    e7: number,
+    e8: number,
+    e9: number,
+    e10: number,
+    e11: number,
+    e12: number,
+    e13: number,
+    e14: number,
+    e15: number,
+    e16: number
+];
+```
+
+#### `Mat2d`
+
+```ts
+/** A 2D affine transform matrix */
+export type Mat2d = [
+    e1: number,
+    e2: number,
+    e3: number,
+    e4: number,
+    e5: number,
+    e6: number
+];
+```
+
+#### `Box3`
+
+```ts
+/** A box in 3D space */
+export type Box3 = [
+    min: Vec3,
+    max: Vec3
+];
+```
+
+#### `OBB3`
+
+```ts
+/** A oriented bounding box in 3D space */
+export type OBB3 = {
+    center: Vec3;
+    halfExtents: Vec3;
+    quaternion: Quat;
+};
+```
+
+#### `EulerOrder`
+
+```ts
+/** Euler orders */
+export type EulerOrder = 'xyz' | 'xzy' | 'yxz' | 'yzx' | 'zxy' | 'zyx';
+```
+
+#### `Euler`
+
+```ts
+/** A Euler in 3D space, with an optional order (default is 'xyz') */
+export type Euler = [
+    x: number,
+    y: number,
+    z: number,
+    order?: EulerOrder
+];
+```
+
+#### `Triangle3`
+
+```ts
+/** A triangle in 3D space */
+export type Triangle3 = [
+    a: Vec3,
+    b: Vec3,
+    c: Vec3
+];
+```
+
+#### `Segment3`
+
+```ts
+/** A line segment in 3D space */
+export type Segment3 = [
+    start: Vec3,
+    end: Vec3
+];
+```
+
+#### `Triangle2`
+
+```ts
+/** A triangle in 2D space */
+export type Triangle2 = [
+    a: Vec2,
+    b: Vec2,
+    c: Vec2
+];
+```
+
+#### `Segment2`
+
+```ts
+/** A line segment in 2D space */
+export type Segment2 = [
+    start: Vec2,
+    end: Vec2
+];
+```
+
+#### `Plane3`
+
+```ts
+/**
+ * A plane in 3D space
+ * normal - a unit length vector defining the normal of the plane.
+ * constant - the signed distance from the origin to the plane.
+ */
+export type Plane3 = {
+    normal: Vec3;
+    constant: number;
+};
+```
+
+#### `Sphere`
+
+```ts
+/** A sphere in 3D space */
+export type Sphere = {
+    center: Vec3;
+    radius: number;
+};
+```
+
+#### `Circle`
+
+```ts
+/** A circle in 2D space */
+export type Circle = {
+    center: Vec2;
+    radius: number;
+};
+```
+
+#### `MutableArrayLike`
+
+```ts
+export type MutableArrayLike<T> = {
+    [index: number]: T;
+    length: number;
+};
+```
+
+
