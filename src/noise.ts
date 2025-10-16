@@ -22,9 +22,6 @@ import { fade, lerp } from './common';
 // attribution is appreciated.
 // ```
 
-export type NoiseGenerator2D = (x: number, y: number) => number;
-export type NoiseGenerator3D = (x: number, y: number, z: number) => number;
-
 class Grad {
     constructor(
         public x: number,
@@ -102,11 +99,14 @@ function createPermutationTables(seed: number) {
     return { perm, gradP };
 }
 
-// Skewing and unskewing factors for 2, 3, and 4 dimensions
+// skewing and unskewing factors for 2, 3, and 4 dimensions
 const F2 = 0.5 * (Math.sqrt(3) - 1);
 const G2 = (3 - Math.sqrt(3)) / 6;
 const F3 = 1 / 3;
 const G3 = 1 / 6;
+
+export type NoiseGenerator2D = (x: number, y: number) => number;
+export type NoiseGenerator3D = (x: number, y: number, z: number) => number;
 
 /**
  * Creates a 2D simplex noise generator with the given seed
