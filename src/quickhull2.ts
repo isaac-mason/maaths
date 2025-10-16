@@ -1,17 +1,19 @@
-const EPSILON = 1e-12;
+const EPSILON = 1e-10;
 
 /**
  * Computes the convex hull of a set of 2D points using the QuickHull algorithm.
  * The hull is returned as an array of indices in counter-clockwise order.
  *
- * @param points Flat array of 2D points: [x0, y0, x1, y1, ...]
- * @returns Indices of hull vertices in CCW order
+ * Implementation of pseudocode from: https://en.wikipedia.org/wiki/Quickhull
+ *
+ * @param points flat array of 2D points: [x0, y0, x1, y1, ...]
+ * @returns indices of hull vertices in ccw order
  */
 export function quickhull2(points: number[]): number[] {
-    const n = points.length / 2;
+    const n = Math.floor(points.length / 2);
     if (n < 3) return Array.from({ length: n }, (_, i) => i);
 
-    // find leftmost and rightmost points
+    // find left and right most points
     let leftIdx = 0;
     let rightIdx = 0;
     let minX = points[0];
@@ -29,116 +31,105 @@ export function quickhull2(points: number[]): number[] {
         }
     }
 
-    if (Math.abs(maxX - minX) < EPSILON) return [leftIdx]; // all same x
+    if (Math.abs(maxX - minX) < EPSILON) return [leftIdx];
 
-    // partition points into upper/lower sets
-    const upperSet: number[] = [];
-    const lowerSet: number[] = [];
+    // convex Hull starts with A and B
+    const hull: number[] = [];
+
+    // partition points into S1 and S2
+    // S1 = points on the right side of oriented line from A to B
+    // S2 = points on the right side of oriented line from B to A
+    const s1: number[] = [];
+    const s2: number[] = [];
 
     for (let i = 0; i < n; i++) {
         if (i === leftIdx || i === rightIdx) continue;
-        const orient = orientation(points, leftIdx, rightIdx, i);
-        if (orient > EPSILON) upperSet.push(i);
-        else if (orient < -EPSILON) lowerSet.push(i);
+
+        const side = crossProduct(points, leftIdx, rightIdx, i);
+
+        // positive = left side of A→B = right side of B→A
+        // negative = right side of A→B = left side of B→A
+        if (side > EPSILON) {
+            s2.push(i); // left of A→B is right of B→A
+        } else if (side < -EPSILON) {
+            s1.push(i); // right of A→B
+        }
     }
 
-    // build hull iteratively (explicit stack, no recursion)
-    const hull: number[] = [leftIdx];
-    quickHullIterative(points, leftIdx, rightIdx, upperSet, hull);
+    // build hull: start with leftmost, process upper hull, add rightmost, process lower hull
+    hull.push(leftIdx);
+    findHull(points, s1, leftIdx, rightIdx, hull);
     hull.push(rightIdx);
-    quickHullIterative(points, rightIdx, leftIdx, lowerSet, hull);
+    findHull(points, s2, rightIdx, leftIdx, hull);
 
     return hull;
 }
 
-type StackFrame = {
-    p1: number;
-    p2: number;
-    outsideSet: number[];
-    insertPos: number;
-};
-
 /**
- * Iterative QuickHull subdivision step.
- * Expands the hull by finding the furthest point from a segment and
- * partitioning points on either side.
+ * Finds points on convex hull from set Sk that are on the right side of oriented line from P to Q.
+ * Points are inserted into hull array at the end (before the final endpoint).
  */
-function quickHullIterative(points: number[], p1: number, p2: number, outsideSet: number[], hull: number[]): void {
-    if (outsideSet.length === 0) return;
+function findHull(points: number[], sk: number[], p: number, q: number, hull: number[]): void {
+    if (sk.length === 0) return;
 
-    const stack: StackFrame[] = [{ p1, p2, outsideSet, insertPos: hull.length }];
+    // find farthest point C from segment PQ
+    let maxIdx = -1;
+    let maxDist = -1;
 
-    while (stack.length > 0) {
-        const frame = stack.pop()!;
-        const { p1, p2, outsideSet, insertPos } = frame;
-
-        if (outsideSet.length === 0) continue;
-
-        // find the point furthest from line (by perpendicular distance)
-        let maxIdx = -1;
-        let maxDist = EPSILON;
-
-        for (const idx of outsideSet) {
-            const dist = distanceToLine(points, p1, p2, idx);
-            if (dist > maxDist) {
-                maxDist = dist;
-                maxIdx = idx;
-            }
+    for (const idx of sk) {
+        const dist = Math.abs(crossProduct(points, p, q, idx));
+        if (dist > maxDist) {
+            maxDist = dist;
+            maxIdx = idx;
         }
-
-        if (maxIdx === -1) continue;
-
-        // partition remaining points
-        const leftSet: number[] = [];
-        const rightSet: number[] = [];
-
-        for (const idx of outsideSet) {
-            if (idx === maxIdx) continue;
-            const orientLeft = orientation(points, p1, maxIdx, idx);
-            const orientRight = orientation(points, maxIdx, p2, idx);
-            if (orientLeft > EPSILON) leftSet.push(idx);
-            else if (orientRight > EPSILON) rightSet.push(idx);
-        }
-
-        // insert max point into hull between p1 and p2
-        hull.splice(insertPos, 0, maxIdx);
-
-        // push right first so left is processed first (stack = LIFO)
-        if (rightSet.length > 0) stack.push({ p1: maxIdx, p2, outsideSet: rightSet, insertPos: insertPos + 1 });
-
-        if (leftSet.length > 0) stack.push({ p1, p2: maxIdx, outsideSet: leftSet, insertPos });
     }
+
+    if (maxIdx === -1) return;
+
+    // partition remaining points into S1 and S2
+    // S1 = points on right side of oriented line from P to C
+    // S2 = points on right side of oriented line from C to Q
+    // S0 = points inside triangle PCQ (discarded)
+    const s1: number[] = [];
+    const s2: number[] = [];
+
+    for (const idx of sk) {
+        if (idx === maxIdx) continue;
+
+        const sidePC = crossProduct(points, p, maxIdx, idx);
+        const sideCQ = crossProduct(points, maxIdx, q, idx);
+
+        // point is on right of P→C if cross product is negative
+        if (sidePC < -EPSILON) {
+            s1.push(idx);
+        }
+        // point is on right of C→Q if cross product is negative
+        else if (sideCQ < -EPSILON) {
+            s2.push(idx);
+        }
+        // else: point is inside triangle PCQ, discard it
+    }
+
+    // recursively process the two subsets
+    findHull(points, s1, p, maxIdx, hull);
+    hull.push(maxIdx); // Add point C to hull between P and Q
+    findHull(points, s2, maxIdx, q, hull);
 }
 
 /**
- * Returns the **unsigned** perpendicular distance from point p to line (p1, p2).
+ * Cross product to determine orientation.
+ * Returns (p2 - p1) × (p3 - p1)
+ * > 0: p3 is on the left of line p1→p2 (counter-clockwise)
+ * < 0: p3 is on the right of line p1→p2 (clockwise)
+ * = 0: collinear
  */
-function distanceToLine(points: number[], p1: number, p2: number, p: number): number {
-    const x1 = points[p1 * 2],
-        y1 = points[p1 * 2 + 1];
-    const x2 = points[p2 * 2],
-        y2 = points[p2 * 2 + 1];
-    const xp = points[p * 2],
-        yp = points[p * 2 + 1];
-    const dx = x2 - x1,
-        dy = y2 - y1;
-    const len = Math.sqrt(dx * dx + dy * dy);
-    if (len < EPSILON) return 0;
-    return Math.abs((xp - x1) * (-dy / len) + (yp - y1) * (dx / len));
-}
+function crossProduct(points: number[], p1: number, p2: number, p3: number): number {
+    const x1 = points[p1 * 2];
+    const y1 = points[p1 * 2 + 1];
+    const x2 = points[p2 * 2];
+    const y2 = points[p2 * 2 + 1];
+    const x3 = points[p3 * 2];
+    const y3 = points[p3 * 2 + 1];
 
-/**
- * Orientation test for three points.
- * > 0 => counter-clockwise turn
- * < 0 => clockwise turn
- * = 0 => collinear
- */
-function orientation(points: number[], p1: number, p2: number, p3: number): number {
-    const x1 = points[p1 * 2],
-        y1 = points[p1 * 2 + 1];
-    const x2 = points[p2 * 2],
-        y2 = points[p2 * 2 + 1];
-    const x3 = points[p3 * 2],
-        y3 = points[p3 * 2 + 1];
     return (x2 - x1) * (y3 - y1) - (y2 - y1) * (x3 - x1);
 }
