@@ -89,8 +89,8 @@ function createPermutationTables(seed: number) {
     }
 
     // To remove the need for index wrapping, double the permutation table length
-    const perm = new Array(512);
-    const gradP = new Array(512);
+    const perm: number[] = new Array(512);
+    const gradP: Grad[] = new Array(512);
 
     for (let i = 0; i < 256; i++) {
         let v: number;
