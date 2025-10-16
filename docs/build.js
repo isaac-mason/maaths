@@ -65,8 +65,8 @@ function generateApiDocs() {
             continue;
         }
 
-        const sf = tsProgram.getSourceFile(file);
-        if (!sf) {
+        const sourceFile = tsProgram.getSourceFile(file);
+        if (!sourceFile) {
             console.warn('couldnt get ts sourcefile for', file);
             continue;
         }
@@ -105,7 +105,7 @@ function generateApiDocs() {
 
             ts.forEachChild(node, visit);
         }
-        visit(sf);
+        visit(sourceFile);
 
         docs += `### ${entryModule.apiName}\n\n`;
         
@@ -120,7 +120,7 @@ function generateApiDocs() {
         }
 
         for (const name of exported) {
-            const typeDoc = getType(name);
+            const typeDoc = getType(name, sourceFile);
 
             if (typeDoc) {
                 const lines = typeDoc.trim();
@@ -270,7 +270,7 @@ function getSource(typeName) {
     return found ? found.trimStart() : null;
 }
 
-function getType(typeName) {
+function getType(typeName, sourceFile = null) {
     const checker = tsProgram.getTypeChecker();
 
     let found = null;
@@ -369,13 +369,13 @@ function getType(typeName) {
         ts.forEachChild(node, (child) => visit(child, fileText));
     }
 
-    // search all files for the type or function
-    for (const file of sourceFiles) {
-        const sf = tsProgram.getSourceFile(file);
-        if (sf) {
-            const fileText = sf.getFullText();
-            visit(sf, fileText);
-        }
+    // If a specific source file is provided, only search that file
+    // Otherwise, search all files for the type or function
+    const filesToSearch = sourceFile ? [sourceFile] : sourceFiles.map(file => tsProgram.getSourceFile(file)).filter(Boolean);
+    
+    for (const sf of filesToSearch) {
+        const fileText = sf.getFullText();
+        visit(sf, fileText);
         if (found) break;
     }
 

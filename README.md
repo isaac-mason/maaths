@@ -106,75 +106,77 @@ maaths is a collection of math helpers for 3D graphics and simulations.
 
 ```ts
 /**
- * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
- * @returns A new Box3
+ * Creates a new, empty vec2
+ *
+ * @returns a new 2D vector
  */
-export function create(): Box3;
+export function create(): Vec2;
 ```
 
 #### `vec2.clone`
 
 ```ts
 /**
- * Clones a Box3
- * @param box - A Box3 to clone
- * @returns a clone of box
+ * Creates a new vec2 initialized with values from an existing vector
+ *
+ * @param a vector to clone
+ * @returns a new 2D vector
  */
-export function clone(box: Box3): Box3;
+export function clone(a: Vec2): Vec2;
 ```
 
 #### `vec2.fromValues`
 
 ```ts
 /**
- * Creates a new Euler from the given values.
- * @param x The x rotation in radians.
- * @param y The y rotation in radians.
- * @param z The z rotation in radians.
- * @param order The order of rotation.
- * @returns A new Euler.
+ * Creates a new vec2 initialized with the given values
+ *
+ * @param x X component
+ * @param y Y component
+ * @returns a new 2D vector
  */
-export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
+export function fromValues(x: number, y: number): Vec2;
 ```
 
 #### `vec2.copy`
 
 ```ts
 /**
- * Copy the values from one mat2 to another
+ * Copy the values from one vec2 to another
  *
- * @param out the receiving matrix
- * @param a the source matrix
+ * @param out the receiving vector
+ * @param a the source vector
  * @returns out
  */
-export function copy(out: Mat2, a: Mat2): Mat2;
+export function copy(out: Vec2, a: Vec2): Vec2;
 ```
 
 #### `vec2.set`
 
 ```ts
 /**
- * Sets the min and max values of a Box3
- * @param out - The output Box3
- * @param min - The minimum corner
- * @param max - The maximum corner
- * @returns The updated Box3
+ * Set the components of a vec2 to the given values
+ *
+ * @param out the receiving vector
+ * @param x X component
+ * @param y Y component
+ * @returns out
  */
-export function set(out: Box3, min: Vec3, max: Vec3): Box3;
+export function set(out: Vec2, x: number, y: number): Vec2;
 ```
 
 #### `vec2.add`
 
 ```ts
 /**
- * Adds two mat2's
+ * Adds two vec2's
  *
- * @param out the receiving matrix
+ * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function add(out: Vec2, a: Vec2, b: Vec2): Vec2;
 ```
 
 #### `vec2.addScalar`
@@ -195,14 +197,14 @@ export function addScalar(out: Vec2, a: Vec2, b: number): Vec2;
 
 ```ts
 /**
- * Subtracts matrix b from matrix a
+ * Subtracts vector b from vector a
  *
- * @param out the receiving matrix
+ * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function subtract(out: Vec2, a: Vec2, b: Vec2): Vec2;
 ```
 
 #### `vec2.subtractScalar`
@@ -223,14 +225,14 @@ export function subtractScalar(out: Vec2, a: Vec2, b: number): Vec2;
 
 ```ts
 /**
- * Multiplies two mat2's
+ * Multiplies two vec2's
  *
- * @param out the receiving matrix
+ * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function multiply(out: Vec2, a: Vec2, b: Vec2): Vec2;
 ```
 
 #### `vec2.divide`
@@ -305,26 +307,27 @@ export function max(out: Vec2, a: Vec2, b: Vec2): Vec2;
 
 ```ts
 /**
- * Symmetric round
- * see https://www.npmjs.com/package/round-half-up-symmetric#user-content-detailed-background
+ * symmetric round the components of a vec2
  *
- * @param a value to round
+ * @param out the receiving vector
+ * @param a vector to round
+ * @returns out
  */
-export function round(a: number): number;
+export function round(out: Vec2, a: Vec2): Vec2;
 ```
 
 #### `vec2.scale`
 
 ```ts
 /**
- * Scales the mat2 by the dimensions in the given vec2
+ * Scales a vec2 by a scalar number
  *
- * @param out the receiving matrix
- * @param a the matrix to rotate
- * @param v the vec2 to scale the matrix by
+ * @param out the receiving vector
+ * @param a the vector to scale
+ * @param b amount to scale the vector by
  * @returns out
- **/
-export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
+ */
+export function scale(out: Vec2, a: Vec2, b: number): Vec2;
 ```
 
 #### `vec2.scaleAndAdd`
@@ -372,24 +375,24 @@ export function squaredDistance(a: Vec2, b: Vec2): number;
 
 ```ts
 /**
- * Calculates the length of a quat
+ * Calculates the length of a vec2
  *
- * @param a quaternion to calculate length of
+ * @param a vector to calculate length of
  * @returns length of a
  */
-export const length = vec4.length;
+export function length(a: Vec2): number;
 ```
 
 #### `vec2.squaredLength`
 
 ```ts
 /**
- * Calculates the squared length of a quat
+ * Calculates the squared length of a vec2
  *
- * @param a quaternion to calculate squared length of
+ * @param a vector to calculate squared length of
  * @returns squared length of a
  */
-export const squaredLength = vec4.squaredLength;
+export function squaredLength(a: Vec2): number;
 ```
 
 #### `vec2.negate`
@@ -422,26 +425,26 @@ export function inverse(out: Vec2, a: Vec2): Vec2;
 
 ```ts
 /**
- * Normalize a quat
+ * Normalize a vec2
  *
- * @param out the receiving quaternion
- * @param a quaternion to normalize
+ * @param out the receiving vector
+ * @param a vector to normalize
  * @returns out
  */
-export const normalize = vec4.normalize;
+export function normalize(out: Vec2, a: Vec2): Vec2;
 ```
 
 #### `vec2.dot`
 
 ```ts
 /**
- * Calculates the dot product of two quat's
+ * Calculates the dot product of two vec2's
  *
  * @param a the first operand
  * @param b the second operand
  * @returns dot product of a and b
  */
-export const dot = vec4.dot;
+export function dot(a: Vec2, b: Vec2): number;
 ```
 
 #### `vec2.cross`
@@ -463,15 +466,15 @@ export function cross(out: Vec3, a: Vec2, b: Vec2): Vec3;
 
 ```ts
 /**
+ * Performs a linear interpolation between two vec2's
  *
- * Returns the result of linearly interpolating between input A and input B by input T.
- *
- * @param v0
- * @param v1
- * @param t
- * @returns
+ * @param out the receiving vector
+ * @param a the first operand
+ * @param b the second operand
+ * @param t interpolation amount, in the range [0-1], between the two inputs
+ * @returns out
  */
-export function lerp(v0: number, v1: number, t: number);
+export function lerp(out: Vec2, a: Vec2, b: Vec2, t: number): Vec2;
 ```
 
 #### `vec2.transformMat2`
@@ -537,14 +540,14 @@ export function transformMat4(out: Vec2, a: Vec2, m: Mat4): Vec2;
 
 ```ts
 /**
- * Rotates a mat2 by the given angle
- *
- * @param out the receiving matrix
- * @param a the matrix to rotate
- * @param rad the angle to rotate the matrix by
+ * Rotate a 2D vector
+ * @param out The receiving vec2
+ * @param a The vec2 point to rotate
+ * @param b The origin of the rotation
+ * @param rad The angle of rotation in radians
  * @returns out
  */
-export function rotate(out: Mat2, a: Mat2, rad: number): Mat2;
+export function rotate(out: Vec2, a: Vec2, b: Vec2, rad: number): Vec2;
 ```
 
 #### `vec2.angle`
@@ -575,40 +578,38 @@ export function zero(out: Vec2): Vec2;
 
 ```ts
 /**
- * Returns a string representation of a mat2
+ * Returns a string representation of a vector
  *
- * @param a matrix to represent as a string
- * @returns string representation of the matrix
+ * @param a vector to represent as a string
+ * @returns string representation of the vector
  */
-export function str(a: Mat2): string;
+export function str(a: Vec2): string;
 ```
 
 #### `vec2.exactEquals`
 
 ```ts
 /**
- * Returns whether or not the euler angles have exactly the same elements in the same position (when compared with ===)
+ * Returns whether or not the vectors exactly have the same elements in the same position (when compared with ===)
  *
- * @param a The first euler.
- * @param b The second euler.
- * @returns True if the euler angles are equal, false otherwise.
+ * @param a The first vector.
+ * @param b The second vector.
+ * @returns True if the vectors are equal, false otherwise.
  */
-export function exactEquals(a: Euler, b: Euler): boolean;
+export function exactEquals(a: Vec2, b: Vec2): boolean;
 ```
 
 #### `vec2.equals`
 
 ```ts
 /**
- * Tests whether or not the arguments have approximately the same value, within an absolute
- * or relative tolerance of glMatrix.EPSILON (an absolute tolerance is used for values less
- * than or equal to 1.0, and a relative tolerance is used for larger values)
+ * Returns whether or not the vectors have approximately the same elements in the same position.
  *
- * @param a The first number to test.
- * @param b The second number to test.
- * @returns True if the numbers are approximately equal, false otherwise.
+ * @param a The first vector.
+ * @param b The second vector.
+ * @returns True if the vectors are equal, false otherwise.
  */
-export function equals(a: number, b: number, epsilon = EPSILON): boolean;
+export function equals(a: Vec2, b: Vec2): boolean;
 ```
 
 #### `vec2.finite`
@@ -635,7 +636,7 @@ export const len = length;
 
 ```ts
 /**
- * Alias for {@link mat2.subtract}
+ * Alias for {@link subtract}
  */
 export const sub = subtract;
 ```
@@ -644,7 +645,7 @@ export const sub = subtract;
 
 ```ts
 /**
- * Alias for {@link mat2.multiply}
+ * Alias for {@link multiply}
  */
 export const mul = multiply;
 ```
@@ -744,73 +745,77 @@ export const sqrLen = squaredLength;
 
 ```ts
 /**
- * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
- * @returns A new Box3
+ * Creates a new, empty vec3
+ *
+ * @returns a new 3D vector
  */
-export function create(): Box3;
+export function create(): Vec3;
 ```
 
 #### `vec3.clone`
 
 ```ts
 /**
- * Clones a Box3
- * @param box - A Box3 to clone
- * @returns a clone of box
+ * Creates a new vec3 initialized with values from an existing vector
+ *
+ * @param a vector to clone
+ * @returns a new 3D vector
  */
-export function clone(box: Box3): Box3;
+export function clone(a: Vec3): Vec3;
 ```
 
 #### `vec3.length`
 
 ```ts
 /**
- * Calculates the length of a quat
+ * Calculates the length of a vec3
  *
- * @param a quaternion to calculate length of
+ * @param a vector to calculate length of
  * @returns length of a
  */
-export const length = vec4.length;
+export function length(a: Vec3): number;
 ```
 
 #### `vec3.fromValues`
 
 ```ts
 /**
- * Creates a new Euler from the given values.
- * @param x The x rotation in radians.
- * @param y The y rotation in radians.
- * @param z The z rotation in radians.
- * @param order The order of rotation.
- * @returns A new Euler.
+ * Creates a new vec3 initialized with the given values
+ *
+ * @param x X component
+ * @param y Y component
+ * @param z Z component
+ * @returns a new 3D vector
  */
-export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
+export function fromValues(x: number, y: number, z: number): Vec3;
 ```
 
 #### `vec3.copy`
 
 ```ts
 /**
- * Copy the values from one mat2 to another
+ * Copy the values from one vec3 to another
  *
- * @param out the receiving matrix
- * @param a the source matrix
+ * @param out the receiving vector
+ * @param a the source vector
  * @returns out
  */
-export function copy(out: Mat2, a: Mat2): Mat2;
+export function copy(out: Vec3, a: Vec3): Vec3;
 ```
 
 #### `vec3.set`
 
 ```ts
 /**
- * Sets the min and max values of a Box3
- * @param out - The output Box3
- * @param min - The minimum corner
- * @param max - The maximum corner
- * @returns The updated Box3
+ * Set the components of a vec3 to the given values
+ *
+ * @param out the receiving vector
+ * @param x X component
+ * @param y Y component
+ * @param z Z component
+ * @returns out
  */
-export function set(out: Box3, min: Vec3, max: Vec3): Box3;
+export function set(out: Vec3, x: number, y: number, z: number): Vec3;
 ```
 
 #### `vec3.fromBuffer`
@@ -843,171 +848,172 @@ export function toBuffer(outBuffer: MutableArrayLike<number>, vec: Vec3, startIn
 
 ```ts
 /**
- * Adds two mat2's
+ * Adds two vec3's
  *
- * @param out the receiving matrix
+ * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function add(out: Vec3, a: Vec3, b: Vec3): Vec3;
 ```
 
 #### `vec3.addScalar`
 
 ```ts
 /**
- * Adds a scalar value to all components of a vec2
+ * Adds a scalar value to all components of a vec3
  *
  * @param out the receiving vector
  * @param a the source vector
  * @param b the scalar value to add
  * @returns out
  */
-export function addScalar(out: Vec2, a: Vec2, b: number): Vec2;
+export function addScalar(out: Vec3, a: Vec3, b: number): Vec3;
 ```
 
 #### `vec3.subtract`
 
 ```ts
 /**
- * Subtracts matrix b from matrix a
+ * Subtracts vector b from vector a
  *
- * @param out the receiving matrix
+ * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function subtract(out: Vec3, a: Vec3, b: Vec3): Vec3;
 ```
 
 #### `vec3.subtractScalar`
 
 ```ts
 /**
- * Subtracts a scalar value from all components of a vec2
+ * Subtracts a scalar value from all components of a vec3
  *
  * @param out the receiving vector
  * @param a the source vector
  * @param b the scalar value to subtract
  * @returns out
  */
-export function subtractScalar(out: Vec2, a: Vec2, b: number): Vec2;
+export function subtractScalar(out: Vec3, a: Vec3, b: number): Vec3;
 ```
 
 #### `vec3.multiply`
 
 ```ts
 /**
- * Multiplies two mat2's
+ * Multiplies two vec3's
  *
- * @param out the receiving matrix
+ * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function multiply(out: Vec3, a: Vec3, b: Vec3): Vec3;
 ```
 
 #### `vec3.divide`
 
 ```ts
 /**
- * Divides two vec2's
+ * Divides two vec3's
  *
  * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function divide(out: Vec2, a: Vec2, b: Vec2): Vec2;
+export function divide(out: Vec3, a: Vec3, b: Vec3): Vec3;
 ```
 
 #### `vec3.ceil`
 
 ```ts
 /**
- * Math.ceil the components of a vec2
+ * Math.ceil the components of a vec3
  *
  * @param out the receiving vector
  * @param a vector to ceil
  * @returns out
  */
-export function ceil(out: Vec2, a: Vec2): Vec2;
+export function ceil(out: Vec3, a: Vec3): Vec3;
 ```
 
 #### `vec3.floor`
 
 ```ts
 /**
- * Math.floor the components of a vec2
+ * Math.floor the components of a vec3
  *
  * @param out the receiving vector
  * @param a vector to floor
  * @returns out
  */
-export function floor(out: Vec2, a: Vec2): Vec2;
+export function floor(out: Vec3, a: Vec3): Vec3;
 ```
 
 #### `vec3.min`
 
 ```ts
 /**
- * Returns the minimum of two vec2's
+ * Returns the minimum of two vec3's
  *
  * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function min(out: Vec2, a: Vec2, b: Vec2): Vec2;
+export function min(out: Vec3, a: Vec3, b: Vec3): Vec3;
 ```
 
 #### `vec3.max`
 
 ```ts
 /**
- * Returns the maximum of two vec2's
+ * Returns the maximum of two vec3's
  *
  * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function max(out: Vec2, a: Vec2, b: Vec2): Vec2;
+export function max(out: Vec3, a: Vec3, b: Vec3): Vec3;
 ```
 
 #### `vec3.round`
 
 ```ts
 /**
- * Symmetric round
- * see https://www.npmjs.com/package/round-half-up-symmetric#user-content-detailed-background
+ * symmetric round the components of a vec3
  *
- * @param a value to round
+ * @param out the receiving vector
+ * @param a vector to round
+ * @returns out
  */
-export function round(a: number): number;
+export function round(out: Vec3, a: Vec3): Vec3;
 ```
 
 #### `vec3.scale`
 
 ```ts
 /**
- * Scales the mat2 by the dimensions in the given vec2
+ * Scales a vec3 by a scalar number
  *
- * @param out the receiving matrix
- * @param a the matrix to rotate
- * @param v the vec2 to scale the matrix by
+ * @param out the receiving vector
+ * @param a the vector to scale
+ * @param b amount to scale the vector by
  * @returns out
- **/
-export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
+ */
+export function scale(out: Vec3, a: Vec3, b: number): Vec3;
 ```
 
 #### `vec3.scaleAndAdd`
 
 ```ts
 /**
- * Adds two vec2's after scaling the second operand by a scalar value
+ * Adds two vec3's after scaling the second operand by a scalar value
  *
  * @param out the receiving vector
  * @param a the first operand
@@ -1015,142 +1021,141 @@ export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
  * @param scale the amount to scale b by before adding
  * @returns out
  */
-export function scaleAndAdd(out: Vec2, a: Vec2, b: Vec2, scale: number): Vec2;
+export function scaleAndAdd(out: Vec3, a: Vec3, b: Vec3, scale: number): Vec3;
 ```
 
 #### `vec3.distance`
 
 ```ts
 /**
- * Calculates the euclidian distance between two vec2's
+ * Calculates the euclidian distance between two vec3's
  *
  * @param a the first operand
  * @param b the second operand
  * @returns distance between a and b
  */
-export function distance(a: Vec2, b: Vec2): number;
+export function distance(a: Vec3, b: Vec3): number;
 ```
 
 #### `vec3.squaredDistance`
 
 ```ts
 /**
- * Calculates the squared euclidian distance between two vec2's
+ * Calculates the squared euclidian distance between two vec3's
  *
  * @param a the first operand
  * @param b the second operand
  * @returns squared distance between a and b
  */
-export function squaredDistance(a: Vec2, b: Vec2): number;
+export function squaredDistance(a: Vec3, b: Vec3): number;
 ```
 
 #### `vec3.squaredLength`
 
 ```ts
 /**
- * Calculates the squared length of a quat
+ * Calculates the squared length of a vec3
  *
- * @param a quaternion to calculate squared length of
+ * @param a vector to calculate squared length of
  * @returns squared length of a
  */
-export const squaredLength = vec4.squaredLength;
+export function squaredLength(a: Vec3): number;
 ```
 
 #### `vec3.negate`
 
 ```ts
 /**
- * Negates the components of a vec2
+ * Negates the components of a vec3
  *
  * @param out the receiving vector
  * @param a vector to negate
  * @returns out
  */
-export function negate(out: Vec2, a: Vec2): Vec2;
+export function negate(out: Vec3, a: Vec3): Vec3;
 ```
 
 #### `vec3.inverse`
 
 ```ts
 /**
- * Returns the inverse of the components of a vec2
+ * Returns the inverse of the components of a vec3
  *
  * @param out the receiving vector
  * @param a vector to invert
  * @returns out
  */
-export function inverse(out: Vec2, a: Vec2): Vec2;
+export function inverse(out: Vec3, a: Vec3): Vec3;
 ```
 
 #### `vec3.normalize`
 
 ```ts
 /**
- * Normalize a quat
+ * Normalize a vec3
  *
- * @param out the receiving quaternion
- * @param a quaternion to normalize
+ * @param out the receiving vector
+ * @param a vector to normalize
  * @returns out
  */
-export const normalize = vec4.normalize;
+export function normalize(out: Vec3, a: Vec3): Vec3;
 ```
 
 #### `vec3.dot`
 
 ```ts
 /**
- * Calculates the dot product of two quat's
+ * Calculates the dot product of two vec3's
  *
  * @param a the first operand
  * @param b the second operand
  * @returns dot product of a and b
  */
-export const dot = vec4.dot;
+export function dot(a: Vec3, b: Vec3): number;
 ```
 
 #### `vec3.cross`
 
 ```ts
 /**
- * Computes the cross product of two vec2's
- * Note that the cross product must by definition produce a 3D vector
+ * Computes the cross product of two vec3's
  *
  * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function cross(out: Vec3, a: Vec2, b: Vec2): Vec3;
+export function cross(out: Vec3, a: Vec3, b: Vec3): Vec3;
 ```
 
 #### `vec3.lerp`
 
 ```ts
 /**
+ * Performs a linear interpolation between two vec3's
  *
- * Returns the result of linearly interpolating between input A and input B by input T.
- *
- * @param v0
- * @param v1
- * @param t
- * @returns
+ * @param out the receiving vector
+ * @param a the first operand
+ * @param b the second operand
+ * @param t interpolation amount, in the range [0-1], between the two inputs
+ * @returns out
  */
-export function lerp(v0: number, v1: number, t: number);
+export function lerp(out: Vec3, a: Vec3, b: Vec3, t: number): Vec3;
 ```
 
 #### `vec3.slerp`
 
 ```ts
 /**
- * Performs a spherical linear interpolation between two quat
+ * Performs a spherical linear interpolation between two vec3's
  *
- * @param out the receiving quaternion
+ * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @param t interpolation amount, in the range [0-1], between the two inputs
  * @returns out
  */
-export function slerp(out: Quat, a: Quat, b: Quat, t: number): Quat;
+export function slerp(out: Vec3, a: Vec3, b: Vec3, t: number): Vec3;
 ```
 
 #### `vec3.hermite`
@@ -1191,8 +1196,7 @@ export function bezier(out: Vec3, a: Vec3, b: Vec3, c: Vec3, d: Vec3, t: number)
 
 ```ts
 /**
- * Transforms the vec2 with a mat4
- * 3rd vector component is implicitly '0'
+ * Transforms the vec3 with a mat4.
  * 4th vector component is implicitly '1'
  *
  * @param out the receiving vector
@@ -1200,22 +1204,21 @@ export function bezier(out: Vec3, a: Vec3, b: Vec3, c: Vec3, d: Vec3, t: number)
  * @param m matrix to transform with
  * @returns out
  */
-export function transformMat4(out: Vec2, a: Vec2, m: Mat4): Vec2;
+export function transformMat4(out: Vec3, a: Vec3, m: Mat4): Vec3;
 ```
 
 #### `vec3.transformMat3`
 
 ```ts
 /**
- * Transforms the vec2 with a mat3
- * 3rd vector component is implicitly '1'
+ * Transforms the vec3 with a mat3.
  *
  * @param out the receiving vector
  * @param a the vector to transform
- * @param m matrix to transform with
+ * @param m the 3x3 matrix to transform with
  * @returns out
  */
-export function transformMat3(out: Vec2, a: Vec2, m: Mat3): Vec2;
+export function transformMat3(out: Vec3, a: Vec3, m: Mat3): Vec3;
 ```
 
 #### `vec3.transformQuat`
@@ -1237,106 +1240,104 @@ export function transformQuat(out: Vec3, a: Vec3, q: Quat): Vec3;
 
 ```ts
 /**
- * Rotates a matrix by the given angle around the X axis
- *
- * @param out the receiving matrix
- * @param a the matrix to rotate
- * @param rad the angle to rotate the matrix by
+ * Rotate a 3D vector around the x-axis
+ * @param out The receiving vec3
+ * @param a The vec3 point to rotate
+ * @param b The origin of the rotation
+ * @param rad The angle of rotation in radians
  * @returns out
  */
-export function rotateX(out: Mat4, a: Mat4, rad: number): Mat4;
+export function rotateX(out: Vec3, a: Vec3, b: Vec3, rad: number): Vec3;
 ```
 
 #### `vec3.rotateY`
 
 ```ts
 /**
- * Rotates a matrix by the given angle around the Y axis
- *
- * @param out the receiving matrix
- * @param a the matrix to rotate
- * @param rad the angle to rotate the matrix by
+ * Rotate a 3D vector around the y-axis
+ * @param out The receiving vec3
+ * @param a The vec3 point to rotate
+ * @param b The origin of the rotation
+ * @param rad The angle of rotation in radians
  * @returns out
  */
-export function rotateY(out: Mat4, a: Mat4, rad: number): Mat4;
+export function rotateY(out: Vec3, a: Vec3, b: Vec3, rad: number): Vec3;
 ```
 
 #### `vec3.rotateZ`
 
 ```ts
 /**
- * Rotates a matrix by the given angle around the Z axis
- *
- * @param out the receiving matrix
- * @param a the matrix to rotate
- * @param rad the angle to rotate the matrix by
+ * Rotate a 3D vector around the z-axis
+ * @param out The receiving vec3
+ * @param a The vec3 point to rotate
+ * @param b The origin of the rotation
+ * @param rad The angle of rotation in radians
  * @returns out
  */
-export function rotateZ(out: Mat4, a: Mat4, rad: number): Mat4;
+export function rotateZ(out: Vec3, a: Vec3, b: Vec3, rad: number): Vec3;
 ```
 
 #### `vec3.angle`
 
 ```ts
 /**
- * Get the angle between two 2D vectors
+ * Get the angle between two 3D vectors
  * @param a The first operand
  * @param b The second operand
  * @returns The angle in radians
  */
-export function angle(a: Vec2, b: Vec2): number;
+export function angle(a: Vec3, b: Vec3): number;
 ```
 
 #### `vec3.zero`
 
 ```ts
 /**
- * Set the components of a vec2 to zero
+ * Set the components of a vec3 to zero
  *
  * @param out the receiving vector
  * @returns out
  */
-export function zero(out: Vec2): Vec2;
+export function zero(out: Vec3): Vec3;
 ```
 
 #### `vec3.str`
 
 ```ts
 /**
- * Returns a string representation of a mat2
+ * Returns a string representation of a vector
  *
- * @param a matrix to represent as a string
- * @returns string representation of the matrix
+ * @param a vector to represent as a string
+ * @returns string representation of the vector
  */
-export function str(a: Mat2): string;
+export function str(a: Vec3): string;
 ```
 
 #### `vec3.exactEquals`
 
 ```ts
 /**
- * Returns whether or not the euler angles have exactly the same elements in the same position (when compared with ===)
+ * Returns whether or not the vectors have exactly the same elements in the same position (when compared with ===)
  *
- * @param a The first euler.
- * @param b The second euler.
- * @returns True if the euler angles are equal, false otherwise.
+ * @param a The first vector.
+ * @param b The second vector.
+ * @returns True if the vectors are equal, false otherwise.
  */
-export function exactEquals(a: Euler, b: Euler): boolean;
+export function exactEquals(a: Vec3, b: Vec3): boolean;
 ```
 
 #### `vec3.equals`
 
 ```ts
 /**
- * Tests whether or not the arguments have approximately the same value, within an absolute
- * or relative tolerance of glMatrix.EPSILON (an absolute tolerance is used for values less
- * than or equal to 1.0, and a relative tolerance is used for larger values)
+ * Returns whether or not the vectors have approximately the same elements in the same position.
  *
- * @param a The first number to test.
- * @param b The second number to test.
- * @returns True if the numbers are approximately equal, false otherwise.
+ * @param a The first vector.
+ * @param b The second vector.
+ * @returns True if the vectors are equal, false otherwise.
  */
-export function equals(a: number, b: number, epsilon = EPSILON): boolean;
+export function equals(a: Vec3, b: Vec3): boolean;
 ```
 
 #### `vec3.finite`
@@ -1347,14 +1348,14 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
  * @param a vector to test
  * @returns whether or not the vector is finite
  */
-export function finite(a: Vec2): boolean;
+export function finite(a: Vec3): boolean;
 ```
 
 #### `vec3.sub`
 
 ```ts
 /**
- * Alias for {@link mat2.subtract}
+ * Alias for {@link subtract}
  */
 export const sub = subtract;
 ```
@@ -1363,7 +1364,7 @@ export const sub = subtract;
 
 ```ts
 /**
- * Alias for {@link mat2.multiply}
+ * Alias for {@link multiply}
  */
 export const mul = multiply;
 ```
@@ -1460,204 +1461,211 @@ export const sqrLen = squaredLength;
 
 ```ts
 /**
- * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
- * @returns A new Box3
+ * Creates a new, empty vec4
+ *
+ * @returns a new 4D vector
  */
-export function create(): Box3;
+export function create(): Vec4;
 ```
 
 #### `vec4.clone`
 
 ```ts
 /**
- * Clones a Box3
- * @param box - A Box3 to clone
- * @returns a clone of box
+ * Creates a new vec4 initialized with values from an existing vector
+ *
+ * @param a vector to clone
+ * @returns a new 4D vector
  */
-export function clone(box: Box3): Box3;
+export function clone(a: Vec4): Vec4;
 ```
 
 #### `vec4.fromValues`
 
 ```ts
 /**
- * Creates a new Euler from the given values.
- * @param x The x rotation in radians.
- * @param y The y rotation in radians.
- * @param z The z rotation in radians.
- * @param order The order of rotation.
- * @returns A new Euler.
+ * Creates a new vec4 initialized with the given values
+ *
+ * @param x X component
+ * @param y Y component
+ * @param z Z component
+ * @param w W component
+ * @returns a new 4D vector
  */
-export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
+export function fromValues(x: number, y: number, z: number, w: number): Vec4;
 ```
 
 #### `vec4.copy`
 
 ```ts
 /**
- * Copy the values from one mat2 to another
+ * Copy the values from one vec4 to another
  *
- * @param out the receiving matrix
- * @param a the source matrix
+ * @param out the receiving vector
+ * @param a the source vector
  * @returns out
  */
-export function copy(out: Mat2, a: Mat2): Mat2;
+export function copy(out: Vec4, a: Vec4): Vec4;
 ```
 
 #### `vec4.set`
 
 ```ts
 /**
- * Sets the min and max values of a Box3
- * @param out - The output Box3
- * @param min - The minimum corner
- * @param max - The maximum corner
- * @returns The updated Box3
+ * Set the components of a vec4 to the given values
+ *
+ * @param out the receiving vector
+ * @param x X component
+ * @param y Y component
+ * @param z Z component
+ * @param w W component
+ * @returns out
  */
-export function set(out: Box3, min: Vec3, max: Vec3): Box3;
+export function set(out: Vec4, x: number, y: number, z: number, w: number): Vec4;
 ```
 
 #### `vec4.add`
 
 ```ts
 /**
- * Adds two mat2's
+ * Adds two vec4's
  *
- * @param out the receiving matrix
+ * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function add(out: Vec4, a: Vec4, b: Vec4): Vec4;
 ```
 
 #### `vec4.subtract`
 
 ```ts
 /**
- * Subtracts matrix b from matrix a
+ * Subtracts vector b from vector a
  *
- * @param out the receiving matrix
+ * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function subtract(out: Vec4, a: Vec4, b: Vec4): Vec4;
 ```
 
 #### `vec4.multiply`
 
 ```ts
 /**
- * Multiplies two mat2's
+ * Multiplies two vec4's
  *
- * @param out the receiving matrix
+ * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function multiply(out: Vec4, a: Vec4, b: Vec4): Vec4;
 ```
 
 #### `vec4.divide`
 
 ```ts
 /**
- * Divides two vec2's
+ * Divides two vec4's
  *
  * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function divide(out: Vec2, a: Vec2, b: Vec2): Vec2;
+export function divide(out: Vec4, a: Vec4, b: Vec4): Vec4;
 ```
 
 #### `vec4.ceil`
 
 ```ts
 /**
- * Math.ceil the components of a vec2
+ * Math.ceil the components of a vec4
  *
  * @param out the receiving vector
  * @param a vector to ceil
  * @returns out
  */
-export function ceil(out: Vec2, a: Vec2): Vec2;
+export function ceil(out: Vec4, a: Vec4): Vec4;
 ```
 
 #### `vec4.floor`
 
 ```ts
 /**
- * Math.floor the components of a vec2
+ * Math.floor the components of a vec4
  *
  * @param out the receiving vector
  * @param a vector to floor
  * @returns out
  */
-export function floor(out: Vec2, a: Vec2): Vec2;
+export function floor(out: Vec4, a: Vec4): Vec4;
 ```
 
 #### `vec4.min`
 
 ```ts
 /**
- * Returns the minimum of two vec2's
+ * Returns the minimum of two vec4's
  *
  * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function min(out: Vec2, a: Vec2, b: Vec2): Vec2;
+export function min(out: Vec4, a: Vec4, b: Vec4): Vec4;
 ```
 
 #### `vec4.max`
 
 ```ts
 /**
- * Returns the maximum of two vec2's
+ * Returns the maximum of two vec4's
  *
  * @param out the receiving vector
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function max(out: Vec2, a: Vec2, b: Vec2): Vec2;
+export function max(out: Vec4, a: Vec4, b: Vec4): Vec4;
 ```
 
 #### `vec4.round`
 
 ```ts
 /**
- * Symmetric round
- * see https://www.npmjs.com/package/round-half-up-symmetric#user-content-detailed-background
+ * symmetric round the components of a vec4
  *
- * @param a value to round
+ * @param out the receiving vector
+ * @param a vector to round
+ * @returns out
  */
-export function round(a: number): number;
+export function round(out: Vec4, a: Vec4): Vec4;
 ```
 
 #### `vec4.scale`
 
 ```ts
 /**
- * Scales the mat2 by the dimensions in the given vec2
+ * Scales a vec4 by a scalar number
  *
- * @param out the receiving matrix
- * @param a the matrix to rotate
- * @param v the vec2 to scale the matrix by
+ * @param out the receiving vector
+ * @param a the vector to scale
+ * @param b amount to scale the vector by
  * @returns out
- **/
-export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
+ */
+export function scale(out: Vec4, a: Vec4, b: number): Vec4;
 ```
 
 #### `vec4.scaleAndAdd`
 
 ```ts
 /**
- * Adds two vec2's after scaling the second operand by a scalar value
+ * Adds two vec4's after scaling the second operand by a scalar value
  *
  * @param out the receiving vector
  * @param a the first operand
@@ -1665,222 +1673,217 @@ export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
  * @param scale the amount to scale b by before adding
  * @returns out
  */
-export function scaleAndAdd(out: Vec2, a: Vec2, b: Vec2, scale: number): Vec2;
+export function scaleAndAdd(out: Vec4, a: Vec4, b: Vec4, scale: number): Vec4;
 ```
 
 #### `vec4.distance`
 
 ```ts
 /**
- * Calculates the euclidian distance between two vec2's
+ * Calculates the euclidian distance between two vec4's
  *
  * @param a the first operand
  * @param b the second operand
  * @returns distance between a and b
  */
-export function distance(a: Vec2, b: Vec2): number;
+export function distance(a: Vec4, b: Vec4): number;
 ```
 
 #### `vec4.squaredDistance`
 
 ```ts
 /**
- * Calculates the squared euclidian distance between two vec2's
+ * Calculates the squared euclidian distance between two vec4's
  *
  * @param a the first operand
  * @param b the second operand
  * @returns squared distance between a and b
  */
-export function squaredDistance(a: Vec2, b: Vec2): number;
+export function squaredDistance(a: Vec4, b: Vec4): number;
 ```
 
 #### `vec4.length`
 
 ```ts
 /**
- * Calculates the length of a quat
+ * Calculates the length of a vec4
  *
- * @param a quaternion to calculate length of
+ * @param a vector to calculate length of
  * @returns length of a
  */
-export const length = vec4.length;
+export function length(a: Vec4): number;
 ```
 
 #### `vec4.squaredLength`
 
 ```ts
 /**
- * Calculates the squared length of a quat
+ * Calculates the squared length of a vec4
  *
- * @param a quaternion to calculate squared length of
+ * @param a vector to calculate squared length of
  * @returns squared length of a
  */
-export const squaredLength = vec4.squaredLength;
+export function squaredLength(a: Vec4): number;
 ```
 
 #### `vec4.negate`
 
 ```ts
 /**
- * Negates the components of a vec2
+ * Negates the components of a vec4
  *
  * @param out the receiving vector
  * @param a vector to negate
  * @returns out
  */
-export function negate(out: Vec2, a: Vec2): Vec2;
+export function negate(out: Vec4, a: Vec4): Vec4;
 ```
 
 #### `vec4.inverse`
 
 ```ts
 /**
- * Returns the inverse of the components of a vec2
+ * Returns the inverse of the components of a vec4
  *
  * @param out the receiving vector
  * @param a vector to invert
  * @returns out
  */
-export function inverse(out: Vec2, a: Vec2): Vec2;
+export function inverse(out: Vec4, a: Vec4): Vec4;
 ```
 
 #### `vec4.normalize`
 
 ```ts
 /**
- * Normalize a quat
+ * Normalize a vec4
  *
- * @param out the receiving quaternion
- * @param a quaternion to normalize
+ * @param out the receiving vector
+ * @param a vector to normalize
  * @returns out
  */
-export const normalize = vec4.normalize;
+export function normalize(out: Vec4, a: Vec4): Vec4;
 ```
 
 #### `vec4.dot`
 
 ```ts
 /**
- * Calculates the dot product of two quat's
+ * Calculates the dot product of two vec4's
  *
  * @param a the first operand
  * @param b the second operand
  * @returns dot product of a and b
  */
-export const dot = vec4.dot;
+export function dot(a: Vec4, b: Vec4): number;
 ```
 
 #### `vec4.cross`
 
 ```ts
 /**
- * Computes the cross product of two vec2's
- * Note that the cross product must by definition produce a 3D vector
+ * Returns the cross-product of three vectors in a 4-dimensional space
  *
  * @param out the receiving vector
- * @param a the first operand
- * @param b the second operand
- * @returns out
+ * @param u the first vector
+ * @param v the second vector
+ * @param w the third vector
+ * @returns result
  */
-export function cross(out: Vec3, a: Vec2, b: Vec2): Vec3;
+export function cross(out: Vec4, u: Vec4, v: Vec4, w: Vec4): Vec4;
 ```
 
 #### `vec4.lerp`
 
 ```ts
 /**
+ * Performs a linear interpolation between two vec4's
  *
- * Returns the result of linearly interpolating between input A and input B by input T.
- *
- * @param v0
- * @param v1
- * @param t
- * @returns
+ * @param out the receiving vector
+ * @param a the first operand
+ * @param b the second operand
+ * @param t interpolation amount, in the range [0-1], between the two inputs
+ * @returns out
  */
-export function lerp(v0: number, v1: number, t: number);
+export function lerp(out: Vec4, a: Vec4, b: Vec4, t: number): Vec4;
 ```
 
 #### `vec4.transformMat4`
 
 ```ts
 /**
- * Transforms the vec2 with a mat4
- * 3rd vector component is implicitly '0'
- * 4th vector component is implicitly '1'
+ * Transforms the vec4 with a mat4.
  *
  * @param out the receiving vector
  * @param a the vector to transform
  * @param m matrix to transform with
  * @returns out
  */
-export function transformMat4(out: Vec2, a: Vec2, m: Mat4): Vec2;
+export function transformMat4(out: Vec4, a: Vec4, m: Mat4): Vec4;
 ```
 
 #### `vec4.transformQuat`
 
 ```ts
 /**
- * Transforms the vec3 with a quat
- * Can also be used for dual quaternions. (Multiply it with the real part)
+ * Transforms the vec4 with a quat
  *
  * @param out the receiving vector
  * @param a the vector to transform
  * @param q quaternion to transform with
  * @returns out
  */
-export function transformQuat(out: Vec3, a: Vec3, q: Quat): Vec3;
+export function transformQuat(out: Vec4, a: Vec4, q: Quat): Vec4;
 ```
 
 #### `vec4.zero`
 
 ```ts
 /**
- * Set the components of a vec2 to zero
+ * Set the components of a vec4 to zero
  *
  * @param out the receiving vector
  * @returns out
  */
-export function zero(out: Vec2): Vec2;
+export function zero(out: Vec4): Vec4;
 ```
 
 #### `vec4.str`
 
 ```ts
 /**
- * Returns a string representation of a mat2
+ * Returns a string representation of a vector
  *
- * @param a matrix to represent as a string
- * @returns string representation of the matrix
+ * @param a vector to represent as a string
+ * @returns string representation of the vector
  */
-export function str(a: Mat2): string;
+export function str(a: Vec4): string;
 ```
 
 #### `vec4.exactEquals`
 
 ```ts
 /**
- * Returns whether or not the euler angles have exactly the same elements in the same position (when compared with ===)
+ * Returns whether or not the vectors have exactly the same elements in the same position (when compared with ===)
  *
- * @param a The first euler.
- * @param b The second euler.
- * @returns True if the euler angles are equal, false otherwise.
+ * @param a The first vector.
+ * @param b The second vector.
+ * @returns True if the vectors are equal, false otherwise.
  */
-export function exactEquals(a: Euler, b: Euler): boolean;
+export function exactEquals(a: Vec4, b: Vec4): boolean;
 ```
 
 #### `vec4.equals`
 
 ```ts
 /**
- * Tests whether or not the arguments have approximately the same value, within an absolute
- * or relative tolerance of glMatrix.EPSILON (an absolute tolerance is used for values less
- * than or equal to 1.0, and a relative tolerance is used for larger values)
+ * Returns whether or not the vectors have approximately the same elements in the same position.
  *
- * @param a The first number to test.
- * @param b The second number to test.
- * @returns True if the numbers are approximately equal, false otherwise.
+ * @param a The first vector.
+ * @param b The second vector.
+ * @returns True if the vectors are equal, false otherwise.
  */
-export function equals(a: number, b: number, epsilon = EPSILON): boolean;
+export function equals(a: Vec4, b: Vec4): boolean;
 ```
 
 #### `vec4.finite`
@@ -1891,14 +1894,14 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
  * @param a vector to test
  * @returns whether or not the vector is finite
  */
-export function finite(a: Vec2): boolean;
+export function finite(a: Vec4): boolean;
 ```
 
 #### `vec4.sub`
 
 ```ts
 /**
- * Alias for {@link mat2.subtract}
+ * Alias for {@link subtract}
  */
 export const sub = subtract;
 ```
@@ -1907,7 +1910,7 @@ export const sub = subtract;
 
 ```ts
 /**
- * Alias for {@link mat2.multiply}
+ * Alias for {@link multiply}
  */
 export const mul = multiply;
 ```
@@ -1972,10 +1975,9 @@ export const sqrLen = squaredLength;
 
 ```ts
 /**
- * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
- * @returns A new Box3
+ * Creates a new Euler with default values (0, 0, 0, 'xyz').
  */
-export function create(): Box3;
+export function create(): Euler;
 ```
 
 #### `euler.fromValues`
@@ -2037,15 +2039,13 @@ export function exactEquals(a: Euler, b: Euler): boolean;
 
 ```ts
 /**
- * Tests whether or not the arguments have approximately the same value, within an absolute
- * or relative tolerance of glMatrix.EPSILON (an absolute tolerance is used for values less
- * than or equal to 1.0, and a relative tolerance is used for larger values)
+ * Returns whether or not the euler angles have approximately the same elements in the same position.
  *
- * @param a The first number to test.
- * @param b The second number to test.
- * @returns True if the numbers are approximately equal, false otherwise.
+ * @param a The first euler.
+ * @param b The second euler.
+ * @returns True if the euler angles are equal, false otherwise.
  */
-export function equals(a: number, b: number, epsilon = EPSILON): boolean;
+export function equals(a: Euler, b: Euler): boolean;
 ```
 
 #### `euler.fromQuat`
@@ -2119,22 +2119,23 @@ export function reorder(out: Euler, a: Euler, order: EulerOrder): Euler;
 
 ```ts
 /**
- * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
- * @returns A new Box3
+ * Creates a new identity quat
+ *
+ * @returns a new quaternion
  */
-export function create(): Box3;
+export function create(): Quat;
 ```
 
 #### `quat.identity`
 
 ```ts
 /**
- * Set a mat2 to the identity matrix
+ * Set a quat to the identity quaternion
  *
- * @param out the receiving matrix
+ * @param out the receiving quaternion
  * @returns out
  */
-export function identity(out: Mat2): Mat2;
+export function identity(out: Quat): Quat;
 ```
 
 #### `quat.setAxisAngle`
@@ -2188,56 +2189,56 @@ export function getAngle(a: Quat, b: Quat): number;
 
 ```ts
 /**
- * Multiplies two mat2's
+ * Multiplies two quat's
  *
- * @param out the receiving matrix
+ * @param out the receiving quaternion
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function multiply(out: Quat, a: Quat, b: Quat): Quat;
 ```
 
 #### `quat.rotateX`
 
 ```ts
 /**
- * Rotates a matrix by the given angle around the X axis
+ * Rotates a quaternion by the given angle about the X axis
  *
- * @param out the receiving matrix
- * @param a the matrix to rotate
- * @param rad the angle to rotate the matrix by
+ * @param out quat receiving operation result
+ * @param a quat to rotate
+ * @param rad angle (in radians) to rotate
  * @returns out
  */
-export function rotateX(out: Mat4, a: Mat4, rad: number): Mat4;
+export function rotateX(out: Quat, a: Quat, rad: number): Quat;
 ```
 
 #### `quat.rotateY`
 
 ```ts
 /**
- * Rotates a matrix by the given angle around the Y axis
+ * Rotates a quaternion by the given angle about the Y axis
  *
- * @param out the receiving matrix
- * @param a the matrix to rotate
- * @param rad the angle to rotate the matrix by
+ * @param out quat receiving operation result
+ * @param a quat to rotate
+ * @param rad angle (in radians) to rotate
  * @returns out
  */
-export function rotateY(out: Mat4, a: Mat4, rad: number): Mat4;
+export function rotateY(out: Quat, a: Quat, rad: number): Quat;
 ```
 
 #### `quat.rotateZ`
 
 ```ts
 /**
- * Rotates a matrix by the given angle around the Z axis
+ * Rotates a quaternion by the given angle about the Z axis
  *
- * @param out the receiving matrix
- * @param a the matrix to rotate
- * @param rad the angle to rotate the matrix by
+ * @param out quat receiving operation result
+ * @param a quat to rotate
+ * @param rad angle (in radians) to rotate
  * @returns out
  */
-export function rotateZ(out: Mat4, a: Mat4, rad: number): Mat4;
+export function rotateZ(out: Quat, a: Quat, rad: number): Quat;
 ```
 
 #### `quat.calculateW`
@@ -2258,7 +2259,14 @@ export function calculateW(out: Quat, a: Quat): Quat;
 #### `quat.exp`
 
 ```ts
-export function exp(t: number);
+/**
+ * Calculate the exponential of a unit quaternion.
+ *
+ * @param out the receiving quaternion
+ * @param a quat to calculate the exponential of
+ * @returns out
+ */
+export function exp(out: Quat, a: Quat): Quat;
 ```
 
 #### `quat.ln`
@@ -2307,13 +2315,13 @@ export function slerp(out: Quat, a: Quat, b: Quat, t: number): Quat;
 
 ```ts
 /**
- * Inverts a mat2
+ * Calculates the inverse of a quat
  *
- * @param out the receiving matrix
- * @param a the source matrix
- * @returns out, or null if source matrix is not invertible
+ * @param out the receiving quaternion
+ * @param a quat to calculate inverse of
+ * @returns out
  */
-export function invert(out: Mat2, a: Mat2): Mat2 | null;
+export function invert(out: Quat, a: Quat): Quat;
 ```
 
 #### `quat.conjugate`
@@ -2362,91 +2370,96 @@ export function fromEuler(out: Quat, euler: Euler): Quat;
 
 ```ts
 /**
- * Returns a string representation of a mat2
+ * Returns a string representation of a quaternion
  *
- * @param a matrix to represent as a string
- * @returns string representation of the matrix
+ * @param a vector to represent as a string
+ * @returns string representation of the vector
  */
-export function str(a: Mat2): string;
+export function str(a: Quat): string;
 ```
 
 #### `quat.clone`
 
 ```ts
 /**
- * Clones a Box3
- * @param box - A Box3 to clone
- * @returns a clone of box
+ * Creates a new quat initialized with values from an existing quaternion
+ *
+ * @param a quaternion to clone
+ * @returns a new quaternion
  */
-export function clone(box: Box3): Box3;
+export const clone = vec4.clone;
 ```
 
 #### `quat.fromValues`
 
 ```ts
 /**
- * Creates a new Euler from the given values.
- * @param x The x rotation in radians.
- * @param y The y rotation in radians.
- * @param z The z rotation in radians.
- * @param order The order of rotation.
- * @returns A new Euler.
+ * Creates a new quat initialized with the given values
+ *
+ * @param x X component
+ * @param y Y component
+ * @param z Z component
+ * @param w W component
+ * @returns a new quaternion
  */
-export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
+export const fromValues = vec4.fromValues;
 ```
 
 #### `quat.copy`
 
 ```ts
 /**
- * Copy the values from one mat2 to another
+ * Copy the values from one quat to another
  *
- * @param out the receiving matrix
- * @param a the source matrix
+ * @param out the receiving quaternion
+ * @param a the source quaternion
  * @returns out
  */
-export function copy(out: Mat2, a: Mat2): Mat2;
+export const copy = vec4.copy;
 ```
 
 #### `quat.set`
 
 ```ts
 /**
- * Sets the min and max values of a Box3
- * @param out - The output Box3
- * @param min - The minimum corner
- * @param max - The maximum corner
- * @returns The updated Box3
+ * Set the components of a quat to the given values
+ *
+ * @param out the receiving quaternion
+ * @param x X component
+ * @param y Y component
+ * @param z Z component
+ * @param w W component
+ * @returns out
  */
-export function set(out: Box3, min: Vec3, max: Vec3): Box3;
+export const set = vec4.set;
 ```
 
 #### `quat.add`
 
 ```ts
 /**
- * Adds two mat2's
+ * Adds two quat's
  *
- * @param out the receiving matrix
+ * @param out the receiving quaternion
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export const add = vec4.add;
 ```
 
 #### `quat.scale`
 
 ```ts
 /**
- * Scales the mat2 by the dimensions in the given vec2
+ * Scales a quat by a scalar number
  *
- * @param out the receiving matrix
- * @param a the matrix to rotate
- * @param v the vec2 to scale the matrix by
+ * @param out the receiving quaternion
+ * @param a the quaternion to scale
+ * @param b amount to scale the quaternion by
  * @returns out
- **/
-export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
+ */
+export const scale = vec4.scale;
 ```
 
 #### `quat.dot`
@@ -2466,15 +2479,15 @@ export const dot = vec4.dot;
 
 ```ts
 /**
+ * Performs a linear interpolation between two quat's
  *
- * Returns the result of linearly interpolating between input A and input B by input T.
- *
- * @param v0
- * @param v1
- * @param t
- * @returns
+ * @param out the receiving quaternion
+ * @param a the first operand
+ * @param b the second operand
+ * @param t interpolation amount, in the range [0-1], between the two inputs
+ * @returns out
  */
-export function lerp(v0: number, v1: number, t: number);
+export const lerp = vec4.lerp;
 ```
 
 #### `quat.length`
@@ -2523,7 +2536,7 @@ export const sqrLen = squaredLength;
 
 ```ts
 /**
- * Alias for {@link mat2.multiply}
+ * Alias for {@link multiply}
  */
 export const mul = multiply;
 ```
@@ -2545,28 +2558,26 @@ export const normalize = vec4.normalize;
 
 ```ts
 /**
- * Returns whether or not the euler angles have exactly the same elements in the same position (when compared with ===)
+ * Returns whether or not the quaternions have exactly the same elements in the same position (when compared with ===)
  *
- * @param a The first euler.
- * @param b The second euler.
- * @returns True if the euler angles are equal, false otherwise.
+ * @param a The first quaternion.
+ * @param b The second quaternion.
+ * @returns True if the quaternions are equal, false otherwise.
  */
-export function exactEquals(a: Euler, b: Euler): boolean;
+export const exactEquals = vec4.exactEquals;
 ```
 
 #### `quat.equals`
 
 ```ts
 /**
- * Tests whether or not the arguments have approximately the same value, within an absolute
- * or relative tolerance of glMatrix.EPSILON (an absolute tolerance is used for values less
- * than or equal to 1.0, and a relative tolerance is used for larger values)
+ * Returns whether or not the quaternions have approximately the same elements in the same position.
  *
- * @param a The first number to test.
- * @param b The second number to test.
- * @returns True if the numbers are approximately equal, false otherwise.
+ * @param a The first quaternion.
+ * @param b The second quaternion.
+ * @returns True if the quaternions are equal, false otherwise.
  */
-export function equals(a: number, b: number, epsilon = EPSILON): boolean;
+export function equals(a: Quat, b: Quat): boolean;
 ```
 
 #### `quat.rotationTo`
@@ -2716,35 +2727,44 @@ export const setAxes = (() => {
 
 ```ts
 /**
- * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
- * @returns A new Box3
+ * Creates a new identity dual quat
+ *
+ * @returns a new dual quaternion [real -> rotation, dual -> translation]
  */
-export function create(): Box3;
+export function create(): Quat2;
 ```
 
 #### `quat2.clone`
 
 ```ts
 /**
- * Clones a Box3
- * @param box - A Box3 to clone
- * @returns a clone of box
+ * Creates a new quat initialized with values from an existing quaternion
+ *
+ * @param a dual quaternion to clone
+ * @returns new dual quaternion
+ * @function
  */
-export function clone(box: Box3): Box3;
+export function clone(a: Quat2): Quat2;
 ```
 
 #### `quat2.fromValues`
 
 ```ts
 /**
- * Creates a new Euler from the given values.
- * @param x The x rotation in radians.
- * @param y The y rotation in radians.
- * @param z The z rotation in radians.
- * @param order The order of rotation.
- * @returns A new Euler.
+ * Creates a new dual quat initialized with the given values
+ *
+ * @param x1 X component
+ * @param y1 Y component
+ * @param z1 Z component
+ * @param w1 W component
+ * @param x2 X component
+ * @param y2 Y component
+ * @param z2 Z component
+ * @param w2 W component
+ * @returns new dual quaternion
+ * @function
  */
-export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
+export function fromValues(x1: number, y1: number, z1: number, w1: number, x2: number, y2: number, z2: number, w2: number): Quat2;
 ```
 
 #### `quat2.fromRotationTranslationValues`
@@ -2770,106 +2790,104 @@ export function fromRotationTranslationValues(x1: number, y1: number, z1: number
 
 ```ts
 /**
- * Creates a matrix from a quaternion rotation and vector translation
- * This is equivalent to (but much faster than):
+ * Creates a dual quat from a quaternion and a translation
  *
- *     mat4.identity(dest);
- *     mat4.translate(dest, dest, vec);
- *     let quatMat = mat4.create();
- *     mat4.fromQuat(quatMat, quat);
- *     mat4.multiply(dest, dest, quatMat);
- *
- * @param out mat4 receiving operation result
- * @param q Rotation quaternion
- * @param v Translation vector
- * @returns out
+ * @param out dual quaternion receiving operation result
+ * @param q a normalized quaternion
+ * @param t translation vector
+ * @returns dual quaternion receiving operation result
+ * @function
  */
-export function fromRotationTranslation(out: Mat4, q: Quat | Quat2, v: Vec3): Mat4;
+export function fromRotationTranslation(out: Quat2, q: Quat, t: Vec3): Quat2;
 ```
 
 #### `quat2.fromTranslation`
 
 ```ts
 /**
- * Creates a matrix from a vector translation
- * This is equivalent to (but much faster than):
+ * Creates a dual quat from a translation
  *
- *     mat2d.identity(dest);
- *     mat2d.translate(dest, dest, vec);
- *
- * @param out mat2d receiving operation result
- * @param v Translation vector
- * @returns out
+ * @param out dual quaternion receiving operation result
+ * @param t translation vector
+ * @returns dual quaternion receiving operation result
+ * @function
  */
-export function fromTranslation(out: Mat2d, v: Vec2): Mat2d;
+export function fromTranslation(out: Quat2, t: Vec3): Quat2;
 ```
 
 #### `quat2.fromRotation`
 
 ```ts
 /**
- * Creates a matrix from a given angle
- * This is equivalent to (but much faster than):
+ * Creates a dual quat from a quaternion
  *
- *     mat2.identity(dest);
- *     mat2.rotate(dest, dest, rad);
- *
- * @param out mat2 receiving operation result
- * @param rad the angle to rotate the matrix by
- * @returns out
+ * @param out dual quaternion receiving operation result
+ * @param q the quaternion
+ * @returns dual quaternion receiving operation result
+ * @function
  */
-export function fromRotation(out: Mat2, rad: number): Mat2;
+export function fromRotation(out: Quat2, q: Quat): Quat2;
 ```
 
 #### `quat2.fromMat4`
 
 ```ts
 /**
- * Copies the upper-left 3x3 values into the given mat3.
+ * Creates a new dual quat from a matrix (4x4)
  *
- * @param out the receiving 3x3 matrix
- * @param a   the source 4x4 matrix
- * @returns out
+ * @param out the dual quaternion
+ * @param a the matrix
+ * @returns dual quat receiving operation result
+ * @function
  */
-export function fromMat4(out: Mat3, a: Mat4): Mat3;
+export function fromMat4(out: Quat2, a: Mat4): Quat2;
 ```
 
 #### `quat2.copy`
 
 ```ts
 /**
- * Copy the values from one mat2 to another
+ * Copy the values from one dual quat to another
  *
- * @param out the receiving matrix
- * @param a the source matrix
+ * @param out the receiving dual quaternion
+ * @param a the source dual quaternion
  * @returns out
+ * @function
  */
-export function copy(out: Mat2, a: Mat2): Mat2;
+export function copy(out: Quat2, a: Quat2): Quat2;
 ```
 
 #### `quat2.identity`
 
 ```ts
 /**
- * Set a mat2 to the identity matrix
+ * Set a dual quat to the identity dual quaternion
  *
- * @param out the receiving matrix
+ * @param out the receiving quaternion
  * @returns out
  */
-export function identity(out: Mat2): Mat2;
+export function identity(out: Quat2): Quat2;
 ```
 
 #### `quat2.set`
 
 ```ts
 /**
- * Sets the min and max values of a Box3
- * @param out - The output Box3
- * @param min - The minimum corner
- * @param max - The maximum corner
- * @returns The updated Box3
+ * Set the components of a dual quat to the given values
+ *
+ * @param out the receiving quaternion
+ * @param x1 X component
+ * @param y1 Y component
+ * @param z1 Z component
+ * @param w1 W component
+ * @param x2 X component
+ * @param y2 Y component
+ * @param z2 Z component
+ * @param w2 W component
+ * @returns out
+ * @function
  */
-export function set(out: Box3, min: Vec3, max: Vec3): Box3;
+export function set(out: Quat2, x1: number, y1: number, z1: number, w1: number, x2: number, y2: number, z2: number, w2: number): Quat2;
 ```
 
 #### `quat2.getReal`
@@ -2928,71 +2946,68 @@ export function setDual(out: Quat2, q: Quat): Quat2;
 
 ```ts
 /**
- * Returns the translation vector component of a transformation
- *  matrix. If a matrix is built with fromRotationTranslation,
- *  the returned vector will be the same as the translation vector
- *  originally supplied.
- * @param out Vector to receive translation component
- * @param mat Matrix to be decomposed (input)
- * @return out
+ * Gets the translation of a normalized dual quat
+ * @param  out translation
+ * @param  a Dual Quaternion to be decomposed
+ * @return translation
  */
-export function getTranslation(out: Vec3, mat: Mat4): Vec3;
+export function getTranslation(out: Vec3, a: Quat2): Vec3;
 ```
 
 #### `quat2.translate`
 
 ```ts
 /**
- * Translates the mat2d by the dimensions in the given vec2
+ * Translates a dual quat by the given vector
  *
- * @param out the receiving matrix
- * @param a the matrix to translate
- * @param v the vec2 to translate the matrix by
+ * @param out the receiving dual quaternion
+ * @param a the dual quaternion to translate
+ * @param v vector to translate by
  * @returns out
- **/
-export function translate(out: Mat2d, a: Mat2d, v: Vec2): Mat2d;
+ */
+export function translate(out: Quat2, a: Quat2, v: Vec3): Quat2;
 ```
 
 #### `quat2.rotateX`
 
 ```ts
 /**
- * Rotates a matrix by the given angle around the X axis
+ * Rotates a dual quat around the X axis
  *
- * @param out the receiving matrix
- * @param a the matrix to rotate
- * @param rad the angle to rotate the matrix by
+ * @param out the receiving dual quaternion
+ * @param a the dual quaternion to rotate
+ * @param rad how far should the rotation be
  * @returns out
  */
-export function rotateX(out: Mat4, a: Mat4, rad: number): Mat4;
+export function rotateX(out: Quat2, a: Quat2, rad: number): Quat2;
 ```
 
 #### `quat2.rotateY`
 
 ```ts
 /**
- * Rotates a matrix by the given angle around the Y axis
+ * Rotates a dual quat around the Y axis
  *
- * @param out the receiving matrix
- * @param a the matrix to rotate
- * @param rad the angle to rotate the matrix by
+ * @param out the receiving dual quaternion
+ * @param a the dual quaternion to rotate
+ * @param rad how far should the rotation be
  * @returns out
  */
-export function rotateY(out: Mat4, a: Mat4, rad: number): Mat4;
+export function rotateY(out: Quat2, a: Quat2, rad: number): Quat2;
 ```
 
 #### `quat2.rotateZ`
 
 ```ts
 /**
- * Rotates a matrix by the given angle around the Z axis
+ * Rotates a dual quat around the Z axis
  *
- * @param out the receiving matrix
- * @param a the matrix to rotate
- * @param rad the angle to rotate the matrix by
+ * @param out the receiving dual quaternion
+ * @param a the dual quaternion to rotate
+ * @param rad how far should the rotation be
  * @returns out
  */
-export function rotateZ(out: Mat4, a: Mat4, rad: number): Mat4;
+export function rotateZ(out: Quat2, a: Quat2, rad: number): Quat2;
 ```
 
 #### `quat2.rotateByQuatAppend`
@@ -3042,35 +3057,37 @@ export function rotateAroundAxis(out: Quat2, a: Quat2, axis: Vec3, rad: number):
 
 ```ts
 /**
- * Adds two mat2's
+ * Adds two dual quat's
  *
- * @param out the receiving matrix
+ * @param out the receiving dual quaternion
  * @param a the first operand
  * @param b the second operand
  * @returns out
+ * @function
  */
-export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function add(out: Quat2, a: Quat2, b: Quat2): Quat2;
 ```
 
 #### `quat2.multiply`
 
 ```ts
 /**
- * Multiplies two mat2's
+ * Multiplies two dual quat's
  *
- * @param out the receiving matrix
+ * @param out the receiving dual quaternion
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function multiply(out: Quat2, a: Quat2, b: Quat2): Quat2;
 ```
 
 #### `quat2.mul`
 
 ```ts
 /**
- * Alias for {@link mat2.multiply}
+ * Alias for {@link quat2.multiply}
+ * @function
  */
 export const mul = multiply;
 ```
@@ -3079,88 +3096,93 @@ export const mul = multiply;
 
 ```ts
 /**
- * Scales the mat2 by the dimensions in the given vec2
+ * Scales a dual quat by a scalar number
  *
- * @param out the receiving matrix
- * @param a the matrix to rotate
- * @param v the vec2 to scale the matrix by
+ * @param out the receiving dual quat
+ * @param a the dual quat to scale
+ * @param b amount to scale the dual quat by
  * @returns out
- **/
-export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
+ * @function
+ */
+export function scale(out: Quat2, a: Quat2, b: number): Quat2;
 ```
 
 #### `quat2.dot`
 
 ```ts
 /**
- * Calculates the dot product of two quat's
+ * Calculates the dot product of two dual quat's (The dot product of the real parts)
  *
  * @param a the first operand
  * @param b the second operand
  * @returns dot product of a and b
+ * @function
  */
-export const dot = vec4.dot;
+export const dot = quat.dot;
 ```
 
 #### `quat2.lerp`
 
 ```ts
 /**
+ * Performs a linear interpolation between two dual quats's
+ * NOTE: The resulting dual quaternions won't always be normalized (The error is most noticeable when t = 0.5)
  *
- * Returns the result of linearly interpolating between input A and input B by input T.
- *
- * @param v0
- * @param v1
- * @param t
- * @returns
+ * @param out the receiving dual quat
+ * @param a the first operand
+ * @param b the second operand
+ * @param t interpolation amount, in the range [0-1], between the two inputs
+ * @returns out
  */
-export function lerp(v0: number, v1: number, t: number);
+export function lerp(out: Quat2, a: Quat2, b: Quat2, t: number): Quat2;
 ```
 
 #### `quat2.invert`
 
 ```ts
 /**
- * Inverts a mat2
+ * Calculates the inverse of a dual quat. If they are normalized, conjugate is cheaper
  *
- * @param out the receiving matrix
- * @param a the source matrix
- * @returns out, or null if source matrix is not invertible
+ * @param out the receiving dual quaternion
+ * @param a dual quat to calculate inverse of
+ * @returns out
  */
-export function invert(out: Mat2, a: Mat2): Mat2 | null;
+export function invert(out: Quat2, a: Quat2): Quat2;
 ```
 
 #### `quat2.conjugate`
 
 ```ts
 /**
- * Calculates the conjugate of a quat
- * If the quaternion is normalized, this function is faster than quat.inverse and produces the same result.
+ * Calculates the conjugate of a dual quat
+ * If the dual quaternion is normalized, this function is faster than quat2.inverse and produces the same result.
  *
  * @param out the receiving quaternion
  * @param a quat to calculate conjugate of
  * @returns out
  */
-export function conjugate(out: Quat, a: Quat): Quat;
+export function conjugate(out: Quat2, a: Quat2): Quat2;
 ```
 
 #### `quat2.length`
 
 ```ts
 /**
- * Calculates the length of a quat
+ * Calculates the length of a dual quat
  *
- * @param a quaternion to calculate length of
+ * @param a dual quat to calculate length of
  * @returns length of a
+ * @function
  */
-export const length = vec4.length;
+export const length = quat.length;
 ```
 
 #### `quat2.len`
 
 ```ts
 /**
- * Alias for {@link length}
+ * Alias for {@link quat2.length}
+ * @function
  */
 export const len = length;
 ```
@@ -3169,19 +3191,21 @@ export const len = length;
 
 ```ts
 /**
- * Calculates the squared length of a quat
+ * Calculates the squared length of a dual quat
  *
- * @param a quaternion to calculate squared length of
+ * @param a dual quat to calculate squared length of
  * @returns squared length of a
+ * @function
  */
-export const squaredLength = vec4.squaredLength;
+export const squaredLength = quat.squaredLength;
 ```
 
 #### `quat2.sqrLen`
 
 ```ts
 /**
- * Alias for {@link squaredLength}
+ * Alias for {@link quat2.squaredLength}
+ * @function
  */
 export const sqrLen = squaredLength;
 ```
@@ -3190,53 +3214,52 @@ export const sqrLen = squaredLength;
 
 ```ts
 /**
- * Normalize a quat
+ * Normalize a dual quat
  *
- * @param out the receiving quaternion
- * @param a quaternion to normalize
+ * @param out the receiving dual quaternion
+ * @param a dual quaternion to normalize
  * @returns out
+ * @function
  */
-export const normalize = vec4.normalize;
+export function normalize(out: Quat2, a: Quat2): Quat2;
 ```
 
 #### `quat2.str`
 
 ```ts
 /**
- * Returns a string representation of a mat2
+ * Returns a string representation of a dual quaternion
  *
- * @param a matrix to represent as a string
- * @returns string representation of the matrix
+ * @param a dual quaternion to represent as a string
+ * @returns string representation of the dual quat
  */
-export function str(a: Mat2): string;
+export function str(a: Quat2): string;
 ```
 
 #### `quat2.exactEquals`
 
 ```ts
 /**
- * Returns whether or not the euler angles have exactly the same elements in the same position (when compared with ===)
+ * Returns whether or not the dual quaternions have exactly the same elements in the same position (when compared with ===)
  *
- * @param a The first euler.
- * @param b The second euler.
- * @returns True if the euler angles are equal, false otherwise.
+ * @param a the first dual quaternion.
+ * @param b the second dual quaternion.
+ * @returns true if the dual quaternions are equal, false otherwise.
  */
-export function exactEquals(a: Euler, b: Euler): boolean;
+export function exactEquals(a: Quat2, b: Quat2): boolean;
 ```
 
 #### `quat2.equals`
 
 ```ts
 /**
- * Tests whether or not the arguments have approximately the same value, within an absolute
- * or relative tolerance of glMatrix.EPSILON (an absolute tolerance is used for values less
- * than or equal to 1.0, and a relative tolerance is used for larger values)
+ * Returns whether or not the dual quaternions have approximately the same elements in the same position.
  *
- * @param a The first number to test.
- * @param b The second number to test.
- * @returns True if the numbers are approximately equal, false otherwise.
+ * @param a the first dual quat.
+ * @param b the second dual quat.
+ * @returns true if the dual quats are equal, false otherwise.
  */
-export function equals(a: number, b: number, epsilon = EPSILON): boolean;
+export function equals(a: Quat2, b: Quat2): boolean;
 ```
 
 ### mat2
@@ -3272,21 +3295,23 @@ export function equals(a: number, b: number, epsilon = EPSILON): boolean;
 
 ```ts
 /**
- * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
- * @returns A new Box3
+ * Creates a new identity mat2
+ *
+ * @returns a new 2x2 matrix
  */
-export function create(): Box3;
+export function create(): Mat2;
 ```
 
 #### `mat2.clone`
 
 ```ts
 /**
- * Clones a Box3
- * @param box - A Box3 to clone
- * @returns a clone of box
+ * Creates a new mat2 initialized with values from an existing matrix
+ *
+ * @param a matrix to clone
+ * @returns a new 2x2 matrix
  */
-export function clone(box: Box3): Box3;
+export function clone(a: Mat2): Mat2;
 ```
 
 #### `mat2.copy`
@@ -3318,27 +3343,31 @@ export function identity(out: Mat2): Mat2;
 
 ```ts
 /**
- * Creates a new Euler from the given values.
- * @param x The x rotation in radians.
- * @param y The y rotation in radians.
- * @param z The z rotation in radians.
- * @param order The order of rotation.
- * @returns A new Euler.
+ * Create a new mat2 with the given values
+ *
+ * @param m00 Component in column 0, row 0 position (index 0)
+ * @param m01 Component in column 0, row 1 position (index 1)
+ * @param m10 Component in column 1, row 0 position (index 2)
+ * @param m11 Component in column 1, row 1 position (index 3)
+ * @returns out A new 2x2 matrix
  */
-export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
+export function fromValues(m00: number, m01: number, m10: number, m11: number): Mat2;
 ```
 
 #### `mat2.set`
 
 ```ts
 /**
- * Sets the min and max values of a Box3
- * @param out - The output Box3
- * @param min - The minimum corner
- * @param max - The maximum corner
- * @returns The updated Box3
+ * Set the components of a mat2 to the given values
+ *
+ * @param out the receiving matrix
+ * @param m00 Component in column 0, row 0 position (index 0)
+ * @param m01 Component in column 0, row 1 position (index 1)
+ * @param m10 Component in column 1, row 0 position (index 2)
+ * @param m11 Component in column 1, row 1 position (index 3)
+ * @returns out
  */
-export function set(out: Box3, min: Vec3, max: Vec3): Box3;
+export function set(out: Mat2, m00: number, m01: number, m10: number, m11: number): Mat2;
 ```
 
 #### `mat2.transpose`
@@ -3541,28 +3570,26 @@ export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
 
 ```ts
 /**
- * Returns whether or not the euler angles have exactly the same elements in the same position (when compared with ===)
+ * Returns whether or not the matrices have exactly the same elements in the same position (when compared with ===)
  *
- * @param a The first euler.
- * @param b The second euler.
- * @returns True if the euler angles are equal, false otherwise.
+ * @param a The first matrix.
+ * @param b The second matrix.
+ * @returns True if the matrices are equal, false otherwise.
  */
-export function exactEquals(a: Euler, b: Euler): boolean;
+export function exactEquals(a: Mat2, b: Mat2): boolean;
 ```
 
 #### `mat2.equals`
 
 ```ts
 /**
- * Tests whether or not the arguments have approximately the same value, within an absolute
- * or relative tolerance of glMatrix.EPSILON (an absolute tolerance is used for values less
- * than or equal to 1.0, and a relative tolerance is used for larger values)
+ * Returns whether or not the matrices have approximately the same elements in the same position.
  *
- * @param a The first number to test.
- * @param b The second number to test.
- * @returns True if the numbers are approximately equal, false otherwise.
+ * @param a The first matrix.
+ * @param b The second matrix.
+ * @returns True if the matrices are equal, false otherwise.
  */
-export function equals(a: number, b: number, epsilon = EPSILON): boolean;
+export function equals(a: Mat2, b: Mat2): boolean;
 ```
 
 #### `mat2.multiplyScalar`
@@ -3644,140 +3671,150 @@ export const sub = subtract;
 
 ```ts
 /**
- * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
- * @returns A new Box3
+ * Creates a new identity mat2d
+ *
+ * @returns a new 2x3 matrix
  */
-export function create(): Box3;
+export function create(): Mat2d;
 ```
 
 #### `mat2d.clone`
 
 ```ts
 /**
- * Clones a Box3
- * @param box - A Box3 to clone
- * @returns a clone of box
+ * Creates a new mat2d initialized with values from an existing matrix
+ *
+ * @param a matrix to clone
+ * @returns a new 2x3 matrix
  */
-export function clone(box: Box3): Box3;
+export function clone(a: Mat2d): Mat2d;
 ```
 
 #### `mat2d.copy`
 
 ```ts
 /**
- * Copy the values from one mat2 to another
+ * Copy the values from one mat2d to another
  *
  * @param out the receiving matrix
  * @param a the source matrix
  * @returns out
  */
-export function copy(out: Mat2, a: Mat2): Mat2;
+export function copy(out: Mat2d, a: Mat2d): Mat2d;
 ```
 
 #### `mat2d.identity`
 
 ```ts
 /**
- * Set a mat2 to the identity matrix
+ * Set a mat2d to the identity matrix
  *
  * @param out the receiving matrix
  * @returns out
  */
-export function identity(out: Mat2): Mat2;
+export function identity(out: Mat2d): Mat2d;
 ```
 
 #### `mat2d.fromValues`
 
 ```ts
 /**
- * Creates a new Euler from the given values.
- * @param x The x rotation in radians.
- * @param y The y rotation in radians.
- * @param z The z rotation in radians.
- * @param order The order of rotation.
- * @returns A new Euler.
+ * Create a new mat2d with the given values
+ *
+ * @param a Component A (index 0)
+ * @param b Component B (index 1)
+ * @param c Component C (index 2)
+ * @param d Component D (index 3)
+ * @param tx Component TX (index 4)
+ * @param ty Component TY (index 5)
+ * @returns A new mat2d
  */
-export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
+export function fromValues(a: number, b: number, c: number, d: number, tx: number, ty: number): Mat2d;
 ```
 
 #### `mat2d.set`
 
 ```ts
 /**
- * Sets the min and max values of a Box3
- * @param out - The output Box3
- * @param min - The minimum corner
- * @param max - The maximum corner
- * @returns The updated Box3
+ * Set the components of a mat2d to the given values
+ *
+ * @param out the receiving matrix
+ * @param a Component A (index 0)
+ * @param b Component B (index 1)
+ * @param c Component C (index 2)
+ * @param d Component D (index 3)
+ * @param tx Component TX (index 4)
+ * @param ty Component TY (index 5)
+ * @returns out
  */
-export function set(out: Box3, min: Vec3, max: Vec3): Box3;
+export function set(out: Mat2d, a: number, b: number, c: number, d: number, tx: number, ty: number): Mat2d;
 ```
 
 #### `mat2d.invert`
 
 ```ts
 /**
- * Inverts a mat2
+ * Inverts a mat2d
  *
  * @param out the receiving matrix
  * @param a the source matrix
  * @returns out, or null if source matrix is not invertible
  */
-export function invert(out: Mat2, a: Mat2): Mat2 | null;
+export function invert(out: Mat2d, a: Mat2d): Mat2d | null;
 ```
 
 #### `mat2d.determinant`
 
 ```ts
 /**
- * Calculates the determinant of a mat2
+ * Calculates the determinant of a mat2d
  *
  * @param a the source matrix
  * @returns determinant of a
  */
-export function determinant(a: Mat2): number;
+export function determinant(a: Mat2d): number;
 ```
 
 #### `mat2d.multiply`
 
 ```ts
 /**
- * Multiplies two mat2's
+ * Multiplies two mat2d's
  *
  * @param out the receiving matrix
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function multiply(out: Mat2d, a: Mat2d, b: Mat2d): Mat2d;
 ```
 
 #### `mat2d.rotate`
 
 ```ts
 /**
- * Rotates a mat2 by the given angle
+ * Rotates a mat2d by the given angle
  *
  * @param out the receiving matrix
  * @param a the matrix to rotate
  * @param rad the angle to rotate the matrix by
  * @returns out
  */
-export function rotate(out: Mat2, a: Mat2, rad: number): Mat2;
+export function rotate(out: Mat2d, a: Mat2d, rad: number): Mat2d;
 ```
 
 #### `mat2d.scale`
 
 ```ts
 /**
- * Scales the mat2 by the dimensions in the given vec2
+ * Scales the mat2d by the dimensions in the given vec2
  *
  * @param out the receiving matrix
- * @param a the matrix to rotate
+ * @param a the matrix to translate
  * @param v the vec2 to scale the matrix by
  * @returns out
  **/
-export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
+export function scale(out: Mat2d, a: Mat2d, v: Vec2): Mat2d;
 ```
 
 #### `mat2d.translate`
@@ -3801,14 +3838,14 @@ export function translate(out: Mat2d, a: Mat2d, v: Vec2): Mat2d;
  * Creates a matrix from a given angle
  * This is equivalent to (but much faster than):
  *
- *     mat2.identity(dest);
- *     mat2.rotate(dest, dest, rad);
+ *     mat2d.identity(dest);
+ *     mat2d.rotate(dest, dest, rad);
  *
- * @param out mat2 receiving operation result
+ * @param out mat2d receiving operation result
  * @param rad the angle to rotate the matrix by
  * @returns out
  */
-export function fromRotation(out: Mat2, rad: number): Mat2;
+export function fromRotation(out: Mat2d, rad: number): Mat2d;
 ```
 
 #### `mat2d.fromScaling`
@@ -3818,14 +3855,14 @@ export function fromRotation(out: Mat2, rad: number): Mat2;
  * Creates a matrix from a vector scaling
  * This is equivalent to (but much faster than):
  *
- *     mat2.identity(dest);
- *     mat2.scale(dest, dest, vec);
+ *     mat2d.identity(dest);
+ *     mat2d.scale(dest, dest, vec);
  *
- * @param out mat2 receiving operation result
+ * @param out mat2d receiving operation result
  * @param v Scaling vector
  * @returns out
  */
-export function fromScaling(out: Mat2, v: Vec2): Mat2;
+export function fromScaling(out: Mat2d, v: Vec2): Mat2d;
 ```
 
 #### `mat2d.fromTranslation`
@@ -3849,38 +3886,38 @@ export function fromTranslation(out: Mat2d, v: Vec2): Mat2d;
 
 ```ts
 /**
- * Returns a string representation of a mat2
+ * Returns a string representation of a mat2d
  *
  * @param a matrix to represent as a string
  * @returns string representation of the matrix
  */
-export function str(a: Mat2): string;
+export function str(a: Mat2d): string;
 ```
 
 #### `mat2d.frob`
 
 ```ts
 /**
- * Returns Frobenius norm of a mat2
+ * Returns Frobenius norm of a mat2d
  *
  * @param a the matrix to calculate Frobenius norm of
  * @returns Frobenius norm
  */
-export function frob(a: Mat2): number;
+export function frob(a: Mat2d): number;
 ```
 
 #### `mat2d.add`
 
 ```ts
 /**
- * Adds two mat2's
+ * Adds two mat2d's
  *
  * @param out the receiving matrix
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function add(out: Mat2d, a: Mat2d, b: Mat2d): Mat2d;
 ```
 
 #### `mat2d.subtract`
@@ -3894,7 +3931,7 @@ export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
  * @param b the second operand
  * @returns out
  */
-export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function subtract(out: Mat2d, a: Mat2d, b: Mat2d): Mat2d;
 ```
 
 #### `mat2d.multiplyScalar`
@@ -3908,14 +3945,14 @@ export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
  * @param b amount to scale the matrix's elements by
  * @returns out
  */
-export function multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2;
+export function multiplyScalar(out: Mat2d, a: Mat2d, b: number): Mat2d;
 ```
 
 #### `mat2d.multiplyScalarAndAdd`
 
 ```ts
 /**
- * Adds two mat2's after multiplying each element of the second operand by a scalar value.
+ * Adds two mat2d's after multiplying each element of the second operand by a scalar value.
  *
  * @param out the receiving vector
  * @param a the first operand
@@ -3923,42 +3960,40 @@ export function multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2;
  * @param scale the amount to scale b's elements by before adding
  * @returns out
  */
-export function multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number): Mat2;
+export function multiplyScalarAndAdd(out: Mat2d, a: Mat2d, b: Mat2d, scale: number): Mat2d;
 ```
 
 #### `mat2d.exactEquals`
 
 ```ts
 /**
- * Returns whether or not the euler angles have exactly the same elements in the same position (when compared with ===)
+ * Returns whether or not the matrices have exactly the same elements in the same position (when compared with ===)
  *
- * @param a The first euler.
- * @param b The second euler.
- * @returns True if the euler angles are equal, false otherwise.
+ * @param a The first matrix.
+ * @param b The second matrix.
+ * @returns True if the matrices are equal, false otherwise.
  */
-export function exactEquals(a: Euler, b: Euler): boolean;
+export function exactEquals(a: Mat2d, b: Mat2d): boolean;
 ```
 
 #### `mat2d.equals`
 
 ```ts
 /**
- * Tests whether or not the arguments have approximately the same value, within an absolute
- * or relative tolerance of glMatrix.EPSILON (an absolute tolerance is used for values less
- * than or equal to 1.0, and a relative tolerance is used for larger values)
+ * Returns whether or not the matrices have approximately the same elements in the same position.
  *
- * @param a The first number to test.
- * @param b The second number to test.
- * @returns True if the numbers are approximately equal, false otherwise.
+ * @param a The first matrix.
+ * @param b The second matrix.
+ * @returns True if the matrices are equal, false otherwise.
  */
-export function equals(a: number, b: number, epsilon = EPSILON): boolean;
+export function equals(a: Mat2d, b: Mat2d): boolean;
 ```
 
 #### `mat2d.mul`
 
 ```ts
 /**
- * Alias for {@link mat2.multiply}
+ * Alias for {@link mat2d.multiply}
  */
 export const mul = multiply;
 ```
@@ -3967,7 +4002,7 @@ export const mul = multiply;
 
 ```ts
 /**
- * Alias for {@link mat2.subtract}
+ * Alias for {@link mat2d.subtract}
  */
 export const sub = subtract;
 ```
@@ -4011,10 +4046,11 @@ export const sub = subtract;
 
 ```ts
 /**
- * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
- * @returns A new Box3
+ * Creates a new identity mat3
+ *
+ * @returns a new 3x3 matrix
  */
-export function create(): Box3;
+export function create(): Mat3;
 ```
 
 #### `mat3.fromMat4`
@@ -4034,170 +4070,185 @@ export function fromMat4(out: Mat3, a: Mat4): Mat3;
 
 ```ts
 /**
- * Clones a Box3
- * @param box - A Box3 to clone
- * @returns a clone of box
+ * Creates a new mat3 initialized with values from an existing matrix
+ *
+ * @param a matrix to clone
+ * @returns a new 3x3 matrix
  */
-export function clone(box: Box3): Box3;
+export function clone(a: Mat3): Mat3;
 ```
 
 #### `mat3.copy`
 
 ```ts
 /**
- * Copy the values from one mat2 to another
+ * Copy the values from one mat3 to another
  *
  * @param out the receiving matrix
  * @param a the source matrix
  * @returns out
  */
-export function copy(out: Mat2, a: Mat2): Mat2;
+export function copy(out: Mat3, a: Mat3): Mat3;
 ```
 
 #### `mat3.fromValues`
 
 ```ts
 /**
- * Creates a new Euler from the given values.
- * @param x The x rotation in radians.
- * @param y The y rotation in radians.
- * @param z The z rotation in radians.
- * @param order The order of rotation.
- * @returns A new Euler.
+ * Create a new mat3 with the given values
+ *
+ * @param m00 Component in column 0, row 0 position (index 0)
+ * @param m01 Component in column 0, row 1 position (index 1)
+ * @param m02 Component in column 0, row 2 position (index 2)
+ * @param m10 Component in column 1, row 0 position (index 3)
+ * @param m11 Component in column 1, row 1 position (index 4)
+ * @param m12 Component in column 1, row 2 position (index 5)
+ * @param m20 Component in column 2, row 0 position (index 6)
+ * @param m21 Component in column 2, row 1 position (index 7)
+ * @param m22 Component in column 2, row 2 position (index 8)
+ * @returns A new mat3
  */
-export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
+export function fromValues(m00: number, m01: number, m02: number, m10: number, m11: number, m12: number, m20: number, m21: number, m22: number): Mat3;
 ```
 
 #### `mat3.set`
 
 ```ts
 /**
- * Sets the min and max values of a Box3
- * @param out - The output Box3
- * @param min - The minimum corner
- * @param max - The maximum corner
- * @returns The updated Box3
+ * Set the components of a mat3 to the given values
+ *
+ * @param out the receiving matrix
+ * @param m00 Component in column 0, row 0 position (index 0)
+ * @param m01 Component in column 0, row 1 position (index 1)
+ * @param m02 Component in column 0, row 2 position (index 2)
+ * @param m10 Component in column 1, row 0 position (index 3)
+ * @param m11 Component in column 1, row 1 position (index 4)
+ * @param m12 Component in column 1, row 2 position (index 5)
+ * @param m20 Component in column 2, row 0 position (index 6)
+ * @param m21 Component in column 2, row 1 position (index 7)
+ * @param m22 Component in column 2, row 2 position (index 8)
+ * @returns out
  */
-export function set(out: Box3, min: Vec3, max: Vec3): Box3;
+export function set(out: Mat3, m00: number, m01: number, m02: number, m10: number, m11: number, m12: number, m20: number, m21: number, m22: number): Mat3;
 ```
 
 #### `mat3.identity`
 
 ```ts
 /**
- * Set a mat2 to the identity matrix
+ * Set a mat3 to the identity matrix
  *
  * @param out the receiving matrix
  * @returns out
  */
-export function identity(out: Mat2): Mat2;
+export function identity(out: Mat3): Mat3;
 ```
 
 #### `mat3.transpose`
 
 ```ts
 /**
- * Transpose the values of a mat2
+ * Transpose the values of a mat3
  *
  * @param out the receiving matrix
  * @param a the source matrix
  * @returns out
  */
-export function transpose(out: Mat2, a: Mat2): Mat2;
+export function transpose(out: Mat3, a: Mat3): Mat3;
 ```
 
 #### `mat3.invert`
 
 ```ts
 /**
- * Inverts a mat2
+ * Inverts a mat3
  *
  * @param out the receiving matrix
  * @param a the source matrix
- * @returns out, or null if source matrix is not invertible
+ * @returns out
  */
-export function invert(out: Mat2, a: Mat2): Mat2 | null;
+export function invert(out: Mat3, a: Mat3): Mat3 | null;
 ```
 
 #### `mat3.adjoint`
 
 ```ts
 /**
- * Calculates the adjugate of a mat2
+ * Calculates the adjugate of a mat3
  *
  * @param out the receiving matrix
  * @param a the source matrix
  * @returns out
  */
-export function adjoint(out: Mat2, a: Mat2): Mat2;
+export function adjoint(out: Mat3, a: Mat3): Mat3;
 ```
 
 #### `mat3.determinant`
 
 ```ts
 /**
- * Calculates the determinant of a mat2
+ * Calculates the determinant of a mat3
  *
  * @param a the source matrix
  * @returns determinant of a
  */
-export function determinant(a: Mat2): number;
+export function determinant(a: Mat3): number;
 ```
 
 #### `mat3.multiply`
 
 ```ts
 /**
- * Multiplies two mat2's
+ * Multiplies two mat3's
  *
  * @param out the receiving matrix
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function multiply(out: Mat3, a: Mat3, b: Mat3): Mat3;
 ```
 
 #### `mat3.translate`
 
 ```ts
 /**
- * Translates the mat2d by the dimensions in the given vec2
+ * Translate a mat3 by the given vector
  *
  * @param out the receiving matrix
  * @param a the matrix to translate
- * @param v the vec2 to translate the matrix by
+ * @param v vector to translate by
  * @returns out
- **/
-export function translate(out: Mat2d, a: Mat2d, v: Vec2): Mat2d;
+ */
+export function translate(out: Mat3, a: Mat3, v: Vec2): Mat3;
 ```
 
 #### `mat3.rotate`
 
 ```ts
 /**
- * Rotates a mat2 by the given angle
+ * Rotates a mat3 by the given angle
  *
  * @param out the receiving matrix
  * @param a the matrix to rotate
  * @param rad the angle to rotate the matrix by
  * @returns out
  */
-export function rotate(out: Mat2, a: Mat2, rad: number): Mat2;
+export function rotate(out: Mat3, a: Mat3, rad: number): Mat3;
 ```
 
 #### `mat3.scale`
 
 ```ts
 /**
- * Scales the mat2 by the dimensions in the given vec2
+ * Scales the mat3 by the dimensions in the given vec2
  *
  * @param out the receiving matrix
  * @param a the matrix to rotate
  * @param v the vec2 to scale the matrix by
  * @returns out
  **/
-export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
+export function scale(out: Mat3, a: Mat3, v: Vec2): Mat3;
 ```
 
 #### `mat3.fromTranslation`
@@ -4207,14 +4258,14 @@ export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
  * Creates a matrix from a vector translation
  * This is equivalent to (but much faster than):
  *
- *     mat2d.identity(dest);
- *     mat2d.translate(dest, dest, vec);
+ *     mat3.identity(dest);
+ *     mat3.translate(dest, dest, vec);
  *
- * @param out mat2d receiving operation result
+ * @param out mat3 receiving operation result
  * @param v Translation vector
  * @returns out
  */
-export function fromTranslation(out: Mat2d, v: Vec2): Mat2d;
+export function fromTranslation(out: Mat3, v: Vec2): Mat3;
 ```
 
 #### `mat3.fromRotation`
@@ -4224,14 +4275,14 @@ export function fromTranslation(out: Mat2d, v: Vec2): Mat2d;
  * Creates a matrix from a given angle
  * This is equivalent to (but much faster than):
  *
- *     mat2.identity(dest);
- *     mat2.rotate(dest, dest, rad);
+ *     mat3.identity(dest);
+ *     mat3.rotate(dest, dest, rad);
  *
- * @param out mat2 receiving operation result
+ * @param out mat3 receiving operation result
  * @param rad the angle to rotate the matrix by
  * @returns out
  */
-export function fromRotation(out: Mat2, rad: number): Mat2;
+export function fromRotation(out: Mat3, rad: number): Mat3;
 ```
 
 #### `mat3.fromScaling`
@@ -4241,14 +4292,14 @@ export function fromRotation(out: Mat2, rad: number): Mat2;
  * Creates a matrix from a vector scaling
  * This is equivalent to (but much faster than):
  *
- *     mat2.identity(dest);
- *     mat2.scale(dest, dest, vec);
+ *     mat3.identity(dest);
+ *     mat3.scale(dest, dest, vec);
  *
- * @param out mat2 receiving operation result
+ * @param out mat3 receiving operation result
  * @param v Scaling vector
  * @returns out
  */
-export function fromScaling(out: Mat2, v: Vec2): Mat2;
+export function fromScaling(out: Mat3, v: Vec2): Mat3;
 ```
 
 #### `mat3.fromMat2d`
@@ -4268,13 +4319,14 @@ export function fromMat2d(out: Mat3, a: Mat2d): Mat3;
 
 ```ts
 /**
- * Sets the Euler angles from a quaternion.
- * @param out The output Euler.
- * @param q The input quaternion.
- * @param order The order of the Euler.
- * @returns The output Euler
+ * Calculates a 3x3 matrix from the given quaternion
+ *
+ * @param out mat3 receiving operation result
+ * @param q Quaternion to create matrix from
+ *
+ * @returns out
  */
-export function fromQuat(out: Euler, q: Quat, order: EulerOrder): Euler;
+export function fromQuat(out: Mat3, q: Quat): Mat3;
 ```
 
 #### `mat3.normalFromMat4`
@@ -4309,38 +4361,38 @@ export function projection(out: Mat3, width: number, height: number): Mat3;
 
 ```ts
 /**
- * Returns a string representation of a mat2
+ * Returns a string representation of a mat3
  *
  * @param a matrix to represent as a string
  * @returns string representation of the matrix
  */
-export function str(a: Mat2): string;
+export function str(a: Mat3): string;
 ```
 
 #### `mat3.frob`
 
 ```ts
 /**
- * Returns Frobenius norm of a mat2
+ * Returns Frobenius norm of a mat3
  *
  * @param a the matrix to calculate Frobenius norm of
  * @returns Frobenius norm
  */
-export function frob(a: Mat2): number;
+export function frob(a: Mat3): number;
 ```
 
 #### `mat3.add`
 
 ```ts
 /**
- * Adds two mat2's
+ * Adds two mat3's
  *
  * @param out the receiving matrix
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function add(out: Mat3, a: Mat3, b: Mat3): Mat3;
 ```
 
 #### `mat3.subtract`
@@ -4354,7 +4406,7 @@ export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
  * @param b the second operand
  * @returns out
  */
-export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function subtract(out: Mat3, a: Mat3, b: Mat3): Mat3;
 ```
 
 #### `mat3.multiplyScalar`
@@ -4368,14 +4420,14 @@ export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
  * @param b amount to scale the matrix's elements by
  * @returns out
  */
-export function multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2;
+export function multiplyScalar(out: Mat3, a: Mat3, b: number): Mat3;
 ```
 
 #### `mat3.multiplyScalarAndAdd`
 
 ```ts
 /**
- * Adds two mat2's after multiplying each element of the second operand by a scalar value.
+ * Adds two mat3's after multiplying each element of the second operand by a scalar value.
  *
  * @param out the receiving vector
  * @param a the first operand
@@ -4383,42 +4435,41 @@ export function multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2;
  * @param scale the amount to scale b's elements by before adding
  * @returns out
  */
-export function multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number): Mat2;
+export function multiplyScalarAndAdd(out: Mat3, a: Mat3, b: Mat3, scale: number): Mat3;
 ```
 
 #### `mat3.exactEquals`
 
 ```ts
 /**
- * Returns whether or not the euler angles have exactly the same elements in the same position (when compared with ===)
+ * Returns whether or not the matrices have exactly the same elements in the same position (when compared with ===)
  *
- * @param a The first euler.
- * @param b The second euler.
- * @returns True if the euler angles are equal, false otherwise.
+ * @param a The first matrix.
+ * @param b The second matrix.
+ * @returns True if the matrices are equal, false otherwise.
  */
-export function exactEquals(a: Euler, b: Euler): boolean;
+export function exactEquals(a: Mat3, b: Mat3): boolean;
 ```
 
 #### `mat3.equals`
 
 ```ts
 /**
- * Tests whether or not the arguments have approximately the same value, within an absolute
- * or relative tolerance of glMatrix.EPSILON (an absolute tolerance is used for values less
- * than or equal to 1.0, and a relative tolerance is used for larger values)
+ * Returns whether or not the matrices have approximately the same elements in the same position.
  *
- * @param a The first number to test.
- * @param b The second number to test.
- * @returns True if the numbers are approximately equal, false otherwise.
+ * @param a The first matrix.
+ * @param b The second matrix.
+ * @returns True if the matrices are equal, false otherwise.
  */
-export function equals(a: number, b: number, epsilon = EPSILON): boolean;
+export function equals(a: Mat3, b: Mat3): boolean;
 ```
 
 #### `mat3.mul`
 
 ```ts
 /**
- * Alias for {@link mat2.multiply}
+ * Alias for {@link mat3.multiply}
+ * @function
  */
 export const mul = multiply;
 ```
@@ -4427,7 +4478,8 @@ export const mul = multiply;
 
 ```ts
 /**
- * Alias for {@link mat2.subtract}
+ * Alias for {@link mat3.subtract}
+ * @function
  */
 export const sub = subtract;
 ```
@@ -4491,180 +4543,211 @@ export const sub = subtract;
 
 ```ts
 /**
- * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
- * @returns A new Box3
+ * Creates a new identity mat4
+ *
+ * @returns a new 4x4 matrix
  */
-export function create(): Box3;
+export function create(): Mat4;
 ```
 
 #### `mat4.clone`
 
 ```ts
 /**
- * Clones a Box3
- * @param box - A Box3 to clone
- * @returns a clone of box
+ * Creates a new mat4 initialized with values from an existing matrix
+ *
+ * @param a matrix to clone
+ * @returns a new 4x4 matrix
  */
-export function clone(box: Box3): Box3;
+export function clone(a: Mat4): Mat4;
 ```
 
 #### `mat4.copy`
 
 ```ts
 /**
- * Copy the values from one mat2 to another
+ * Copy the values from one mat4 to another
  *
  * @param out the receiving matrix
  * @param a the source matrix
  * @returns out
  */
-export function copy(out: Mat2, a: Mat2): Mat2;
+export function copy(out: Mat4, a: Mat4): Mat4;
 ```
 
 #### `mat4.fromValues`
 
 ```ts
 /**
- * Creates a new Euler from the given values.
- * @param x The x rotation in radians.
- * @param y The y rotation in radians.
- * @param z The z rotation in radians.
- * @param order The order of rotation.
- * @returns A new Euler.
+ * Create a new mat4 with the given values
+ *
+ * @param m00 Component in column 0, row 0 position (index 0)
+ * @param m01 Component in column 0, row 1 position (index 1)
+ * @param m02 Component in column 0, row 2 position (index 2)
+ * @param m03 Component in column 0, row 3 position (index 3)
+ * @param m10 Component in column 1, row 0 position (index 4)
+ * @param m11 Component in column 1, row 1 position (index 5)
+ * @param m12 Component in column 1, row 2 position (index 6)
+ * @param m13 Component in column 1, row 3 position (index 7)
+ * @param m20 Component in column 2, row 0 position (index 8)
+ * @param m21 Component in column 2, row 1 position (index 9)
+ * @param m22 Component in column 2, row 2 position (index 10)
+ * @param m23 Component in column 2, row 3 position (index 11)
+ * @param m30 Component in column 3, row 0 position (index 12)
+ * @param m31 Component in column 3, row 1 position (index 13)
+ * @param m32 Component in column 3, row 2 position (index 14)
+ * @param m33 Component in column 3, row 3 position (index 15)
+ * @returns A new mat4
  */
-export function fromValues(x: number, y: number, z: number, order: EulerOrder): Euler;
+export function fromValues(m00: number, m01: number, m02: number, m03: number, m10: number, m11: number, m12: number, m13: number, m20: number, m21: number, m22: number, m23: number, m30: number, m31: number, m32: number, m33: number): Mat4;
 ```
 
 #### `mat4.set`
 
 ```ts
 /**
- * Sets the min and max values of a Box3
- * @param out - The output Box3
- * @param min - The minimum corner
- * @param max - The maximum corner
- * @returns The updated Box3
+ * Set the components of a mat4 to the given values
+ *
+ * @param out the receiving matrix
+ * @param m00 Component in column 0, row 0 position (index 0)
+ * @param m01 Component in column 0, row 1 position (index 1)
+ * @param m02 Component in column 0, row 2 position (index 2)
+ * @param m03 Component in column 0, row 3 position (index 3)
+ * @param m10 Component in column 1, row 0 position (index 4)
+ * @param m11 Component in column 1, row 1 position (index 5)
+ * @param m12 Component in column 1, row 2 position (index 6)
+ * @param m13 Component in column 1, row 3 position (index 7)
+ * @param m20 Component in column 2, row 0 position (index 8)
+ * @param m21 Component in column 2, row 1 position (index 9)
+ * @param m22 Component in column 2, row 2 position (index 10)
+ * @param m23 Component in column 2, row 3 position (index 11)
+ * @param m30 Component in column 3, row 0 position (index 12)
+ * @param m31 Component in column 3, row 1 position (index 13)
+ * @param m32 Component in column 3, row 2 position (index 14)
+ * @param m33 Component in column 3, row 3 position (index 15)
+ * @returns out
  */
-export function set(out: Box3, min: Vec3, max: Vec3): Box3;
+export function set(out: Mat4, m00: number, m01: number, m02: number, m03: number, m10: number, m11: number, m12: number, m13: number, m20: number, m21: number, m22: number, m23: number, m30: number, m31: number, m32: number, m33: number): Mat4;
 ```
 
 #### `mat4.identity`
 
 ```ts
 /**
- * Set a mat2 to the identity matrix
+ * Set a mat4 to the identity matrix
  *
  * @param out the receiving matrix
  * @returns out
  */
-export function identity(out: Mat2): Mat2;
+export function identity(out: Mat4): Mat4;
 ```
 
 #### `mat4.transpose`
 
 ```ts
 /**
- * Transpose the values of a mat2
+ * Transpose the values of a mat4
  *
  * @param out the receiving matrix
  * @param a the source matrix
  * @returns out
  */
-export function transpose(out: Mat2, a: Mat2): Mat2;
+export function transpose(out: Mat4, a: Mat4): Mat4;
 ```
 
 #### `mat4.invert`
 
 ```ts
 /**
- * Inverts a mat2
+ * Inverts a mat4
  *
  * @param out the receiving matrix
  * @param a the source matrix
  * @returns out, or null if source matrix is not invertible
  */
-export function invert(out: Mat2, a: Mat2): Mat2 | null;
+export function invert(out: Mat4, a: Mat4): Mat4 | null;
 ```
 
 #### `mat4.adjoint`
 
 ```ts
 /**
- * Calculates the adjugate of a mat2
+ * Calculates the adjugate of a mat4
  *
  * @param out the receiving matrix
  * @param a the source matrix
  * @returns out
  */
-export function adjoint(out: Mat2, a: Mat2): Mat2;
+export function adjoint(out: Mat4, a: Mat4): Mat4;
 ```
 
 #### `mat4.determinant`
 
 ```ts
 /**
- * Calculates the determinant of a mat2
+ * Calculates the determinant of a mat4
  *
  * @param a the source matrix
  * @returns determinant of a
  */
-export function determinant(a: Mat2): number;
+export function determinant(a: Mat4): number;
 ```
 
 #### `mat4.multiply`
 
 ```ts
 /**
- * Multiplies two mat2's
+ * Multiplies two mat4s
  *
  * @param out the receiving matrix
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function multiply(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function multiply(out: Mat4, a: Mat4, b: Mat4): Mat4;
 ```
 
 #### `mat4.translate`
 
 ```ts
 /**
- * Translates the mat2d by the dimensions in the given vec2
+ * Translate a mat4 by the given vector
  *
  * @param out the receiving matrix
  * @param a the matrix to translate
- * @param v the vec2 to translate the matrix by
+ * @param v vector to translate by
  * @returns out
- **/
-export function translate(out: Mat2d, a: Mat2d, v: Vec2): Mat2d;
+ */
+export function translate(out: Mat4, a: Mat4, v: Vec3): Mat4;
 ```
 
 #### `mat4.scale`
 
 ```ts
 /**
- * Scales the mat2 by the dimensions in the given vec2
+ * Scales the mat4 by the dimensions in the given vec3 not using vectorization
  *
  * @param out the receiving matrix
- * @param a the matrix to rotate
- * @param v the vec2 to scale the matrix by
+ * @param a the matrix to scale
+ * @param v the vec3 to scale the matrix by
  * @returns out
  **/
-export function scale(out: Mat2, a: Mat2, v: Vec2): Mat2;
+export function scale(out: Mat4, a: Mat4, v: Vec3): Mat4;
 ```
 
 #### `mat4.rotate`
 
 ```ts
 /**
- * Rotates a mat2 by the given angle
+ * Rotates a mat4 by the given angle around the given axis
  *
  * @param out the receiving matrix
  * @param a the matrix to rotate
  * @param rad the angle to rotate the matrix by
+ * @param axis the axis to rotate around
  * @returns out
  */
-export function rotate(out: Mat2, a: Mat2, rad: number): Mat2;
+export function rotate(out: Mat4, a: Mat4, rad: number, axis: Vec3): Mat4 | null;
 ```
 
 #### `mat4.rotateX`
@@ -4716,14 +4799,14 @@ export function rotateZ(out: Mat4, a: Mat4, rad: number): Mat4;
  * Creates a matrix from a vector translation
  * This is equivalent to (but much faster than):
  *
- *     mat2d.identity(dest);
- *     mat2d.translate(dest, dest, vec);
+ *     mat4.identity(dest);
+ *     mat4.translate(dest, dest, vec);
  *
- * @param out mat2d receiving operation result
+ * @param out mat4 receiving operation result
  * @param v Translation vector
  * @returns out
  */
-export function fromTranslation(out: Mat2d, v: Vec2): Mat2d;
+export function fromTranslation(out: Mat4, v: Vec3): Mat4;
 ```
 
 #### `mat4.fromScaling`
@@ -4733,31 +4816,32 @@ export function fromTranslation(out: Mat2d, v: Vec2): Mat2d;
  * Creates a matrix from a vector scaling
  * This is equivalent to (but much faster than):
  *
- *     mat2.identity(dest);
- *     mat2.scale(dest, dest, vec);
+ *     mat4.identity(dest);
+ *     mat4.scale(dest, dest, vec);
  *
- * @param out mat2 receiving operation result
+ * @param out mat4 receiving operation result
  * @param v Scaling vector
  * @returns out
  */
-export function fromScaling(out: Mat2, v: Vec2): Mat2;
+export function fromScaling(out: Mat4, v: Vec3): Mat4;
 ```
 
 #### `mat4.fromRotation`
 
 ```ts
 /**
- * Creates a matrix from a given angle
+ * Creates a matrix from a given angle around a given axis
  * This is equivalent to (but much faster than):
  *
- *     mat2.identity(dest);
- *     mat2.rotate(dest, dest, rad);
+ *     mat4.identity(dest);
+ *     mat4.rotate(dest, dest, rad, axis);
  *
- * @param out mat2 receiving operation result
+ * @param out mat4 receiving operation result
  * @param rad the angle to rotate the matrix by
+ * @param axis the axis to rotate around
  * @returns out
  */
-export function fromRotation(out: Mat2, rad: number): Mat2;
+export function fromRotation(out: Mat4, rad: number, axis: Vec3): Mat4 | null;
 ```
 
 #### `mat4.fromXRotation`
@@ -4959,13 +5043,14 @@ export function fromRotationTranslationScaleOrigin(out: Mat4, q: Quat, v: Vec3, 
 
 ```ts
 /**
- * Sets the Euler angles from a quaternion.
- * @param out The output Euler.
- * @param q The input quaternion.
- * @param order The order of the Euler.
- * @returns The output Euler
+ * Calculates a 4x4 matrix from the given quaternion
+ *
+ * @param out mat4 receiving operation result
+ * @param q Quaternion to create matrix from
+ *
+ * @returns out
  */
-export function fromQuat(out: Euler, q: Quat, order: EulerOrder): Euler;
+export function fromQuat(out: Mat4, q: Quat): Mat4;
 ```
 
 #### `mat4.frustum`
@@ -5141,38 +5226,38 @@ export function targetTo(out: Mat4, eye: Vec3, target: Vec3, up: Vec3): Mat4;
 
 ```ts
 /**
- * Returns a string representation of a mat2
+ * Returns a string representation of a mat4
  *
  * @param a matrix to represent as a string
- * @returns string representation of the matrix
+ * @returns {String} string representation of the matrix
  */
-export function str(a: Mat2): string;
+export function str(a: Mat4): string;
 ```
 
 #### `mat4.frob`
 
 ```ts
 /**
- * Returns Frobenius norm of a mat2
+ * Returns Frobenius norm of a mat4
  *
  * @param a the matrix to calculate Frobenius norm of
  * @returns Frobenius norm
  */
-export function frob(a: Mat2): number;
+export function frob(a: Mat4): number;
 ```
 
 #### `mat4.add`
 
 ```ts
 /**
- * Adds two mat2's
+ * Adds two mat4's
  *
  * @param out the receiving matrix
  * @param a the first operand
  * @param b the second operand
  * @returns out
  */
-export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function add(out: Mat4, a: Mat4, b: Mat4): Mat4;
 ```
 
 #### `mat4.subtract`
@@ -5186,7 +5271,7 @@ export function add(out: Mat2, a: Mat2, b: Mat2): Mat2;
  * @param b the second operand
  * @returns out
  */
-export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
+export function subtract(out: Mat4, a: Mat4, b: Mat4): Mat4;
 ```
 
 #### `mat4.multiplyScalar`
@@ -5200,14 +5285,14 @@ export function subtract(out: Mat2, a: Mat2, b: Mat2): Mat2;
  * @param b amount to scale the matrix's elements by
  * @returns out
  */
-export function multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2;
+export function multiplyScalar(out: Mat4, a: Mat4, b: number): Mat4;
 ```
 
 #### `mat4.multiplyScalarAndAdd`
 
 ```ts
 /**
- * Adds two mat2's after multiplying each element of the second operand by a scalar value.
+ * Adds two mat4's after multiplying each element of the second operand by a scalar value.
  *
  * @param out the receiving vector
  * @param a the first operand
@@ -5215,42 +5300,41 @@ export function multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2;
  * @param scale the amount to scale b's elements by before adding
  * @returns out
  */
-export function multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number): Mat2;
+export function multiplyScalarAndAdd(out: Mat4, a: Mat4, b: Mat4, scale: number): Mat4;
 ```
 
 #### `mat4.exactEquals`
 
 ```ts
 /**
- * Returns whether or not the euler angles have exactly the same elements in the same position (when compared with ===)
+ * Returns whether or not the matrices have exactly the same elements in the same position (when compared with ===)
  *
- * @param a The first euler.
- * @param b The second euler.
- * @returns True if the euler angles are equal, false otherwise.
+ * @param a The first matrix.
+ * @param b The second matrix.
+ * @returns {Boolean} True if the matrices are equal, false otherwise.
  */
-export function exactEquals(a: Euler, b: Euler): boolean;
+export function exactEquals(a: Mat4, b: Mat4): boolean;
 ```
 
 #### `mat4.equals`
 
 ```ts
 /**
- * Tests whether or not the arguments have approximately the same value, within an absolute
- * or relative tolerance of glMatrix.EPSILON (an absolute tolerance is used for values less
- * than or equal to 1.0, and a relative tolerance is used for larger values)
+ * Returns whether or not the matrices have approximately the same elements in the same position.
  *
- * @param a The first number to test.
- * @param b The second number to test.
- * @returns True if the numbers are approximately equal, false otherwise.
+ * @param a The first matrix.
+ * @param b The second matrix.
+ * @returns {Boolean} True if the matrices are equal, false otherwise.
  */
-export function equals(a: number, b: number, epsilon = EPSILON): boolean;
+export function equals(a: Mat4, b: Mat4): boolean;
 ```
 
 #### `mat4.mul`
 
 ```ts
 /**
- * Alias for {@link mat2.multiply}
+ * Alias for {@link mat4.multiply}
+ * @function
  */
 export const mul = multiply;
 ```
@@ -5259,7 +5343,8 @@ export const mul = multiply;
 
 ```ts
 /**
- * Alias for {@link mat2.subtract}
+ * Alias for {@link mat4.subtract}
+ * @function
  */
 export const sub = subtract;
 ```
@@ -5271,27 +5356,12 @@ export const sub = subtract;
 #### `circle.create`
 
 ```ts
-/**
- * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
- * @returns A new Box3
- */
-export function create(): Box3;
+export function create(): Circle;
 ```
 
 ### segment2
 
-- [`segment2.create`](#segment2create)
 - [`segment2.closestPoint`](#segment2closestpoint)
-
-#### `segment2.create`
-
-```ts
-/**
- * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
- * @returns A new Box3
- */
-export function create(): Box3;
-```
 
 #### `segment2.closestPoint`
 
@@ -5300,10 +5370,10 @@ export function create(): Box3;
  * Calculates the closest point on a line segment to a given point
  * @param out Output parameter for the closest point
  * @param point The point
- * @param p First endpoint of the segment
- * @param q Second endpoint of the segment
+ * @param a First endpoint of the segment
+ * @param b Second endpoint of the segment
  */
-export function closestPoint(out: Vec2, point: Vec2, segment: Segment2): Vec2;
+export function closestPoint(out: Vec2, point: Vec2, a: Vec2, b: Vec2): Vec2;
 ```
 
 ### triangle2
@@ -5314,11 +5384,7 @@ export function closestPoint(out: Vec2, point: Vec2, segment: Segment2): Vec2;
 #### `triangle2.create`
 
 ```ts
-/**
- * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
- * @returns A new Box3
- */
-export function create(): Box3;
+export function create(): Triangle2;
 ```
 
 #### `triangle2.circumcircle`
@@ -5499,48 +5565,25 @@ export function intersectsRay(box: Box3, start: Vec3, end: Vec3): boolean;
 #### `obb3.create`
 
 ```ts
-/**
- * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
- * @returns A new Box3
- */
-export function create(): Box3;
+export function create(): OBB3;
 ```
 
 #### `obb3.clone`
 
 ```ts
-/**
- * Clones a Box3
- * @param box - A Box3 to clone
- * @returns a clone of box
- */
-export function clone(box: Box3): Box3;
+export function clone(a: OBB3): OBB3;
 ```
 
 #### `obb3.copy`
 
 ```ts
-/**
- * Copy the values from one mat2 to another
- *
- * @param out the receiving matrix
- * @param a the source matrix
- * @returns out
- */
-export function copy(out: Mat2, a: Mat2): Mat2;
+export function copy(out: OBB3, a: OBB3): OBB3;
 ```
 
 #### `obb3.set`
 
 ```ts
-/**
- * Sets the min and max values of a Box3
- * @param out - The output Box3
- * @param min - The minimum corner
- * @param max - The maximum corner
- * @returns The updated Box3
- */
-export function set(out: Box3, min: Vec3, max: Vec3): Box3;
+export function set(out: OBB3, center: Vec3, halfExtents: Vec3, quaternion: Quat): OBB3;
 ```
 
 #### `obb3.setFromBox3`
@@ -5562,12 +5605,13 @@ export function setFromBox3(out: OBB3, aabb: Box3): OBB3;
 
 ```ts
 /**
- * Test if a point is contained within the bounding box
- * @param box - The bounding box
+ * Tests whether a point is contained within an OBB.
+ *
+ * @param obb - The OBB to test
  * @param point - The point to test
- * @returns true if the point is inside or on the boundary of the box
+ * @returns true if the point is inside the OBB
  */
-export function containsPoint(box: Box3, point: Vec3): boolean;
+export function containsPoint(obb: OBB3, point: Vec3): boolean;
 ```
 
 #### `obb3.clampPoint`
@@ -5606,9 +5650,13 @@ export function intersectsOBB3(a: OBB3, b: OBB3, epsilon = Number.EPSILON): bool
 
 ```ts
 /**
- * Check whether two bounding boxes intersect
+ * Tests whether an OBB intersects with an AABB.
+ *
+ * @param obb - The OBB
+ * @param aabb - The AABB (axis-aligned bounding box)
+ * @returns true if they intersect
  */
-export function intersectsBox3(boxA: Box3, boxB: Box3): boolean;
+export function intersectsBox3(obb: OBB3, aabb: Box3): boolean;
 ```
 
 #### `obb3.applyMatrix4`
@@ -5635,10 +5683,10 @@ export function applyMatrix4(out: OBB3, obb: OBB3, matrix: Mat4): OBB3;
 
 ```ts
 /**
- * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
- * @returns A new Box3
+ * Creates a new sphere with a default center 0,0,0 and radius 1
+ * @returns A new sphere.
  */
-export function create(): Box3;
+export function create(): Sphere;
 ```
 
 ### triangle3
@@ -5648,11 +5696,7 @@ export function create(): Box3;
 #### `triangle3.create`
 
 ```ts
-/**
- * Create a new empty Box3 with "min" set to positive infinity and "max" set to negative infinity
- * @returns A new Box3
- */
-export function create(): Box3;
+export function create(): Triangle3;
 ```
 
 ### quickhull3
@@ -5682,8 +5726,10 @@ export function quickhull3(points: number[]): number[];
  * Computes the convex hull of a set of 2D points using the QuickHull algorithm.
  * The hull is returned as an array of indices in counter-clockwise order.
  *
- * @param points Flat array of 2D points: [x0, y0, x1, y1, ...]
- * @returns Indices of hull vertices in CCW order
+ * Implementation of pseudocode from: https://en.wikipedia.org/wiki/Quickhull
+ *
+ * @param points flat array of 2D points: [x0, y0, x1, y1, ...]
+ * @returns indices of hull vertices in ccw order
  */
 export function quickhull2(points: number[]): number[];
 ```
@@ -6225,9 +6271,7 @@ export function remapClamp(value: number, inLow: number, inHigh: number, outLow:
 - [`EulerOrder`](#eulerorder)
 - [`Euler`](#euler)
 - [`Triangle3`](#triangle3)
-- [`Segment3`](#segment3)
 - [`Triangle2`](#triangle2)
-- [`Segment2`](#segment2)
 - [`Plane3`](#plane3)
 - [`Sphere`](#sphere)
 - [`Circle`](#circle)
@@ -6412,16 +6456,6 @@ export type Triangle3 = [
 ];
 ```
 
-#### `Segment3`
-
-```ts
-/** A line segment in 3D space */
-export type Segment3 = [
-    start: Vec3,
-    end: Vec3
-];
-```
-
 #### `Triangle2`
 
 ```ts
@@ -6430,16 +6464,6 @@ export type Triangle2 = [
     a: Vec2,
     b: Vec2,
     c: Vec2
-];
-```
-
-#### `Segment2`
-
-```ts
-/** A line segment in 2D space */
-export type Segment2 = [
-    start: Vec2,
-    end: Vec2
 ];
 ```
 
