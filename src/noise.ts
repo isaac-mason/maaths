@@ -1,6 +1,6 @@
 import { fade, lerp } from './common';
 
-/**
+/*
  * adapted from maath:
  *
  * https://github.com/pmndrs/maath/blob/main/packages/maath/src/random/noise.ts
