@@ -5896,7 +5896,7 @@ export function rsqw(t: number, delta = 0.01, a = 1, f = 1 / (2 * Math.PI));
 #### `NoiseGenerator2D`
 
 ```ts
-/**
+/*
  * adapted from maath:
  *
  * https://github.com/pmndrs/maath/blob/main/packages/maath/src/random/noise.ts
