@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { type Segment2, segment2, type Vec2 } from '../dist';
+import { segment2, type Vec2 } from '../dist';
 
 describe('segment2.closestPoint', () => {
     it('returns the closest point for a point inside the segment', () => {
@@ -7,8 +7,7 @@ describe('segment2.closestPoint', () => {
         const point: Vec2 = [0.5, 0];
         const p: Vec2 = [0, 0];
         const q: Vec2 = [1, 0];
-        const segment: Segment2 = [p, q];
-        segment2.closestPoint(out, point, segment);
+        segment2.closestPoint(out, point, p, q);
         expect(out[0]).toBeCloseTo(0.5);
         expect(out[1]).toBeCloseTo(0);
     });
@@ -18,8 +17,7 @@ describe('segment2.closestPoint', () => {
         const point: Vec2 = [-1, 0];
         const p: Vec2 = [0, 0];
         const q: Vec2 = [1, 0];
-        const segment: Segment2 = [p, q];
-        segment2.closestPoint(out, point, segment);
+        segment2.closestPoint(out, point, p, q);
         expect(out[0]).toBeCloseTo(0);
         expect(out[1]).toBeCloseTo(0);
     });
@@ -29,8 +27,7 @@ describe('segment2.closestPoint', () => {
         const point: Vec2 = [2, 0];
         const p: Vec2 = [0, 0];
         const q: Vec2 = [1, 0];
-        const segment: Segment2 = [p, q];
-        segment2.closestPoint(out, point, segment);
+        segment2.closestPoint(out, point, p, q);
         expect(out[0]).toBeCloseTo(1);
         expect(out[1]).toBeCloseTo(0);
     });
@@ -40,8 +37,7 @@ describe('segment2.closestPoint', () => {
         const point: Vec2 = [0, 2];
         const p: Vec2 = [0, 0];
         const q: Vec2 = [0, 1];
-        const segment: Segment2 = [p, q];
-        segment2.closestPoint(out, point, segment);
+        segment2.closestPoint(out, point, p, q);
         expect(out[0]).toBeCloseTo(0);
         expect(out[1]).toBeCloseTo(1);
     });
@@ -51,8 +47,7 @@ describe('segment2.closestPoint', () => {
         const point: Vec2 = [1, 1];
         const p: Vec2 = [0, 0];
         const q: Vec2 = [2, 2];
-        const segment: Segment2 = [p, q];
-        segment2.closestPoint(out, point, segment);
+        segment2.closestPoint(out, point, p, q);
         expect(out[0]).toBeCloseTo(1);
         expect(out[1]).toBeCloseTo(1);
     });

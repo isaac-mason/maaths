@@ -57,15 +57,8 @@ export type Euler = [x: number, y: number, z: number, order?: EulerOrder];
 /** A triangle in 3D space */
 export type Triangle3 = [a: Vec3, b: Vec3, c: Vec3];
 
-/** A line segment in 3D space */
-export type Segment3 = [start: Vec3, end: Vec3];
-
 /** A triangle in 2D space */
 export type Triangle2 = [a: Vec2, b: Vec2, c: Vec2];
-
-/** A line segment in 2D space */
-export type Segment2 = [start: Vec2, end: Vec2];
-
 /**
  * A plane in 3D space
  * normal - a unit length vector defining the normal of the plane.
