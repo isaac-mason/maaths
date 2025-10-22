@@ -1,5 +1,7 @@
 /** biome-ignore-all assist/source/organizeImports: ordering */
 
+export * from './types';
+
 export * as vec2 from './vec2';
 export * as vec3 from './vec3';
 export * as vec4 from './vec4';
@@ -32,5 +34,3 @@ export * from './noise';
 export * from './random';
 
 export * from './common';
-
-export * from './types';

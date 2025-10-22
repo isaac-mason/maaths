@@ -37,9 +37,44 @@ const readmeOutPath = path.join(path.dirname(new URL(import.meta.url).pathname),
 
 let readmeText = fs.readFileSync(readmeTemplatePath, 'utf-8');
 
+/* Shared anchor generation and collision tracking */
+const usedAnchors = new Map(); // maps base anchor -> { type: 'module' | 'function' | 'type' }
+
+function generateUniqueHeading(headingText, itemType = 'function') {
+    const baseAnchor = headingText
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '') // remove non-alphanumeric characters except spaces and hyphens
+        .replace(/\s+/g, '-') // replace spaces with hyphens
+        .replace(/-+/g, '-'); // collapse multiple hyphens
+
+    if (usedAnchors.has(baseAnchor)) {
+        // If this is a type and the anchor is already used, append (type)
+        if (itemType === 'type') {
+            if (headingText.startsWith('`') && headingText.endsWith('`')) {
+                const inner = headingText.slice(1, -1);
+                return `\`${inner}\` (type)`;
+            }
+            return `${headingText} (type)`;
+        }
+    }
+
+    // Track this anchor
+    usedAnchors.set(baseAnchor, { type: itemType });
+    return headingText;
+}
+
+function generateAnchor(text) {
+    return text
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '') // remove non-alphanumeric characters except spaces and hyphens
+        .replace(/\s+/g, '-') // replace spaces with hyphens
+        .replace(/-+/g, '-'); // collapse multiple hyphens
+}
+
 /* <RenderAPI /> - render complete api docs */
 function generateApiDocs() {
-    let docs = '';
+    let tocDocs = ''; // Table of contents with all module grids
+    let detailDocs = ''; // Detailed documentation for each function
 
     const entryModules = [];
 
@@ -107,32 +142,92 @@ function generateApiDocs() {
         }
         visit(sourceFile);
 
-        docs += `### ${entryModule.apiName}\n\n`;
-        
-        // Add mini-TOC for this module
+        // Generate unique module heading
+        const moduleHeading = generateUniqueHeading(entryModule.apiName, 'module');
+
+        // Pre-generate unique headings for all exported items
+        const uniqueHeadings = new Map();
+        for (const name of exported) {
+            const prefix = entryModule.name ? `${entryModule.name}.` : '';
+            const headingText = `\`${prefix}${name}\``;
+            const uniqueHeading = generateUniqueHeading(headingText);
+            uniqueHeadings.set(name, uniqueHeading);
+        }
+
+    // Add to TOC with module grid
+    // Use bold module name instead of a Markdown heading so it doesn't
+    // create an extra anchor that interferes with existing anchors.
+    tocDocs += `**${entryModule.apiName}**\n\n`;
+
         if (exported.length > 0) {
+            const maxCols = 4;
+            // Determine columns based on longest display name to avoid cramped layouts.
+            // Heuristics (tweak as needed):
+            // - very long names -> 1 column
+            // - long names -> 2 columns
+            // - medium names -> 3 columns
+            // - short names -> up to 4 columns
+            const displayNames = exported.map((name) => (entryModule.name ? `${entryModule.name}.` : '') + name);
+            const maxNameLen = displayNames.reduce((m, s) => Math.max(m, s.length), 0);
+
+            // Choose number of columns (1..maxCols) by estimating how many columns of
+            // width (maxNameLen + padding) fit in a reasonable target line width.
+            // This avoids forcing a single column for names that are long but still
+            // allow 2 columns to improve compactness (e.g. mat4).
+            const targetLineWidth = 90; // approx characters per line for README render
+            const perColWidth = Math.max(12, maxNameLen + 6); // include markup/padding
+            let estimatedCols = Math.floor(targetLineWidth / perColWidth) || 1;
+            estimatedCols = Math.min(maxCols, Math.max(1, estimatedCols));
+            // But never exceed number of items; clamp to exported.length
+            const itemsPerRow = Math.min(estimatedCols, exported.length);
+            const links = [];
+
             for (const name of exported) {
                 const prefix = entryModule.name ? `${entryModule.name}.` : '';
-                const anchor = `${prefix}${name}`.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
-                docs += `- [\`${prefix}${name}\`](#${anchor})\n`;
+                const displayName = `${prefix}${name}`;
+                const uniqueHeading = uniqueHeadings.get(name);
+                const anchor = generateAnchor(uniqueHeading);
+                links.push(`<a href="#${anchor}"><code>${displayName}</code></a>`);
             }
-            docs += '\n';
+
+            // Build HTML table for TOC
+            tocDocs += '<table><tr>\n';
+            for (let i = 0; i < links.length; i++) {
+                tocDocs += `<td>${links[i]}</td>`;
+                if ((i + 1) % itemsPerRow === 0 && i < links.length - 1) {
+                    tocDocs += '\n</tr><tr>\n';
+                }
+            }
+            // Fill remaining cells if needed (only if we have more than 1 item)
+            if (links.length > 1) {
+                const remainder = links.length % itemsPerRow;
+                if (remainder !== 0) {
+                    for (let i = 0; i < itemsPerRow - remainder; i++) {
+                        tocDocs += '<td></td>';
+                    }
+                }
+            }
+            tocDocs += '\n</tr></table>\n\n';
         }
+
+        // Add detailed documentation
+        detailDocs += `### ${moduleHeading}\n\n`;
 
         for (const name of exported) {
             const typeDoc = getType(name, sourceFile);
 
             if (typeDoc) {
                 const lines = typeDoc.trim();
-                docs += `#### \`${entryModule.name ? `${entryModule.name}.` : ''}${name}\``;
-                docs += `\n\n\`\`\`ts\n`;
-                docs += lines;
-                docs += `\n\`\`\`\n\n`;
+                const uniqueHeading = uniqueHeadings.get(name);
+                detailDocs += `#### ${uniqueHeading}`;
+                detailDocs += `\n\n\`\`\`ts\n`;
+                detailDocs += lines;
+                detailDocs += `\n\`\`\`\n\n`;
             }
         }
     }
 
-    return docs;
+    return tocDocs + '\n---\n\n## Reference\n\n' + detailDocs;
 }
 
 const renderApiRegex = /<RenderAPI\s*\/>/g;
@@ -193,29 +288,6 @@ readmeText = readmeText.replace(snippetRegex, (fullMatch, sourcePath, groupName)
     snippetCode = snippetCode.replace(/^\s*\n|\n\s*$/g, '');
     return `\`\`\`ts\n${snippetCode}\n\`\`\``;
 });
-
-/* <TOC /> */
-const tocRegex = /<TOC\s*\/>/g;
-const tocLine = readmeText.split('\n').findIndex((line) => tocRegex.test(line));
-const linesAfterToc = readmeText
-    .split('\n')
-    .slice(tocLine + 1)
-    .join('\n');
-const tocLines = [];
-const headingRegex = /^(#{2,3})\s+(.*)$/gm;
-for (const match of linesAfterToc.matchAll(headingRegex)) {
-    const level = match[1].length - 1; // level 2-6 becomes 1-5
-    const title = match[2].trim();
-    const anchor = title
-        .toLowerCase()
-        .replace(/[^\w\s-]/g, '') // remove non-alphanumeric characters except spaces and hyphens
-        .replace(/\s+/g, '-') // replace spaces with hyphens
-        .replace(/-+/g, '-'); // collapse multiple hyphens
-    const indent = '  '.repeat(level - 1);
-    tocLines.push(`${indent}- [${title}](#${anchor})`);
-}
-const tocText = tocLines.join('\n');
-readmeText = readmeText.replace(tocRegex, tocText);
 
 /* write result */
 fs.writeFileSync(readmeOutPath, readmeText, 'utf-8');

@@ -23,10 +23,6 @@ maaths is a collection of math helpers for 3D graphics and simulations.
 - The vec*, quat*, mat* code started as a typescript port of glMatrix (https://glmatrix.net/). This library doesn't aim to stay in sync with glMatrix however.
 - Simplex noise functions are adapted from https://github.com/pmndrs/maath, which were adapted from https://github.com/josephg/noisejs :)
 
-## Table Of Contents
-
-<TOC />
-
 ## API Documentation
 
 <RenderAPI />
