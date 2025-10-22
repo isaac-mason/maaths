@@ -38,7 +38,7 @@ importers:
 
   docs:
     dependencies:
-      maaths:
+      mathcat:
         specifier: workspace:^
         version: link:..
 
@@ -47,7 +47,7 @@ importers:
       lil-gui:
         specifier: ^0.20.0
         version: 0.20.0
-      maaths:
+      mathcat:
         specifier: workspace:*
         version: link:..
       three:

@@ -1,5 +1,5 @@
 import GUI from 'lil-gui';
-import { quickhull3 } from 'maaths';
+import { quickhull3 } from 'mathcat';
 import { GLTFLoader, OrbitControls } from 'three/examples/jsm/Addons.js';
 import * as THREE from 'three/webgpu';
 

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.0.6
+
+- NOTE: maaths has been moved to the `mathcat` package name to avoid confusion with `maath` from pmndrs.
+
 ## 0.0.5
 
 - feat: add `OBB3` type and `obb3` APIs for 3D oriented bounding boxes

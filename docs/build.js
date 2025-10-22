@@ -236,8 +236,8 @@ readmeText = readmeText.replace(renderApiRegex, () => {
     return apiDocs;
 });
 
-/* <RenderType type="import('maaths').TypeName" /> */
-const renderTypeRegex = /<RenderType\s+type=["']import\(['"]maaths['"]\)\.(\w+)["']\s*\/>/g;
+/* <RenderType type="import('mathcat').TypeName" /> */
+const renderTypeRegex = /<RenderType\s+type=["']import\(['"]mathcat['"]\)\.(\w+)["']\s*\/>/g;
 readmeText = readmeText.replace(renderTypeRegex, (fullMatch, typeName) => {
     const typeDef = getType(typeName);
     if (!typeDef) {
@@ -247,8 +247,8 @@ readmeText = readmeText.replace(renderTypeRegex, (fullMatch, typeName) => {
     return `\`\`\`ts\n${typeDef}\n\`\`\``;
 });
 
-/* <RenderSource type="import('maaths').TypeName" /> */
-const renderSourceRegex = /<RenderSource\s+type=["']import\(['"]maaths['"]\)\.(\w+)["']\s*\/>/g;
+/* <RenderSource type="import('mathcat').TypeName" /> */
+const renderSourceRegex = /<RenderSource\s+type=["']import\(['"]mathcat['"]\)\.(\w+)["']\s*\/>/g;
 readmeText = readmeText.replace(renderSourceRegex, (fullMatch, typeName) => {
     const typeDef = getSource(typeName);
     if (!typeDef) {

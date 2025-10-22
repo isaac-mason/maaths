@@ -1,12 +1,12 @@
 ![cover](./docs/cover.png)
 
 ```sh
-> npm install maaths
+> npm install mathcat
 ```
 
-# maaths
+# mathcat
 
-maaths is a collection of math helpers for 3D graphics and simulations.
+mathcat is a collection of math helpers for 3D graphics and simulations.
 
 **Features:**
 

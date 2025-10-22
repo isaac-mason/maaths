@@ -1,5 +1,5 @@
 {
-    "name": "maaths-examples",
+    "name": "mathcat-examples",
     "private": true,
     "version": "0.0.0",
     "type": "module",
@@ -10,7 +10,7 @@
     },
     "dependencies": {
         "lil-gui": "^0.20.0",
-        "maaths": "workspace:*",
+        "mathcat": "workspace:*",
         "three": "^0.180.0"
     },
     "devDependencies": {

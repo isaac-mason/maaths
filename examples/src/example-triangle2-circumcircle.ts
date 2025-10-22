@@ -1,6 +1,6 @@
 import GUI from 'lil-gui';
-import type { Circle, Triangle2 } from 'maaths';
-import { circle, triangle2 } from 'maaths';
+import type { Circle, Triangle2 } from 'mathcat';
+import { circle, triangle2 } from 'mathcat';
 
 function generateRandomTriangle(): Triangle2 {
     const spread = 150;

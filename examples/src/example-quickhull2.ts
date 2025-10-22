@@ -1,5 +1,5 @@
 import GUI from 'lil-gui';
-import { quickhull2 } from 'maaths';
+import { quickhull2 } from 'mathcat';
 
 function generateRandomPoints(count: number): number[] {
     const points: number[] = [];

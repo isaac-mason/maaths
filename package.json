@@ -1,5 +1,5 @@
 {
-    "name": "maaths",
+    "name": "mathcat",
     "version": "0.0.5",
     "author": "Isaac Mason <isaac@isaacmason.com>",
     "description": "a collection of math helpers for 3D graphics and simulations",
@@ -15,7 +15,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/isaac-mason/maaths.git"
+        "url": "git+https://github.com/isaac-mason/mathcat.git"
     },
     "scripts": {
         "build": "rm -rf ./dist && rollup --config rollup.config.mjs",
