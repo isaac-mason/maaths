@@ -2,7 +2,7 @@
 
 ## 0.0.6
 
-- NOTE: maaths has been moved to the `mathcat` package name to avoid confusion with `maath` from pmndrs.
+- `maaths` has been renamed to `mathcat` to avoid confusion with `maath` from pmndrs.
 
 ## 0.0.5
 
