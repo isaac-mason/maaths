@@ -5392,11 +5392,9 @@ export function create(): Triangle2;
 ```ts
 /**
  * Calculates the circumcircle of three points and stores the center in the output parameter.
- * @param p1 First point
- * @param p2 Second point
- * @param p3 Third point
- * @param c Output parameter for the circumcircle center
- * @returns The radius of the circumcircle, or 0 if the points are collinear
+ * @param outCircle The circle to store the result in
+ * @param triangle The triangle defined by three points
+ * @returns outCircle
  */
 export function circumcircle(outCircle: Circle, triangle: Triangle2): Circle;
 ```
