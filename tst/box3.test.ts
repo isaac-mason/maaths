@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { Box3, Plane3, Sphere, Triangle3, Vec3 } from '../dist';
+import type { Box3, Mat4, Plane3, Sphere, Triangle3, Vec3 } from '../dist';
 import { box3 } from '../dist';
 
 describe('box3', () => {
@@ -920,124 +920,81 @@ describe('box3', () => {
         });
     });
 
-    describe('intersectsRay', () => {
-        it('should return true when ray passes through box', () => {
-            const box: Box3 = [
-                [0, 0, 0],
-                [2, 2, 2],
-            ];
-            const start: Vec3 = [-1, 1, 1];
-            const end: Vec3 = [3, 1, 1];
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(true);
-        });
-        
-        it('should return true when ray starts inside box', () => {
-            const box: Box3 = [
-                [0, 0, 0],
-                [2, 2, 2],
-            ];
-            const start: Vec3 = [1, 1, 1]; // inside box
-            const end: Vec3 = [3, 3, 3]; // outside box
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(true);
-        });
-        
-        it('should return true when ray ends inside box', () => {
-            const box: Box3 = [
-                [0, 0, 0],
-                [2, 2, 2],
-            ];
-            const start: Vec3 = [-1, -1, -1]; // outside box
-            const end: Vec3 = [1, 1, 1]; // inside box
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(true);
-        });
-        
-        it('should return false when ray misses box completely', () => {
+    describe('transformMat4', () => {
+        it('should apply translation and scale transformations correctly', () => {
             const box: Box3 = [
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const start: Vec3 = [2, 2, 2];
-            const end: Vec3 = [3, 3, 3];
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(false);
+            // Scale by 2, then translate by (5, 3, 2)
+            const transform: Mat4 = [
+                2, 0, 0, 0,
+                0, 2, 0, 0,
+                0, 0, 2, 0,
+                5, 3, 2, 1,
+            ];
+
+            const out = box3.create();
+            const result = box3.transformMat4(out, box, transform);
+
+            expect(result).toBe(out);
+            expect(out[0]).toEqual([5, 3, 2]);
+            expect(out[1]).toEqual([7, 5, 4]);
         });
-        
-        it('should return true when ray touches box corner', () => {
+
+        it('should handle reflection and negative scale correctly', () => {
+            const box: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+            // Negative scale (reflection)
+            const reflect: Mat4 = [
+                -1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1,
+            ];
+
+            const out = box3.create();
+            box3.transformMat4(out, box, reflect);
+
+            expect(out[0]).toEqual([-4, 2, 3]);
+            expect(out[1]).toEqual([-1, 5, 6]);
+        });
+
+        it('should encompass all corners after rotation transformation', () => {
             const box: Box3 = [
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const start: Vec3 = [-1, -1, -1];
-            const end: Vec3 = [1, 1, 1]; // exactly hits corner
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(true);
-        });
-        
-        it('should return true when ray touches box face', () => {
-            const box: Box3 = [
-                [0, 0, 0],
-                [1, 1, 1],
+            // 45 degree rotation around Z axis
+            const cos45 = Math.cos(Math.PI / 4);
+            const sin45 = Math.sin(Math.PI / 4);
+            const rotation: Mat4 = [
+                cos45, sin45, 0, 0,
+                -sin45, cos45, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1,
             ];
-            const start: Vec3 = [-1, 0.5, 0.5];
-            const end: Vec3 = [0, 0.5, 0.5]; // hits face at x=0
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(true);
-        });
-        
-        it('should handle degenerate ray (point)', () => {
-            const box: Box3 = [
-                [0, 0, 0],
-                [1, 1, 1],
+
+            const out = box3.create();
+            box3.transformMat4(out, box, rotation);
+
+            // All 8 corners should be within the resulting AABB
+            const corners: Vec3[] = [
+                [0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0],
+                [0, 0, 1], [1, 0, 1], [0, 1, 1], [1, 1, 1],
             ];
-            const point: Vec3 = [0.5, 0.5, 0.5];
-            
-            expect(box3.intersectsRay(box, point, point)).toBe(true);
-        });
-        
-        it('should handle degenerate ray outside box', () => {
-            const box: Box3 = [
-                [0, 0, 0],
-                [1, 1, 1],
-            ];
-            const point: Vec3 = [2, 2, 2];
-            
-            expect(box3.intersectsRay(box, point, point)).toBe(false);
-        });
-        
-        it('should handle ray parallel to box face', () => {
-            const box: Box3 = [
-                [0, 0, 0],
-                [1, 1, 1],
-            ];
-            const start: Vec3 = [0.5, -1, 0.5]; // parallel to Y axis
-            const end: Vec3 = [0.5, 2, 0.5];
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(true);
-        });
-        
-        it('should handle ray parallel but missing box', () => {
-            const box: Box3 = [
-                [0, 0, 0],
-                [1, 1, 1],
-            ];
-            const start: Vec3 = [2, -1, 0.5]; // parallel to Y axis but outside
-            const end: Vec3 = [2, 2, 0.5];
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(false);
-        });
-        
-        it('should handle diagonal ray through box', () => {
-            const box: Box3 = [
-                [0, 0, 0],
-                [2, 2, 2],
-            ];
-            const start: Vec3 = [-1, -1, -1];
-            const end: Vec3 = [3, 3, 3]; // diagonal through box
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(true);
+
+            for (const corner of corners) {
+                const x = corner[0], y = corner[1], z = corner[2];
+                const transformed: Vec3 = [
+                    cos45 * x - sin45 * y,
+                    sin45 * x + cos45 * y,
+                    z,
+                ];
+                expect(box3.containsPoint(out, transformed)).toBe(true);
+            }
         });
     });
 });

@@ -1,4 +1,4 @@
-import type { Box3, Plane3, Sphere, Triangle3, Vec3 } from './types';
+import type { Box3, Mat4, Plane3, Sphere, Triangle3, Vec3 } from './types';
 import * as vec3 from './vec3';
 
 /**
@@ -87,6 +87,41 @@ export function expandByPoint(out: Box3, box: Box3, point: Vec3): Box3 {
     out[1][0] = Math.max(box[1][0], point[0]);
     out[1][1] = Math.max(box[1][1], point[1]);
     out[1][2] = Math.max(box[1][2], point[2]);
+    return out;
+}
+
+const _transformMat4_corner = vec3.create();
+
+export function transformMat4(out: Box3, box: Box3, mat: Mat4): Box3 {
+    const min = box[0];
+    const max = box[1];
+
+    // Initialize output to infinities
+    out[0][0] = Number.POSITIVE_INFINITY;
+    out[0][1] = Number.POSITIVE_INFINITY;
+    out[0][2] = Number.POSITIVE_INFINITY;
+    out[1][0] = Number.NEGATIVE_INFINITY;
+    out[1][1] = Number.NEGATIVE_INFINITY;
+    out[1][2] = Number.NEGATIVE_INFINITY;
+
+    // Transform all 8 corners of the box and expand the output AABB
+    for (let i = 0; i < 8; i++) {
+        _transformMat4_corner[0] = (i & 1) === 0 ? min[0] : max[0];
+        _transformMat4_corner[1] = (i & 2) === 0 ? min[1] : max[1];
+        _transformMat4_corner[2] = (i & 4) === 0 ? min[2] : max[2];
+
+        vec3.transformMat4(_transformMat4_corner, _transformMat4_corner, mat);
+
+        if (_transformMat4_corner[0] < out[0][0]) out[0][0] = _transformMat4_corner[0];
+        if (_transformMat4_corner[0] > out[1][0]) out[1][0] = _transformMat4_corner[0];
+
+        if (_transformMat4_corner[1] < out[0][1]) out[0][1] = _transformMat4_corner[1];
+        if (_transformMat4_corner[1] > out[1][1]) out[1][1] = _transformMat4_corner[1];
+
+        if (_transformMat4_corner[2] < out[0][2]) out[0][2] = _transformMat4_corner[2];
+        if (_transformMat4_corner[2] > out[1][2]) out[1][2] = _transformMat4_corner[2];
+    }
+
     return out;
 }
 

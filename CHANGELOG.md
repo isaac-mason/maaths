@@ -7,6 +7,9 @@
 - feat: add `ray3.intersectsTriangle` for ray-triangle intersection tests in 3D space
 - feat: move `circumcircle` module out of `triangle2`, export standalone
 - feat: add `box3.copy` function to copy Box3 values to another Box3
+- feat: add `box3.transformMat4`
+- feat: add `triangle3.centroid`, `triangle3.normal`, `triangle3.bounds`
+- feat: add `triangle3.copy`
 
 ## 0.0.6
 
