@@ -72,6 +72,13 @@ export type Sphere = { center: Vec3; radius: number };
 /** A circle in 2D space */
 export type Circle = { center: Vec2; radius: number };
 
+/** A ray in 3D space */
+export type Ray3 = {
+    origin: Vec3;
+    direction: Vec3;
+    length: number;
+};
+
 export type MutableArrayLike<T> = {
     [index: number]: T;
     length: number;

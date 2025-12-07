@@ -25,8 +25,12 @@ export * as obb3 from './obb3';
 export * as sphere from './sphere';
 export * as triangle3 from './triangle3';
 
+export * as ray3 from './ray3';
+
 export * from './quickhull3';
 export * from './quickhull2';
+
+export * from "./circumcircle";
 
 export * as easing from './easing';
 

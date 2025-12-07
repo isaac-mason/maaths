@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 0.0.7 (Unreleased)
+
+- feat: add `ray3` module and `Ray3` type for rays with origin, direction, and length in 3D space
+- feat: replace `box3.intersectsRay` with `ray3.intersectsBox3` for ray-box intersection tests
+- feat: add `ray3.intersectsTriangle` for ray-triangle intersection tests in 3D space
+- feat: move `circumcircle` module out of `triangle2`, export standalone
+- feat: add `box3.copy` function to copy Box3 values to another Box3
+
 ## 0.0.6
 
 - `maaths` has been renamed to `mathcat` to avoid confusion with `maath` from pmndrs.

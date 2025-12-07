@@ -25,6 +25,22 @@ export function clone(box: Box3): Box3 {
 }
 
 /**
+ * Copies a Box3 to another Box3
+ * @param out the output Box3
+ * @param box the input Box3
+ * @returns the output Box3
+ */
+export function copy(out: Box3, box: Box3): Box3 {
+    out[0][0] = box[0][0];
+    out[0][1] = box[0][1];
+    out[0][2] = box[0][2];
+    out[1][0] = box[1][0];
+    out[1][1] = box[1][1];
+    out[1][2] = box[1][2];
+    return out;
+}
+
+/**
  * Sets the min and max values of a Box3
  * @param out - The output Box3
  * @param min - The minimum corner
@@ -298,80 +314,4 @@ export function intersectsPlane3(box: Box3, plane: Plane3): boolean {
 
     // Plane intersection occurs if the interval [minDot + constant, maxDot + constant] straddles zero
     return minDot + constant <= 0 && maxDot + constant >= 0;
-}
-
-/**
- * Test intersection between axis-aligned bounding box and a ray.
- * Ray is defined by start and end points.
- * Uses slab method for intersection testing.
- *
- * @param box - The bounding box
- * @param start - Ray start point
- * @param end - Ray end point
- * @returns true if the ray intersects the box, false otherwise
- */
-export function intersectsRay(box: Box3, start: Vec3, end: Vec3): boolean {
-    const min = box[0];
-    const max = box[1];
-    
-    // Ray direction and inverse direction
-    const dx = end[0] - start[0];
-    const dy = end[1] - start[1];
-    const dz = end[2] - start[2];
-    
-    // Handle degenerate ray (start == end)
-    if (dx === 0 && dy === 0 && dz === 0) {
-        // Point in box test
-        return start[0] >= min[0] && start[0] <= max[0] &&
-               start[1] >= min[1] && start[1] <= max[1] &&
-               start[2] >= min[2] && start[2] <= max[2];
-    }
-    
-    let tMin = 0;
-    let tMax = 1; // We only care about the segment from start to end
-    
-    // X axis
-    if (dx === 0) {
-        // Ray is parallel to X axis
-        if (start[0] < min[0] || start[0] > max[0]) return false;
-    } else {
-        const invDx = 1 / dx;
-        let t1 = (min[0] - start[0]) * invDx;
-        let t2 = (max[0] - start[0]) * invDx;
-        if (t1 > t2) [t1, t2] = [t2, t1]; // swap
-        tMin = Math.max(tMin, t1);
-        tMax = Math.min(tMax, t2);
-        if (tMin > tMax) return false;
-    }
-    
-    // Y axis
-    if (dy === 0) {
-        // Ray is parallel to Y axis
-        if (start[1] < min[1] || start[1] > max[1]) return false;
-    } else {
-        const invDy = 1 / dy;
-        let t1 = (min[1] - start[1]) * invDy;
-        let t2 = (max[1] - start[1]) * invDy;
-        if (t1 > t2) [t1, t2] = [t2, t1]; // swap
-        tMin = Math.max(tMin, t1);
-        tMax = Math.min(tMax, t2);
-        if (tMin > tMax) return false;
-    }
-    
-    // Z axis
-    if (dz === 0) {
-        // Ray is parallel to Z axis
-        if (start[2] < min[2] || start[2] > max[2]) return false;
-    } else {
-        const invDz = 1 / dz;
-        let t1 = (min[2] - start[2]) * invDz;
-        let t2 = (max[2] - start[2]) * invDz;
-        if (t1 > t2) [t1, t2] = [t2, t1]; // swap
-        tMin = Math.max(tMin, t1);
-        tMax = Math.min(tMax, t2);
-        if (tMin > tMax) return false;
-    }
-    
-    // Ray intersects if tMin <= tMax and the intersection is within the segment [0, 1]
-    return tMax >= 0 && tMin <= 1;
 }
