@@ -13,6 +13,7 @@
 - feat: add `triangle3.expandByExtents`
 - feat: add `vec3.setScalar`
 - feat: add `box3.extents`, `box3.center`
+- feat: add `vec3.isScaleInsideOut`
 
 ## 0.0.6
 
