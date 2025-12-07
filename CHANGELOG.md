@@ -10,6 +10,9 @@
 - feat: add `box3.transformMat4`
 - feat: add `triangle3.centroid`, `triangle3.normal`, `triangle3.bounds`
 - feat: add `triangle3.copy`
+- feat: add `triangle3.expandByExtents`
+- feat: add `vec3.setScalar`
+- feat: add `box3.extents`, `box3.center`
 
 ## 0.0.6
 

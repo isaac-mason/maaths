@@ -84,6 +84,20 @@ export function set(out: Vec3, x: number, y: number, z: number): Vec3 {
 }
 
 /**
+ * Sets all components of a vec3 to the given scalar value
+ *
+ * @param out the receiving vector
+ * @param s scalar value to set
+ * @returns out
+ */
+export function setScalar(out: Vec3, s: number): Vec3 {
+    out[0] = s;
+    out[1] = s;
+    out[2] = s;
+    return out;
+}
+
+/**
  * Sets the components of a vec3 from a buffer
  * @param out the receiving vector
  * @param buffer the source buffer

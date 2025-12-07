@@ -90,13 +90,93 @@ export function expandByPoint(out: Box3, box: Box3, point: Vec3): Box3 {
     return out;
 }
 
+/**
+ * Widens a Box3 by a vector on both sides
+ * Subtracts the vector from min and adds it to max
+ * @param out - The output Box3
+ * @param box - The input Box3
+ * @param vector - The vector to expand by
+ * @returns The expanded Box3
+ */
+export function expandByExtents(out: Box3, box: Box3, vector: Vec3): Box3 {
+    out[0][0] = box[0][0] - vector[0];
+    out[0][1] = box[0][1] - vector[1];
+    out[0][2] = box[0][2] - vector[2];
+    out[1][0] = box[1][0] + vector[0];
+    out[1][1] = box[1][1] + vector[1];
+    out[1][2] = box[1][2] + vector[2];
+    return out;
+}
+
+/**
+ * Calculate the center point of a bounding box
+ * @param out - The output Vec3 for the center
+ * @param box - The input Box3
+ * @returns The center point
+ */
+export function center(out: Vec3, box: Box3): Vec3 {
+    out[0] = (box[0][0] + box[1][0]) * 0.5;
+    out[1] = (box[0][1] + box[1][1]) * 0.5;
+    out[2] = (box[0][2] + box[1][2]) * 0.5;
+    return out;
+}
+
+/**
+ * Calculate the extents (half-size) of a bounding box
+ * @param out - The output Vec3 for the extents
+ * @param box - The input Box3
+ * @returns The extents (distance from center to each face)
+ */
+export function extents(out: Vec3, box: Box3): Vec3 {
+    out[0] = (box[1][0] - box[0][0]) * 0.5;
+    out[1] = (box[1][1] - box[0][1]) * 0.5;
+    out[2] = (box[1][2] - box[0][2]) * 0.5;
+    return out;
+}
+
+/**
+ * Scale a bounding box by a vector, handling non-uniform and negative scaling
+ * @param out - The output Box3
+ * @param box - The input Box3
+ * @param scale - The scale to apply (as a Vec3)
+ * @returns The scaled Box3
+ */
+export function scale(out: Box3, box: Box3, scale: Vec3): Box3 {
+    const min = box[0];
+    const max = box[1];
+    
+    const minX = min[0] * scale[0];
+    const maxX = max[0] * scale[0];
+    const minY = min[1] * scale[1];
+    const maxY = max[1] * scale[1];
+    const minZ = min[2] * scale[2];
+    const maxZ = max[2] * scale[2];
+
+    // handle negative scaling by ensuring min <= max for each axis
+    out[0][0] = Math.min(minX, maxX);
+    out[1][0] = Math.max(minX, maxX);
+    out[0][1] = Math.min(minY, maxY);
+    out[1][1] = Math.max(minY, maxY);
+    out[0][2] = Math.min(minZ, maxZ);
+    out[1][2] = Math.max(minZ, maxZ);
+
+    return out;
+}
+
 const _transformMat4_corner = vec3.create();
 
+/**
+ * Transform a bounding box by a 4x4 matrix
+ * Transforms all 8 corners and creates a new AABB that encompasses them
+ * @param out - The output Box3
+ * @param box - The input Box3
+ * @param mat - The 4x4 transformation matrix
+ * @returns The transformed Box3
+ */
 export function transformMat4(out: Box3, box: Box3, mat: Mat4): Box3 {
     const min = box[0];
     const max = box[1];
 
-    // Initialize output to infinities
     out[0][0] = Number.POSITIVE_INFINITY;
     out[0][1] = Number.POSITIVE_INFINITY;
     out[0][2] = Number.POSITIVE_INFINITY;
@@ -104,7 +184,7 @@ export function transformMat4(out: Box3, box: Box3, mat: Mat4): Box3 {
     out[1][1] = Number.NEGATIVE_INFINITY;
     out[1][2] = Number.NEGATIVE_INFINITY;
 
-    // Transform all 8 corners of the box and expand the output AABB
+    // transform all 8 corners of the box and expand the output AABB
     for (let i = 0; i < 8; i++) {
         _transformMat4_corner[0] = (i & 1) === 0 ? min[0] : max[0];
         _transformMat4_corner[1] = (i & 2) === 0 ? min[1] : max[1];

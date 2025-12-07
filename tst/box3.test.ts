@@ -255,6 +255,109 @@ describe('box3', () => {
         });
     });
 
+    describe('expandByExtents', () => {
+        it('should expand box uniformly on all sides', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [2, 2, 2],
+            ];
+            const result = box3.create();
+            const vector: Vec3 = [1, 1, 1];
+
+            const returnValue = box3.expandByExtents(result, box, vector);
+
+            expect(returnValue).toBe(result);
+            expect(result[0]).toEqual([-1, -1, -1]); // min -= vector
+            expect(result[1]).toEqual([3, 3, 3]); // max += vector
+        });
+
+        it('should expand box non-uniformly', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [2, 2, 2],
+            ];
+            const result = box3.create();
+            const vector: Vec3 = [0.5, 1, 2];
+
+            box3.expandByExtents(result, box, vector);
+
+            expect(result[0]).toEqual([-0.5, -1, -2]);
+            expect(result[1]).toEqual([2.5, 3, 4]);
+        });
+
+        it('should handle negative expansion (shrinking)', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [4, 4, 4],
+            ];
+            const result = box3.create();
+            const vector: Vec3 = [-1, -0.5, -2];
+
+            box3.expandByExtents(result, box, vector);
+
+            expect(result[0]).toEqual([1, 0.5, 2]); // min -= negative = add
+            expect(result[1]).toEqual([3, 3.5, 2]); // max += negative = subtract
+        });
+
+        it('should handle zero expansion', () => {
+            const box: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+            const result = box3.create();
+            const vector: Vec3 = [0, 0, 0];
+
+            box3.expandByExtents(result, box, vector);
+
+            expect(result[0]).toEqual([1, 2, 3]);
+            expect(result[1]).toEqual([4, 5, 6]);
+        });
+
+        it('should handle negative box coordinates', () => {
+            const box: Box3 = [
+                [-2, -2, -2],
+                [-1, -1, -1],
+            ];
+            const result = box3.create();
+            const vector: Vec3 = [0.5, 0.5, 0.5];
+
+            box3.expandByExtents(result, box, vector);
+
+            expect(result[0]).toEqual([-2.5, -2.5, -2.5]);
+            expect(result[1]).toEqual([-0.5, -0.5, -0.5]);
+        });
+    });
+
+    describe('center', () => {
+        it('should calculate the center point of a box', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [4, 6, 8],
+            ];
+            const out: Vec3 = [0, 0, 0];
+
+            const result = box3.center(out, box);
+
+            expect(result).toBe(out);
+            expect(out).toEqual([2, 3, 4]);
+        });
+    });
+
+    describe('extents', () => {
+        it('should calculate the extents (half-size) of a box', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [4, 6, 8],
+            ];
+            const out: Vec3 = [0, 0, 0];
+
+            const result = box3.extents(out, box);
+
+            expect(result).toBe(out);
+            expect(out).toEqual([2, 3, 4]);
+        });
+    });
+
     describe('containsPoint', () => {
         it('should return true when point is inside box', () => {
             const box: Box3 = [
@@ -995,6 +1098,70 @@ describe('box3', () => {
                 ];
                 expect(box3.containsPoint(out, transformed)).toBe(true);
             }
+        });
+    });
+
+    describe('scale', () => {
+        it('should apply uniform scaling correctly', () => {
+            const box: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+            const scaleVec: Vec3 = [2, 2, 2];
+
+            const out = box3.create();
+            const result = box3.scale(out, box, scaleVec);
+
+            expect(result).toBe(out);
+            expect(out[0]).toEqual([2, 4, 6]);
+            expect(out[1]).toEqual([8, 10, 12]);
+        });
+
+        it('should apply non-uniform scaling correctly', () => {
+            const box: Box3 = [
+                [1, 1, 1],
+                [2, 2, 2],
+            ];
+            const scaleVec: Vec3 = [2, 3, 4];
+
+            const out = box3.create();
+            box3.scale(out, box, scaleVec);
+
+            expect(out[0]).toEqual([2, 3, 4]);
+            expect(out[1]).toEqual([4, 6, 8]);
+        });
+
+        it('should handle negative scaling (reflection) and swap min/max', () => {
+            const box: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+            const scaleVec: Vec3 = [-1, 1, 1];
+
+            const out = box3.create();
+            box3.scale(out, box, scaleVec);
+
+            // After negative scaling on x, we need to ensure min <= max
+            expect(out[0]).toEqual([-4, 2, 3]);
+            expect(out[1]).toEqual([-1, 5, 6]);
+        });
+
+        it('should handle all axes with negative scaling', () => {
+            const box: Box3 = [
+                [1, 1, 1],
+                [3, 3, 3],
+            ];
+            const scaleVec: Vec3 = [-1, -2, -0.5];
+
+            const out = box3.create();
+            box3.scale(out, box, scaleVec);
+
+            expect(out[0][0]).toEqual(-3);
+            expect(out[1][0]).toEqual(-1);
+            expect(out[0][1]).toEqual(-6);
+            expect(out[1][1]).toEqual(-2);
+            expect(out[0][2]).toEqual(-1.5);
+            expect(out[1][2]).toEqual(-0.5);
         });
     });
 });
