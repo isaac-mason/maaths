@@ -14,6 +14,7 @@
 - feat: add `vec3.setScalar`
 - feat: add `box3.extents`, `box3.center`
 - feat: add `vec3.isScaleInsideOut`
+- feat: remove unnecessary allocations in `obb3` functions
 
 ## 0.0.6
 
