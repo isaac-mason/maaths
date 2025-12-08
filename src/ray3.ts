@@ -1,9 +1,6 @@
 import type { Box3, Ray3, Vec3 } from './types';
 import * as vec3 from './vec3';
 
-
-
-
 const _rayIntersectsTriangle_edge1 = vec3.create();
 const _rayIntersectsTriangle_edge2 = vec3.create();
 const _rayIntersectsTriangle_h = vec3.create();
@@ -20,13 +17,7 @@ const _rayIntersectsTriangle_q = vec3.create();
  * @param b Second vertex of triangle
  * @param c Third vertex of triangle
  */
-export function intersectsTriangle(
-    out: { fraction: number; hit: boolean },
-    ray: Ray3,
-    a: Vec3,
-    b: Vec3,
-    c: Vec3,
-): void {
+export function intersectsTriangle(out: { fraction: number; hit: boolean }, ray: Ray3, a: Vec3, b: Vec3, c: Vec3): void {
     const EPSILON = 1e-8;
 
     // Edge vectors
