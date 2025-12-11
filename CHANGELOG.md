@@ -15,6 +15,8 @@
 - feat: add `box3.extents`, `box3.center`
 - feat: add `vec3.isScaleInsideOut`
 - feat: remove unnecessary allocations in `obb3` functions
+- feat: add `/*@__PURE__*/` annotations to internal temporary variables for better tree-shaking
+- feat: remove `Triangle2` and `Triangle3` types, passing individual Vec2/Vec3 arguments has been generally more practical instead
 
 ## 0.0.6
 

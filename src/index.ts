@@ -18,7 +18,6 @@ export * as mat4 from './mat4';
 
 export * as circle from './circle';
 export * as segment2 from './segment2';
-export * as triangle2 from './triangle2';
 
 export * as box3 from './box3';
 export * as obb3 from './obb3';

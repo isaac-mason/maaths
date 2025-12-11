@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { Box3, Mat4, Plane3, Sphere, Triangle3, Vec3 } from '../dist';
+import type { Box3, Mat4, Plane3, Sphere, Vec3 } from '../dist';
 import { box3 } from '../dist';
 
 describe('box3', () => {
@@ -717,13 +717,11 @@ describe('box3', () => {
                 [1, 1, 1],
                 [0, 0, 0], // max < min
             ];
-            const triangle: Triangle3 = [
-                [0, 0, 0],
-                [1, 0, 0],
-                [0, 1, 0],
-            ];
+            const a: Vec3 = [0, 0, 0];
+            const b: Vec3 = [1, 0, 0];
+            const c: Vec3 = [0, 1, 0];
 
-            expect(box3.intersectsTriangle3(emptyBox, triangle)).toBe(false);
+            expect(box3.intersectsTriangle3(emptyBox, a, b, c)).toBe(false);
         });
 
         it('should return true when triangle is completely inside box', () => {
@@ -731,13 +729,11 @@ describe('box3', () => {
                 [-2, -2, -2],
                 [2, 2, 2],
             ];
-            const triangle: Triangle3 = [
-                [0, 0, 0],
-                [0.5, 0, 0],
-                [0, 0.5, 0],
-            ];
+            const a: Vec3 = [0, 0, 0];
+            const b: Vec3 = [0.5, 0, 0];
+            const c: Vec3 = [0, 0.5, 0];
 
-            expect(box3.intersectsTriangle3(box, triangle)).toBe(true);
+            expect(box3.intersectsTriangle3(box, a, b, c)).toBe(true);
         });
 
         it('should return true when triangle intersects box', () => {
@@ -745,13 +741,11 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const triangle: Triangle3 = [
-                [-0.5, 0.5, 0.5],
-                [1.5, 0.5, 0.5],
-                [0.5, 1.5, 0.5],
-            ];
+            const a: Vec3 = [-0.5, 0.5, 0.5];
+            const b: Vec3 = [1.5, 0.5, 0.5];
+            const c: Vec3 = [0.5, 1.5, 0.5];
 
-            expect(box3.intersectsTriangle3(box, triangle)).toBe(true);
+            expect(box3.intersectsTriangle3(box, a, b, c)).toBe(true);
         });
 
         it('should return false when triangle is completely outside box', () => {
@@ -759,13 +753,11 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const triangle: Triangle3 = [
-                [2, 2, 2],
-                [3, 2, 2],
-                [2, 3, 2],
-            ];
+            const a: Vec3 = [2, 2, 2];
+            const b: Vec3 = [3, 2, 2];
+            const c: Vec3 = [2, 3, 2];
 
-            expect(box3.intersectsTriangle3(box, triangle)).toBe(false);
+            expect(box3.intersectsTriangle3(box, a, b, c)).toBe(false);
         });
 
         it('should handle triangle with one vertex inside box', () => {
@@ -773,13 +765,11 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const triangle: Triangle3 = [
-                [0.5, 0.5, 0.5], // inside
-                [2, 2, 2], // outside
-                [3, 3, 3], // outside
-            ];
+            const a: Vec3 = [0.5, 0.5, 0.5]; // inside
+            const b: Vec3 = [2, 2, 2]; // outside
+            const c: Vec3 = [3, 3, 3]; // outside
 
-            expect(box3.intersectsTriangle3(box, triangle)).toBe(true);
+            expect(box3.intersectsTriangle3(box, a, b, c)).toBe(true);
         });
 
         it('should handle degenerate triangle (all vertices same)', () => {
@@ -787,13 +777,11 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const triangle: Triangle3 = [
-                [0.5, 0.5, 0.5],
-                [0.5, 0.5, 0.5],
-                [0.5, 0.5, 0.5],
-            ];
+            const a: Vec3 = [0.5, 0.5, 0.5];
+            const b: Vec3 = [0.5, 0.5, 0.5];
+            const c: Vec3 = [0.5, 0.5, 0.5];
 
-            expect(box3.intersectsTriangle3(box, triangle)).toBe(true);
+            expect(box3.intersectsTriangle3(box, a, b, c)).toBe(true);
         });
 
         it('should handle triangle that passes through box diagonally', () => {
@@ -801,13 +789,11 @@ describe('box3', () => {
                 [0, 0, 0],
                 [2, 2, 2],
             ];
-            const triangle: Triangle3 = [
-                [-1, -1, 1],
-                [3, 1, 1],
-                [1, 3, 1],
-            ];
+            const a: Vec3 = [-1, -1, 1];
+            const b: Vec3 = [3, 1, 1];
+            const c: Vec3 = [1, 3, 1];
 
-            expect(box3.intersectsTriangle3(box, triangle)).toBe(true);
+            expect(box3.intersectsTriangle3(box, a, b, c)).toBe(true);
         });
     });
 

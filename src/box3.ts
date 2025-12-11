@@ -1,4 +1,4 @@
-import type { Box3, Mat4, Plane3, Sphere, Triangle3, Vec3 } from './types';
+import type { Box3, Mat4, Plane3, Sphere, Vec3 } from './types';
 import * as vec3 from './vec3';
 
 /**
@@ -294,7 +294,7 @@ function _satForAxes(axes: number[], axisCount: number): boolean {
     return true;
 }
 
-export function intersectsTriangle3(box: Box3, triangle: Triangle3): boolean {
+export function intersectsTriangle3(box: Box3, a: Vec3, b: Vec3, c: Vec3): boolean {
     const min = box[0];
     const max = box[1];
 
@@ -310,15 +310,15 @@ export function intersectsTriangle3(box: Box3, triangle: Triangle3): boolean {
     _extents[2] = max[2] - _center[2];
 
     // Translate triangle vertices so box center = origin
-    _v0[0] = triangle[0][0] - _center[0];
-    _v0[1] = triangle[0][1] - _center[1];
-    _v0[2] = triangle[0][2] - _center[2];
-    _v1[0] = triangle[1][0] - _center[0];
-    _v1[1] = triangle[1][1] - _center[1];
-    _v1[2] = triangle[1][2] - _center[2];
-    _v2[0] = triangle[2][0] - _center[0];
-    _v2[1] = triangle[2][1] - _center[1];
-    _v2[2] = triangle[2][2] - _center[2];
+    _v0[0] = a[0] - _center[0];
+    _v0[1] = a[1] - _center[1];
+    _v0[2] = a[2] - _center[2];
+    _v1[0] = b[0] - _center[0];
+    _v1[1] = b[1] - _center[1];
+    _v1[2] = b[2] - _center[2];
+    _v2[0] = c[0] - _center[0];
+    _v2[1] = c[1] - _center[1];
+    _v2[2] = c[2] - _center[2];
 
     // Edge vectors f0 = v1 - v0, etc.
     _f0[0] = _v1[0] - _v0[0];

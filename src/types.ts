@@ -54,11 +54,6 @@ export type EulerOrder = 'xyz' | 'xzy' | 'yxz' | 'yzx' | 'zxy' | 'zyx';
 /** A Euler in 3D space, with an optional order (default is 'xyz') */
 export type Euler = [x: number, y: number, z: number, order?: EulerOrder];
 
-/** A triangle in 3D space */
-export type Triangle3 = [a: Vec3, b: Vec3, c: Vec3];
-
-/** A triangle in 2D space */
-export type Triangle2 = [a: Vec2, b: Vec2, c: Vec2];
 /**
  * A plane in 3D space
  * normal - a unit length vector defining the normal of the plane.
