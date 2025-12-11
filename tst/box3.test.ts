@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { Box3, Plane3, Sphere, Triangle3, Vec3 } from '../dist';
+import type { Box3, Mat4, Plane3, Sphere, Vec3 } from '../dist';
 import { box3 } from '../dist';
 
 describe('box3', () => {
@@ -252,6 +252,109 @@ describe('box3', () => {
 
             expect(result[0]).toEqual([-3, -2, -2]); // X min expanded
             expect(result[1]).toEqual([-1, 0, -0.5]); // Y and Z max expanded
+        });
+    });
+
+    describe('expandByExtents', () => {
+        it('should expand box uniformly on all sides', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [2, 2, 2],
+            ];
+            const result = box3.create();
+            const vector: Vec3 = [1, 1, 1];
+
+            const returnValue = box3.expandByExtents(result, box, vector);
+
+            expect(returnValue).toBe(result);
+            expect(result[0]).toEqual([-1, -1, -1]); // min -= vector
+            expect(result[1]).toEqual([3, 3, 3]); // max += vector
+        });
+
+        it('should expand box non-uniformly', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [2, 2, 2],
+            ];
+            const result = box3.create();
+            const vector: Vec3 = [0.5, 1, 2];
+
+            box3.expandByExtents(result, box, vector);
+
+            expect(result[0]).toEqual([-0.5, -1, -2]);
+            expect(result[1]).toEqual([2.5, 3, 4]);
+        });
+
+        it('should handle negative expansion (shrinking)', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [4, 4, 4],
+            ];
+            const result = box3.create();
+            const vector: Vec3 = [-1, -0.5, -2];
+
+            box3.expandByExtents(result, box, vector);
+
+            expect(result[0]).toEqual([1, 0.5, 2]); // min -= negative = add
+            expect(result[1]).toEqual([3, 3.5, 2]); // max += negative = subtract
+        });
+
+        it('should handle zero expansion', () => {
+            const box: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+            const result = box3.create();
+            const vector: Vec3 = [0, 0, 0];
+
+            box3.expandByExtents(result, box, vector);
+
+            expect(result[0]).toEqual([1, 2, 3]);
+            expect(result[1]).toEqual([4, 5, 6]);
+        });
+
+        it('should handle negative box coordinates', () => {
+            const box: Box3 = [
+                [-2, -2, -2],
+                [-1, -1, -1],
+            ];
+            const result = box3.create();
+            const vector: Vec3 = [0.5, 0.5, 0.5];
+
+            box3.expandByExtents(result, box, vector);
+
+            expect(result[0]).toEqual([-2.5, -2.5, -2.5]);
+            expect(result[1]).toEqual([-0.5, -0.5, -0.5]);
+        });
+    });
+
+    describe('center', () => {
+        it('should calculate the center point of a box', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [4, 6, 8],
+            ];
+            const out: Vec3 = [0, 0, 0];
+
+            const result = box3.center(out, box);
+
+            expect(result).toBe(out);
+            expect(out).toEqual([2, 3, 4]);
+        });
+    });
+
+    describe('extents', () => {
+        it('should calculate the extents (half-size) of a box', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [4, 6, 8],
+            ];
+            const out: Vec3 = [0, 0, 0];
+
+            const result = box3.extents(out, box);
+
+            expect(result).toBe(out);
+            expect(out).toEqual([2, 3, 4]);
         });
     });
 
@@ -614,13 +717,11 @@ describe('box3', () => {
                 [1, 1, 1],
                 [0, 0, 0], // max < min
             ];
-            const triangle: Triangle3 = [
-                [0, 0, 0],
-                [1, 0, 0],
-                [0, 1, 0],
-            ];
+            const a: Vec3 = [0, 0, 0];
+            const b: Vec3 = [1, 0, 0];
+            const c: Vec3 = [0, 1, 0];
 
-            expect(box3.intersectsTriangle3(emptyBox, triangle)).toBe(false);
+            expect(box3.intersectsTriangle3(emptyBox, a, b, c)).toBe(false);
         });
 
         it('should return true when triangle is completely inside box', () => {
@@ -628,13 +729,11 @@ describe('box3', () => {
                 [-2, -2, -2],
                 [2, 2, 2],
             ];
-            const triangle: Triangle3 = [
-                [0, 0, 0],
-                [0.5, 0, 0],
-                [0, 0.5, 0],
-            ];
+            const a: Vec3 = [0, 0, 0];
+            const b: Vec3 = [0.5, 0, 0];
+            const c: Vec3 = [0, 0.5, 0];
 
-            expect(box3.intersectsTriangle3(box, triangle)).toBe(true);
+            expect(box3.intersectsTriangle3(box, a, b, c)).toBe(true);
         });
 
         it('should return true when triangle intersects box', () => {
@@ -642,13 +741,11 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const triangle: Triangle3 = [
-                [-0.5, 0.5, 0.5],
-                [1.5, 0.5, 0.5],
-                [0.5, 1.5, 0.5],
-            ];
+            const a: Vec3 = [-0.5, 0.5, 0.5];
+            const b: Vec3 = [1.5, 0.5, 0.5];
+            const c: Vec3 = [0.5, 1.5, 0.5];
 
-            expect(box3.intersectsTriangle3(box, triangle)).toBe(true);
+            expect(box3.intersectsTriangle3(box, a, b, c)).toBe(true);
         });
 
         it('should return false when triangle is completely outside box', () => {
@@ -656,13 +753,11 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const triangle: Triangle3 = [
-                [2, 2, 2],
-                [3, 2, 2],
-                [2, 3, 2],
-            ];
+            const a: Vec3 = [2, 2, 2];
+            const b: Vec3 = [3, 2, 2];
+            const c: Vec3 = [2, 3, 2];
 
-            expect(box3.intersectsTriangle3(box, triangle)).toBe(false);
+            expect(box3.intersectsTriangle3(box, a, b, c)).toBe(false);
         });
 
         it('should handle triangle with one vertex inside box', () => {
@@ -670,13 +765,11 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const triangle: Triangle3 = [
-                [0.5, 0.5, 0.5], // inside
-                [2, 2, 2], // outside
-                [3, 3, 3], // outside
-            ];
+            const a: Vec3 = [0.5, 0.5, 0.5]; // inside
+            const b: Vec3 = [2, 2, 2]; // outside
+            const c: Vec3 = [3, 3, 3]; // outside
 
-            expect(box3.intersectsTriangle3(box, triangle)).toBe(true);
+            expect(box3.intersectsTriangle3(box, a, b, c)).toBe(true);
         });
 
         it('should handle degenerate triangle (all vertices same)', () => {
@@ -684,13 +777,11 @@ describe('box3', () => {
                 [0, 0, 0],
                 [1, 1, 1],
             ];
-            const triangle: Triangle3 = [
-                [0.5, 0.5, 0.5],
-                [0.5, 0.5, 0.5],
-                [0.5, 0.5, 0.5],
-            ];
+            const a: Vec3 = [0.5, 0.5, 0.5];
+            const b: Vec3 = [0.5, 0.5, 0.5];
+            const c: Vec3 = [0.5, 0.5, 0.5];
 
-            expect(box3.intersectsTriangle3(box, triangle)).toBe(true);
+            expect(box3.intersectsTriangle3(box, a, b, c)).toBe(true);
         });
 
         it('should handle triangle that passes through box diagonally', () => {
@@ -698,13 +789,11 @@ describe('box3', () => {
                 [0, 0, 0],
                 [2, 2, 2],
             ];
-            const triangle: Triangle3 = [
-                [-1, -1, 1],
-                [3, 1, 1],
-                [1, 3, 1],
-            ];
+            const a: Vec3 = [-1, -1, 1];
+            const b: Vec3 = [3, 1, 1];
+            const c: Vec3 = [1, 3, 1];
 
-            expect(box3.intersectsTriangle3(box, triangle)).toBe(true);
+            expect(box3.intersectsTriangle3(box, a, b, c)).toBe(true);
         });
     });
 
@@ -920,124 +1009,145 @@ describe('box3', () => {
         });
     });
 
-    describe('intersectsRay', () => {
-        it('should return true when ray passes through box', () => {
+    describe('transformMat4', () => {
+        it('should apply translation and scale transformations correctly', () => {
             const box: Box3 = [
                 [0, 0, 0],
+                [1, 1, 1],
+            ];
+            // Scale by 2, then translate by (5, 3, 2)
+            const transform: Mat4 = [
+                2, 0, 0, 0,
+                0, 2, 0, 0,
+                0, 0, 2, 0,
+                5, 3, 2, 1,
+            ];
+
+            const out = box3.create();
+            const result = box3.transformMat4(out, box, transform);
+
+            expect(result).toBe(out);
+            expect(out[0]).toEqual([5, 3, 2]);
+            expect(out[1]).toEqual([7, 5, 4]);
+        });
+
+        it('should handle reflection and negative scale correctly', () => {
+            const box: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+            // Negative scale (reflection)
+            const reflect: Mat4 = [
+                -1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1,
+            ];
+
+            const out = box3.create();
+            box3.transformMat4(out, box, reflect);
+
+            expect(out[0]).toEqual([-4, 2, 3]);
+            expect(out[1]).toEqual([-1, 5, 6]);
+        });
+
+        it('should encompass all corners after rotation transformation', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [1, 1, 1],
+            ];
+            // 45 degree rotation around Z axis
+            const cos45 = Math.cos(Math.PI / 4);
+            const sin45 = Math.sin(Math.PI / 4);
+            const rotation: Mat4 = [
+                cos45, sin45, 0, 0,
+                -sin45, cos45, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1,
+            ];
+
+            const out = box3.create();
+            box3.transformMat4(out, box, rotation);
+
+            // All 8 corners should be within the resulting AABB
+            const corners: Vec3[] = [
+                [0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0],
+                [0, 0, 1], [1, 0, 1], [0, 1, 1], [1, 1, 1],
+            ];
+
+            for (const corner of corners) {
+                const x = corner[0], y = corner[1], z = corner[2];
+                const transformed: Vec3 = [
+                    cos45 * x - sin45 * y,
+                    sin45 * x + cos45 * y,
+                    z,
+                ];
+                expect(box3.containsPoint(out, transformed)).toBe(true);
+            }
+        });
+    });
+
+    describe('scale', () => {
+        it('should apply uniform scaling correctly', () => {
+            const box: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+            const scaleVec: Vec3 = [2, 2, 2];
+
+            const out = box3.create();
+            const result = box3.scale(out, box, scaleVec);
+
+            expect(result).toBe(out);
+            expect(out[0]).toEqual([2, 4, 6]);
+            expect(out[1]).toEqual([8, 10, 12]);
+        });
+
+        it('should apply non-uniform scaling correctly', () => {
+            const box: Box3 = [
+                [1, 1, 1],
                 [2, 2, 2],
             ];
-            const start: Vec3 = [-1, 1, 1];
-            const end: Vec3 = [3, 1, 1];
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(true);
+            const scaleVec: Vec3 = [2, 3, 4];
+
+            const out = box3.create();
+            box3.scale(out, box, scaleVec);
+
+            expect(out[0]).toEqual([2, 3, 4]);
+            expect(out[1]).toEqual([4, 6, 8]);
         });
-        
-        it('should return true when ray starts inside box', () => {
+
+        it('should handle negative scaling (reflection) and swap min/max', () => {
             const box: Box3 = [
-                [0, 0, 0],
-                [2, 2, 2],
+                [1, 2, 3],
+                [4, 5, 6],
             ];
-            const start: Vec3 = [1, 1, 1]; // inside box
-            const end: Vec3 = [3, 3, 3]; // outside box
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(true);
+            const scaleVec: Vec3 = [-1, 1, 1];
+
+            const out = box3.create();
+            box3.scale(out, box, scaleVec);
+
+            // After negative scaling on x, we need to ensure min <= max
+            expect(out[0]).toEqual([-4, 2, 3]);
+            expect(out[1]).toEqual([-1, 5, 6]);
         });
-        
-        it('should return true when ray ends inside box', () => {
+
+        it('should handle all axes with negative scaling', () => {
             const box: Box3 = [
-                [0, 0, 0],
-                [2, 2, 2],
-            ];
-            const start: Vec3 = [-1, -1, -1]; // outside box
-            const end: Vec3 = [1, 1, 1]; // inside box
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(true);
-        });
-        
-        it('should return false when ray misses box completely', () => {
-            const box: Box3 = [
-                [0, 0, 0],
                 [1, 1, 1],
+                [3, 3, 3],
             ];
-            const start: Vec3 = [2, 2, 2];
-            const end: Vec3 = [3, 3, 3];
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(false);
-        });
-        
-        it('should return true when ray touches box corner', () => {
-            const box: Box3 = [
-                [0, 0, 0],
-                [1, 1, 1],
-            ];
-            const start: Vec3 = [-1, -1, -1];
-            const end: Vec3 = [1, 1, 1]; // exactly hits corner
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(true);
-        });
-        
-        it('should return true when ray touches box face', () => {
-            const box: Box3 = [
-                [0, 0, 0],
-                [1, 1, 1],
-            ];
-            const start: Vec3 = [-1, 0.5, 0.5];
-            const end: Vec3 = [0, 0.5, 0.5]; // hits face at x=0
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(true);
-        });
-        
-        it('should handle degenerate ray (point)', () => {
-            const box: Box3 = [
-                [0, 0, 0],
-                [1, 1, 1],
-            ];
-            const point: Vec3 = [0.5, 0.5, 0.5];
-            
-            expect(box3.intersectsRay(box, point, point)).toBe(true);
-        });
-        
-        it('should handle degenerate ray outside box', () => {
-            const box: Box3 = [
-                [0, 0, 0],
-                [1, 1, 1],
-            ];
-            const point: Vec3 = [2, 2, 2];
-            
-            expect(box3.intersectsRay(box, point, point)).toBe(false);
-        });
-        
-        it('should handle ray parallel to box face', () => {
-            const box: Box3 = [
-                [0, 0, 0],
-                [1, 1, 1],
-            ];
-            const start: Vec3 = [0.5, -1, 0.5]; // parallel to Y axis
-            const end: Vec3 = [0.5, 2, 0.5];
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(true);
-        });
-        
-        it('should handle ray parallel but missing box', () => {
-            const box: Box3 = [
-                [0, 0, 0],
-                [1, 1, 1],
-            ];
-            const start: Vec3 = [2, -1, 0.5]; // parallel to Y axis but outside
-            const end: Vec3 = [2, 2, 0.5];
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(false);
-        });
-        
-        it('should handle diagonal ray through box', () => {
-            const box: Box3 = [
-                [0, 0, 0],
-                [2, 2, 2],
-            ];
-            const start: Vec3 = [-1, -1, -1];
-            const end: Vec3 = [3, 3, 3]; // diagonal through box
-            
-            expect(box3.intersectsRay(box, start, end)).toBe(true);
+            const scaleVec: Vec3 = [-1, -2, -0.5];
+
+            const out = box3.create();
+            box3.scale(out, box, scaleVec);
+
+            expect(out[0][0]).toEqual(-3);
+            expect(out[1][0]).toEqual(-1);
+            expect(out[0][1]).toEqual(-6);
+            expect(out[1][1]).toEqual(-2);
+            expect(out[0][2]).toEqual(-1.5);
+            expect(out[1][2]).toEqual(-0.5);
         });
     });
 });

@@ -461,4 +461,33 @@ describe('vec3', () => {
             expect(vec3.sqrLen).toBe(vec3.squaredLength);
         });
     });
+
+    describe('isScaleInsideOut', () => {
+        it('should return false for all positive scale', () => {
+            expect(vec3.isScaleInsideOut([1, 2, 3])).toBe(false);
+            expect(vec3.isScaleInsideOut([0.5, 2, 4])).toBe(false);
+        });
+
+        it('should return true for one negative component (reflection)', () => {
+            expect(vec3.isScaleInsideOut([-1, 1, 1])).toBe(true);
+            expect(vec3.isScaleInsideOut([1, -2, 1])).toBe(true);
+            expect(vec3.isScaleInsideOut([1, 1, -3])).toBe(true);
+        });
+
+        it('should return false for two negative components', () => {
+            expect(vec3.isScaleInsideOut([-1, -2, 1])).toBe(false);
+            expect(vec3.isScaleInsideOut([-1, 1, -3])).toBe(false);
+            expect(vec3.isScaleInsideOut([1, -2, -3])).toBe(false);
+        });
+
+        it('should return true for three negative components', () => {
+            expect(vec3.isScaleInsideOut([-1, -2, -3])).toBe(true);
+        });
+
+        it('should handle zero and negative values', () => {
+            expect(vec3.isScaleInsideOut([0, 1, 1])).toBe(false);
+            expect(vec3.isScaleInsideOut([0, -1, 1])).toBe(true);
+            expect(vec3.isScaleInsideOut([0, -1, -1])).toBe(false);
+        });
+    });
 });

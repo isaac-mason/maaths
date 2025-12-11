@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 0.0.7 (Unreleased)
+
+- feat: add `ray3` module and `Ray3` type for rays with origin, direction, and length in 3D space
+- feat: replace `box3.intersectsRay` with `ray3.intersectsBox3` for ray-box intersection tests
+- feat: add `ray3.intersectsTriangle` for ray-triangle intersection tests in 3D space
+- feat: move `circumcircle` module out of `triangle2`, export standalone
+- feat: add `box3.copy` function to copy Box3 values to another Box3
+- feat: add `box3.transformMat4`
+- feat: add `triangle3.centroid`, `triangle3.normal`, `triangle3.bounds`
+- feat: add `triangle3.copy`
+- feat: add `box3.expandByExtents`
+- feat: add `vec3.setScalar`
+- feat: add `box3.extents`, `box3.center`
+- feat: add `vec3.isScaleInsideOut`
+- feat: remove unnecessary allocations in `obb3` functions
+- feat: add `/*@__PURE__*/` annotations to internal temporary variables for better tree-shaking
+- feat: remove `Triangle2` and `Triangle3` types, passing individual Vec2/Vec3 arguments has been generally more practical instead
+
 ## 0.0.6
 
 - `maaths` has been renamed to `mathcat` to avoid confusion with `maath` from pmndrs.

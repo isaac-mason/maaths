@@ -179,7 +179,7 @@ export function equals(a: Euler, b: Euler): boolean {
     );
 }
 
-const _setFromQuaternionRotationMatrix = mat4.create();
+const _setFromQuaternionRotationMatrix = /*@__PURE__*/ mat4.create();
 
 /**
  * Sets the Euler angles from a quaternion.
@@ -193,7 +193,7 @@ export function fromQuat(out: Euler, q: Quat, order: EulerOrder): Euler {
     return fromRotationMat4(out, _setFromQuaternionRotationMatrix, order);
 }
 
-const _reorderQuaternion = quat.create();
+const _reorderQuaternion = /*@__PURE__*/ quat.create();
 
 /**
  * Reorders the Euler based on the specified order.
