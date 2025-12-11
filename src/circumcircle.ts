@@ -2,9 +2,9 @@ import { EPSILON } from './common';
 import type { Circle, Vec2 } from './types';
 import * as vec2 from './vec2';
 
-const _circumcircleV1 = vec2.create();
-const _circumcircleV2 = vec2.create();
-const _circumcircleV3 = vec2.create();
+const _circumcircleV1 = /*@__PURE__*/ vec2.create();
+const _circumcircleV2 = /*@__PURE__*/ vec2.create();
+const _circumcircleV3 = /*@__PURE__*/ vec2.create();
 
 /**
  * Calculates the circumcircle of three points and stores the center in the output parameter.

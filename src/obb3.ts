@@ -76,6 +76,9 @@ export function setFromBox3(out: OBB3, aabb: Box3): OBB3 {
     return out;
 }
 
+const _containsPoint_localPoint = /*@__PURE__*/ vec3.create();
+const _containsPoint_invQuat = /*@__PURE__*/ quat.create();
+
 /**
  * Tests whether a point is contained within an OBB.
  *
@@ -83,9 +86,6 @@ export function setFromBox3(out: OBB3, aabb: Box3): OBB3 {
  * @param point - The point to test
  * @returns true if the point is inside the OBB
  */
-const _containsPoint_localPoint = vec3.create();
-const _containsPoint_invQuat = quat.create();
-
 export function containsPoint(obb: OBB3, point: Vec3): boolean {
     // Transform point to OBB's local space
     vec3.subtract(_containsPoint_localPoint, point, obb.center);
@@ -170,29 +170,29 @@ export function clampPoint(out: Vec3, obb: OBB3, point: Vec3): Vec3 {
  * @param epsilon - Small value to prevent arithmetic errors when edges are parallel
  * @returns true if the OBBs intersect
  */
-const _intersectsOBB3_rotA = mat3.create();
-const _intersectsOBB3_rotB = mat3.create();
+const _intersectsOBB3_rotA = /*@__PURE__*/ mat3.create();
+const _intersectsOBB3_rotB = /*@__PURE__*/ mat3.create();
 const _intersectsOBB3_R: number[][] = [
     [0, 0, 0],
     [0, 0, 0],
     [0, 0, 0],
 ];
-const _intersectsOBB3_t = vec3.create();
-const _intersectsOBB3_tInA = vec3.create();
+const _intersectsOBB3_t = /*@__PURE__*/ vec3.create();
+const _intersectsOBB3_tInA = /*@__PURE__*/ vec3.create();
 const _intersectsOBB3_AbsR: number[][] = [
     [0, 0, 0],
     [0, 0, 0],
     [0, 0, 0],
 ];
 const _intersectsOBB3_aU: [Vec3, Vec3, Vec3] = [
-    vec3.create(),
-    vec3.create(),
-    vec3.create(),
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
 ];
 const _intersectsOBB3_bU: [Vec3, Vec3, Vec3] = [
-    vec3.create(),
-    vec3.create(),
-    vec3.create(),
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
 ];
 
 export function intersectsOBB3(a: OBB3, b: OBB3, epsilon = Number.EPSILON): boolean {
@@ -248,65 +248,90 @@ export function intersectsOBB3(a: OBB3, b: OBB3, epsilon = Number.EPSILON): bool
     // Test axes L = A0, L = A1, L = A2
     for (let i = 0; i < 3; i++) {
         ra = a.halfExtents[i];
-        rb = b.halfExtents[0] * _intersectsOBB3_AbsR[i][0] + b.halfExtents[1] * _intersectsOBB3_AbsR[i][1] + b.halfExtents[2] * _intersectsOBB3_AbsR[i][2];
+        rb =
+            b.halfExtents[0] * _intersectsOBB3_AbsR[i][0] +
+            b.halfExtents[1] * _intersectsOBB3_AbsR[i][1] +
+            b.halfExtents[2] * _intersectsOBB3_AbsR[i][2];
         if (Math.abs(_intersectsOBB3_tInA[i]) > ra + rb) return false;
     }
 
     // Test axes L = B0, L = B1, L = B2
     for (let i = 0; i < 3; i++) {
-        ra = a.halfExtents[0] * _intersectsOBB3_AbsR[0][i] + a.halfExtents[1] * _intersectsOBB3_AbsR[1][i] + a.halfExtents[2] * _intersectsOBB3_AbsR[2][i];
+        ra =
+            a.halfExtents[0] * _intersectsOBB3_AbsR[0][i] +
+            a.halfExtents[1] * _intersectsOBB3_AbsR[1][i] +
+            a.halfExtents[2] * _intersectsOBB3_AbsR[2][i];
         rb = b.halfExtents[i];
-        if (Math.abs(_intersectsOBB3_tInA[0] * _intersectsOBB3_R[0][i] + _intersectsOBB3_tInA[1] * _intersectsOBB3_R[1][i] + _intersectsOBB3_tInA[2] * _intersectsOBB3_R[2][i]) > ra + rb) return false;
+        if (
+            Math.abs(
+                _intersectsOBB3_tInA[0] * _intersectsOBB3_R[0][i] +
+                    _intersectsOBB3_tInA[1] * _intersectsOBB3_R[1][i] +
+                    _intersectsOBB3_tInA[2] * _intersectsOBB3_R[2][i],
+            ) >
+            ra + rb
+        )
+            return false;
     }
 
     // Test axis L = A0 x B0
     ra = a.halfExtents[1] * _intersectsOBB3_AbsR[2][0] + a.halfExtents[2] * _intersectsOBB3_AbsR[1][0];
     rb = b.halfExtents[1] * _intersectsOBB3_AbsR[0][2] + b.halfExtents[2] * _intersectsOBB3_AbsR[0][1];
-    if (Math.abs(_intersectsOBB3_tInA[2] * _intersectsOBB3_R[1][0] - _intersectsOBB3_tInA[1] * _intersectsOBB3_R[2][0]) > ra + rb) return false;
+    if (Math.abs(_intersectsOBB3_tInA[2] * _intersectsOBB3_R[1][0] - _intersectsOBB3_tInA[1] * _intersectsOBB3_R[2][0]) > ra + rb)
+        return false;
 
     // Test axis L = A0 x B1
     ra = a.halfExtents[1] * _intersectsOBB3_AbsR[2][1] + a.halfExtents[2] * _intersectsOBB3_AbsR[1][1];
     rb = b.halfExtents[0] * _intersectsOBB3_AbsR[0][2] + b.halfExtents[2] * _intersectsOBB3_AbsR[0][0];
-    if (Math.abs(_intersectsOBB3_tInA[2] * _intersectsOBB3_R[1][1] - _intersectsOBB3_tInA[1] * _intersectsOBB3_R[2][1]) > ra + rb) return false;
+    if (Math.abs(_intersectsOBB3_tInA[2] * _intersectsOBB3_R[1][1] - _intersectsOBB3_tInA[1] * _intersectsOBB3_R[2][1]) > ra + rb)
+        return false;
 
     // Test axis L = A0 x B2
     ra = a.halfExtents[1] * _intersectsOBB3_AbsR[2][2] + a.halfExtents[2] * _intersectsOBB3_AbsR[1][2];
     rb = b.halfExtents[0] * _intersectsOBB3_AbsR[0][1] + b.halfExtents[1] * _intersectsOBB3_AbsR[0][0];
-    if (Math.abs(_intersectsOBB3_tInA[2] * _intersectsOBB3_R[1][2] - _intersectsOBB3_tInA[1] * _intersectsOBB3_R[2][2]) > ra + rb) return false;
+    if (Math.abs(_intersectsOBB3_tInA[2] * _intersectsOBB3_R[1][2] - _intersectsOBB3_tInA[1] * _intersectsOBB3_R[2][2]) > ra + rb)
+        return false;
 
     // Test axis L = A1 x B0
     ra = a.halfExtents[0] * _intersectsOBB3_AbsR[2][0] + a.halfExtents[2] * _intersectsOBB3_AbsR[0][0];
     rb = b.halfExtents[1] * _intersectsOBB3_AbsR[1][2] + b.halfExtents[2] * _intersectsOBB3_AbsR[1][1];
-    if (Math.abs(_intersectsOBB3_tInA[0] * _intersectsOBB3_R[2][0] - _intersectsOBB3_tInA[2] * _intersectsOBB3_R[0][0]) > ra + rb) return false;
+    if (Math.abs(_intersectsOBB3_tInA[0] * _intersectsOBB3_R[2][0] - _intersectsOBB3_tInA[2] * _intersectsOBB3_R[0][0]) > ra + rb)
+        return false;
 
     // Test axis L = A1 x B1
     ra = a.halfExtents[0] * _intersectsOBB3_AbsR[2][1] + a.halfExtents[2] * _intersectsOBB3_AbsR[0][1];
     rb = b.halfExtents[0] * _intersectsOBB3_AbsR[1][2] + b.halfExtents[2] * _intersectsOBB3_AbsR[1][0];
-    if (Math.abs(_intersectsOBB3_tInA[0] * _intersectsOBB3_R[2][1] - _intersectsOBB3_tInA[2] * _intersectsOBB3_R[0][1]) > ra + rb) return false;
+    if (Math.abs(_intersectsOBB3_tInA[0] * _intersectsOBB3_R[2][1] - _intersectsOBB3_tInA[2] * _intersectsOBB3_R[0][1]) > ra + rb)
+        return false;
 
     // Test axis L = A1 x B2
     ra = a.halfExtents[0] * _intersectsOBB3_AbsR[2][2] + a.halfExtents[2] * _intersectsOBB3_AbsR[0][2];
     rb = b.halfExtents[0] * _intersectsOBB3_AbsR[1][1] + b.halfExtents[1] * _intersectsOBB3_AbsR[1][0];
-    if (Math.abs(_intersectsOBB3_tInA[0] * _intersectsOBB3_R[2][2] - _intersectsOBB3_tInA[2] * _intersectsOBB3_R[0][2]) > ra + rb) return false;
+    if (Math.abs(_intersectsOBB3_tInA[0] * _intersectsOBB3_R[2][2] - _intersectsOBB3_tInA[2] * _intersectsOBB3_R[0][2]) > ra + rb)
+        return false;
 
     // Test axis L = A2 x B0
     ra = a.halfExtents[0] * _intersectsOBB3_AbsR[1][0] + a.halfExtents[1] * _intersectsOBB3_AbsR[0][0];
     rb = b.halfExtents[1] * _intersectsOBB3_AbsR[2][2] + b.halfExtents[2] * _intersectsOBB3_AbsR[2][1];
-    if (Math.abs(_intersectsOBB3_tInA[1] * _intersectsOBB3_R[0][0] - _intersectsOBB3_tInA[0] * _intersectsOBB3_R[1][0]) > ra + rb) return false;
+    if (Math.abs(_intersectsOBB3_tInA[1] * _intersectsOBB3_R[0][0] - _intersectsOBB3_tInA[0] * _intersectsOBB3_R[1][0]) > ra + rb)
+        return false;
 
     // Test axis L = A2 x B1
     ra = a.halfExtents[0] * _intersectsOBB3_AbsR[1][1] + a.halfExtents[1] * _intersectsOBB3_AbsR[0][1];
     rb = b.halfExtents[0] * _intersectsOBB3_AbsR[2][2] + b.halfExtents[2] * _intersectsOBB3_AbsR[2][0];
-    if (Math.abs(_intersectsOBB3_tInA[1] * _intersectsOBB3_R[0][1] - _intersectsOBB3_tInA[0] * _intersectsOBB3_R[1][1]) > ra + rb) return false;
+    if (Math.abs(_intersectsOBB3_tInA[1] * _intersectsOBB3_R[0][1] - _intersectsOBB3_tInA[0] * _intersectsOBB3_R[1][1]) > ra + rb)
+        return false;
 
     // Test axis L = A2 x B2
     ra = a.halfExtents[0] * _intersectsOBB3_AbsR[1][2] + a.halfExtents[1] * _intersectsOBB3_AbsR[0][2];
     rb = b.halfExtents[0] * _intersectsOBB3_AbsR[2][1] + b.halfExtents[1] * _intersectsOBB3_AbsR[2][0];
-    if (Math.abs(_intersectsOBB3_tInA[1] * _intersectsOBB3_R[0][2] - _intersectsOBB3_tInA[0] * _intersectsOBB3_R[1][2]) > ra + rb) return false;
+    if (Math.abs(_intersectsOBB3_tInA[1] * _intersectsOBB3_R[0][2] - _intersectsOBB3_tInA[0] * _intersectsOBB3_R[1][2]) > ra + rb)
+        return false;
 
     // No separating axis found - OBBs must be intersecting
     return true;
 }
+
+const _intersectsBox3_obbFromAABB = /*@__PURE__*/ create();
 
 /**
  * Tests whether an OBB intersects with an AABB.
@@ -316,9 +341,7 @@ export function intersectsOBB3(a: OBB3, b: OBB3, epsilon = Number.EPSILON): bool
  * @returns true if they intersect
  */
 export function intersectsBox3(obb: OBB3, aabb: Box3): boolean {
-    // Convert AABB to OBB and test
-    const obbFromAABB = create();
-    setFromBox3(obbFromAABB, aabb);
+    const obbFromAABB = setFromBox3(_intersectsBox3_obbFromAABB, aabb);
     return intersectsOBB3(obb, obbFromAABB);
 }
 
@@ -332,9 +355,9 @@ export function intersectsBox3(obb: OBB3, aabb: Box3): boolean {
  * @param matrix - The 4x4 transformation matrix
  * @returns out
  */
-const _applyMatrix4_rotationMat = mat3.create();
-const _applyMatrix4_currentRot = mat3.create();
-const _applyMatrix4_translation = vec3.create();
+const _applyMatrix4_rotationMat = /*@__PURE__*/ mat3.create();
+const _applyMatrix4_currentRot = /*@__PURE__*/ mat3.create();
+const _applyMatrix4_translation = /*@__PURE__*/ vec3.create();
 
 export function applyMatrix4(out: OBB3, obb: OBB3, matrix: Mat4): OBB3 {
     const e = matrix;

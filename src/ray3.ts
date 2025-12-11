@@ -1,11 +1,11 @@
 import type { Box3, Ray3, Vec3 } from './types';
 import * as vec3 from './vec3';
 
-const _rayIntersectsTriangle_edge1 = vec3.create();
-const _rayIntersectsTriangle_edge2 = vec3.create();
-const _rayIntersectsTriangle_h = vec3.create();
-const _rayIntersectsTriangle_s = vec3.create();
-const _rayIntersectsTriangle_q = vec3.create();
+const _rayIntersectsTriangle_edge1 = /*@__PURE__*/ vec3.create();
+const _rayIntersectsTriangle_edge2 = /*@__PURE__*/ vec3.create();
+const _rayIntersectsTriangle_h = /*@__PURE__*/ vec3.create();
+const _rayIntersectsTriangle_s = /*@__PURE__*/ vec3.create();
+const _rayIntersectsTriangle_q = /*@__PURE__*/ vec3.create();
 
 /**
  * Ray-triangle intersection using Möller-Trumbore algorithm.

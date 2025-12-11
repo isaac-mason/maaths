@@ -57,7 +57,7 @@ export function set(out: Box3, min: Vec3, max: Vec3): Box3 {
     return out;
 }
 
-const _setFromCenterAndSize_halfSize = vec3.create();
+const _setFromCenterAndSize_halfSize = /*@__PURE__*/ vec3.create();
 
 /**
  * Sets the box from a center point and size
@@ -163,7 +163,7 @@ export function scale(out: Box3, box: Box3, scale: Vec3): Box3 {
     return out;
 }
 
-const _transformMat4_corner = vec3.create();
+const _transformMat4_corner = /*@__PURE__*/ vec3.create();
 
 /**
  * Transform a bounding box by a 4x4 matrix
