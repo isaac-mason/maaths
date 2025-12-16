@@ -109,6 +109,24 @@ export function expandByExtents(out: Box3, box: Box3, vector: Vec3): Box3 {
 }
 
 /**
+ * Computes the union of two bounding boxes
+ * Returns a Box3 that encompasses both input boxes
+ * @param out - The output Box3
+ * @param boxA - The first Box3
+ * @param boxB - The second Box3
+ * @returns The union Box3
+ */
+export function union(out: Box3, boxA: Box3, boxB: Box3): Box3 {
+    out[0][0] = Math.min(boxA[0][0], boxB[0][0]);
+    out[0][1] = Math.min(boxA[0][1], boxB[0][1]);
+    out[0][2] = Math.min(boxA[0][2], boxB[0][2]);
+    out[1][0] = Math.max(boxA[1][0], boxB[1][0]);
+    out[1][1] = Math.max(boxA[1][1], boxB[1][1]);
+    out[1][2] = Math.max(boxA[1][2], boxB[1][2]);
+    return out;
+}
+
+/**
  * Calculate the center point of a bounding box
  * @param out - The output Vec3 for the center
  * @param box - The input Box3

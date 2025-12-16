@@ -328,6 +328,77 @@ describe('box3', () => {
         });
     });
 
+    describe('union', () => {
+        it('should compute the union of two overlapping boxes', () => {
+            const boxA: Box3 = [
+                [0, 0, 0],
+                [4, 4, 4],
+            ];
+            const boxB: Box3 = [
+                [2, 2, 2],
+                [6, 6, 6],
+            ];
+            const result = box3.create();
+
+            const returnValue = box3.union(result, boxA, boxB);
+
+            expect(returnValue).toBe(result);
+            expect(result[0]).toEqual([0, 0, 0]); // min of both
+            expect(result[1]).toEqual([6, 6, 6]); // max of both
+        });
+
+        it('should compute the union of two non-overlapping boxes', () => {
+            const boxA: Box3 = [
+                [0, 0, 0],
+                [2, 2, 2],
+            ];
+            const boxB: Box3 = [
+                [5, 5, 5],
+                [7, 7, 7],
+            ];
+            const result = box3.create();
+
+            box3.union(result, boxA, boxB);
+
+            expect(result[0]).toEqual([0, 0, 0]);
+            expect(result[1]).toEqual([7, 7, 7]);
+        });
+
+        it('should compute the union when one box contains another', () => {
+            const boxA: Box3 = [
+                [-5, -5, -5],
+                [5, 5, 5],
+            ];
+            const boxB: Box3 = [
+                [0, 0, 0],
+                [2, 2, 2],
+            ];
+            const result = box3.create();
+
+            box3.union(result, boxA, boxB);
+
+            expect(result[0]).toEqual([-5, -5, -5]);
+            expect(result[1]).toEqual([5, 5, 5]);
+        });
+
+        it('should handle negative coordinates', () => {
+            const boxA: Box3 = [
+                [-4, -4, -4],
+                [-1, -1, -1],
+            ];
+            const boxB: Box3 = [
+                [-2, -3, 0],
+                [2, 3, 4],
+            ];
+            const result = box3.create();
+
+            box3.union(result, boxA, boxB);
+
+            expect(result[0]).toEqual([-4, -4, -4]);
+            expect(result[1]).toEqual([2, 3, 4]);
+        });
+    });
+
     describe('center', () => {
         it('should calculate the center point of a box', () => {
             const box: Box3 = [

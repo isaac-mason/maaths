@@ -18,7 +18,7 @@
 - feat: add `/*@__PURE__*/` annotations to internal temporary variables for better tree-shaking
 - feat: remove `Triangle2` and `Triangle3` types, passing individual Vec2/Vec3 arguments has been generally more practical instead
 - feat: add `quat.fromDegrees` convenience function to set quaternion from Euler angles in degrees
-
+- feat: add `box3.union` to compute the union of two Box3s
 
 ## 0.0.6
 
