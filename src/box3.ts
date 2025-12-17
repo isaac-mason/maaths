@@ -109,6 +109,24 @@ export function expandByExtents(out: Box3, box: Box3, vector: Vec3): Box3 {
 }
 
 /**
+ * Expands a Box3 uniformly by a scalar margin on all sides
+ * Subtracts the margin from min and adds it to max on each axis
+ * @param out - The output Box3
+ * @param box - The input Box3
+ * @param margin - The uniform margin to expand by
+ * @returns The expanded Box3
+ */
+export function expandByMargin(out: Box3, box: Box3, margin: number): Box3 {
+    out[0][0] = box[0][0] - margin;
+    out[0][1] = box[0][1] - margin;
+    out[0][2] = box[0][2] - margin;
+    out[1][0] = box[1][0] + margin;
+    out[1][1] = box[1][1] + margin;
+    out[1][2] = box[1][2] + margin;
+    return out;
+}
+
+/**
  * Computes the union of two bounding boxes
  * Returns a Box3 that encompasses both input boxes
  * @param out - The output Box3

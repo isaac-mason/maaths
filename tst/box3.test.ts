@@ -328,6 +328,50 @@ describe('box3', () => {
         });
     });
 
+    describe('expandByMargin', () => {
+        it('should expand box uniformly by a scalar margin', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [4, 4, 4],
+            ];
+            const result = box3.create();
+            const margin = 1;
+
+            const returnValue = box3.expandByMargin(result, box, margin);
+
+            expect(returnValue).toBe(result);
+            expect(result[0]).toEqual([-1, -1, -1]);
+            expect(result[1]).toEqual([5, 5, 5]);
+        });
+
+        it('should handle negative margin (shrinking)', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [4, 4, 4],
+            ];
+            const result = box3.create();
+            const margin = -0.5;
+
+            box3.expandByMargin(result, box, margin);
+
+            expect(result[0]).toEqual([0.5, 0.5, 0.5]);
+            expect(result[1]).toEqual([3.5, 3.5, 3.5]);
+        });
+
+        it('should handle zero margin', () => {
+            const box: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+            const result = box3.create();
+
+            box3.expandByMargin(result, box, 0);
+
+            expect(result[0]).toEqual([1, 2, 3]);
+            expect(result[1]).toEqual([4, 5, 6]);
+        });
+    });
+
     describe('union', () => {
         it('should compute the union of two overlapping boxes', () => {
             const boxA: Box3 = [
