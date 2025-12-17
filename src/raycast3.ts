@@ -1,11 +1,11 @@
-import type { Box3, Ray3, Vec3 } from './types';
+import type { Box3, Raycast3, Vec3 } from './types';
 import * as vec3 from './vec3';
 
 /**
- * Creates a new Ray3 with default values (origin at (0,0,0), direction (0,0,0), length 1.
- * @returns A new Ray3.
+ * Creates a new Raycast3 with default values (origin at (0,0,0), direction (0,0,0), length 1.
+ * @returns A new Raycast3.
  */
-export function create(): Ray3 {
+export function create(): Raycast3 {
     return {
         origin: vec3.create(),
         direction: vec3.fromValues(0, 0, 0),
@@ -14,14 +14,14 @@ export function create(): Ray3 {
 }
 
 /**
- * Sets the components of a Ray3.
- * @param out The output Ray3.
+ * Sets the components of a Raycast3.
+ * @param out The output Raycast3.
  * @param origin The origin Vec3.
  * @param direction The direction Vec3.
  * @param length The length of the ray.
- * @returns The output Ray3.
+ * @returns The output Raycast3.
  */
-export function set(out: Ray3, origin: Vec3, direction: Vec3, length: number): Ray3 {
+export function set(out: Raycast3, origin: Vec3, direction: Vec3, length: number): Raycast3 {
     vec3.copy(out.origin, origin);
     vec3.copy(out.direction, direction);
     out.length = length;
@@ -29,12 +29,12 @@ export function set(out: Ray3, origin: Vec3, direction: Vec3, length: number): R
 }
 
 /**
- * Copies a Ray3.
- * @param out The output Ray3.
- * @param a The input Ray3.
- * @returns The output Ray3.
+ * Copies a Raycast3.
+ * @param out The output Raycast3.
+ * @param a The input Raycast3.
+ * @returns The output Raycast3.
  */
-export function copy(out: Ray3, a: Ray3): Ray3 {
+export function copy(out: Raycast3, a: Raycast3): Raycast3 {
     vec3.copy(out.origin, a.origin);
     vec3.copy(out.direction, a.direction);
     out.length = a.length;
@@ -42,13 +42,13 @@ export function copy(out: Ray3, a: Ray3): Ray3 {
 }
 
 /**
- * Creates a Ray3 from two points.
- * @param out The output Ray3.
+ * Creates a Raycast3 from two points.
+ * @param out The output Raycast3.
  * @param a The starting point.
  * @param b The ending point.
- * @returns The output Ray3.
+ * @returns The output Raycast3.
  */
-export function fromSegment(out: Ray3, a: Vec3, b: Vec3): Ray3 {
+export function fromSegment(out: Raycast3, a: Vec3, b: Vec3): Raycast3 {
     vec3.copy(out.origin, a);
     vec3.subtract(out.direction, b, a);
     out.length = vec3.length(out.direction);
@@ -72,7 +72,7 @@ const _rayIntersectsTriangle_q = /*@__PURE__*/ vec3.create();
  * @param b Second vertex of triangle
  * @param c Third vertex of triangle
  */
-export function intersectsTriangle(out: { fraction: number; hit: boolean }, ray: Ray3, a: Vec3, b: Vec3, c: Vec3): void {
+export function intersectsTriangle(out: { fraction: number; hit: boolean }, ray: Raycast3, a: Vec3, b: Vec3, c: Vec3): void {
     const EPSILON = 1e-8;
 
     // Edge vectors
@@ -135,7 +135,7 @@ export function intersectsTriangle(out: { fraction: number; hit: boolean }, ray:
  * @param aabb AABB to test against
  * @returns true if ray intersects the AABB, false otherwise
  */
-export function intersectsBox3(ray: Ray3, aabb: Box3): boolean {
+export function intersectsBox3(ray: Raycast3, aabb: Box3): boolean {
     let tmin = 0;
     let tmax = ray.length;
 

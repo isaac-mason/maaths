@@ -24,7 +24,7 @@ export * as obb3 from './obb3';
 export * as sphere from './sphere';
 export * as triangle3 from './triangle3';
 
-export * as ray3 from './ray3';
+export * as raycast3 from './raycast3';
 
 export * from './quickhull3';
 export * from './quickhull2';
