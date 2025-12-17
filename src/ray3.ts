@@ -1,6 +1,61 @@
 import type { Box3, Ray3, Vec3 } from './types';
 import * as vec3 from './vec3';
 
+/**
+ * Creates a new Ray3 with default values (origin at (0,0,0), direction (0,0,0), length 1.
+ * @returns A new Ray3.
+ */
+export function create(): Ray3 {
+    return {
+        origin: vec3.create(),
+        direction: vec3.fromValues(0, 0, 0),
+        length: 1,
+    };
+}
+
+/**
+ * Sets the components of a Ray3.
+ * @param out The output Ray3.
+ * @param origin The origin Vec3.
+ * @param direction The direction Vec3.
+ * @param length The length of the ray.
+ * @returns The output Ray3.
+ */
+export function set(out: Ray3, origin: Vec3, direction: Vec3, length: number): Ray3 {
+    vec3.copy(out.origin, origin);
+    vec3.copy(out.direction, direction);
+    out.length = length;
+    return out;
+}
+
+/**
+ * Copies a Ray3.
+ * @param out The output Ray3.
+ * @param a The input Ray3.
+ * @returns The output Ray3.
+ */
+export function copy(out: Ray3, a: Ray3): Ray3 {
+    vec3.copy(out.origin, a.origin);
+    vec3.copy(out.direction, a.direction);
+    out.length = a.length;
+    return out;
+}
+
+/**
+ * Creates a Ray3 from two points.
+ * @param out The output Ray3.
+ * @param a The starting point.
+ * @param b The ending point.
+ * @returns The output Ray3.
+ */
+export function fromSegment(out: Ray3, a: Vec3, b: Vec3): Ray3 {
+    vec3.copy(out.origin, a);
+    vec3.subtract(out.direction, b, a);
+    out.length = vec3.length(out.direction);
+    vec3.normalize(out.direction, out.direction);
+    return out;
+}
+
 const _rayIntersectsTriangle_edge1 = /*@__PURE__*/ vec3.create();
 const _rayIntersectsTriangle_edge2 = /*@__PURE__*/ vec3.create();
 const _rayIntersectsTriangle_h = /*@__PURE__*/ vec3.create();

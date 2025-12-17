@@ -3,6 +3,66 @@ import type { Box3, Vec3, Ray3 } from '../dist';
 import { ray3 } from '../dist';
 
 describe('ray3', () => {
+    describe('create', () => {
+        it('should create a default ray', () => {
+            const ray = ray3.create();
+
+            expect(ray.origin).toEqual([0, 0, 0]);
+            expect(ray.direction).toEqual([0, 0, 0]);
+            expect(ray.length).toBe(1);
+        });
+    });
+
+    describe('set', () => {
+        it('should set ray origin, direction, and length', () => {
+            const ray = ray3.create();
+            const origin: Vec3 = [1, 2, 3];
+            const direction: Vec3 = [0, 0, 1];
+
+            const result = ray3.set(ray, origin, direction, 5);
+
+            expect(result).toBe(ray);
+            expect(ray.origin).toEqual([1, 2, 3]);
+            expect(ray.direction).toEqual([0, 0, 1]);
+            expect(ray.length).toBe(5);
+        });
+    });
+
+    describe('fromSegment', () => {
+        it('should create ray from two points', () => {
+            const ray = ray3.create();
+            const a: Vec3 = [0, 0, 0];
+            const b: Vec3 = [3, 4, 0];
+
+            const result = ray3.fromSegment(ray, a, b);
+
+            expect(result).toBe(ray);
+            expect(ray.origin).toEqual([0, 0, 0]);
+            expect(ray.direction[0]).toBeCloseTo(0.6, 5);
+            expect(ray.direction[1]).toBeCloseTo(0.8, 5);
+            expect(ray.direction[2]).toBeCloseTo(0, 5);
+            expect(ray.length).toBeCloseTo(5, 5);
+        });
+    });
+
+    describe('copy', () => {
+        it('should copy ray to another ray', () => {
+            const source: Ray3 = {
+                origin: [1, 2, 3],
+                direction: [0, 0, 1],
+                length: 5,
+            };
+            const dest = ray3.create();
+
+            const result = ray3.copy(dest, source);
+
+            expect(result).toBe(dest);
+            expect(dest.origin).toEqual([1, 2, 3]);
+            expect(dest.direction).toEqual([0, 0, 1]);
+            expect(dest.length).toBe(5);
+        });
+    });
+
     describe('intersectsTriangle', () => {
         it('detects intersection with triangle directly in front of ray origin', () => {
             const ray: Ray3 = {

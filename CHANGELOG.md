@@ -20,6 +20,7 @@
 - feat: add `quat.fromDegrees` convenience function to set quaternion from Euler angles in degrees
 - feat: add `box3.union` to compute the union of two Box3s
 - feat: add `box3.size` to compute the size or dimensions of a Box3
+- feat: add `ray3.create`, `ray3.set`, `ray3.copy`, `ray3.fromSegment`
 
 ## 0.0.6
 
