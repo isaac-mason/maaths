@@ -153,6 +153,19 @@ export function extents(out: Vec3, box: Box3): Vec3 {
 }
 
 /**
+ * Calculate the size (dimensions) of a bounding box
+ * @param out - The output Vec3 for the size
+ * @param box - The input Box3
+ * @returns The size (width, height, depth)
+ */
+export function size(out: Vec3, box: Box3): Vec3 {
+    out[0] = box[1][0] - box[0][0];
+    out[1] = box[1][1] - box[0][1];
+    out[2] = box[1][2] - box[0][2];
+    return out;
+}
+
+/**
  * Scale a bounding box by a vector, handling non-uniform and negative scaling
  * @param out - The output Box3
  * @param box - The input Box3

@@ -429,6 +429,45 @@ describe('box3', () => {
         });
     });
 
+    describe('size', () => {
+        it('should calculate the size (dimensions) of a box', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [4, 6, 8],
+            ];
+            const out: Vec3 = [0, 0, 0];
+
+            const result = box3.size(out, box);
+
+            expect(result).toBe(out);
+            expect(out).toEqual([4, 6, 8]);
+        });
+
+        it('should calculate size with negative coordinates', () => {
+            const box: Box3 = [
+                [-2, -3, -4],
+                [2, 3, 4],
+            ];
+            const out: Vec3 = [0, 0, 0];
+
+            box3.size(out, box);
+
+            expect(out).toEqual([4, 6, 8]);
+        });
+
+        it('should handle zero-size box', () => {
+            const box: Box3 = [
+                [1, 2, 3],
+                [1, 2, 3],
+            ];
+            const out: Vec3 = [1, 1, 1];
+
+            box3.size(out, box);
+
+            expect(out).toEqual([0, 0, 0]);
+        });
+    });
+
     describe('containsPoint', () => {
         it('should return true when point is inside box', () => {
             const box: Box3 = [
