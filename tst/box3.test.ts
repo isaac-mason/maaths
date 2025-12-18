@@ -79,6 +79,34 @@ describe('box3', () => {
         });
     });
 
+    describe('empty', () => {
+        it('should set box to empty state', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [2, 2, 2],
+            ];
+
+            const result = box3.empty(box);
+
+            expect(result).toBe(box);
+            expect(box[0]).toEqual([Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY]);
+            expect(box[1]).toEqual([Number.NEGATIVE_INFINITY, Number.NEGATIVE_INFINITY, Number.NEGATIVE_INFINITY]);
+        });
+
+        it('should match create() output', () => {
+            const box: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+            const emptyBox = box3.create();
+
+            box3.empty(box);
+
+            expect(box[0]).toEqual(emptyBox[0]);
+            expect(box[1]).toEqual(emptyBox[1]);
+        });
+    });
+
     describe('setFromCenterAndSize', () => {
         it('should create box from center and size correctly', () => {
             const box = box3.create();

@@ -57,6 +57,21 @@ export function set(out: Box3, min: Vec3, max: Vec3): Box3 {
     return out;
 }
 
+/**
+ * Set a Box3 to empty (min to positive infinity, max to negative infinity)
+ * @param out - The Box3 to make empty
+ * @returns The emptied Box3
+ */
+export function empty(out: Box3): Box3 {
+    out[0][0] = Number.POSITIVE_INFINITY;
+    out[0][1] = Number.POSITIVE_INFINITY;
+    out[0][2] = Number.POSITIVE_INFINITY;
+    out[1][0] = Number.NEGATIVE_INFINITY;
+    out[1][1] = Number.NEGATIVE_INFINITY;
+    out[1][2] = Number.NEGATIVE_INFINITY;
+    return out;
+}
+
 const _setFromCenterAndSize_halfSize = /*@__PURE__*/ vec3.create();
 
 /**
