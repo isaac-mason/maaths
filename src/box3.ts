@@ -184,6 +184,18 @@ export function size(out: Vec3, box: Box3): Vec3 {
 }
 
 /**
+ * Calculate the surface area of a bounding box
+ * @param box - The input Box3
+ * @returns The surface area
+ */
+export function surfaceArea(box: Box3): number {
+    const width = box[1][0] - box[0][0];
+    const height = box[1][1] - box[0][1];
+    const depth = box[1][2] - box[0][2];
+    return 2 * (width * height + width * depth + height * depth);
+}
+
+/**
  * Scale a bounding box by a vector, handling non-uniform and negative scaling
  * @param out - The output Box3
  * @param box - The input Box3

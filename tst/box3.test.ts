@@ -512,6 +512,43 @@ describe('box3', () => {
         });
     });
 
+    describe('surfaceArea', () => {
+        it('should calculate surface area of a box', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [2, 3, 4],
+            ];
+
+            const result = box3.surfaceArea(box);
+
+            // 2 * (w*h + w*d + h*d) = 2 * (2*3 + 2*4 + 3*4) = 2 * (6 + 8 + 12) = 52
+            expect(result).toBe(52);
+        });
+
+        it('should calculate surface area with negative coordinates', () => {
+            const box: Box3 = [
+                [-1, -1, -1],
+                [1, 1, 1],
+            ];
+
+            const result = box3.surfaceArea(box);
+
+            // Dimensions: 2x2x2, surface area = 2 * (4 + 4 + 4) = 24
+            expect(result).toBe(24);
+        });
+
+        it('should return zero for degenerate (flat) box', () => {
+            const box: Box3 = [
+                [0, 0, 0],
+                [0, 0, 0],
+            ];
+
+            const result = box3.surfaceArea(box);
+
+            expect(result).toBe(0);
+        });
+    });
+
     describe('containsPoint', () => {
         it('should return true when point is inside box', () => {
             const box: Box3 = [

@@ -23,6 +23,7 @@
 - feat: add `ray3.create`, `ray3.set`, `ray3.copy`, `ray3.fromSegment`
 - feat: add `box3.expandByMargin` to expand a Box3 by a uniform margin in all directions
 - feat: rename `ray3` / `Ray3` to `raycast3` / `Raycast3` to better reflect its purpose as a ray used for raycasting, including a length component
+- feat: add `box3.surfaceArea` to compute the surface area of a Box3
 
 ## 0.0.6
 
