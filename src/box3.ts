@@ -1,4 +1,5 @@
 import type { Box3, Mat4, Plane3, Sphere, Vec3 } from './types';
+import * as common from './common';
 import * as vec3 from './vec3';
 
 /**
@@ -70,6 +71,52 @@ export function empty(out: Box3): Box3 {
     out[1][1] = Number.NEGATIVE_INFINITY;
     out[1][2] = Number.NEGATIVE_INFINITY;
     return out;
+}
+
+/**
+ * Returns whether or not the boxes have exactly the same elements in the same position (when compared with ===)
+ * @param a - The first box
+ * @param b - The second box
+ * @returns True if the boxes are equal, false otherwise
+ */
+export function exactEquals(a: Box3, b: Box3): boolean {
+    return (
+        a[0][0] === b[0][0] &&
+        a[0][1] === b[0][1] &&
+        a[0][2] === b[0][2] &&
+        a[1][0] === b[1][0] &&
+        a[1][1] === b[1][1] &&
+        a[1][2] === b[1][2]
+    );
+}
+
+/**
+ * Returns whether or not the boxes have approximately the same elements in the same position
+ * @param a - The first box
+ * @param b - The second box
+ * @returns True if the boxes are equal, false otherwise
+ */
+export function equals(a: Box3, b: Box3): boolean {
+    const a0 = a[0][0];
+    const a1 = a[0][1];
+    const a2 = a[0][2];
+    const a3 = a[1][0];
+    const a4 = a[1][1];
+    const a5 = a[1][2];
+    const b0 = b[0][0];
+    const b1 = b[0][1];
+    const b2 = b[0][2];
+    const b3 = b[1][0];
+    const b4 = b[1][1];
+    const b5 = b[1][2];
+    return (
+        Math.abs(a0 - b0) <= common.EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
+        Math.abs(a1 - b1) <= common.EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)) &&
+        Math.abs(a2 - b2) <= common.EPSILON * Math.max(1.0, Math.abs(a2), Math.abs(b2)) &&
+        Math.abs(a3 - b3) <= common.EPSILON * Math.max(1.0, Math.abs(a3), Math.abs(b3)) &&
+        Math.abs(a4 - b4) <= common.EPSILON * Math.max(1.0, Math.abs(a4), Math.abs(b4)) &&
+        Math.abs(a5 - b5) <= common.EPSILON * Math.max(1.0, Math.abs(a5), Math.abs(b5))
+    );
 }
 
 const _setFromCenterAndSize_halfSize = /*@__PURE__*/ vec3.create();

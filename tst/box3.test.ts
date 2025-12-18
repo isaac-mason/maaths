@@ -107,6 +107,75 @@ describe('box3', () => {
         });
     });
 
+    describe('exactEquals', () => {
+        it('should return true for identical boxes', () => {
+            const a: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+            const b: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+
+            expect(box3.exactEquals(a, b)).toBe(true);
+        });
+
+        it('should return false for different boxes', () => {
+            const a: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+            const b: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6.0001],
+            ];
+
+            expect(box3.exactEquals(a, b)).toBe(false);
+        });
+    });
+
+    describe('equals', () => {
+        it('should return true for identical boxes', () => {
+            const a: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+            const b: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+
+            expect(box3.equals(a, b)).toBe(true);
+        });
+
+        it('should return true for approximately equal boxes', () => {
+            const a: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+            const b: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6.0000001],
+            ];
+
+            expect(box3.equals(a, b)).toBe(true);
+        });
+
+        it('should return false for clearly different boxes', () => {
+            const a: Box3 = [
+                [1, 2, 3],
+                [4, 5, 6],
+            ];
+            const b: Box3 = [
+                [1, 2, 3],
+                [4, 5, 7],
+            ];
+
+            expect(box3.equals(a, b)).toBe(false);
+        });
+    });
+
     describe('setFromCenterAndSize', () => {
         it('should create box from center and size correctly', () => {
             const box = box3.create();
