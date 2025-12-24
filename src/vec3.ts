@@ -84,6 +84,20 @@ export function set(out: Vec3, x: number, y: number, z: number): Vec3 {
 }
 
 /**
+ * Sets all components of a vec3 to the given scalar value
+ *
+ * @param out the receiving vector
+ * @param s scalar value to set
+ * @returns out
+ */
+export function setScalar(out: Vec3, s: number): Vec3 {
+    out[0] = s;
+    out[1] = s;
+    out[2] = s;
+    return out;
+}
+
+/**
  * Sets the components of a vec3 from a buffer
  * @param out the receiving vector
  * @param buffer the source buffer
@@ -771,6 +785,30 @@ export function finite(a: Vec3): boolean {
     return Number.isFinite(a[0]) && Number.isFinite(a[1]) && Number.isFinite(a[2]);
 }
 
+
+/**
+ * Determines if a scale vector represents an inside-out transformation (reflection)
+ * Returns true if an odd number of scale components are negative
+ *
+ * @param scale The scale vector to test
+ * @returns true if the scale represents a reflection (odd number of negative components)
+ */
+export function isScaleInsideOut(scale: Vec3): boolean {
+    // create a bitmask of which components are negative
+    // each component that is < 0 contributes a bit (1, 2, or 4)
+    const mask = (scale[0] < 0 ? 1 : 0) | (scale[1] < 0 ? 2 : 0) | (scale[2] < 0 ? 4 : 0);
+    
+    // count the number of set bits and return true if odd
+    // popcount: count number of 1-bits in the mask
+    let count = 0;
+    let m = mask;
+    while (m) {
+        count += m & 1;
+        m >>= 1;
+    }
+    return (count & 1) !== 0;
+}
+
 /**
  * Alias for {@link subtract}
  */
@@ -805,3 +843,4 @@ export const len = length;
  * Alias for {@link squaredLength}
  */
 export const sqrLen = squaredLength;
+
