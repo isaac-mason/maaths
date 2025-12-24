@@ -62,6 +62,20 @@ const _rayIntersectsTriangle_normal = /*@__PURE__*/ vec3.create();
 const _rayIntersectsTriangle_diff = /*@__PURE__*/ vec3.create();
 const _rayIntersectsTriangle_temp = /*@__PURE__*/ vec3.create();
 
+export type IntersectsTriangleResult = {
+    fraction: number;
+    hit: boolean;
+    frontFacing: boolean;
+};
+
+export function createIntersectsTriangleResult(): IntersectsTriangleResult {
+    return {
+        fraction: 0,
+        hit: false,
+        frontFacing: false,
+    };
+}
+
 /**
  * Ray-triangle intersection test.
  * Aligned with Three.js implementation.
@@ -74,7 +88,7 @@ const _rayIntersectsTriangle_temp = /*@__PURE__*/ vec3.create();
  * @param c Third vertex of triangle
  * @param backfaceCulling If true, backfaces will not be considered hits
  */
-export function intersectsTriangle(out: { fraction: number; hit: boolean; frontFacing: boolean }, ray: Raycast3, a: Vec3, b: Vec3, c: Vec3, backfaceCulling: boolean): void {
+export function intersectsTriangle(out: IntersectsTriangleResult, ray: Raycast3, a: Vec3, b: Vec3, c: Vec3, backfaceCulling: boolean): void {
     // Compute edges and normal
     vec3.subtract(_rayIntersectsTriangle_edge1, b, a);
     vec3.subtract(_rayIntersectsTriangle_edge2, c, a);
