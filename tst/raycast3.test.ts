@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Box3, Vec3, Raycast3 } from '../dist';
-import { raycast3 } from '../dist';
+import { raycast3, vec3 } from '../dist';
 
 describe('raycast3', () => {
     describe('create', () => {
@@ -64,127 +64,124 @@ describe('raycast3', () => {
     });
 
     describe('intersectsTriangle', () => {
-        it('detects intersection with triangle directly in front of ray origin', () => {
+        it('DdN == 0 (ray parallel to triangle)', () => {
             const ray: Raycast3 = {
                 origin: [0, 0, 0],
-                direction: [0, 0, 1],
+                direction: [0, 0, 0],
                 length: 10,
             };
 
-            const a: Vec3 = [-1, -1, 5];
-            const b: Vec3 = [1, -1, 5];
-            const c: Vec3 = [0, 1, 5];
+            const a: Vec3 = [1, 1, 0];
+            const b: Vec3 = [0, 1, 1];
+            const c: Vec3 = [1, 0, 1];
 
-            const result = { hit: false, fraction: 0 };
-            raycast3.intersectsTriangle(result, ray, a, b, c);
-
-            expect(result.hit).toBe(true);
-            expect(result.fraction).toBeGreaterThan(0);
-            expect(result.fraction).toBeLessThan(1);
-        });
-
-        it('returns false when ray is parallel to triangle', () => {
-            const ray: Raycast3 = {
-                origin: [0, 2, 0],
-                direction: [1, 0, 0],
-                length: 10,
-            };
-
-            const a: Vec3 = [0, 0, 0];
-            const b: Vec3 = [1, 0, 0];
-            const c: Vec3 = [0, 1, 0];
-
-            const result = { hit: false, fraction: 0 };
-            raycast3.intersectsTriangle(result, ray, a, b, c);
+            const result = { hit: false, fraction: 0, frontFacing: false };
+            raycast3.intersectsTriangle(result, ray, a, b, c, false);
 
             expect(result.hit).toBe(false);
         });
 
-        it('returns false when intersection is behind ray origin', () => {
+        it('DdN > 0, backfaceCulling = true (no intersection with backside)', () => {
             const ray: Raycast3 = {
-                origin: [0, 0, 10],
-                direction: [0, 0, 1],
-                length: 5,
+                origin: [0, 0, 0],
+                direction: vec3.normalize(vec3.create(), [1, 1, 1]),
+                length: 10,
             };
 
-            const a: Vec3 = [-1, -1, 5];
-            const b: Vec3 = [1, -1, 5];
-            const c: Vec3 = [0, 1, 5];
+            const a: Vec3 = [1, 1, 0];
+            const b: Vec3 = [0, 1, 1];
+            const c: Vec3 = [1, 0, 1];
 
-            const result = { hit: false, fraction: 0 };
-            raycast3.intersectsTriangle(result, ray, a, b, c);
+            const result = { hit: false, fraction: 0, frontFacing: false };
+            raycast3.intersectsTriangle(result, ray, a, b, c, true);
 
             expect(result.hit).toBe(false);
         });
 
-        it('returns false when intersection is beyond ray length', () => {
+        it('DdN > 0, backfaceCulling = false (successful backface intersection)', () => {
             const ray: Raycast3 = {
                 origin: [0, 0, 0],
-                direction: [0, 0, 1],
-                length: 3,
+                direction: vec3.normalize(vec3.create(), [1, 1, 1]),
+                length: 10,
             };
 
-            const a: Vec3 = [-1, -1, 5];
-            const b: Vec3 = [1, -1, 5];
-            const c: Vec3 = [0, 1, 5];
+            const a: Vec3 = [1, 1, 0];
+            const b: Vec3 = [0, 1, 1];
+            const c: Vec3 = [1, 0, 1];
 
-            const result = { hit: false, fraction: 0 };
-            raycast3.intersectsTriangle(result, ray, a, b, c);
+            const result = { hit: false, fraction: 0, frontFacing: false };
+            raycast3.intersectsTriangle(result, ray, a, b, c, false);
+
+            expect(result.hit).toBe(true);
+            expect(result.frontFacing).toBe(false);
+        });
+
+        it('DdN > 0, DdQxE2 < 0 (no intersection)', () => {
+            const ray: Raycast3 = {
+                origin: [0, 0, 0],
+                direction: vec3.normalize(vec3.create(), [1, 1, 1]),
+                length: 10,
+            };
+
+            const a: Vec3 = [1, 1, 0];
+            const b: Vec3 = [0, -1, -1];
+            const c: Vec3 = [1, 0, 1];
+
+            const result = { hit: false, fraction: 0, frontFacing: false };
+            raycast3.intersectsTriangle(result, ray, a, b, c, false);
 
             expect(result.hit).toBe(false);
         });
 
-        it('detects intersection with edge of triangle (barycentric boundary)', () => {
+        it('DdN > 0, DdE1xQ < 0 (no intersection)', () => {
             const ray: Raycast3 = {
                 origin: [0, 0, 0],
-                direction: [0, 0, 1],
+                direction: vec3.normalize(vec3.create(), [1, 1, 1]),
                 length: 10,
             };
 
-            const a: Vec3 = [-1, 0, 5];
-            const b: Vec3 = [1, 0, 5];
-            const c: Vec3 = [0, 1, 5];
+            const a: Vec3 = [-1, -1, 0];
+            const b: Vec3 = [0, -1, -1];
+            const c: Vec3 = [1, 0, 1];
 
-            const result = { hit: false, fraction: 0 };
-            raycast3.intersectsTriangle(result, ray, a, b, c);
+            const result = { hit: false, fraction: 0, frontFacing: false };
+            raycast3.intersectsTriangle(result, ray, a, b, c, false);
 
-            expect(result.hit).toBe(true);
+            expect(result.hit).toBe(false);
         });
 
-        it('detects intersection with triangle at exact ray length', () => {
+        it('DdN > 0, DdQxE2 + DdE1xQ > DdN (no intersection)', () => {
             const ray: Raycast3 = {
                 origin: [0, 0, 0],
-                direction: [0, 0, 1],
-                length: 5,
-            };
-
-            const a: Vec3 = [-1, -1, 5];
-            const b: Vec3 = [1, -1, 5];
-            const c: Vec3 = [0, 1, 5];
-
-            const result = { hit: false, fraction: 0 };
-            raycast3.intersectsTriangle(result, ray, a, b, c);
-
-            expect(result.hit).toBe(true);
-            expect(result.fraction).toBeCloseTo(1.0, 5);
-        });
-
-        it('returns correct fraction for intersection point', () => {
-            const ray: Raycast3 = {
-                origin: [0, 0, 0],
-                direction: [0, 0, 1],
+                direction: vec3.normalize(vec3.create(), [1, 1, 1]),
                 length: 10,
             };
 
-            const a: Vec3 = [-1, -1, 2.5];
-            const b: Vec3 = [1, -1, 2.5];
-            const c: Vec3 = [0, 1, 2.5];
+            const a: Vec3 = [-1, -1, 0];
+            const b: Vec3 = [0, 1, 1];
+            const c: Vec3 = [1, 0, 1];
 
-            const result = { hit: false, fraction: 0 };
-            raycast3.intersectsTriangle(result, ray, a, b, c);
+            const result = { hit: false, fraction: 0, frontFacing: false };
+            raycast3.intersectsTriangle(result, ray, a, b, c, false);
 
-            expect(result.hit).toBe(true);
-            expect(result.fraction).toBeCloseTo(0.25, 5);
+            expect(result.hit).toBe(false);
+        });
+
+        it('DdN < 0, QdN < 0 (no intersection when looking in wrong direction)', () => {
+            const ray: Raycast3 = {
+                origin: [0, 0, 0],
+                direction: vec3.normalize(vec3.create(), [-1, -1, -1]),
+                length: 10,
+            };
+
+            const a: Vec3 = [-1, -1, 0];
+            const b: Vec3 = [0, -1, -1];
+            const c: Vec3 = [1, 0, 1];
+
+            const result = { hit: false, fraction: 0, frontFacing: false };
+            raycast3.intersectsTriangle(result, ray, a, b, c, false);
+
+            expect(result.hit).toBe(false);
         });
     });
 

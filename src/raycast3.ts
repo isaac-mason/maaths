@@ -58,72 +58,108 @@ export function fromSegment(out: Raycast3, a: Vec3, b: Vec3): Raycast3 {
 
 const _rayIntersectsTriangle_edge1 = /*@__PURE__*/ vec3.create();
 const _rayIntersectsTriangle_edge2 = /*@__PURE__*/ vec3.create();
-const _rayIntersectsTriangle_h = /*@__PURE__*/ vec3.create();
-const _rayIntersectsTriangle_s = /*@__PURE__*/ vec3.create();
-const _rayIntersectsTriangle_q = /*@__PURE__*/ vec3.create();
+const _rayIntersectsTriangle_normal = /*@__PURE__*/ vec3.create();
+const _rayIntersectsTriangle_diff = /*@__PURE__*/ vec3.create();
+const _rayIntersectsTriangle_temp = /*@__PURE__*/ vec3.create();
 
 /**
- * Ray-triangle intersection using Möller-Trumbore algorithm.
- * https://en.wikipedia.org/wiki/Möller–Trumbore_intersection_algorithm
+ * Ray-triangle intersection test.
+ * Aligned with Three.js implementation.
+ * Based on https://github.com/pmjoniak/GeometricTools/blob/master/GTEngine/Include/Mathematics/GteIntrRay3Triangle3.h
  *
- * @param out Output object to store result (fraction and hit boolean)
+ * @param out Output object to store result (hit boolean, fraction, frontFacing)
  * @param ray Ray to test (with origin, direction, and length)
  * @param a First vertex of triangle
  * @param b Second vertex of triangle
  * @param c Third vertex of triangle
+ * @param backfaceCulling If true, backfaces will not be considered hits
  */
-export function intersectsTriangle(out: { fraction: number; hit: boolean }, ray: Raycast3, a: Vec3, b: Vec3, c: Vec3): void {
-    const EPSILON = 1e-8;
-
-    // Edge vectors
+export function intersectsTriangle(out: { fraction: number; hit: boolean; frontFacing: boolean }, ray: Raycast3, a: Vec3, b: Vec3, c: Vec3, backfaceCulling: boolean): void {
+    // Compute edges and normal
     vec3.subtract(_rayIntersectsTriangle_edge1, b, a);
     vec3.subtract(_rayIntersectsTriangle_edge2, c, a);
+    vec3.cross(_rayIntersectsTriangle_normal, _rayIntersectsTriangle_edge1, _rayIntersectsTriangle_edge2);
 
-    // Ray-edge cross product
-    vec3.cross(_rayIntersectsTriangle_h, ray.direction, _rayIntersectsTriangle_edge2);
-    const det = vec3.dot(_rayIntersectsTriangle_edge1, _rayIntersectsTriangle_h);
+    // Determine front vs back facing
+    let DdN = vec3.dot(ray.direction, _rayIntersectsTriangle_normal);
+    let sign: number;
 
-    // Check if ray is parallel to triangle
-    if (det > -EPSILON && det < EPSILON) {
+    if (DdN > 0) {
+        // Backface
+        if (backfaceCulling) {
+            out.hit = false;
+            out.fraction = 0;
+            out.frontFacing = false;
+            return;
+        }
+        sign = 1;
+    } else if (DdN < 0) {
+        // Frontface
+        sign = -1;
+        DdN = -DdN;
+    } else {
+        // Ray is parallel to triangle
         out.hit = false;
         out.fraction = 0;
+        out.frontFacing = false;
         return;
     }
 
-    const invDet = 1.0 / det;
+    vec3.subtract(_rayIntersectsTriangle_diff, ray.origin, a);
 
-    // Vector from triangle vertex A to ray origin
-    vec3.subtract(_rayIntersectsTriangle_s, ray.origin, a);
-    const u = invDet * vec3.dot(_rayIntersectsTriangle_s, _rayIntersectsTriangle_h);
+    // Compute barycentric coordinate b1
+    // DdQxE2 = sign * D · (diff × edge2)
+    vec3.cross(_rayIntersectsTriangle_temp, _rayIntersectsTriangle_diff, _rayIntersectsTriangle_edge2);
+    const DdQxE2 = sign * vec3.dot(ray.direction, _rayIntersectsTriangle_temp);
 
-    // Check if intersection is outside triangle (barycentric u coordinate)
-    if (u < -EPSILON || u > 1.0 + EPSILON) {
+    if (DdQxE2 < 0) {
         out.hit = false;
         out.fraction = 0;
+        out.frontFacing = false;
         return;
     }
 
-    // Second barycentric coordinate
-    vec3.cross(_rayIntersectsTriangle_q, _rayIntersectsTriangle_s, _rayIntersectsTriangle_edge1);
-    const v = invDet * vec3.dot(ray.direction, _rayIntersectsTriangle_q);
+    // Compute barycentric coordinate b2
+    // DdE1xQ = sign * D · (edge1 × diff)
+    vec3.cross(_rayIntersectsTriangle_temp, _rayIntersectsTriangle_edge1, _rayIntersectsTriangle_diff);
+    const DdE1xQ = sign * vec3.dot(ray.direction, _rayIntersectsTriangle_temp);
 
-    // Check if intersection is outside triangle (barycentric v coordinate)
-    if (v < -EPSILON || u + v > 1.0 + EPSILON) {
+    if (DdE1xQ < 0) {
         out.hit = false;
         out.fraction = 0;
+        out.frontFacing = false;
         return;
     }
 
-    // Distance along ray
-    const t = invDet * vec3.dot(_rayIntersectsTriangle_edge2, _rayIntersectsTriangle_q);
+    // Check if b1 + b2 > 1
+    if (DdQxE2 + DdE1xQ > DdN) {
+        out.hit = false;
+        out.fraction = 0;
+        out.frontFacing = false;
+        return;
+    }
 
-    // Check if intersection is within ray segment
-    if (t > EPSILON && t <= ray.length + EPSILON) {
+    // Compute intersection distance
+    const QdN = -sign * vec3.dot(_rayIntersectsTriangle_diff, _rayIntersectsTriangle_normal);
+
+    if (QdN < 0) {
+        out.hit = false;
+        out.fraction = 0;
+        out.frontFacing = false;
+        return;
+    }
+
+    const t = QdN / DdN;
+
+    // Check if intersection is within ray length
+    if (t <= ray.length) {
         out.hit = true;
         out.fraction = t / ray.length;
+        out.frontFacing = sign < 0;
     } else {
         out.hit = false;
         out.fraction = 0;
+        out.frontFacing = false;
     }
 }
 
