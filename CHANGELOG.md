@@ -27,6 +27,7 @@
 - feat: add `box3.empty` to set a Box3 to an empty state (min at +Infinity, max at -Infinity)
 - feat: add `box3.equals` and `box3.exactEquals` for Box3 equality checks
 - feat: change `raycast3.intersectsTriangle` to hit backfaces and set a `frontFacing` property on the output result
+- feat: add `createIntersectsTriangleResult`, `IntersectsTriangleResult` type
 
 ## 0.0.6
 
